@@ -15,5 +15,5 @@ generation:
   telemetryEnabled: false
 go:
   version: 0.1.0
-  maxMethodParams: 0
+  maxMethodParams: 4
   packageName: github.com/speakeasy-sdks/moov-go
