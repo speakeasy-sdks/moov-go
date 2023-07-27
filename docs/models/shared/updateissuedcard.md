@@ -1,0 +1,11 @@
+# UpdateIssuedCard
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `authorization_controls`                                                        | [Optional[AuthorizationControls]](../../models/shared/authorizationcontrols.md) | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `authorized_user`                                                               | [Optional[CreateAuthorizedUser]](../../models/shared/createauthorizeduser.md)   | :heavy_minus_sign:                                                              | Fields to identify a human                                                      |
+| `memo`                                                                          | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | Optional descriptive name                                                       |
+| `state`                                                                         | [Optional[IssuedCardState]](../../models/shared/issuedcardstate.md)             | :heavy_minus_sign:                                                              | State of a Moov issued card                                                     |

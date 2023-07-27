@@ -1,0 +1,10 @@
+# CreateTransferOptions
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `amount`                                                                                              | [Amount](../../models/shared/amount.md)                                                               | :heavy_check_mark:                                                                                    | A representation of money containing an integer value and it's currency.                              |
+| `destination`                                                                                         | [Optional[CreateTransferOptionsDestination]](../../models/shared/createtransferoptionsdestination.md) | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `source`                                                                                              | [Optional[CreateTransferOptionsSource]](../../models/shared/createtransferoptionssource.md)           | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |

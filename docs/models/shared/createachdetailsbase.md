@@ -1,0 +1,9 @@
+# CreateACHDetailsBase
+
+
+## Fields
+
+| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         | Example                                                                             |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `company_entry_description`                                                         | *Optional[str]*                                                                     | :heavy_minus_sign:                                                                  | An optional override of the default NACHA Company Entry Description for a transfer. | Gym Dues                                                                            |
+| `originating_company_name`                                                          | *Optional[str]*                                                                     | :heavy_minus_sign:                                                                  | An optional override of the default NACHA Company Name for a transfer.              | Whole Body Fit                                                                      |

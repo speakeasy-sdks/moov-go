@@ -1,0 +1,12 @@
+# CancelTransferResponse
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `content_type`                                                                        | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `created_reversal`                                                                    | [Optional[shared.CreatedReversal]](../../models/shared/createdreversal.md)            | :heavy_minus_sign:                                                                    | Successfully initiated a reversal                                                     |
+| `error`                                                                               | [Optional[shared.Error]](../../models/shared/error.md)                                | :heavy_minus_sign:                                                                    | Reversal request failed, an error message will be available in the response body.     |
+| `status_code`                                                                         | *int*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `raw_response`                                                                        | [requests.Response](https://requests.readthedocs.io/en/latest/api/#requests.Response) | :heavy_minus_sign:                                                                    | N/A                                                                                   |

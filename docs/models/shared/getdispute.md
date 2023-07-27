@@ -1,0 +1,12 @@
+# GetDispute
+
+Details of a card dispute
+
+
+## Fields
+
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              | Example                                                                  |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `amount`                                                                 | [Optional[Amount]](../../models/shared/amount.md)                        | :heavy_minus_sign:                                                       | A representation of money containing an integer value and it's currency. |                                                                          |
+| `created_on`                                                             | [date](https://docs.python.org/3/library/datetime.html#date-objects)     | :heavy_minus_sign:                                                       | N/A                                                                      |                                                                          |
+| `dispute_id`                                                             | *Optional[str]*                                                          | :heavy_minus_sign:                                                       | UUID v4                                                                  | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                     |

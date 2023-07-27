@@ -1,0 +1,12 @@
+# CardVerifications
+
+The results of submitting cardholder data to a card network for verification
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       | Example                                                                           |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `address_line1`                                                                   | [Optional[CardVerificationResult]](../../models/shared/cardverificationresult.md) | :heavy_minus_sign:                                                                | N/A                                                                               | match                                                                             |
+| `cvv`                                                                             | [Optional[CardVerificationResult]](../../models/shared/cardverificationresult.md) | :heavy_minus_sign:                                                                | N/A                                                                               | match                                                                             |
+| `postal_code`                                                                     | [Optional[CardVerificationResult]](../../models/shared/cardverificationresult.md) | :heavy_minus_sign:                                                                | N/A                                                                               | match                                                                             |

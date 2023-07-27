@@ -1,0 +1,11 @@
+# GetListIssuedCardsRequest
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `account_id`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | ID of the account                                                                |
+| `count`                                                                          | *Optional[int]*                                                                  | :heavy_minus_sign:                                                               | Optional parameter to limit the number of results in the query                   |
+| `skip`                                                                           | *Optional[int]*                                                                  | :heavy_minus_sign:                                                               | The number of items to offset before starting to collect the result set          |
+| `states`                                                                         | [Optional[shared.IssuedCardState]](../../models/shared/issuedcardstate.md)       | :heavy_minus_sign:                                                               | Optional, comma-separated states to filter the Moov list issued cards response.<br/> |

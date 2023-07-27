@@ -1,0 +1,9 @@
+# AuthorizationSpendLimitControl
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               | Example                                                                                   |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `amount`                                                                                  | *Optional[int]*                                                                           | :heavy_minus_sign:                                                                        | Maximum value in cents allowed per duration                                               | 10000                                                                                     |
+| `duration`                                                                                | [Optional[AuthorizationSpendDuration]](../../models/shared/authorizationspendduration.md) | :heavy_minus_sign:                                                                        | Unit of authorization limit control                                                       |                                                                                           |

@@ -1,0 +1,20 @@
+# AchParticipant
+
+Financial institution information regarding an ACH participant
+
+
+## Fields
+
+| Field                                                       | Type                                                        | Required                                                    | Description                                                 | Example                                                     |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `ach_location`                                              | [Optional[AchLocation]](../../models/shared/achlocation.md) | :heavy_minus_sign:                                          | N/A                                                         |                                                             |
+| `customer_name`                                             | *Optional[str]*                                             | :heavy_minus_sign:                                          | N/A                                                         | Main Street Bank                                            |
+| `new_routing_number`                                        | *Optional[str]*                                             | :heavy_minus_sign:                                          | N/A                                                         | 987654321                                                   |
+| `office_code`                                               | *Optional[str]*                                             | :heavy_minus_sign:                                          | N/A                                                         | 0                                                           |
+| `phone_number`                                              | *Optional[str]*                                             | :heavy_minus_sign:                                          | N/A                                                         | 123-456-7789                                                |
+| `record_type_code`                                          | *Optional[str]*                                             | :heavy_minus_sign:                                          | N/A                                                         | 1                                                           |
+| `revised`                                                   | *Optional[str]*                                             | :heavy_minus_sign:                                          | N/A                                                         | 041921                                                      |
+| `routing_number`                                            | *Optional[str]*                                             | :heavy_minus_sign:                                          | N/A                                                         | 123456789                                                   |
+| `servicing_frb_number`                                      | *Optional[str]*                                             | :heavy_minus_sign:                                          | N/A                                                         | 123456789                                                   |
+| `status_code`                                               | *Optional[str]*                                             | :heavy_minus_sign:                                          | N/A                                                         | 1                                                           |
+| `view_code`                                                 | *Optional[str]*                                             | :heavy_minus_sign:                                          | N/A                                                         | 1                                                           |
