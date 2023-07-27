@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 )
 
 // paymentMethods - [Payment methods](https://docs.moov.io/guides/money-movement/payment-methods/) represent all of the ways an account can move funds to another Moov account. Payment methods are generated programmatically when a card or bank account is added or the status is updated e.g., `ach-debit-fund` will be added as a payment method once the bank account is verified.
@@ -29,7 +29,12 @@ func newPaymentMethods(sdkConfig sdkConfiguration) *paymentMethods {
 
 // Get - Get payment method
 // Get the specified payment method associated with a Moov account. <br><br> To get a payment method, you must specify the `/accounts/{accountID}/payment-methods.read` scope.
-func (s *paymentMethods) Get(ctx context.Context, request operations.GetPaymentMethodRequest) (*operations.GetPaymentMethodResponse, error) {
+func (s *paymentMethods) Get(ctx context.Context, accountID string, paymentMethodID string) (*operations.GetPaymentMethodResponse, error) {
+	request := operations.GetPaymentMethodRequest{
+		AccountID:       accountID,
+		PaymentMethodID: paymentMethodID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/payment-methods/{paymentMethodID}", request, nil)
 	if err != nil {
@@ -92,7 +97,12 @@ func (s *paymentMethods) Get(ctx context.Context, request operations.GetPaymentM
 
 // List - List payment methods
 // Retrieve a list of payment methods associated with a Moov account. <br><br> To list payment methods, you must specify the `/accounts/{accountID}/payment-methods.read` scope.
-func (s *paymentMethods) List(ctx context.Context, request operations.ListPaymentMethodsRequest) (*operations.ListPaymentMethodsResponse, error) {
+func (s *paymentMethods) List(ctx context.Context, accountID string, sourceID *string) (*operations.ListPaymentMethodsResponse, error) {
+	request := operations.ListPaymentMethodsRequest{
+		AccountID: accountID,
+		SourceID:  sourceID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/payment-methods", request, nil)
 	if err != nil {

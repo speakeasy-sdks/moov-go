@@ -31,9 +31,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -42,16 +42,15 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    countries := shared.Countries{
+        Countries: []string{
+            "United States",
+        },
+    }
+    accountID := "92059293-96fe-4a75-96eb-10faaa2352c5"
 
     ctx := context.Background()
-    res, err := s.Accounts.AssignCountry(ctx, operations.PutAccountCountriesRequest{
-        Countries: shared.Countries{
-            Countries: []string{
-                "United States",
-            },
-        },
-        AccountID: "92059293-96fe-4a75-96eb-10faaa2352c5",
-    })
+    res, err := s.Accounts.AssignCountry(ctx, countries, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -64,10 +63,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.PutAccountCountriesRequest](../../models/operations/putaccountcountriesrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `countries`                                           | [shared.Countries](../../models/shared/countries.md)  | :heavy_check_mark:                                    | N/A                                                   |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |
 
 
 ### Response
@@ -87,8 +87,8 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
@@ -242,9 +242,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -253,11 +253,10 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "ff1a3a2f-a946-4773-9251-aa52c3f5ad01"
 
     ctx := context.Background()
-    res, err := s.Accounts.Get(ctx, operations.GetAccountRequest{
-        AccountID: "ff1a3a2f-a946-4773-9251-aa52c3f5ad01",
-    })
+    res, err := s.Accounts.Get(ctx, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -270,10 +269,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [operations.GetAccountRequest](../../models/operations/getaccountrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |
 
 
 ### Response
@@ -293,8 +292,8 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
@@ -346,9 +345,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -404,9 +403,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -415,11 +414,10 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "074f1547-1b5e-46e1-bb99-d488e1e91e45"
 
     ctx := context.Background()
-    res, err := s.Accounts.ListCountries(ctx, operations.GetAccountCountriesRequest{
-        AccountID: "074f1547-1b5e-46e1-bb99-d488e1e91e45",
-    })
+    res, err := s.Accounts.ListCountries(ctx, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -432,10 +430,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.GetAccountCountriesRequest](../../models/operations/getaccountcountriesrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |
 
 
 ### Response
@@ -466,9 +464,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -477,12 +475,30 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Accounts.Update(ctx, operations.PatchAccountRequest{
-        PatchAccountRequest: shared.PatchAccountRequest{
-            CustomerSupport: &shared.PatchAccountRequestCustomerSupport{
-                Address: &shared.PatchAccountRequestCustomerSupportAddress{
+    patchAccountRequest := shared.PatchAccountRequest{
+        CustomerSupport: &shared.PatchAccountRequestCustomerSupport{
+            Address: &shared.PatchAccountRequestCustomerSupportAddress{
+                AddressLine1: moov.String("123 Main Street"),
+                AddressLine2: moov.String("Apt 302"),
+                City: moov.String("Boulder"),
+                Country: moov.String("US"),
+                PostalCode: moov.String("80301"),
+                StateOrProvince: moov.String("CO"),
+            },
+            Email: moov.String("amanda@classbooker.dev"),
+            Phone: &shared.PatchAccountRequestCustomerSupportPhone{
+                CountryCode: moov.String("1"),
+                Number: moov.String("8185551212"),
+            },
+            Website: moov.String("www.wholebodyfitnessgym.com"),
+        },
+        ForeignID: moov.String("4528aba-b9a1-11eb-8529-0242ac13003"),
+        Metadata: map[string]string{
+            "est": "quibusdam",
+        },
+        Profile: &shared.PatchAccountRequestProfile{
+            Business: &shared.PatchAccountRequestProfileBusiness{
+                Address: &shared.PatchAccountRequestProfileBusinessAddress{
                     AddressLine1: moov.String("123 Main Street"),
                     AddressLine2: moov.String("Apt 302"),
                     City: moov.String("Boulder"),
@@ -490,100 +506,81 @@ func main() {
                     PostalCode: moov.String("80301"),
                     StateOrProvince: moov.String("CO"),
                 },
+                BusinessType: shared.PatchAccountRequestProfileBusinessBusinessTypeLlc.ToPointer(),
+                Description: moov.String("Local fitness center paying out instructors"),
+                DoingBusinessAs: moov.String("Whole Body Fitness"),
                 Email: moov.String("amanda@classbooker.dev"),
-                Phone: &shared.PatchAccountRequestCustomerSupportPhone{
+                IndustryCodes: &shared.PatchAccountRequestProfileBusinessIndustryCodes{
+                    Mcc: moov.String("7997"),
+                    Naics: moov.String("713940"),
+                    Sic: moov.String("7991"),
+                },
+                LegalBusinessName: moov.String("Whole Body Fitness LLC"),
+                OwnersProvided: moov.Bool(false),
+                Phone: &shared.PatchAccountRequestProfileBusinessPhone{
                     CountryCode: moov.String("1"),
                     Number: moov.String("8185551212"),
                 },
+                TaxID: &shared.PatchAccountRequestProfileBusinessTaxID{
+                    Ein: &shared.Ein{
+                        Number: moov.String("123-45-6789"),
+                    },
+                },
                 Website: moov.String("www.wholebodyfitnessgym.com"),
             },
-            ForeignID: moov.String("4528aba-b9a1-11eb-8529-0242ac13003"),
-            Metadata: map[string]string{
-                "est": "quibusdam",
-            },
-            Profile: &shared.PatchAccountRequestProfile{
-                Business: &shared.PatchAccountRequestProfileBusiness{
-                    Address: &shared.PatchAccountRequestProfileBusinessAddress{
-                        AddressLine1: moov.String("123 Main Street"),
-                        AddressLine2: moov.String("Apt 302"),
-                        City: moov.String("Boulder"),
-                        Country: moov.String("US"),
-                        PostalCode: moov.String("80301"),
-                        StateOrProvince: moov.String("CO"),
-                    },
-                    BusinessType: shared.PatchAccountRequestProfileBusinessBusinessTypeLlc.ToPointer(),
-                    Description: moov.String("Local fitness center paying out instructors"),
-                    DoingBusinessAs: moov.String("Whole Body Fitness"),
-                    Email: moov.String("amanda@classbooker.dev"),
-                    IndustryCodes: &shared.PatchAccountRequestProfileBusinessIndustryCodes{
-                        Mcc: moov.String("7997"),
-                        Naics: moov.String("713940"),
-                        Sic: moov.String("7991"),
-                    },
-                    LegalBusinessName: moov.String("Whole Body Fitness LLC"),
-                    OwnersProvided: moov.Bool(false),
-                    Phone: &shared.PatchAccountRequestProfileBusinessPhone{
-                        CountryCode: moov.String("1"),
-                        Number: moov.String("8185551212"),
-                    },
-                    TaxID: &shared.PatchAccountRequestProfileBusinessTaxID{
-                        Ein: &shared.Ein{
-                            Number: moov.String("123-45-6789"),
-                        },
-                    },
-                    Website: moov.String("www.wholebodyfitnessgym.com"),
+            Individual: &shared.PatchAccountRequestProfileIndividual{
+                Address: &shared.PatchAccountRequestProfileIndividualAddress{
+                    AddressLine1: moov.String("123 Main Street"),
+                    AddressLine2: moov.String("Apt 302"),
+                    City: moov.String("Boulder"),
+                    Country: moov.String("US"),
+                    PostalCode: moov.String("80301"),
+                    StateOrProvince: moov.String("CO"),
                 },
-                Individual: &shared.PatchAccountRequestProfileIndividual{
-                    Address: &shared.PatchAccountRequestProfileIndividualAddress{
-                        AddressLine1: moov.String("123 Main Street"),
-                        AddressLine2: moov.String("Apt 302"),
-                        City: moov.String("Boulder"),
-                        Country: moov.String("US"),
-                        PostalCode: moov.String("80301"),
-                        StateOrProvince: moov.String("CO"),
+                BirthDate: &shared.PatchAccountRequestProfileIndividualBirthDate{
+                    Day: 9,
+                    Month: 11,
+                    Year: 1989,
+                },
+                Email: moov.String("amanda@classbooker.dev"),
+                GovernmentID: &shared.PatchAccountRequestProfileIndividualGovernmentID{
+                    Itin: &shared.PatchAccountRequestProfileIndividualGovernmentIDItin{
+                        Full: moov.String("123-45-6789"),
+                        LastFour: moov.String("6789"),
                     },
-                    BirthDate: &shared.PatchAccountRequestProfileIndividualBirthDate{
-                        Day: 9,
-                        Month: 11,
-                        Year: 1989,
-                    },
-                    Email: moov.String("amanda@classbooker.dev"),
-                    GovernmentID: &shared.PatchAccountRequestProfileIndividualGovernmentID{
-                        Itin: &shared.PatchAccountRequestProfileIndividualGovernmentIDItin{
-                            Full: moov.String("123-45-6789"),
-                            LastFour: moov.String("6789"),
-                        },
-                        Ssn: &shared.PatchAccountRequestProfileIndividualGovernmentIDSsn{
-                            Full: moov.String("123-45-6789"),
-                            LastFour: moov.String("6789"),
-                        },
-                    },
-                    Name: &shared.PatchAccountRequestProfileIndividualName{
-                        FirstName: moov.String("Amanda"),
-                        LastName: moov.String("Yang"),
-                        MiddleName: moov.String("Amanda"),
-                        Suffix: moov.String("Jr"),
-                    },
-                    Phone: &shared.PatchAccountRequestProfileIndividualPhone{
-                        CountryCode: moov.String("1"),
-                        Number: moov.String("8185551212"),
+                    Ssn: &shared.PatchAccountRequestProfileIndividualGovernmentIDSsn{
+                        Full: moov.String("123-45-6789"),
+                        LastFour: moov.String("6789"),
                     },
                 },
-            },
-            Settings: &shared.PatchAccountRequestSettings{
-                AchPayment: &shared.PatchAccountRequestSettingsAchPayment{
-                    CompanyName: moov.String("Whole Body Fitness"),
+                Name: &shared.PatchAccountRequestProfileIndividualName{
+                    FirstName: moov.String("Amanda"),
+                    LastName: moov.String("Yang"),
+                    MiddleName: moov.String("Amanda"),
+                    Suffix: moov.String("Jr"),
                 },
-                CardPayment: &shared.PatchAccountRequestSettingsCardPayment{
-                    StatementDescriptor: moov.String("Whole Body Fitness"),
+                Phone: &shared.PatchAccountRequestProfileIndividualPhone{
+                    CountryCode: moov.String("1"),
+                    Number: moov.String("8185551212"),
                 },
-            },
-            TermsOfService: &shared.PatchAccountRequestTermsOfService{
-                Token: moov.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
             },
         },
-        AccountID: "2abd4426-9802-4d50-aa94-bb4f63c969e9",
-    })
+        Settings: &shared.PatchAccountRequestSettings{
+            AchPayment: &shared.PatchAccountRequestSettingsAchPayment{
+                CompanyName: moov.String("Whole Body Fitness"),
+            },
+            CardPayment: &shared.PatchAccountRequestSettingsCardPayment{
+                StatementDescriptor: moov.String("Whole Body Fitness"),
+            },
+        },
+        TermsOfService: &shared.PatchAccountRequestTermsOfService{
+            Token: moov.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
+        },
+    }
+    accountID := "2abd4426-9802-4d50-aa94-bb4f63c969e9"
+
+    ctx := context.Background()
+    res, err := s.Accounts.Update(ctx, patchAccountRequest, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -596,10 +593,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.PatchAccountRequest](../../models/operations/patchaccountrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
+| `patchAccountRequest`                                                    | [shared.PatchAccountRequest](../../models/shared/patchaccountrequest.md) | :heavy_check_mark:                                                       | N/A                                                                      |
+| `accountID`                                                              | *string*                                                                 | :heavy_check_mark:                                                       | ID of the account                                                        |
 
 
 ### Response

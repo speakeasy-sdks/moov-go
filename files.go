@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 )
 
 // files - Files can be used for a multitude of different use cases including but not limited to, individual identity verification and business underwriting. You may need to provide documentation to enable capabilities or to keep capabilities enabled for an account. The maximum file size is 10MB. Each account is allowed a maximum of 10 files. Acceptable file types include csv, jpg, pdf, and png. To learn about uploading files in the Moov Dashboard, read our [file upload guide](https://docs.moov.io/guides/dashboard/accounts/#file-upload).
@@ -27,7 +27,12 @@ func newFiles(sdkConfig sdkConfiguration) *files {
 
 // Get - Get File Details
 // Retrieve file details associated with a specific Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.read` scope.
-func (s *files) Get(ctx context.Context, request operations.GetFileDetailsRequest) (*operations.GetFileDetailsResponse, error) {
+func (s *files) Get(ctx context.Context, accountID string, fileID string) (*operations.GetFileDetailsResponse, error) {
+	request := operations.GetFileDetailsRequest{
+		AccountID: accountID,
+		FileID:    fileID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/files/{fileID}", request, nil)
 	if err != nil {
@@ -90,7 +95,11 @@ func (s *files) Get(ctx context.Context, request operations.GetFileDetailsReques
 
 // List - List files
 // List all the files associated with a particular Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.read` scope.
-func (s *files) List(ctx context.Context, request operations.ListFilesRequest) (*operations.ListFilesResponse, error) {
+func (s *files) List(ctx context.Context, accountID string) (*operations.ListFilesResponse, error) {
+	request := operations.ListFilesRequest{
+		AccountID: accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/files", request, nil)
 	if err != nil {
@@ -153,7 +162,12 @@ func (s *files) List(ctx context.Context, request operations.ListFilesRequest) (
 
 // Upload - Upload File
 // Upload a file and link it to the provided Moov account. The maximum file size is 10MB. Each account is allowed a maximum of 10 files. Acceptable file types include csv, jpg, pdf, and png. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.write` scope.
-func (s *files) Upload(ctx context.Context, request operations.UploadFileRequest) (*operations.UploadFileResponse, error) {
+func (s *files) Upload(ctx context.Context, fileUploadRequest shared.FileUploadRequest, accountID string) (*operations.UploadFileResponse, error) {
+	request := operations.UploadFileRequest{
+		FileUploadRequest: fileUploadRequest,
+		AccountID:         accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/files", request, nil)
 	if err != nil {

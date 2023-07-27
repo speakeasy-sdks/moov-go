@@ -3,25 +3,18 @@
 package operations
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"net/http"
-	"openapi/pkg/models/shared"
 )
 
 type RefundTransferRequest struct {
-	CreateRefund *shared.CreateRefund `request:"mediaType=application/json"`
 	// Prevents duplicate refunds from being created. Note that we only accept UUID v4.
 	XIdempotencyKey string `header:"style=simple,explode=false,name=X-Idempotency-Key"`
+	// ID of the Transfer
+	TransferID   string               `pathParam:"style=simple,explode=false,name=transferID"`
+	CreateRefund *shared.CreateRefund `request:"mediaType=application/json"`
 	// Optional header that indicates whether to return a synchronous response that includes the full refund and card transaction details or an asynchronous response indicating the refund was created (this is the default response if the header is omitted).
 	XWaitFor *shared.WaitFor `header:"style=simple,explode=false,name=X-Wait-For"`
-	// ID of the Transfer
-	TransferID string `pathParam:"style=simple,explode=false,name=transferID"`
-}
-
-func (o *RefundTransferRequest) GetCreateRefund() *shared.CreateRefund {
-	if o == nil {
-		return nil
-	}
-	return o.CreateRefund
 }
 
 func (o *RefundTransferRequest) GetXIdempotencyKey() string {
@@ -31,18 +24,25 @@ func (o *RefundTransferRequest) GetXIdempotencyKey() string {
 	return o.XIdempotencyKey
 }
 
-func (o *RefundTransferRequest) GetXWaitFor() *shared.WaitFor {
-	if o == nil {
-		return nil
-	}
-	return o.XWaitFor
-}
-
 func (o *RefundTransferRequest) GetTransferID() string {
 	if o == nil {
 		return ""
 	}
 	return o.TransferID
+}
+
+func (o *RefundTransferRequest) GetCreateRefund() *shared.CreateRefund {
+	if o == nil {
+		return nil
+	}
+	return o.CreateRefund
+}
+
+func (o *RefundTransferRequest) GetXWaitFor() *shared.WaitFor {
+	if o == nil {
+		return nil
+	}
+	return o.XWaitFor
 }
 
 type RefundTransferResponse struct {

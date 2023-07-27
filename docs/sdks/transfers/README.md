@@ -27,9 +27,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -38,15 +38,14 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    xIdempotencyKey := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    transferID := "fb9f58c4-d86e-468e-8be0-56013f59da75"
+    createReversal := &shared.CreateReversal{
+        Amount: moov.Int64(1000),
+    }
 
     ctx := context.Background()
-    res, err := s.Transfers.Cancel(ctx, operations.CancelTransferRequest{
-        CreateReversal: &shared.CreateReversal{
-            Amount: moov.Int64(1000),
-        },
-        XIdempotencyKey: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-        TransferID: "58c4d86e-68e4-4be0-9601-3f59da757a59",
-    })
+    res, err := s.Transfers.Cancel(ctx, xIdempotencyKey, transferID, createReversal)
     if err != nil {
         log.Fatal(err)
     }
@@ -59,10 +58,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.CancelTransferRequest](../../models/operations/canceltransferrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     | Example                                                         |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `ctx`                                                           | [context.Context](https://pkg.go.dev/context#Context)           | :heavy_check_mark:                                              | The context to use for the request.                             |                                                                 |
+| `xIdempotencyKey`                                               | *string*                                                        | :heavy_check_mark:                                              | Prevents duplicate reversals from being created                 | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                            |
+| `transferID`                                                    | *string*                                                        | :heavy_check_mark:                                              | ID of the Transfer                                              |                                                                 |
+| `createReversal`                                                | [*shared.CreateReversal](../../models/shared/createreversal.md) | :heavy_minus_sign:                                              | N/A                                                             |                                                                 |
 
 
 ### Response
@@ -82,9 +83,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -93,49 +94,46 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    createTransfer := shared.CreateTransfer{
+        Amount: &shared.Amount{
+            Currency: "USD",
+            Value: 1204,
+        },
+        Description: moov.String("Pay Instructor for May 15 Class"),
+        Destination: &shared.CreateTransferDestination{
+            AchDetails: &shared.CreateACHDetailsBase{
+                CompanyEntryDescription: moov.String("Gym Dues"),
+                OriginatingCompanyName: moov.String("Whole Body Fit"),
+            },
+            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+        },
+        FacilitatorFee: &shared.CreateFacilitatorFee{
+            Markup: moov.Int64(444587),
+            Total: moov.Int64(667715),
+        },
+        Metadata: map[string]string{
+            "sint": "accusamus",
+            "impedit": "hic",
+        },
+        Source: &shared.CreateTransferSource{
+            AchDetails: &shared.CreateAchDetailsSource{
+                CompanyEntryDescription: moov.String("Gym Dues"),
+                DebitHoldPeriod: shared.CreateAchDetailsSourceDebitHoldPeriodTwoDays.ToPointer(),
+                OriginatingCompanyName: moov.String("Whole Body Fit"),
+            },
+            CardDetails: &shared.CreateCardDetails{
+                DynamicDescriptor: moov.String("WhlBdy *Yoga 11-12"),
+                TransactionSource: shared.TransactionSourceUnscheduled.ToPointer(),
+            },
+            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            TransferID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+        },
+    }
+    xIdempotencyKey := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    xWaitFor := shared.WaitForRailResponse
 
     ctx := context.Background()
-    res, err := s.Transfers.Create(ctx, operations.CreateTransferRequest{
-        CreateTransfer: shared.CreateTransfer{
-            Amount: &shared.Amount{
-                Currency: "USD",
-                Value: 1204,
-            },
-            Description: moov.String("Pay Instructor for May 15 Class"),
-            Destination: &shared.CreateTransferDestination{
-                AchDetails: &shared.CreateACHDetailsBase{
-                    CompanyEntryDescription: moov.String("Gym Dues"),
-                    OriginatingCompanyName: moov.String("Whole Body Fit"),
-                },
-                PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-            },
-            FacilitatorFee: &shared.CreateFacilitatorFee{
-                Markup: moov.Int64(880679),
-                Total: moov.Int64(774684),
-            },
-            Metadata: map[string]string{
-                "necessitatibus": "asperiores",
-                "ex": "voluptas",
-                "debitis": "delectus",
-                "quae": "minus",
-            },
-            Source: &shared.CreateTransferSource{
-                AchDetails: &shared.CreateAchDetailsSource{
-                    CompanyEntryDescription: moov.String("Gym Dues"),
-                    DebitHoldPeriod: shared.CreateAchDetailsSourceDebitHoldPeriodTwoDays.ToPointer(),
-                    OriginatingCompanyName: moov.String("Whole Body Fit"),
-                },
-                CardDetails: &shared.CreateCardDetails{
-                    DynamicDescriptor: moov.String("WhlBdy *Yoga 11-12"),
-                    TransactionSource: shared.TransactionSourceUnscheduled.ToPointer(),
-                },
-                PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-                TransferID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-            },
-        },
-        XIdempotencyKey: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-        XWaitFor: shared.WaitForRailResponse.ToPointer(),
-    })
+    res, err := s.Transfers.Create(ctx, createTransfer, xIdempotencyKey, xWaitFor)
     if err != nil {
         log.Fatal(err)
     }
@@ -148,10 +146,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.CreateTransferRequest](../../models/operations/createtransferrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| Parameter                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                     | The context to use for the request.                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                        |
+| `createTransfer`                                                                                                                                                                                                                                       | [shared.CreateTransfer](../../models/shared/createtransfer.md)                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                        |
+| `xIdempotencyKey`                                                                                                                                                                                                                                      | *string*                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                     | Prevents duplicate transfers from being created. Note that we only accept UUID v4.                                                                                                                                                                     | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                                                                                                                                                                                   |
+| `xWaitFor`                                                                                                                                                                                                                                             | [*shared.WaitFor](../../models/shared/waitfor.md)                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                     | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an asynchronous response indicating the transfer was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                        |
 
 
 ### Response
@@ -171,8 +171,8 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
@@ -232,9 +232,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -243,12 +243,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    transferID := "f66ef1ca-a338-43c2-beb4-77373c8d72f6"
+    accountID := "4d1db1f2-c431-4066-9e96-349e1cf9e06e"
 
     ctx := context.Background()
-    res, err := s.Transfers.Get(ctx, operations.GetTransferRequest{
-        AccountID: moov.String("a3383c2b-eb47-4737-bc8d-72f64d1db1f2"),
-        TransferID: "c4310661-e963-449e-9cf9-e06e3a437000",
-    })
+    res, err := s.Transfers.Get(ctx, transferID, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -261,10 +260,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [operations.GetTransferRequest](../../models/operations/gettransferrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `transferID`                                          | *string*                                              | :heavy_check_mark:                                    | ID of the Transfer                                    |
+| `accountID`                                           | **string*                                             | :heavy_minus_sign:                                    | ID of a connected account                             |
 
 
 ### Response
@@ -284,9 +284,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -295,12 +295,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    refundID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    transferID := "3a437000-ae6b-46bc-9b8f-759eac55a974"
 
     ctx := context.Background()
-    res, err := s.Transfers.GetRefund(ctx, operations.GetRefundRequest{
-        RefundID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-        TransferID: "ae6b6bc9-b8f7-459e-ac55-a9741d311352",
-    })
+    res, err := s.Transfers.GetRefund(ctx, refundID, transferID)
     if err != nil {
         log.Fatal(err)
     }
@@ -313,10 +312,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `request`                                                                  | [operations.GetRefundRequest](../../models/operations/getrefundrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `refundID`                                            | *string*                                              | :heavy_check_mark:                                    | ID of the refund                                      | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
+| `transferID`                                          | *string*                                              | :heavy_check_mark:                                    | ID of the Transfer                                    |                                                       |
 
 
 ### Response
@@ -336,9 +336,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -347,11 +347,10 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    transferID := "1d311352-965b-4b8a-b202-611435e139db"
 
     ctx := context.Background()
-    res, err := s.Transfers.ListRefunds(ctx, operations.ListRefundsRequest{
-        TransferID: "965bb8a7-2026-4114-b5e1-39dbc2259b1a",
-    })
+    res, err := s.Transfers.ListRefunds(ctx, transferID)
     if err != nil {
         log.Fatal(err)
     }
@@ -364,10 +363,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [operations.ListRefundsRequest](../../models/operations/listrefundsrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `transferID`                                          | *string*                                              | :heavy_check_mark:                                    | ID of the Transfer                                    |
 
 
 ### Response
@@ -387,9 +386,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -398,16 +397,15 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    xIdempotencyKey := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    transferID := "c2259b1a-bda8-4c07-8e10-84cb0672d1ad"
+    createRefund := &shared.CreateRefund{
+        Amount: moov.Int64(1000),
+    }
+    xWaitFor := shared.WaitForRailResponse
 
     ctx := context.Background()
-    res, err := s.Transfers.Refund(ctx, operations.RefundTransferRequest{
-        CreateRefund: &shared.CreateRefund{
-            Amount: moov.Int64(1000),
-        },
-        XIdempotencyKey: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-        XWaitFor: shared.WaitForRailResponse.ToPointer(),
-        TransferID: "bda8c070-e108-44cb-8672-d1ad879eeb96",
-    })
+    res, err := s.Transfers.Refund(ctx, xIdempotencyKey, transferID, createRefund, xWaitFor)
     if err != nil {
         log.Fatal(err)
     }
@@ -420,10 +418,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.RefundTransferRequest](../../models/operations/refundtransferrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| Parameter                                                                                                                                                                                                                                                 | Type                                                                                                                                                                                                                                                      | Required                                                                                                                                                                                                                                                  | Description                                                                                                                                                                                                                                               | Example                                                                                                                                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                        | The context to use for the request.                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                           |
+| `xIdempotencyKey`                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                        | Prevents duplicate refunds from being created. Note that we only accept UUID v4.                                                                                                                                                                          | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                                                                                                                                                                                      |
+| `transferID`                                                                                                                                                                                                                                              | *string*                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                        | ID of the Transfer                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                           |
+| `createRefund`                                                                                                                                                                                                                                            | [*shared.CreateRefund](../../models/shared/createrefund.md)                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                        | N/A                                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                           |
+| `xWaitFor`                                                                                                                                                                                                                                                | [*shared.WaitFor](../../models/shared/waitfor.md)                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                        | Optional header that indicates whether to return a synchronous response that includes the full refund and card transaction details or an asynchronous response indicating the refund was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                           |
 
 
 ### Response
@@ -443,9 +444,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -454,18 +455,18 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    patchTransfer := shared.PatchTransfer{
+        Metadata: map[string]string{
+            "molestiae": "provident",
+            "accusamus": "necessitatibus",
+            "tempore": "sint",
+        },
+    }
+    transferID := "665b85ef-bd02-4bae-8be2-d782259e3ea4"
+    accountID := "b5197f92-443d-4a7c-a52b-895c537c6454"
 
     ctx := context.Background()
-    res, err := s.Transfers.Update(ctx, operations.PatchTransferRequest{
-        PatchTransfer: shared.PatchTransfer{
-            Metadata: map[string]string{
-                "ipsam": "rerum",
-                "laudantium": "corporis",
-            },
-        },
-        AccountID: moov.String("efbd02ba-e0be-42d7-8225-9e3ea4b5197f"),
-        TransferID: "92443da7-ce52-4b89-9c53-7c6454efb0b3",
-    })
+    res, err := s.Transfers.Update(ctx, patchTransfer, transferID, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -478,10 +479,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
-| `request`                                                                          | [operations.PatchTransferRequest](../../models/operations/patchtransferrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
+| `patchTransfer`                                              | [shared.PatchTransfer](../../models/shared/patchtransfer.md) | :heavy_check_mark:                                           | N/A                                                          |
+| `transferID`                                                 | *string*                                                     | :heavy_check_mark:                                           | ID of the Transfer                                           |
+| `accountID`                                                  | **string*                                                    | :heavy_minus_sign:                                           | ID of a connected account                                    |
 
 
 ### Response

@@ -30,9 +30,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -41,12 +41,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "74ba4469-b6e2-4141-9598-90afa563e251"
+    bankAccountID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.BankAccounts.InitiateMicroDeposits(ctx, operations.PostInitiateMicroDepositsRequest{
-        AccountID: "74ba4469-b6e2-4141-9598-90afa563e251",
-        BankAccountID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.BankAccounts.InitiateMicroDeposits(ctx, accountID, bankAccountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -59,10 +58,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
-| `request`                                                                                                  | [operations.PostInitiateMicroDepositsRequest](../../models/operations/postinitiatemicrodepositsrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |                                                       |
+| `bankAccountID`                                       | *string*                                              | :heavy_check_mark:                                    | ID of the bank account                                | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
 
 
 ### Response
@@ -82,9 +82,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -93,18 +93,17 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    completeMicroDepositsRequest := shared.CompleteMicroDepositsRequest{
+        Amounts: []int64{
+            984043,
+            891924,
+        },
+    }
+    accountID := "4c8b711e-5b7f-4d2e-9028-921cddc69260"
+    bankAccountID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.BankAccounts.CompleteMicroDeposits(ctx, operations.PutCompleteMicroDepositsRequest{
-        CompleteMicroDepositsRequest: shared.CompleteMicroDepositsRequest{
-            Amounts: []int64{
-                984043,
-                891924,
-            },
-        },
-        AccountID: "4c8b711e-5b7f-4d2e-9028-921cddc69260",
-        BankAccountID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.BankAccounts.CompleteMicroDeposits(ctx, completeMicroDepositsRequest, accountID, bankAccountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -117,10 +116,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
-| `request`                                                                                                | [operations.PutCompleteMicroDepositsRequest](../../models/operations/putcompletemicrodepositsrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |                                                                                            |
+| `completeMicroDepositsRequest`                                                             | [shared.CompleteMicroDepositsRequest](../../models/shared/completemicrodepositsrequest.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |                                                                                            |
+| `accountID`                                                                                | *string*                                                                                   | :heavy_check_mark:                                                                         | ID of the account                                                                          |                                                                                            |
+| `bankAccountID`                                                                            | *string*                                                                                   | :heavy_check_mark:                                                                         | ID of the bank account                                                                     | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                       |
 
 
 ### Response
@@ -140,9 +141,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -151,12 +152,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "1fb576b0-d5f0-4d30-85fb-b2587053202c"
+    bankAccountID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.BankAccounts.Delete(ctx, operations.DeleteBankAccountRequest{
-        AccountID: "1fb576b0-d5f0-4d30-85fb-b2587053202c",
-        BankAccountID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.BankAccounts.Delete(ctx, accountID, bankAccountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -169,10 +169,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
-| `request`                                                                                  | [operations.DeleteBankAccountRequest](../../models/operations/deletebankaccountrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |                                                       |
+| `bankAccountID`                                       | *string*                                              | :heavy_check_mark:                                    | ID of the bank account                                | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
 
 
 ### Response
@@ -192,9 +193,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -203,12 +204,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "73d5fe9b-90c2-4890-9b3f-e49a8d9cbf48"
+    bankAccountID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.BankAccounts.Get(ctx, operations.GetBankAccountRequest{
-        AccountID: "73d5fe9b-90c2-4890-9b3f-e49a8d9cbf48",
-        BankAccountID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.BankAccounts.Get(ctx, accountID, bankAccountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -221,10 +221,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.GetBankAccountRequest](../../models/operations/getbankaccountrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |                                                       |
+| `bankAccountID`                                       | *string*                                              | :heavy_check_mark:                                    | ID of the bank account                                | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
 
 
 ### Response
@@ -244,9 +245,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -255,12 +256,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    bankAccountPayload := shared.BankAccountPayload{}
+    accountID := "633323f9-b77f-43a4-9006-74ebf69280d1"
 
     ctx := context.Background()
-    res, err := s.BankAccounts.Link(ctx, operations.LinkBankAccountRequest{
-        BankAccountPayload: shared.BankAccountPayload{},
-        AccountID: "633323f9-b77f-43a4-9006-74ebf69280d1",
-    })
+    res, err := s.BankAccounts.Link(ctx, bankAccountPayload, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -273,10 +273,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.LinkBankAccountRequest](../../models/operations/linkbankaccountrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |
+| `bankAccountPayload`                                                   | [shared.BankAccountPayload](../../models/shared/bankaccountpayload.md) | :heavy_check_mark:                                                     | N/A                                                                    |
+| `accountID`                                                            | *string*                                                               | :heavy_check_mark:                                                     | ID of the account                                                      |
 
 
 ### Response
@@ -296,9 +297,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -307,11 +308,10 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "ba77a89e-bf73-47ae-8203-ce5e6a95d8a0"
 
     ctx := context.Background()
-    res, err := s.BankAccounts.List(ctx, operations.ListBankAccountsRequest{
-        AccountID: "ba77a89e-bf73-47ae-8203-ce5e6a95d8a0",
-    })
+    res, err := s.BankAccounts.List(ctx, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -324,10 +324,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.ListBankAccountsRequest](../../models/operations/listbankaccountsrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |
 
 
 ### Response

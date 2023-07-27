@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 )
 
 // wallets - A [Moov wallet](https://docs.moov.io/guides/wallet/) can serve as a funding source as you accumulate funds. You can also use the Moov wallet to:
@@ -31,7 +31,12 @@ func newWallets(sdkConfig sdkConfiguration) *wallets {
 
 // Get - Get wallet
 // Get information on a specific wallet (e.g., the available balance). <br><br> To get wallet information, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-func (s *wallets) Get(ctx context.Context, request operations.GetWalletForAccountRequest) (*operations.GetWalletForAccountResponse, error) {
+func (s *wallets) Get(ctx context.Context, accountID string, walletID string) (*operations.GetWalletForAccountResponse, error) {
+	request := operations.GetWalletForAccountRequest{
+		AccountID: accountID,
+		WalletID:  walletID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/wallets/{walletID}", request, nil)
 	if err != nil {
@@ -94,7 +99,13 @@ func (s *wallets) Get(ctx context.Context, request operations.GetWalletForAccoun
 
 // GetTransaction - Get wallet transaction
 // Get details on a specific wallet transaction. <br><br> To access this endpoint, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-func (s *wallets) GetTransaction(ctx context.Context, request operations.GetWalletTransactionRequest) (*operations.GetWalletTransactionResponse, error) {
+func (s *wallets) GetTransaction(ctx context.Context, accountID string, transactionID string, walletID string) (*operations.GetWalletTransactionResponse, error) {
+	request := operations.GetWalletTransactionRequest{
+		AccountID:     accountID,
+		TransactionID: transactionID,
+		WalletID:      walletID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/wallets/{walletID}/transactions/{transactionID}", request, nil)
 	if err != nil {
@@ -157,7 +168,11 @@ func (s *wallets) GetTransaction(ctx context.Context, request operations.GetWall
 
 // List - List wallets
 // List the wallets associated with a Moov account. <br><br> To list wallets, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-func (s *wallets) List(ctx context.Context, request operations.ListWalletsForAccountRequest) (*operations.ListWalletsForAccountResponse, error) {
+func (s *wallets) List(ctx context.Context, accountID string) (*operations.ListWalletsForAccountResponse, error) {
+	request := operations.ListWalletsForAccountRequest{
+		AccountID: accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/wallets", request, nil)
 	if err != nil {

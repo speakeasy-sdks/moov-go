@@ -20,9 +20,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -35,10 +35,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Institutions.Search(ctx, operations.SearchInstitutionRequest{
         Limit: moov.Int64(499),
-        Name: moov.String("Arturo Hagenes"),
-        Rail: shared.RailAch,
-        RoutingNumber: moov.String("culpa"),
-        State: moov.String("adipisci"),
+        Name: moov.String("Joanne Parisian DVM"),
+        Rail: shared.RailWire,
+        RoutingNumber: moov.String("quaerat"),
+        State: moov.String("molestiae"),
     })
     if err != nil {
         log.Fatal(err)

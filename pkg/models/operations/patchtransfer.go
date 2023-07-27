@@ -3,16 +3,16 @@
 package operations
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"net/http"
-	"openapi/pkg/models/shared"
 )
 
 type PatchTransferRequest struct {
 	PatchTransfer shared.PatchTransfer `request:"mediaType=application/json"`
-	// ID of a connected account
-	AccountID *string `queryParam:"style=form,explode=true,name=accountID"`
 	// ID of the Transfer
 	TransferID string `pathParam:"style=simple,explode=false,name=transferID"`
+	// ID of a connected account
+	AccountID *string `queryParam:"style=form,explode=true,name=accountID"`
 }
 
 func (o *PatchTransferRequest) GetPatchTransfer() shared.PatchTransfer {
@@ -22,18 +22,18 @@ func (o *PatchTransferRequest) GetPatchTransfer() shared.PatchTransfer {
 	return o.PatchTransfer
 }
 
-func (o *PatchTransferRequest) GetAccountID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.AccountID
-}
-
 func (o *PatchTransferRequest) GetTransferID() string {
 	if o == nil {
 		return ""
 	}
 	return o.TransferID
+}
+
+func (o *PatchTransferRequest) GetAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
 }
 
 type PatchTransferResponse struct {

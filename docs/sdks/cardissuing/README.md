@@ -29,9 +29,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -40,45 +40,44 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    requestCard := shared.RequestCard{
+        AuthorizationControls: &shared.AuthorizationControls{
+            SpendLimits: []shared.AuthorizationSpendLimitControl{
+                shared.AuthorizationSpendLimitControl{
+                    Amount: moov.Int64(10000),
+                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                },
+                shared.AuthorizationSpendLimitControl{
+                    Amount: moov.Int64(10000),
+                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                },
+                shared.AuthorizationSpendLimitControl{
+                    Amount: moov.Int64(10000),
+                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                },
+                shared.AuthorizationSpendLimitControl{
+                    Amount: moov.Int64(10000),
+                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                },
+            },
+        },
+        AuthorizedUser: &shared.CreateAuthorizedUser{
+            BirthDate: &shared.BirthDate{
+                Day: 9,
+                Month: 11,
+                Year: 1989,
+            },
+            FirstName: moov.String("Jane"),
+            LastName: moov.String("Doe"),
+        },
+        FundingWalletID: moov.String("doloribus"),
+        Memo: moov.String("iusto"),
+        Type: shared.IssuedCardTypeSingleUse.ToPointer(),
+    }
+    accountID := "c70a4562-6d43-4681-bf16-d9f5fce6c556"
 
     ctx := context.Background()
-    res, err := s.CardIssuing.RequestCard(ctx, operations.PostRequestCardRequest{
-        RequestCard: shared.RequestCard{
-            AuthorizationControls: &shared.AuthorizationControls{
-                SpendLimits: []shared.AuthorizationSpendLimitControl{
-                    shared.AuthorizationSpendLimitControl{
-                        Amount: moov.Int64(10000),
-                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                    },
-                    shared.AuthorizationSpendLimitControl{
-                        Amount: moov.Int64(10000),
-                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                    },
-                    shared.AuthorizationSpendLimitControl{
-                        Amount: moov.Int64(10000),
-                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                    },
-                    shared.AuthorizationSpendLimitControl{
-                        Amount: moov.Int64(10000),
-                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                    },
-                },
-            },
-            AuthorizedUser: &shared.CreateAuthorizedUser{
-                BirthDate: &shared.BirthDate{
-                    Day: 9,
-                    Month: 11,
-                    Year: 1989,
-                },
-                FirstName: moov.String("Jane"),
-                LastName: moov.String("Doe"),
-            },
-            FundingWalletID: moov.String("doloribus"),
-            Memo: moov.String("iusto"),
-            Type: shared.IssuedCardTypeSingleUse.ToPointer(),
-        },
-        AccountID: "c70a4562-6d43-4681-bf16-d9f5fce6c556",
-    })
+    res, err := s.CardIssuing.RequestCard(ctx, requestCard, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -91,10 +90,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.PostRequestCardRequest](../../models/operations/postrequestcardrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `requestCard`                                            | [shared.RequestCard](../../models/shared/requestcard.md) | :heavy_check_mark:                                       | N/A                                                      |
+| `accountID`                                              | *string*                                                 | :heavy_check_mark:                                       | ID of the account                                        |
 
 
 ### Response
@@ -116,9 +116,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -127,12 +127,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "146c3e25-0fb0-408c-82e1-41aac366c8dd"
+    issuedCardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.CardIssuing.GetCard(ctx, operations.GetIssuedCardRequest{
-        AccountID: "146c3e25-0fb0-408c-82e1-41aac366c8dd",
-        IssuedCardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.CardIssuing.GetCard(ctx, accountID, issuedCardID)
     if err != nil {
         log.Fatal(err)
     }
@@ -145,10 +144,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
-| `request`                                                                          | [operations.GetIssuedCardRequest](../../models/operations/getissuedcardrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |                                                       |
+| `issuedCardID`                                        | *string*                                              | :heavy_check_mark:                                    | ID of the issued card                                 | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
 
 
 ### Response
@@ -170,9 +170,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -181,12 +181,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "6b144290-7474-4778-a7bd-466d28c10ab3"
+    issuedCardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.CardIssuing.GetCardFullDetails(ctx, operations.GetFullIssuedCardRequest{
-        AccountID: "6b144290-7474-4778-a7bd-466d28c10ab3",
-        IssuedCardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.CardIssuing.GetCardFullDetails(ctx, accountID, issuedCardID)
     if err != nil {
         log.Fatal(err)
     }
@@ -199,10 +198,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
-| `request`                                                                                  | [operations.GetFullIssuedCardRequest](../../models/operations/getfullissuedcardrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |                                                       |
+| `issuedCardID`                                        | *string*                                              | :heavy_check_mark:                                    | ID of the issued card                                 | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
 
 
 ### Response
@@ -225,9 +225,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -236,14 +236,13 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "cdca4251-904e-4523-87e0-bc7178e4796f"
+    count := 174112
+    skip := 645570
+    states := shared.IssuedCardStateInactive
 
     ctx := context.Background()
-    res, err := s.CardIssuing.ListCards(ctx, operations.ListIssuedCardsRequest{
-        AccountID: "cdca4251-904e-4523-87e0-bc7178e4796f",
-        Count: moov.Int64(174112),
-        Skip: moov.Int64(645570),
-        States: shared.IssuedCardStateInactive.ToPointer(),
-    })
+    res, err := s.CardIssuing.ListCards(ctx, accountID, count, skip, states)
     if err != nil {
         log.Fatal(err)
     }
@@ -256,10 +255,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.ListIssuedCardsRequest](../../models/operations/listissuedcardsrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `accountID`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | ID of the account                                                                |
+| `count`                                                                          | **int64*                                                                         | :heavy_minus_sign:                                                               | Optional parameter to limit the number of results in the query                   |
+| `skip`                                                                           | **int64*                                                                         | :heavy_minus_sign:                                                               | The number of items to offset before starting to collect the result set          |
+| `states`                                                                         | [*shared.IssuedCardState](../../models/shared/issuedcardstate.md)                | :heavy_minus_sign:                                                               | Optional, comma-separated states to filter the Moov list issued cards response.<br/> |
 
 
 ### Response
@@ -281,9 +283,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -292,33 +294,32 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    updateIssuedCard := shared.UpdateIssuedCard{
+        AuthorizationControls: &shared.AuthorizationControls{
+            SpendLimits: []shared.AuthorizationSpendLimitControl{
+                shared.AuthorizationSpendLimitControl{
+                    Amount: moov.Int64(10000),
+                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                },
+            },
+        },
+        AuthorizedUser: &shared.CreateAuthorizedUser{
+            BirthDate: &shared.BirthDate{
+                Day: 9,
+                Month: 11,
+                Year: 1989,
+            },
+            FirstName: moov.String("Jane"),
+            LastName: moov.String("Doe"),
+        },
+        Memo: moov.String("porro"),
+        State: shared.IssuedCardStateInactive.ToPointer(),
+    }
+    accountID := "88282aa4-8256-42f2-a2e9-817ee17cbe61"
+    issuedCardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.CardIssuing.UpdateCard(ctx, operations.UpdateIssuedCardRequest{
-        UpdateIssuedCard: shared.UpdateIssuedCard{
-            AuthorizationControls: &shared.AuthorizationControls{
-                SpendLimits: []shared.AuthorizationSpendLimitControl{
-                    shared.AuthorizationSpendLimitControl{
-                        Amount: moov.Int64(10000),
-                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                    },
-                },
-            },
-            AuthorizedUser: &shared.CreateAuthorizedUser{
-                BirthDate: &shared.BirthDate{
-                    Day: 9,
-                    Month: 11,
-                    Year: 1989,
-                },
-                FirstName: moov.String("Jane"),
-                LastName: moov.String("Doe"),
-            },
-            Memo: moov.String("porro"),
-            State: shared.IssuedCardStateInactive.ToPointer(),
-        },
-        AccountID: "88282aa4-8256-42f2-a2e9-817ee17cbe61",
-        IssuedCardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.CardIssuing.UpdateCard(ctx, updateIssuedCard, accountID, issuedCardID)
     if err != nil {
         log.Fatal(err)
     }
@@ -331,10 +332,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.UpdateIssuedCardRequest](../../models/operations/updateissuedcardrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `ctx`                                                              | [context.Context](https://pkg.go.dev/context#Context)              | :heavy_check_mark:                                                 | The context to use for the request.                                |                                                                    |
+| `updateIssuedCard`                                                 | [shared.UpdateIssuedCard](../../models/shared/updateissuedcard.md) | :heavy_check_mark:                                                 | N/A                                                                |                                                                    |
+| `accountID`                                                        | *string*                                                           | :heavy_check_mark:                                                 | ID of the account                                                  |                                                                    |
+| `issuedCardID`                                                     | *string*                                                           | :heavy_check_mark:                                                 | ID of the issued card                                              | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                               |
 
 
 ### Response

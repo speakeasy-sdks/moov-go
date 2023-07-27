@@ -22,9 +22,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -33,12 +33,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "86bc173d-689e-4ee9-926f-8d986e881ead"
+    fileID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.Files.Get(ctx, operations.GetFileDetailsRequest{
-        AccountID: "73d689ee-e952-46f8-9986-e881ead4f0e1",
-        FileID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.Files.Get(ctx, accountID, fileID)
     if err != nil {
         log.Fatal(err)
     }
@@ -51,10 +50,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.GetFileDetailsRequest](../../models/operations/getfiledetailsrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |                                                       |
+| `fileID`                                              | *string*                                              | :heavy_check_mark:                                    | ID of the file                                        | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
 
 
 ### Response
@@ -74,9 +74,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -85,11 +85,10 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "4f0e1012-563f-494e-a9e9-73e922a57a15"
 
     ctx := context.Background()
-    res, err := s.Files.List(ctx, operations.ListFilesRequest{
-        AccountID: "012563f9-4e29-4e97-be92-2a57a15be3e0",
-    })
+    res, err := s.Files.List(ctx, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -102,10 +101,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `request`                                                                  | [operations.ListFilesRequest](../../models/operations/listfilesrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |
 
 
 ### Response
@@ -125,9 +124,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -136,18 +135,17 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    fileUploadRequest := shared.FileUploadRequest{
+        File: shared.FileUploadRequestFile{
+            Content: []byte("quidem"),
+            File: "eveniet",
+        },
+        FilePurpose: shared.FilePurposeIdentityVerification,
+    }
+    accountID := "e060807e-2b6e-43ab-8845-f0597a60ff2a"
 
     ctx := context.Background()
-    res, err := s.Files.Upload(ctx, operations.UploadFileRequest{
-        FileUploadRequest: shared.FileUploadRequest{
-            File: shared.FileUploadRequestFile{
-                Content: []byte("iure"),
-                File: "ipsa",
-            },
-            FilePurpose: shared.FilePurposeMerchantUnderwriting,
-        },
-        AccountID: "07e2b6e3-ab88-445f-8597-a60ff2a54a31",
-    })
+    res, err := s.Files.Upload(ctx, fileUploadRequest, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -160,10 +158,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [operations.UploadFileRequest](../../models/operations/uploadfilerequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `ctx`                                                                | [context.Context](https://pkg.go.dev/context#Context)                | :heavy_check_mark:                                                   | The context to use for the request.                                  |
+| `fileUploadRequest`                                                  | [shared.FileUploadRequest](../../models/shared/fileuploadrequest.md) | :heavy_check_mark:                                                   | N/A                                                                  |
+| `accountID`                                                          | *string*                                                             | :heavy_check_mark:                                                   | ID of the account                                                    |
 
 
 ### Response

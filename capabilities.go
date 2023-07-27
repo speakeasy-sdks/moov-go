@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 )
 
 // capabilities - Capabilities determine what a Moov account can do. Each capability has specific [verification requirements](https://docs.moov.io/guides/accounts/identity-verification/), depending on risk and compliance standards associated with different account activities. For example, there are more information requirements for a business that wants to charge other accounts than for an individual who simply wants to receive funds. When you request a capability, we list the information requirements for that capability. Once you submit the required information, we need to verify the data. Because of this, a requested capability may not immediately become active. For more detailed information on capabilities and capability IDs, read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/).
@@ -27,7 +27,12 @@ func newCapabilities(sdkConfig sdkConfiguration) *capabilities {
 
 // Delete - Disable a capability for an account
 // Disable a specific capability that an account has requested. <br><br> To use this endpoint, you must specify the `/accounts/{accountID}/capabilities.write` scope.
-func (s *capabilities) Delete(ctx context.Context, request operations.DeleteCapabilityRequest) (*operations.DeleteCapabilityResponse, error) {
+func (s *capabilities) Delete(ctx context.Context, accountID string, capabilityID shared.CapabilityID) (*operations.DeleteCapabilityResponse, error) {
+	request := operations.DeleteCapabilityRequest{
+		AccountID:    accountID,
+		CapabilityID: capabilityID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/capabilities/{capabilityID}", request, nil)
 	if err != nil {
@@ -80,7 +85,12 @@ func (s *capabilities) Delete(ctx context.Context, request operations.DeleteCapa
 
 // Get - Get capability for account
 // Retrieve a specific capability that an account has requested. <br><br> To use this endpoint, you must specify the `/accounts/{accountID}/capabilities.read` scope.
-func (s *capabilities) Get(ctx context.Context, request operations.GetCapabilityRequest) (*operations.GetCapabilityResponse, error) {
+func (s *capabilities) Get(ctx context.Context, accountID string, capabilityID shared.CapabilityID) (*operations.GetCapabilityResponse, error) {
+	request := operations.GetCapabilityRequest{
+		AccountID:    accountID,
+		CapabilityID: capabilityID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/capabilities/{capabilityID}", request, nil)
 	if err != nil {
@@ -143,7 +153,11 @@ func (s *capabilities) Get(ctx context.Context, request operations.GetCapability
 
 // List - List capabilities for account
 // Retrieve all the capabilities an account has requested. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/capabilities.read` scope.
-func (s *capabilities) List(ctx context.Context, request operations.ListCapabilitiesRequest) (*operations.ListCapabilitiesResponse, error) {
+func (s *capabilities) List(ctx context.Context, accountID string) (*operations.ListCapabilitiesResponse, error) {
+	request := operations.ListCapabilitiesRequest{
+		AccountID: accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/capabilities", request, nil)
 	if err != nil {
@@ -204,7 +218,12 @@ func (s *capabilities) List(ctx context.Context, request operations.ListCapabili
 
 // Request - Request capabilities
 // Request capabilities for a specific account. <br><br> To use this endpoint, you must specify the `/accounts/{accountID}/capabilities.write` scope.
-func (s *capabilities) Request(ctx context.Context, request operations.PostCapabilityRequest) (*operations.PostCapabilityResponse, error) {
+func (s *capabilities) Request(ctx context.Context, addCapabilityRequest shared.AddCapabilityRequest, accountID string) (*operations.PostCapabilityResponse, error) {
+	request := operations.PostCapabilityRequest{
+		AddCapabilityRequest: addCapabilityRequest,
+		AccountID:            accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/capabilities", request, nil)
 	if err != nil {

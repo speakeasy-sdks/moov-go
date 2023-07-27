@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 )
 
 // transactions - A transaction is a record of a card's activity on a particular Moov account.
@@ -27,7 +27,14 @@ func newTransactions(sdkConfig sdkConfiguration) *transactions {
 
 // List - Get account transactions
 // List issued card transactions associated with a Moov account
-func (s *transactions) List(ctx context.Context, request operations.ListAccountIssuedCardTransactionsRequest) (*operations.ListAccountIssuedCardTransactionsResponse, error) {
+func (s *transactions) List(ctx context.Context, accountID string, count *int64, skip *int64, status *shared.IssuedCardTransactionStatus) (*operations.ListAccountIssuedCardTransactionsResponse, error) {
+	request := operations.ListAccountIssuedCardTransactionsRequest{
+		AccountID: accountID,
+		Count:     count,
+		Skip:      skip,
+		Status:    status,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/issuing/{accountID}/transactions", request, nil)
 	if err != nil {

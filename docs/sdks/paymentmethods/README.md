@@ -24,9 +24,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -35,12 +35,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "64a3e865-e795-46f9-a51a-5a9da660ff57"
+    paymentMethodID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.PaymentMethods.Get(ctx, operations.GetPaymentMethodRequest{
-        AccountID: "e865e795-6f92-451a-9a9d-a660ff57bfaa",
-        PaymentMethodID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.PaymentMethods.Get(ctx, accountID, paymentMethodID)
     if err != nil {
         log.Fatal(err)
     }
@@ -53,10 +52,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.GetPaymentMethodRequest](../../models/operations/getpaymentmethodrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |                                                       |
+| `paymentMethodID`                                     | *string*                                              | :heavy_check_mark:                                    | ID of the payment method                              | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
 
 
 ### Response
@@ -76,9 +76,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -87,12 +87,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "bfaad4f9-efc1-4b45-92c1-032648dc2f61"
+    sourceID := "5199ebfd-0e9f-4e6c-a32c-a3aed0117996"
 
     ctx := context.Background()
-    res, err := s.PaymentMethods.List(ctx, operations.ListPaymentMethodsRequest{
-        AccountID: "d4f9efc1-b451-42c1-8326-48dc2f615199",
-        SourceID: moov.String("ebfd0e9f-e6c6-432c-a3ae-d0117996312f"),
-    })
+    res, err := s.PaymentMethods.List(ctx, accountID, sourceID)
     if err != nil {
         log.Fatal(err)
     }
@@ -105,10 +104,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.ListPaymentMethodsRequest](../../models/operations/listpaymentmethodsrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
+| `accountID`                                                              | *string*                                                                 | :heavy_check_mark:                                                       | ID of the account                                                        |
+| `sourceID`                                                               | **string*                                                                | :heavy_minus_sign:                                                       | Optional parameter to filter the account's payment methods by source ID. |
 
 
 ### Response

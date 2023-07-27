@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 )
 
 // underwriting - [Underwriting](https://docs.moov.io/guides/accounts/underwriting) is a tool Moov uses to understand a business’s profile before allowing them to collect funds on our platform. This profile includes information like a description of the company or the merchant’s business model, the industry they operate in, and transaction volume. Through underwriting, we can understand and prevent unnecessary financial risk for Moov and those transacting on our platform. Note that underwriting can be instant, but in some cases make take around 2 business days before approval.
@@ -27,7 +27,11 @@ func newUnderwriting(sdkConfig sdkConfiguration) *underwriting {
 
 // Get - Retrieve underwriting details
 // Retrieve underwriting associated with a given Moov account. <br><br> To get an account's underwriting details, you'll need to specify the `/accounts/{accountID}/underwriting.read` scope.
-func (s *underwriting) Get(ctx context.Context, request operations.GetUnderwritingRequest) (*operations.GetUnderwritingResponse, error) {
+func (s *underwriting) Get(ctx context.Context, accountID string) (*operations.GetUnderwritingResponse, error) {
+	request := operations.GetUnderwritingRequest{
+		AccountID: accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/underwriting", request, nil)
 	if err != nil {
@@ -88,7 +92,12 @@ func (s *underwriting) Get(ctx context.Context, request operations.GetUnderwriti
 
 // Update - Update underwriting details
 // Update the account's underwriting by passing new values for one or more of the fields. <br><br> To update an account's underwriting details, you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-func (s *underwriting) Update(ctx context.Context, request operations.UpdateUnderwritingRequest) (*operations.UpdateUnderwritingResponse, error) {
+func (s *underwriting) Update(ctx context.Context, underwritingRequest shared.UnderwritingRequest, accountID string) (*operations.UpdateUnderwritingResponse, error) {
+	request := operations.UpdateUnderwritingRequest{
+		UnderwritingRequest: underwritingRequest,
+		AccountID:           accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/underwriting", request, nil)
 	if err != nil {
