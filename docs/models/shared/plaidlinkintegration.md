@@ -7,4 +7,4 @@ This is used by Moov.js with a Plaid reseller relationship. The details of a Pla
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `public_token`     | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+| `PublicToken`      | **string*          | :heavy_minus_sign: | N/A                |

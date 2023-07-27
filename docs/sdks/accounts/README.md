@@ -1,4 +1,4 @@
-# accounts
+# Accounts
 
 ## Overview
 
@@ -11,275 +11,331 @@ When you sign up for the Moov Dashboard, you will have a **facilitator account**
 
 ### Available Operations
 
-* [assign_country](#assign_country) - Assign Account Countries
-* [create](#create) - Create account
-* [get](#get) - Get account
-* [get_tos_token](#get_tos_token) - Get terms of service token
-* [list](#list) - List accounts
-* [list_countries](#list_countries) - Get Account Countries
-* [update](#update) - Patch account
+* [AssignCountry](#assigncountry) - Assign Account Countries
+* [Create](#create) - Create account
+* [Get](#get) - Get account
+* [GetTosToken](#gettostoken) - Get terms of service token
+* [List](#list) - List accounts
+* [ListCountries](#listcountries) - Get Account Countries
+* [Update](#update) - Patch account
 
-## assign_country
+## AssignCountry
 
 Assign the countries of operation for an account. This endpoint will always overwrite the previously assigned values. <br><br> To update the account countries, you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.PutAccountCountriesRequest(
-    countries=shared.Countries(
-        countries=[
-            'United States',
-            'United States',
-            'United States',
-            'United States',
-        ],
-    ),
-    account_id='9d8d69a6-74e0-4f46-bcc8-796ed151a05d',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.accounts.assign_country(req)
+    ctx := context.Background()
+    res, err := s.Accounts.AssignCountry(ctx, operations.PutAccountCountriesRequest{
+        Countries: shared.Countries{
+            Countries: []string{
+                "United States",
+                "United States",
+                "United States",
+                "United States",
+            },
+        },
+        AccountID: "9d8d69a6-74e0-4f46-bcc8-796ed151a05d",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.countries is not None:
-    # handle response
+    if res.Countries != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
 | `request`                                                                                      | [operations.PutAccountCountriesRequest](../../models/operations/putaccountcountriesrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 
 
 ### Response
 
-**[operations.PutAccountCountriesResponse](../../models/operations/putaccountcountriesresponse.md)**
+**[*operations.PutAccountCountriesResponse](../../models/operations/putaccountcountriesresponse.md), error**
 
 
-## create
+## Create
 
 You can create accounts for your users by passing the required information to Moov. <br><br> Note that `mode` field is only required when creating a facilitator account. All non-facilitator account creation requests will ignore the mode field provided and be set to the calling facilitator's mode. <br><br> If you are creating an account with the business type "llc", "partnership", or "privateCorporation", you will need to also provide [business representatives](https://docs.moov.io/api/#tag/Representatives) after creating the account for verification purposes. Once you've added your business owners as representatives, you'll then need to [patch your Moov account](https://docs.moov.io/api/#operation/patchAccount) to indicate that ownership information is complete. Read more on our [business verification requirements here](https://docs.moov.io/guides/accounts/business-verification/). <br><br> When creating an account, you will need to specify the `/accounts.write` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
 )
 
-req = shared.CreateAccountRequest(
-    account_type=shared.AccountType.BUSINESS,
-    capabilities=[
-        shared.CapabilityID.WALLET,
-        shared.CapabilityID.TRANSFERS,
-        shared.CapabilityID.CARD_ISSUING,
-        shared.CapabilityID.CARD_ISSUING,
-    ],
-    customer_support=shared.CreateAccountRequestCustomerSupport(
-        address=shared.CreateAccountRequestCustomerSupportAddress(
-            address_line1='123 Main Street',
-            address_line2='Apt 302',
-            city='Boulder',
-            country='US',
-            postal_code='80301',
-            state_or_province='CO',
-        ),
-        email='amanda@classbooker.dev',
-        phone=shared.CreateAccountRequestCustomerSupportPhone(
-            country_code='1',
-            number='8185551212',
-        ),
-        website='www.wholebodyfitnessgym.com',
-    ),
-    foreign_id='4528aba-b9a1-11eb-8529-0242ac13003',
-    metadata={
-        "molestiae": 'quod',
-        "quod": 'esse',
-        "totam": 'porro',
-        "dolorum": 'dicta',
-    },
-    mode=shared.Mode.PRODUCTION,
-    profile=shared.CreateProfile(
-        business=shared.CreateProfileBusiness(
-            address=shared.CreateProfileBusinessAddress(
-                address_line1='123 Main Street',
-                address_line2='Apt 302',
-                city='Boulder',
-                country='US',
-                postal_code='80301',
-                state_or_province='CO',
-            ),
-            business_type=shared.BusinessType.LLC,
-            description='Local fitness center paying out instructors',
-            doing_business_as='Whole Body Fitness',
-            email='amanda@classbooker.dev',
-            industry_codes=shared.CreateProfileBusinessIndustryCodes(
-                mcc='7997',
-                naics='713940',
-                sic='7991',
-            ),
-            legal_business_name='Whole Body Fitness LLC',
-            phone=shared.CreateProfileBusinessPhone(
-                country_code='1',
-                number='8185551212',
-            ),
-            tax_id=shared.CreateProfileBusinessTaxID(
-                ein=shared.Ein(
-                    number='123-45-6789',
-                ),
-            ),
-            website='www.wholebodyfitnessgym.com',
-        ),
-        individual=shared.CreateProfileIndividual(
-            address=shared.CreateProfileIndividualAddress(
-                address_line1='123 Main Street',
-                address_line2='Apt 302',
-                city='Boulder',
-                country='US',
-                postal_code='80301',
-                state_or_province='CO',
-            ),
-            birth_date=shared.CreateProfileIndividualBirthDate(
-                day=9,
-                month=11,
-                year=1989,
-            ),
-            email='amanda@classbooker.dev',
-            government_id=shared.CreateProfileIndividualGovernmentID(
-                itin=shared.CreateProfileIndividualGovernmentIDItin(
-                    full='123-45-6789',
-                    last_four='6789',
-                ),
-                ssn=shared.CreateProfileIndividualGovernmentIDSsn(
-                    full='123-45-6789',
-                    last_four='6789',
-                ),
-            ),
-            name=shared.Name(
-                first_name='Amanda',
-                last_name='Yang',
-                middle_name='Amanda',
-                suffix='Jr',
-            ),
-            phone=shared.CreateProfileIndividualPhone(
-                country_code='1',
-                number='8185551212',
-            ),
-        ),
-    ),
-    settings=shared.CreateAccountRequestSettings(
-        ach_payment=shared.CreateAccountRequestSettingsAchPayment(
-            company_name='Whole Body Fitness',
-        ),
-        card_payment=shared.CreateAccountRequestSettingsCardPayment(
-            statement_descriptor='Whole Body Fitness',
-        ),
-    ),
-    terms_of_service=shared.CreateAccountRequestTermsOfService(
-        token='kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4',
-    ),
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.accounts.create(req)
+    ctx := context.Background()
+    res, err := s.Accounts.Create(ctx, shared.CreateAccountRequest{
+        AccountType: shared.AccountTypeBusiness,
+        Capabilities: []shared.CapabilityID{
+            shared.CapabilityIDWallet,
+            shared.CapabilityIDTransfers,
+            shared.CapabilityIDCardIssuing,
+            shared.CapabilityIDCardIssuing,
+        },
+        CustomerSupport: &shared.CreateAccountRequestCustomerSupport{
+            Address: &shared.CreateAccountRequestCustomerSupportAddress{
+                AddressLine1: petstore.String("123 Main Street"),
+                AddressLine2: petstore.String("Apt 302"),
+                City: petstore.String("Boulder"),
+                Country: petstore.String("US"),
+                PostalCode: petstore.String("80301"),
+                StateOrProvince: petstore.String("CO"),
+            },
+            Email: petstore.String("amanda@classbooker.dev"),
+            Phone: &shared.CreateAccountRequestCustomerSupportPhone{
+                CountryCode: petstore.String("1"),
+                Number: petstore.String("8185551212"),
+            },
+            Website: petstore.String("www.wholebodyfitnessgym.com"),
+        },
+        ForeignID: petstore.String("4528aba-b9a1-11eb-8529-0242ac13003"),
+        Metadata: map[string]string{
+            "molestiae": "quod",
+            "quod": "esse",
+            "totam": "porro",
+            "dolorum": "dicta",
+        },
+        Mode: shared.ModeProduction.ToPointer(),
+        Profile: shared.CreateProfile{
+            Business: &shared.CreateProfileBusiness{
+                Address: &shared.CreateProfileBusinessAddress{
+                    AddressLine1: petstore.String("123 Main Street"),
+                    AddressLine2: petstore.String("Apt 302"),
+                    City: petstore.String("Boulder"),
+                    Country: petstore.String("US"),
+                    PostalCode: petstore.String("80301"),
+                    StateOrProvince: petstore.String("CO"),
+                },
+                BusinessType: shared.BusinessTypeLlc,
+                Description: petstore.String("Local fitness center paying out instructors"),
+                DoingBusinessAs: petstore.String("Whole Body Fitness"),
+                Email: petstore.String("amanda@classbooker.dev"),
+                IndustryCodes: &shared.CreateProfileBusinessIndustryCodes{
+                    Mcc: petstore.String("7997"),
+                    Naics: petstore.String("713940"),
+                    Sic: petstore.String("7991"),
+                },
+                LegalBusinessName: "Whole Body Fitness LLC",
+                Phone: &shared.CreateProfileBusinessPhone{
+                    CountryCode: petstore.String("1"),
+                    Number: petstore.String("8185551212"),
+                },
+                TaxID: &shared.CreateProfileBusinessTaxID{
+                    Ein: &shared.Ein{
+                        Number: petstore.String("123-45-6789"),
+                    },
+                },
+                Website: petstore.String("www.wholebodyfitnessgym.com"),
+            },
+            Individual: &shared.CreateProfileIndividual{
+                Address: &shared.CreateProfileIndividualAddress{
+                    AddressLine1: petstore.String("123 Main Street"),
+                    AddressLine2: petstore.String("Apt 302"),
+                    City: petstore.String("Boulder"),
+                    Country: petstore.String("US"),
+                    PostalCode: petstore.String("80301"),
+                    StateOrProvince: petstore.String("CO"),
+                },
+                BirthDate: &shared.CreateProfileIndividualBirthDate{
+                    Day: 9,
+                    Month: 11,
+                    Year: 1989,
+                },
+                Email: petstore.String("amanda@classbooker.dev"),
+                GovernmentID: &shared.CreateProfileIndividualGovernmentID{
+                    Itin: &shared.CreateProfileIndividualGovernmentIDItin{
+                        Full: petstore.String("123-45-6789"),
+                        LastFour: petstore.String("6789"),
+                    },
+                    Ssn: &shared.CreateProfileIndividualGovernmentIDSsn{
+                        Full: petstore.String("123-45-6789"),
+                        LastFour: petstore.String("6789"),
+                    },
+                },
+                Name: shared.Name{
+                    FirstName: petstore.String("Amanda"),
+                    LastName: petstore.String("Yang"),
+                    MiddleName: petstore.String("Amanda"),
+                    Suffix: petstore.String("Jr"),
+                },
+                Phone: &shared.CreateProfileIndividualPhone{
+                    CountryCode: petstore.String("1"),
+                    Number: petstore.String("8185551212"),
+                },
+            },
+        },
+        Settings: &shared.CreateAccountRequestSettings{
+            AchPayment: &shared.CreateAccountRequestSettingsAchPayment{
+                CompanyName: petstore.String("Whole Body Fitness"),
+            },
+            CardPayment: &shared.CreateAccountRequestSettingsCardPayment{
+                StatementDescriptor: petstore.String("Whole Body Fitness"),
+            },
+        },
+        TermsOfService: &shared.CreateAccountRequestTermsOfService{
+            Token: petstore.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.account is not None:
-    # handle response
+    if res.Account != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
 | `request`                                                                  | [shared.CreateAccountRequest](../../models/shared/createaccountrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
 
 
 ### Response
 
-**[operations.CreateAccountResponse](../../models/operations/createaccountresponse.md)**
+**[*operations.CreateAccountResponse](../../models/operations/createaccountresponse.md), error**
 
 
-## get
+## Get
 
 Retrieves details for the account with the specified ID. <br><br> To get an account, you will need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetAccountRequest(
-    account_id='ba928fc8-1674-42cb-b392-05929396fea7',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.accounts.get(req)
+    ctx := context.Background()
+    res, err := s.Accounts.Get(ctx, operations.GetAccountRequest{
+        AccountID: "ba928fc8-1674-42cb-b392-05929396fea7",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.account is not None:
-    # handle response
+    if res.Account != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
 | `request`                                                                    | [operations.GetAccountRequest](../../models/operations/getaccountrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 
 
 ### Response
 
-**[operations.GetAccountResponse](../../models/operations/getaccountresponse.md)**
+**[*operations.GetAccountResponse](../../models/operations/getaccountresponse.md), error**
 
 
-## get_tos_token
+## GetTosToken
 
 Generates a non-expiring token that can then be used to accept Moov's terms of service. This token can only be generated via API. Any Moov account requesting the `collect-funds`, `send-funds`, `wallet`, or `card-issuing` capabilities must accept Moov's terms of service, then have the generated terms of service token patched to the account. Read more on our [quick start guide](https://docs.moov.io/guides/quick-start/#request-capabilities).
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
 )
 
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.accounts.get_tos_token()
+    ctx := context.Background()
+    res, err := s.Accounts.GetTosToken(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.terms_of_service_token is not None:
-    # handle response
+    if res.TermsOfServiceToken != nil {
+        // handle response
+    }
+}
 ```
+
+### Parameters
+
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
 
 
 ### Response
 
-**[operations.GetTermsOfServiceTokenResponse](../../models/operations/gettermsofservicetokenresponse.md)**
+**[*operations.GetTermsOfServiceTokenResponse](../../models/operations/gettermsofservicetokenresponse.md), error**
 
 
-## list
+## List
 
 List or search accounts to which the caller is connected.<br><br>
 All supported query parameters are optional. If none are provided
@@ -291,84 +347,110 @@ Searching by name and email will overlap and return results based on relevance.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.ListAccountsRequest(
-    count=359508,
-    email='Humberto.Turcotte6@yahoo.com',
-    foreign_id='4528aba-b9a1-11eb-8529-0242ac13003',
-    include_disconnected=False,
-    name='Carlton O'Hara',
-    skip=210382,
-    type=shared.AccountType.BUSINESS,
-    verification_status=shared.AccountVerificationStatus.RESUBMIT,
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.accounts.list(req)
+    ctx := context.Background()
+    res, err := s.Accounts.List(ctx, operations.ListAccountsRequest{
+        Count: petstore.Int64(359508),
+        Email: petstore.String("Humberto.Turcotte6@yahoo.com"),
+        ForeignID: petstore.String("4528aba-b9a1-11eb-8529-0242ac13003"),
+        IncludeDisconnected: petstore.Bool(false),
+        Name: petstore.String("Carlton O'Hara"),
+        Skip: petstore.Int64(210382),
+        Type: shared.AccountTypeBusiness.ToPointer(),
+        VerificationStatus: shared.AccountVerificationStatusResubmit.ToPointer(),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.accounts is not None:
-    # handle response
+    if res.Accounts != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
 | `request`                                                                        | [operations.ListAccountsRequest](../../models/operations/listaccountsrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[operations.ListAccountsResponse](../../models/operations/listaccountsresponse.md)**
+**[*operations.ListAccountsResponse](../../models/operations/listaccountsresponse.md), error**
 
 
-## list_countries
+## ListCountries
 
 Retrieve the specified countries of operation for an account. <br><br> To get the list of countries, you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetAccountCountriesRequest(
-    account_id='2c595590-7aff-41a3-a2fa-9467739251aa',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.accounts.list_countries(req)
+    ctx := context.Background()
+    res, err := s.Accounts.ListCountries(ctx, operations.GetAccountCountriesRequest{
+        AccountID: "2c595590-7aff-41a3-a2fa-9467739251aa",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.countries is not None:
-    # handle response
+    if res.Countries != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
 | `request`                                                                                      | [operations.GetAccountCountriesRequest](../../models/operations/getaccountcountriesrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 
 
 ### Response
 
-**[operations.GetAccountCountriesResponse](../../models/operations/getaccountcountriesresponse.md)**
+**[*operations.GetAccountCountriesResponse](../../models/operations/getaccountcountriesresponse.md), error**
 
 
-## update
+## Update
 
 To patch an account, you must specify the `/accounts/{accountID}/profile.write` scope and provide the changed information.  
 
@@ -385,137 +467,150 @@ If you need to update information in a locked state, please contact Moov support
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.PatchAccountRequest(
-    patch_account_request=shared.PatchAccountRequest(
-        customer_support=shared.PatchAccountRequestCustomerSupport(
-            address=shared.PatchAccountRequestCustomerSupportAddress(
-                address_line1='123 Main Street',
-                address_line2='Apt 302',
-                city='Boulder',
-                country='US',
-                postal_code='80301',
-                state_or_province='CO',
-            ),
-            email='amanda@classbooker.dev',
-            phone=shared.PatchAccountRequestCustomerSupportPhone(
-                country_code='1',
-                number='8185551212',
-            ),
-            website='www.wholebodyfitnessgym.com',
-        ),
-        foreign_id='4528aba-b9a1-11eb-8529-0242ac13003',
-        metadata={
-            "odit": 'quo',
-            "sequi": 'tenetur',
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
+
+    ctx := context.Background()
+    res, err := s.Accounts.Update(ctx, operations.PatchAccountRequest{
+        PatchAccountRequest: shared.PatchAccountRequest{
+            CustomerSupport: &shared.PatchAccountRequestCustomerSupport{
+                Address: &shared.PatchAccountRequestCustomerSupportAddress{
+                    AddressLine1: petstore.String("123 Main Street"),
+                    AddressLine2: petstore.String("Apt 302"),
+                    City: petstore.String("Boulder"),
+                    Country: petstore.String("US"),
+                    PostalCode: petstore.String("80301"),
+                    StateOrProvince: petstore.String("CO"),
+                },
+                Email: petstore.String("amanda@classbooker.dev"),
+                Phone: &shared.PatchAccountRequestCustomerSupportPhone{
+                    CountryCode: petstore.String("1"),
+                    Number: petstore.String("8185551212"),
+                },
+                Website: petstore.String("www.wholebodyfitnessgym.com"),
+            },
+            ForeignID: petstore.String("4528aba-b9a1-11eb-8529-0242ac13003"),
+            Metadata: map[string]string{
+                "odit": "quo",
+                "sequi": "tenetur",
+            },
+            Profile: &shared.PatchAccountRequestProfile{
+                Business: &shared.PatchAccountRequestProfileBusiness{
+                    Address: &shared.PatchAccountRequestProfileBusinessAddress{
+                        AddressLine1: petstore.String("123 Main Street"),
+                        AddressLine2: petstore.String("Apt 302"),
+                        City: petstore.String("Boulder"),
+                        Country: petstore.String("US"),
+                        PostalCode: petstore.String("80301"),
+                        StateOrProvince: petstore.String("CO"),
+                    },
+                    BusinessType: shared.PatchAccountRequestProfileBusinessBusinessTypeLlc.ToPointer(),
+                    Description: petstore.String("Local fitness center paying out instructors"),
+                    DoingBusinessAs: petstore.String("Whole Body Fitness"),
+                    Email: petstore.String("amanda@classbooker.dev"),
+                    IndustryCodes: &shared.PatchAccountRequestProfileBusinessIndustryCodes{
+                        Mcc: petstore.String("7997"),
+                        Naics: petstore.String("713940"),
+                        Sic: petstore.String("7991"),
+                    },
+                    LegalBusinessName: petstore.String("Whole Body Fitness LLC"),
+                    OwnersProvided: petstore.Bool(false),
+                    Phone: &shared.PatchAccountRequestProfileBusinessPhone{
+                        CountryCode: petstore.String("1"),
+                        Number: petstore.String("8185551212"),
+                    },
+                    TaxID: &shared.PatchAccountRequestProfileBusinessTaxID{
+                        Ein: &shared.Ein{
+                            Number: petstore.String("123-45-6789"),
+                        },
+                    },
+                    Website: petstore.String("www.wholebodyfitnessgym.com"),
+                },
+                Individual: &shared.PatchAccountRequestProfileIndividual{
+                    Address: &shared.PatchAccountRequestProfileIndividualAddress{
+                        AddressLine1: petstore.String("123 Main Street"),
+                        AddressLine2: petstore.String("Apt 302"),
+                        City: petstore.String("Boulder"),
+                        Country: petstore.String("US"),
+                        PostalCode: petstore.String("80301"),
+                        StateOrProvince: petstore.String("CO"),
+                    },
+                    BirthDate: &shared.PatchAccountRequestProfileIndividualBirthDate{
+                        Day: 9,
+                        Month: 11,
+                        Year: 1989,
+                    },
+                    Email: petstore.String("amanda@classbooker.dev"),
+                    GovernmentID: &shared.PatchAccountRequestProfileIndividualGovernmentID{
+                        Itin: &shared.PatchAccountRequestProfileIndividualGovernmentIDItin{
+                            Full: petstore.String("123-45-6789"),
+                            LastFour: petstore.String("6789"),
+                        },
+                        Ssn: &shared.PatchAccountRequestProfileIndividualGovernmentIDSsn{
+                            Full: petstore.String("123-45-6789"),
+                            LastFour: petstore.String("6789"),
+                        },
+                    },
+                    Name: &shared.PatchAccountRequestProfileIndividualName{
+                        FirstName: petstore.String("Amanda"),
+                        LastName: petstore.String("Yang"),
+                        MiddleName: petstore.String("Amanda"),
+                        Suffix: petstore.String("Jr"),
+                    },
+                    Phone: &shared.PatchAccountRequestProfileIndividualPhone{
+                        CountryCode: petstore.String("1"),
+                        Number: petstore.String("8185551212"),
+                    },
+                },
+            },
+            Settings: &shared.PatchAccountRequestSettings{
+                AchPayment: &shared.PatchAccountRequestSettingsAchPayment{
+                    CompanyName: petstore.String("Whole Body Fitness"),
+                },
+                CardPayment: &shared.PatchAccountRequestSettingsCardPayment{
+                    StatementDescriptor: petstore.String("Whole Body Fitness"),
+                },
+            },
+            TermsOfService: &shared.PatchAccountRequestTermsOfService{
+                Token: petstore.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
+            },
         },
-        profile=shared.PatchAccountRequestProfile(
-            business=shared.PatchAccountRequestProfileBusiness(
-                address=shared.PatchAccountRequestProfileBusinessAddress(
-                    address_line1='123 Main Street',
-                    address_line2='Apt 302',
-                    city='Boulder',
-                    country='US',
-                    postal_code='80301',
-                    state_or_province='CO',
-                ),
-                business_type=shared.PatchAccountRequestProfileBusinessBusinessType.LLC,
-                description='Local fitness center paying out instructors',
-                doing_business_as='Whole Body Fitness',
-                email='amanda@classbooker.dev',
-                industry_codes=shared.PatchAccountRequestProfileBusinessIndustryCodes(
-                    mcc='7997',
-                    naics='713940',
-                    sic='7991',
-                ),
-                legal_business_name='Whole Body Fitness LLC',
-                owners_provided=False,
-                phone=shared.PatchAccountRequestProfileBusinessPhone(
-                    country_code='1',
-                    number='8185551212',
-                ),
-                tax_id=shared.PatchAccountRequestProfileBusinessTaxID(
-                    ein=shared.Ein(
-                        number='123-45-6789',
-                    ),
-                ),
-                website='www.wholebodyfitnessgym.com',
-            ),
-            individual=shared.PatchAccountRequestProfileIndividual(
-                address=shared.PatchAccountRequestProfileIndividualAddress(
-                    address_line1='123 Main Street',
-                    address_line2='Apt 302',
-                    city='Boulder',
-                    country='US',
-                    postal_code='80301',
-                    state_or_province='CO',
-                ),
-                birth_date=shared.PatchAccountRequestProfileIndividualBirthDate(
-                    day=9,
-                    month=11,
-                    year=1989,
-                ),
-                email='amanda@classbooker.dev',
-                government_id=shared.PatchAccountRequestProfileIndividualGovernmentID(
-                    itin=shared.PatchAccountRequestProfileIndividualGovernmentIDItin(
-                        full='123-45-6789',
-                        last_four='6789',
-                    ),
-                    ssn=shared.PatchAccountRequestProfileIndividualGovernmentIDSsn(
-                        full='123-45-6789',
-                        last_four='6789',
-                    ),
-                ),
-                name=shared.PatchAccountRequestProfileIndividualName(
-                    first_name='Amanda',
-                    last_name='Yang',
-                    middle_name='Amanda',
-                    suffix='Jr',
-                ),
-                phone=shared.PatchAccountRequestProfileIndividualPhone(
-                    country_code='1',
-                    number='8185551212',
-                ),
-            ),
-        ),
-        settings=shared.PatchAccountRequestSettings(
-            ach_payment=shared.PatchAccountRequestSettingsAchPayment(
-                company_name='Whole Body Fitness',
-            ),
-            card_payment=shared.PatchAccountRequestSettingsCardPayment(
-                statement_descriptor='Whole Body Fitness',
-            ),
-        ),
-        terms_of_service=shared.PatchAccountRequestTermsOfService(
-            token='kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4',
-        ),
-    ),
-    account_id='5ad019da-1ffe-478f-897b-0074f15471b5',
-)
+        AccountID: "5ad019da-1ffe-478f-897b-0074f15471b5",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-res = s.accounts.update(req)
-
-if res.account is not None:
-    # handle response
+    if res.Account != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
 | `request`                                                                        | [operations.PatchAccountRequest](../../models/operations/patchaccountrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[operations.PatchAccountResponse](../../models/operations/patchaccountresponse.md)**
+**[*operations.PatchAccountResponse](../../models/operations/patchaccountresponse.md), error**
 

@@ -5,11 +5,11 @@ Card status
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `INITIATED` | initiated   |
-| `CONFIRMED` | confirmed   |
-| `CANCELED`  | canceled    |
-| `SETTLED`   | settled     |
-| `FAILED`    | failed      |
-| `COMPLETED` | completed   |
+| Name                  | Value                 |
+| --------------------- | --------------------- |
+| `CardStatusInitiated` | initiated             |
+| `CardStatusConfirmed` | confirmed             |
+| `CardStatusCanceled`  | canceled              |
+| `CardStatusSettled`   | settled               |
+| `CardStatusFailed`    | failed                |
+| `CardStatusCompleted` | completed             |

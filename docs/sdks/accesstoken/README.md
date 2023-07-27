@@ -1,4 +1,4 @@
-# access_token
+# AccessToken
 
 ## Overview
 
@@ -9,88 +9,112 @@ Our authentication flow follows the OAuth 2.0 standard. With this endpoint, you'
 
 ### Available Operations
 
-* [create](#create) - Create access token
-* [revoke](#revoke) - Revoke access token
+* [Create](#create) - Create access token
+* [Revoke](#revoke) - Revoke access token
 
-## create
+## Create
 
 Use the client_id and client_secret to generate an access token.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
 )
 
-req = shared.ClientCredentialsGrantToAccessTokenRequest(
-    client_id='5clTR_MdVrrkgxw2',
-    client_secret='dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-',
-    grant_type=shared.ClientCredentialsGrantToAccessTokenRequestGrantType.REFRESH_TOKEN,
-    refresh_token='i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6...',
-    scope='/accounts.write',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.access_token.create(req)
+    ctx := context.Background()
+    res, err := s.AccessToken.Create(ctx, shared.ClientCredentialsGrantToAccessTokenRequest{
+        ClientID: petstore.String("5clTR_MdVrrkgxw2"),
+        ClientSecret: petstore.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
+        GrantType: shared.ClientCredentialsGrantToAccessTokenRequestGrantTypeRefreshToken,
+        RefreshToken: petstore.String("i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6..."),
+        Scope: petstore.String("/accounts.write"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.access_token_response is not None:
-    # handle response
+    if res.AccessTokenResponse != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                                              | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
 | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                  | :heavy_check_mark:                                                                                                     | The context to use for the request.                                                                                    |
 | `request`                                                                                                              | [shared.ClientCredentialsGrantToAccessTokenRequest](../../models/shared/clientcredentialsgranttoaccesstokenrequest.md) | :heavy_check_mark:                                                                                                     | The request object to use for the request.                                                                             |
 
 
 ### Response
 
-**[operations.PostOAuth2TokenResponse](../../models/operations/postoauth2tokenresponse.md)**
+**[*operations.PostOAuth2TokenResponse](../../models/operations/postoauth2tokenresponse.md), error**
 
 
-## revoke
+## Revoke
 
 Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
 )
 
-req = shared.RevokeTokenRequest1(
-    client_id='5clTR_MdVrrkgxw2',
-    client_secret='dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-',
-    token='i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6...',
-    token_type_hint=shared.RevokeTokenRequestTokenTypeHint.REFRESH_TOKEN,
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.access_token.revoke(req)
+    ctx := context.Background()
+    res, err := s.AccessToken.Revoke(ctx, shared.RevokeTokenRequest1{
+        ClientID: petstore.String("5clTR_MdVrrkgxw2"),
+        ClientSecret: petstore.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
+        Token: "i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6...",
+        TokenTypeHint: shared.RevokeTokenRequestTokenTypeHintRefreshToken.ToPointer(),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.status_code == 200:
-    # handle response
+    if res.StatusCode == http.StatusOK {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
 | `request`                                                                | [shared.RevokeTokenRequest1](../../models/shared/revoketokenrequest1.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
 
 
 ### Response
 
-**[operations.RevokeOAuth2TokenResponse](../../models/operations/revokeoauth2tokenresponse.md)**
+**[*operations.RevokeOAuth2TokenResponse](../../models/operations/revokeoauth2tokenresponse.md), error**
 

@@ -1,4 +1,4 @@
-# files
+# Files
 
 ## Overview
 
@@ -6,128 +6,167 @@ Files can be used for a multitude of different use cases including but not limit
 
 ### Available Operations
 
-* [get](#get) - Get File Details
-* [list](#list) - List files
-* [upload](#upload) - Upload File
+* [Get](#get) - Get File Details
+* [List](#list) - List files
+* [Upload](#upload) - Upload File
 
-## get
+## Get
 
 Retrieve file details associated with a specific Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetFileDetailsRequest(
-    account_id='2065e904-f3b1-4194-b8ab-f603a79f9dfe',
-    file_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.files.get(req)
+    ctx := context.Background()
+    res, err := s.Files.Get(ctx, operations.GetFileDetailsRequest{
+        AccountID: "2065e904-f3b1-4194-b8ab-f603a79f9dfe",
+        FileID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.file is not None:
-    # handle response
+    if res.File != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
 | `request`                                                                            | [operations.GetFileDetailsRequest](../../models/operations/getfiledetailsrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 
 
 ### Response
 
-**[operations.GetFileDetailsResponse](../../models/operations/getfiledetailsresponse.md)**
+**[*operations.GetFileDetailsResponse](../../models/operations/getfiledetailsresponse.md), error**
 
 
-## list
+## List
 
 List all the files associated with a particular Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.ListFilesRequest(
-    account_id='0ab7da8a-50ce-4187-b86b-c173d689eee9',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.files.list(req)
+    ctx := context.Background()
+    res, err := s.Files.List(ctx, operations.ListFilesRequest{
+        AccountID: "0ab7da8a-50ce-4187-b86b-c173d689eee9",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.files is not None:
-    # handle response
+    if res.Files != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
 | `request`                                                                  | [operations.ListFilesRequest](../../models/operations/listfilesrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
 
 
 ### Response
 
-**[operations.ListFilesResponse](../../models/operations/listfilesresponse.md)**
+**[*operations.ListFilesResponse](../../models/operations/listfilesresponse.md), error**
 
 
-## upload
+## Upload
 
 Upload a file and link it to the provided Moov account. The maximum file size is 10MB. Each account is allowed a maximum of 10 files. Acceptable file types include csv, jpg, pdf, and png. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.write` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.UploadFileRequest(
-    file_upload_request=shared.FileUploadRequest(
-        file=shared.FileUploadRequestFile(
-            content='minima'.encode(),
-            file='aspernatur',
-        ),
-        file_purpose=shared.FilePurpose.BUSINESS_VERIFICATION,
-    ),
-    account_id='f8d986e8-81ea-4d4f-8e10-12563f94e29e',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.files.upload(req)
+    ctx := context.Background()
+    res, err := s.Files.Upload(ctx, operations.UploadFileRequest{
+        FileUploadRequest: shared.FileUploadRequest{
+            File: shared.FileUploadRequestFile{
+                Content: []byte("minima"),
+                File: "aspernatur",
+            },
+            FilePurpose: shared.FilePurposeBusinessVerification,
+        },
+        AccountID: "f8d986e8-81ea-4d4f-8e10-12563f94e29e",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.file is not None:
-    # handle response
+    if res.File != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
 | `request`                                                                    | [operations.UploadFileRequest](../../models/operations/uploadfilerequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 
 
 ### Response
 
-**[operations.UploadFileResponse](../../models/operations/uploadfileresponse.md)**
+**[*operations.UploadFileResponse](../../models/operations/uploadfileresponse.md), error**
 

@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 management:
-  docChecksum: ee90d9ca8f4204219003c0e0d9e3867c
+  docChecksum: 1f0ce4a978eb6ce392a660dce0a33c3e
   docVersion: 1.0.0
   speakeasyVersion: 1.65.1
   generationVersion: 2.73.1
@@ -13,6 +13,10 @@ generation:
   singleTagPerOp: false
   tagNamespacingDisabled: false
   telemetryEnabled: false
+go:
+  version: 0.0.1
+  maxMethodParams: 0
+  packageName: openapi
 python:
   version: 1.1.1
   author: Speakeasy

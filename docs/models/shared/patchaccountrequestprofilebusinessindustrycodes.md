@@ -7,6 +7,6 @@ Describes industry specific identifiers
 
 | Field              | Type               | Required           | Description        | Example            |
 | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `mcc`              | *Optional[str]*    | :heavy_minus_sign: | N/A                | 7997               |
-| `naics`            | *Optional[str]*    | :heavy_minus_sign: | N/A                | 713940             |
-| `sic`              | *Optional[str]*    | :heavy_minus_sign: | N/A                | 7991               |
+| `Mcc`              | **string*          | :heavy_minus_sign: | N/A                | 7997               |
+| `Naics`            | **string*          | :heavy_minus_sign: | N/A                | 713940             |
+| `Sic`              | **string*          | :heavy_minus_sign: | N/A                | 7991               |

@@ -1,4 +1,4 @@
-# capabilities
+# Capabilities
 
 ## Overview
 
@@ -6,167 +6,220 @@ Capabilities determine what a Moov account can do. Each capability has specific 
 
 ### Available Operations
 
-* [delete](#delete) - Disable a capability for an account
-* [get](#get) - Get capability for account
-* [list](#list) - List capabilities for account
-* [request](#request) - Request capabilities
+* [Delete](#delete) - Disable a capability for an account
+* [Get](#get) - Get capability for account
+* [List](#list) - List capabilities for account
+* [Request](#request) - Request capabilities
 
-## delete
+## Delete
 
 Disable a specific capability that an account has requested. <br><br> To use this endpoint, you must specify the `/accounts/{accountID}/capabilities.write` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.DeleteCapabilityRequest(
-    account_id='7f3a4100-674e-4bf6-9280-d1ba77a89ebf',
-    capability_id=shared.CapabilityID.COLLECT_FUNDS,
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.capabilities.delete(req)
+    ctx := context.Background()
+    res, err := s.Capabilities.Delete(ctx, operations.DeleteCapabilityRequest{
+        AccountID: "b77f3a41-0067-44eb-b692-80d1ba77a89e",
+        CapabilityID: shared.CapabilityIDWallet,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.status_code == 200:
-    # handle response
+    if res.StatusCode == http.StatusOK {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
 | `request`                                                                                | [operations.DeleteCapabilityRequest](../../models/operations/deletecapabilityrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 
 
 ### Response
 
-**[operations.DeleteCapabilityResponse](../../models/operations/deletecapabilityresponse.md)**
+**[*operations.DeleteCapabilityResponse](../../models/operations/deletecapabilityresponse.md), error**
 
 
-## get
+## Get
 
 Retrieve a specific capability that an account has requested. <br><br> To use this endpoint, you must specify the `/accounts/{accountID}/capabilities.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetCapabilityRequest(
-    account_id='37ae4203-ce5e-46a9-9d8a-0d446ce2af7a',
-    capability_id=shared.CapabilityID.COLLECT_FUNDS,
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.capabilities.get(req)
+    ctx := context.Background()
+    res, err := s.Capabilities.Get(ctx, operations.GetCapabilityRequest{
+        AccountID: "f737ae42-03ce-45e6-a95d-8a0d446ce2af",
+        CapabilityID: shared.CapabilityIDCollectFunds,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.capability is not None:
-    # handle response
+    if res.Capability != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
 | `request`                                                                          | [operations.GetCapabilityRequest](../../models/operations/getcapabilityrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 
 
 ### Response
 
-**[operations.GetCapabilityResponse](../../models/operations/getcapabilityresponse.md)**
+**[*operations.GetCapabilityResponse](../../models/operations/getcapabilityresponse.md), error**
 
 
-## list
+## List
 
 Retrieve all the capabilities an account has requested. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/capabilities.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.ListCapabilitiesRequest(
-    account_id='3cf3be45-3f87-40b3-a6b5-a73429cdb1a8',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.capabilities.list(req)
+    ctx := context.Background()
+    res, err := s.Capabilities.List(ctx, operations.ListCapabilitiesRequest{
+        AccountID: "a73cf3be-453f-4870-b326-b5a73429cdb1",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.capabilities is not None:
-    # handle response
+    if res.Capabilities != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
 | `request`                                                                                | [operations.ListCapabilitiesRequest](../../models/operations/listcapabilitiesrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 
 
 ### Response
 
-**[operations.ListCapabilitiesResponse](../../models/operations/listcapabilitiesresponse.md)**
+**[*operations.ListCapabilitiesResponse](../../models/operations/listcapabilitiesresponse.md), error**
 
 
-## request
+## Request
 
 Request capabilities for a specific account. <br><br> To use this endpoint, you must specify the `/accounts/{accountID}/capabilities.write` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.PostCapabilityRequest(
-    add_capability_request=shared.AddCapabilityRequest(
-        capabilities=[
-            shared.CapabilityID.TRANSFERS,
-            shared.CapabilityID.TRANSFERS,
-        ],
-    ),
-    account_id='bb679d23-2271-45bf-8cbb-1e31b8b90f34',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.capabilities.request(req)
+    ctx := context.Background()
+    res, err := s.Capabilities.Request(ctx, operations.PostCapabilityRequest{
+        AddCapabilityRequest: shared.AddCapabilityRequest{
+            Capabilities: []shared.CapabilityID{
+                shared.CapabilityIDCollectFunds,
+                shared.CapabilityIDSendFunds,
+                shared.CapabilityIDTransfers,
+            },
+        },
+        AccountID: "2bb679d2-3227-415b-b0cb-b1e31b8b90f3",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.capabilities is not None:
-    # handle response
+    if res.Capabilities != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
 | `request`                                                                            | [operations.PostCapabilityRequest](../../models/operations/postcapabilityrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 
 
 ### Response
 
-**[operations.PostCapabilityResponse](../../models/operations/postcapabilityresponse.md)**
+**[*operations.PostCapabilityResponse](../../models/operations/postcapabilityresponse.md), error**
 

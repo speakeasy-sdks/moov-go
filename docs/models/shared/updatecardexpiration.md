@@ -9,5 +9,5 @@ Omit any fields that should not be changed.
 
 | Field              | Type               | Required           | Description        | Example            |
 | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `month`            | *Optional[str]*    | :heavy_minus_sign: | N/A                | 01                 |
-| `year`             | *Optional[str]*    | :heavy_minus_sign: | N/A                | 21                 |
+| `Month`            | **string*          | :heavy_minus_sign: | N/A                | 01                 |
+| `Year`             | **string*          | :heavy_minus_sign: | N/A                | 21                 |

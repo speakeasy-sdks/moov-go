@@ -3,7 +3,7 @@
 
 ## Values
 
-| Name                 | Value                |
-| -------------------- | -------------------- |
-| `CLIENT_CREDENTIALS` | client_credentials   |
-| `REFRESH_TOKEN`      | refresh_token        |
+| Name                                                                   | Value                                                                  |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ClientCredentialsGrantToAccessTokenRequestGrantTypeClientCredentials` | client_credentials                                                     |
+| `ClientCredentialsGrantToAccessTokenRequestGrantTypeRefreshToken`      | refresh_token                                                          |

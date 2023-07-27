@@ -7,7 +7,7 @@ Name for an individual
 
 | Field              | Type               | Required           | Description        | Example            |
 | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `first_name`       | *Optional[str]*    | :heavy_minus_sign: | N/A                | Amanda             |
-| `last_name`        | *Optional[str]*    | :heavy_minus_sign: | N/A                | Yang               |
-| `middle_name`      | *Optional[str]*    | :heavy_minus_sign: | N/A                | Amanda             |
-| `suffix`           | *Optional[str]*    | :heavy_minus_sign: | N/A                | Jr                 |
+| `FirstName`        | **string*          | :heavy_minus_sign: | N/A                | Amanda             |
+| `LastName`         | **string*          | :heavy_minus_sign: | N/A                | Yang               |
+| `MiddleName`       | **string*          | :heavy_minus_sign: | N/A                | Amanda             |
+| `Suffix`           | **string*          | :heavy_minus_sign: | N/A                | Jr                 |

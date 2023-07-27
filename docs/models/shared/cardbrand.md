@@ -5,9 +5,9 @@ The card brand
 
 ## Values
 
-| Name               | Value              |
-| ------------------ | ------------------ |
-| `AMERICAN_EXPRESS` | American Express   |
-| `DISCOVER`         | Discover           |
-| `MASTERCARD`       | Mastercard         |
-| `VISA`             | Visa               |
+| Name                       | Value                      |
+| -------------------------- | -------------------------- |
+| `CardBrandAmericanExpress` | American Express           |
+| `CardBrandDiscover`        | Discover                   |
+| `CardBrandMastercard`      | Mastercard                 |
+| `CardBrandVisa`            | Visa                       |

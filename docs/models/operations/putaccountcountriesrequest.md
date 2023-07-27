@@ -5,5 +5,5 @@
 
 | Field                                                | Type                                                 | Required                                             | Description                                          |
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| `countries`                                          | [shared.Countries](../../models/shared/countries.md) | :heavy_check_mark:                                   | N/A                                                  |
-| `account_id`                                         | *str*                                                | :heavy_check_mark:                                   | ID of the account                                    |
+| `Countries`                                          | [shared.Countries](../../models/shared/countries.md) | :heavy_check_mark:                                   | N/A                                                  |
+| `AccountID`                                          | *string*                                             | :heavy_check_mark:                                   | ID of the account                                    |

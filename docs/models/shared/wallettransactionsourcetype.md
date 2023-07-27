@@ -5,8 +5,8 @@ Wallet transaction source type
 
 ## Values
 
-| Name                  | Value                 |
-| --------------------- | --------------------- |
-| `TRANSFER`            | transfer              |
-| `DISPUTE`             | dispute               |
-| `ISSUING_TRANSACTION` | issuing-transaction   |
+| Name                                            | Value                                           |
+| ----------------------------------------------- | ----------------------------------------------- |
+| `WalletTransactionSourceTypeTransfer`           | transfer                                        |
+| `WalletTransactionSourceTypeDispute`            | dispute                                         |
+| `WalletTransactionSourceTypeIssuingTransaction` | issuing-transaction                             |

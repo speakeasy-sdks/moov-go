@@ -5,6 +5,6 @@ The authorization code of a MX account which allows a processor to retrieve a li
 
 ## Fields
 
-| Field                | Type                 | Required             | Description          |
-| -------------------- | -------------------- | -------------------- | -------------------- |
-| `authorization_code` | *Optional[str]*      | :heavy_minus_sign:   | N/A                  |
+| Field               | Type                | Required            | Description         |
+| ------------------- | ------------------- | ------------------- | ------------------- |
+| `AuthorizationCode` | **string*           | :heavy_minus_sign:  | N/A                 |

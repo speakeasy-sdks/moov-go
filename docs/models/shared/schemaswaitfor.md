@@ -5,6 +5,6 @@ Optional header that indicates whether to return a synchronous response or an as
 
 ## Values
 
-| Name             | Value            |
-| ---------------- | ---------------- |
-| `PAYMENT_METHOD` | payment-method   |
+| Name                          | Value                         |
+| ----------------------------- | ----------------------------- |
+| `SchemasWaitForPaymentMethod` | payment-method                |

@@ -5,7 +5,7 @@ An optional override of your default ACH hold period in banking days. The hold p
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `NO_HOLD`  | no-hold    |
-| `TWO_DAYS` | 2-days     |
+| Name                                           | Value                                          |
+| ---------------------------------------------- | ---------------------------------------------- |
+| `CreateAchDetailsSourceDebitHoldPeriodNoHold`  | no-hold                                        |
+| `CreateAchDetailsSourceDebitHoldPeriodTwoDays` | 2-days                                         |
