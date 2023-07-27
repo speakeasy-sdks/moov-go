@@ -5,5 +5,5 @@
 
 | Field              | Type               | Required           | Description        | Example            |
 | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `city`             | *Optional[str]*    | :heavy_minus_sign: | N/A                | Boulder            |
-| `state`            | *Optional[str]*    | :heavy_minus_sign: | N/A                | Colorado           |
+| `City`             | **string*          | :heavy_minus_sign: | N/A                | Boulder            |
+| `State`            | **string*          | :heavy_minus_sign: | N/A                | Colorado           |

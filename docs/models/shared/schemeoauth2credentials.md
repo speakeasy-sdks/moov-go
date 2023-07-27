@@ -5,5 +5,5 @@
 
 | Field              | Type               | Required           | Description        | Example            |
 | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `password`         | *str*              | :heavy_check_mark: | N/A                |                    |
-| `username`         | *str*              | :heavy_check_mark: | N/A                |                    |
+| `Password`         | *string*           | :heavy_check_mark: | N/A                |                    |
+| `Username`         | *string*           | :heavy_check_mark: | N/A                |                    |

@@ -5,9 +5,9 @@ The file purpose
 
 ## Values
 
-| Name                    | Value                   |
-| ----------------------- | ----------------------- |
-| `IDENTITY_VERIFICATION` | identity_verification   |
-| `BUSINESS_VERIFICATION` | business_verification   |
-| `MERCHANT_UNDERWRITING` | merchant_underwriting   |
-| `ACCOUNT_REQUIREMENT`   | account_requirement     |
+| Name                              | Value                             |
+| --------------------------------- | --------------------------------- |
+| `FilePurposeIdentityVerification` | identity_verification             |
+| `FilePurposeBusinessVerification` | business_verification             |
+| `FilePurposeMerchantUnderwriting` | merchant_underwriting             |
+| `FilePurposeAccountRequirement`   | account_requirement               |

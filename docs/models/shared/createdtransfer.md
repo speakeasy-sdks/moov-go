@@ -5,7 +5,7 @@ A transfer was successfully created but an error occurred while generating the s
 
 ## Fields
 
-| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `created_on`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | N/A                                                                  |
-| `transfer_id`                                                        | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | ID of Transfer                                                       |
+| Field                                      | Type                                       | Required                                   | Description                                |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| `CreatedOn`                                | [*time.Time](https://pkg.go.dev/time#Time) | :heavy_minus_sign:                         | N/A                                        |
+| `TransferID`                               | **string*                                  | :heavy_minus_sign:                         | ID of Transfer                             |

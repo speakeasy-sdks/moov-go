@@ -1,4 +1,4 @@
-# transactions
+# Transactions
 
 ## Overview
 
@@ -6,45 +6,58 @@ A transaction is a record of a card's activity on a particular Moov account.
 
 ### Available Operations
 
-* [list](#list) - Get account transactions
+* [List](#list) - Get account transactions
 
-## list
+## List
 
 List issued card transactions associated with a Moov account
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.ListAccountIssuedCardTransactionsRequest(
-    account_id='0421813d-5208-4ece-be25-3b668451c6c6',
-    count=927212,
-    skip=160393,
-    status=shared.IssuedCardTransactionStatus.PENDING,
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.transactions.list(req)
+    ctx := context.Background()
+    res, err := s.Transactions.List(ctx, operations.ListAccountIssuedCardTransactionsRequest{
+        AccountID: "0421813d-5208-4ece-be25-3b668451c6c6",
+        Count: petstore.Int64(927212),
+        Skip: petstore.Int64(160393),
+        Status: shared.IssuedCardTransactionStatusPending.ToPointer(),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.issued_card_transactions is not None:
-    # handle response
+    if res.IssuedCardTransactions != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `request`                                                                                                                  | [operations.ListAccountIssuedCardTransactionsRequest](../../models/operations/listaccountissuedcardtransactionsrequest.md) | :heavy_check_mark:                                                                                                         | The request object to use for the request.                                                                                 |
 
 
 ### Response
 
-**[operations.ListAccountIssuedCardTransactionsResponse](../../models/operations/listaccountissuedcardtransactionsresponse.md)**
+**[*operations.ListAccountIssuedCardTransactionsResponse](../../models/operations/listaccountissuedcardtransactionsresponse.md), error**
 

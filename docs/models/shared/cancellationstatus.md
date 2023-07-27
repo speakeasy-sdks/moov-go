@@ -5,7 +5,7 @@ Cancellation status
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `PENDING`   | pending     |
-| `COMPLETED` | completed   |
+| Name                          | Value                         |
+| ----------------------------- | ----------------------------- |
+| `CancellationStatusPending`   | pending                       |
+| `CancellationStatusCompleted` | completed                     |

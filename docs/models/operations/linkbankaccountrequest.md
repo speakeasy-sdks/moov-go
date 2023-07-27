@@ -3,7 +3,7 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `request_body`     | *Any*              | :heavy_check_mark: | N/A                |
-| `account_id`       | *str*              | :heavy_check_mark: | ID of the account  |
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `BankAccountPayload`                                                   | [shared.BankAccountPayload](../../models/shared/bankaccountpayload.md) | :heavy_check_mark:                                                     | N/A                                                                    |
+| `AccountID`                                                            | *string*                                                               | :heavy_check_mark:                                                     | ID of the account                                                      |

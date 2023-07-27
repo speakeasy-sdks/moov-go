@@ -5,9 +5,9 @@ Status of Transaction
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `PENDING`   | pending     |
-| `COMPLETED` | completed   |
-| `DECLINED`  | declined    |
-| `VOIDED`    | voided      |
+| Name                                   | Value                                  |
+| -------------------------------------- | -------------------------------------- |
+| `IssuedCardTransactionStatusPending`   | pending                                |
+| `IssuedCardTransactionStatusCompleted` | completed                              |
+| `IssuedCardTransactionStatusDeclined`  | declined                               |
+| `IssuedCardTransactionStatusVoided`    | voided                                 |

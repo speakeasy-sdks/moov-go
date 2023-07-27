@@ -5,6 +5,6 @@
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `code`             | *Optional[str]*    | :heavy_minus_sign: | N/A                |
-| `description`      | *Optional[str]*    | :heavy_minus_sign: | N/A                |
-| `reason`           | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+| `Code`             | **string*          | :heavy_minus_sign: | N/A                |
+| `Description`      | **string*          | :heavy_minus_sign: | N/A                |
+| `Reason`           | **string*          | :heavy_minus_sign: | N/A                |
