@@ -38,9 +38,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -111,9 +111,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -121,22 +121,22 @@ func main() {
     res, err := s.Cards.LinkCard(ctx, operations.PostLinkCardRequest{
         CardRequest: shared.CardRequest{
             BillingAddress: &shared.Address{
-                AddressLine1: petstore.String("123 Main Street"),
-                AddressLine2: petstore.String("Apt 302"),
-                City: petstore.String("Boulder"),
-                Country: petstore.String("US"),
-                PostalCode: petstore.String("80301"),
-                StateOrProvince: petstore.String("CO"),
+                AddressLine1: moov.String("123 Main Street"),
+                AddressLine2: moov.String("Apt 302"),
+                City: moov.String("Boulder"),
+                Country: moov.String("US"),
+                PostalCode: moov.String("80301"),
+                StateOrProvince: moov.String("CO"),
             },
-            CardCvv: petstore.String("0123"),
-            CardNumber: petstore.String("atque"),
-            CardOnFile: petstore.Bool(false),
+            CardCvv: moov.String("0123"),
+            CardNumber: moov.String("atque"),
+            CardOnFile: moov.Bool(false),
             Expiration: &shared.CardExpiration{
-                Month: petstore.String("01"),
-                Year: petstore.String("21"),
+                Month: moov.String("01"),
+                Year: moov.String("21"),
             },
-            HolderName: petstore.String("Jules Jackson"),
-            MerchantAccountID: petstore.String("2562f222-e981-47ee-97cb-e61e6b7b95bc"),
+            HolderName: moov.String("Jules Jackson"),
+            MerchantAccountID: moov.String("2562f222-e981-47ee-97cb-e61e6b7b95bc"),
         },
         XWaitFor: shared.SchemasWaitForPaymentMethod.ToPointer(),
         AccountID: "0ab3c20c-4f37-489f-9871-f99dd2efd121",
@@ -183,9 +183,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -237,9 +237,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -292,9 +292,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -344,9 +344,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -398,9 +398,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -452,9 +452,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -516,9 +516,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -526,18 +526,18 @@ func main() {
     res, err := s.Cards.Update(ctx, operations.UpdateCardRequest{
         CardUpdateRequest: shared.CardUpdateRequest{
             BillingAddress: &shared.UpdateAddress{
-                AddressLine1: petstore.String("123 Main Street"),
-                AddressLine2: petstore.String("Apt 302"),
-                City: petstore.String("Boulder"),
-                Country: petstore.String("US"),
-                PostalCode: petstore.String("80301"),
-                StateOrProvince: petstore.String("CO"),
+                AddressLine1: moov.String("123 Main Street"),
+                AddressLine2: moov.String("Apt 302"),
+                City: moov.String("Boulder"),
+                Country: moov.String("US"),
+                PostalCode: moov.String("80301"),
+                StateOrProvince: moov.String("CO"),
             },
-            CardCvv: petstore.String("123"),
-            CardOnFile: petstore.Bool(false),
+            CardCvv: moov.String("123"),
+            CardOnFile: moov.Bool(false),
             Expiration: &shared.UpdateCardExpiration{
-                Month: petstore.String("01"),
-                Year: petstore.String("21"),
+                Month: moov.String("01"),
+                Year: moov.String("21"),
             },
         },
         AccountID: "6b26916f-e1f0-48f4-a94e-3698f447f603",
@@ -587,9 +587,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 

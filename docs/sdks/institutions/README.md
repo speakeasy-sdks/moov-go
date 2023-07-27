@@ -26,19 +26,19 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Institutions.Search(ctx, operations.SearchInstitutionRequest{
-        Limit: petstore.Int64(499),
-        Name: petstore.String("Arnold Ferry"),
+        Limit: moov.Int64(499),
+        Name: moov.String("Arnold Ferry"),
         Rail: shared.RailAch,
-        RoutingNumber: petstore.String("fugit"),
-        State: petstore.String("id"),
+        RoutingNumber: moov.String("fugit"),
+        State: moov.String("id"),
     })
     if err != nil {
         log.Fatal(err)

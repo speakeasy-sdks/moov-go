@@ -30,9 +30,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -82,16 +82,16 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.PaymentMethods.List(ctx, operations.ListPaymentMethodsRequest{
         AccountID: "7a60ff2a-54a3-41e9-8764-a3e865e7956f",
-        SourceID: petstore.String("9251a5a9-da66-40ff-97bf-aad4f9efc1b4"),
+        SourceID: moov.String("9251a5a9-da66-40ff-97bf-aad4f9efc1b4"),
     })
     if err != nil {
         log.Fatal(err)

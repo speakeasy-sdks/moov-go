@@ -30,9 +30,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -84,9 +84,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -138,19 +138,19 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.LargestTransfer(ctx, shared.LimitedTimeRange{
-        Count: petstore.Int64(83112),
-        Every: petstore.String("itaque"),
+        Count: moov.Int64(83112),
+        Every: moov.String("itaque"),
         From: types.MustTimeFromString("2022-09-06T17:20:08.756Z"),
         To: types.MustTimeFromString("2022-05-02T09:29:06.042Z"),
-        Tz: petstore.String("quibusdam"),
+        Tz: moov.String("quibusdam"),
     })
     if err != nil {
         log.Fatal(err)
@@ -193,19 +193,19 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.SmallestTransfer(ctx, shared.LimitedTimeRange{
-        Count: petstore.Int64(131797),
-        Every: petstore.String("deserunt"),
+        Count: moov.Int64(131797),
+        Every: moov.String("deserunt"),
         From: types.MustTimeFromString("2021-04-26T18:54:54.344Z"),
         To: types.MustTimeFromString("2022-09-26T08:57:48.803Z"),
-        Tz: petstore.String("qui"),
+        Tz: moov.String("qui"),
     })
     if err != nil {
         log.Fatal(err)
@@ -248,9 +248,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 

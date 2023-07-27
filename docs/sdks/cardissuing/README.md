@@ -35,9 +35,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -47,11 +47,11 @@ func main() {
             AuthorizationControls: &shared.AuthorizationControls{
                 SpendLimits: []shared.AuthorizationSpendLimitControl{
                     shared.AuthorizationSpendLimitControl{
-                        Amount: petstore.Int64(10000),
+                        Amount: moov.Int64(10000),
                         Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
                     },
                     shared.AuthorizationSpendLimitControl{
-                        Amount: petstore.Int64(10000),
+                        Amount: moov.Int64(10000),
                         Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
                     },
                 },
@@ -62,11 +62,11 @@ func main() {
                     Month: 11,
                     Year: 1989,
                 },
-                FirstName: petstore.String("Jane"),
-                LastName: petstore.String("Doe"),
+                FirstName: moov.String("Jane"),
+                LastName: moov.String("Doe"),
             },
-            FundingWalletID: petstore.String("labore"),
-            Memo: petstore.String("adipisci"),
+            FundingWalletID: moov.String("labore"),
+            Memo: moov.String("adipisci"),
             Type: shared.IssuedCardTypeSingleUse.ToPointer(),
         },
         AccountID: "a1108e0a-dcf4-4b92-9879-fce953f73ef7",
@@ -114,9 +114,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -168,9 +168,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -223,17 +223,17 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.CardIssuing.ListCards(ctx, operations.ListIssuedCardsRequest{
         AccountID: "0fb008c4-2e14-41aa-8366-c8dd6b144290",
-        Count: petstore.Int64(476477),
-        Skip: petstore.Int64(301598),
+        Count: moov.Int64(476477),
+        Skip: moov.Int64(301598),
         States: shared.IssuedCardStateInactive.ToPointer(),
     })
     if err != nil {
@@ -279,9 +279,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -291,11 +291,11 @@ func main() {
             AuthorizationControls: &shared.AuthorizationControls{
                 SpendLimits: []shared.AuthorizationSpendLimitControl{
                     shared.AuthorizationSpendLimitControl{
-                        Amount: petstore.Int64(10000),
+                        Amount: moov.Int64(10000),
                         Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
                     },
                     shared.AuthorizationSpendLimitControl{
-                        Amount: petstore.Int64(10000),
+                        Amount: moov.Int64(10000),
                         Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
                     },
                 },
@@ -306,10 +306,10 @@ func main() {
                     Month: 11,
                     Year: 1989,
                 },
-                FirstName: petstore.String("Jane"),
-                LastName: petstore.String("Doe"),
+                FirstName: moov.String("Jane"),
+                LastName: moov.String("Doe"),
             },
-            Memo: petstore.String("esse"),
+            Memo: moov.String("esse"),
             State: shared.IssuedCardStateInactive.ToPointer(),
         },
         AccountID: "8a7bd466-d28c-410a-b3cd-ca4251904e52",

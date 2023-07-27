@@ -27,27 +27,27 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAddress(ctx, operations.GetAddressRequest{
-        ExcludeStates: petstore.String("atque"),
-        IncludeCities: petstore.String("fugit"),
-        IncludeStates: petstore.String("ut"),
-        IncludeZipcodes: petstore.String("fugiat"),
-        MaxResults: petstore.Int64(30235),
-        PreferCities: petstore.String("culpa"),
-        PreferGeolocation: petstore.String("expedita"),
-        PreferRatio: petstore.Int64(299643),
-        PreferStates: petstore.String("consequatur"),
-        PreferZipcodes: petstore.String("esse"),
+        ExcludeStates: moov.String("atque"),
+        IncludeCities: moov.String("fugit"),
+        IncludeStates: moov.String("ut"),
+        IncludeZipcodes: moov.String("fugiat"),
+        MaxResults: moov.Int64(30235),
+        PreferCities: moov.String("culpa"),
+        PreferGeolocation: moov.String("expedita"),
+        PreferRatio: moov.Int64(299643),
+        PreferStates: moov.String("consequatur"),
+        PreferZipcodes: moov.String("esse"),
         Search: "ipsam",
-        Selected: petstore.String("sit"),
-        Source: petstore.String("voluptatum"),
+        Selected: moov.String("sit"),
+        Source: moov.String("voluptatum"),
     })
     if err != nil {
         log.Fatal(err)
@@ -92,9 +92,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -144,9 +144,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -194,9 +194,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 

@@ -37,9 +37,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -95,9 +95,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -112,21 +112,21 @@ func main() {
         },
         CustomerSupport: &shared.CreateAccountRequestCustomerSupport{
             Address: &shared.CreateAccountRequestCustomerSupportAddress{
-                AddressLine1: petstore.String("123 Main Street"),
-                AddressLine2: petstore.String("Apt 302"),
-                City: petstore.String("Boulder"),
-                Country: petstore.String("US"),
-                PostalCode: petstore.String("80301"),
-                StateOrProvince: petstore.String("CO"),
+                AddressLine1: moov.String("123 Main Street"),
+                AddressLine2: moov.String("Apt 302"),
+                City: moov.String("Boulder"),
+                Country: moov.String("US"),
+                PostalCode: moov.String("80301"),
+                StateOrProvince: moov.String("CO"),
             },
-            Email: petstore.String("amanda@classbooker.dev"),
+            Email: moov.String("amanda@classbooker.dev"),
             Phone: &shared.CreateAccountRequestCustomerSupportPhone{
-                CountryCode: petstore.String("1"),
-                Number: petstore.String("8185551212"),
+                CountryCode: moov.String("1"),
+                Number: moov.String("8185551212"),
             },
-            Website: petstore.String("www.wholebodyfitnessgym.com"),
+            Website: moov.String("www.wholebodyfitnessgym.com"),
         },
-        ForeignID: petstore.String("4528aba-b9a1-11eb-8529-0242ac13003"),
+        ForeignID: moov.String("4528aba-b9a1-11eb-8529-0242ac13003"),
         Metadata: map[string]string{
             "molestiae": "quod",
             "quod": "esse",
@@ -137,81 +137,81 @@ func main() {
         Profile: shared.CreateProfile{
             Business: &shared.CreateProfileBusiness{
                 Address: &shared.CreateProfileBusinessAddress{
-                    AddressLine1: petstore.String("123 Main Street"),
-                    AddressLine2: petstore.String("Apt 302"),
-                    City: petstore.String("Boulder"),
-                    Country: petstore.String("US"),
-                    PostalCode: petstore.String("80301"),
-                    StateOrProvince: petstore.String("CO"),
+                    AddressLine1: moov.String("123 Main Street"),
+                    AddressLine2: moov.String("Apt 302"),
+                    City: moov.String("Boulder"),
+                    Country: moov.String("US"),
+                    PostalCode: moov.String("80301"),
+                    StateOrProvince: moov.String("CO"),
                 },
                 BusinessType: shared.BusinessTypeLlc,
-                Description: petstore.String("Local fitness center paying out instructors"),
-                DoingBusinessAs: petstore.String("Whole Body Fitness"),
-                Email: petstore.String("amanda@classbooker.dev"),
+                Description: moov.String("Local fitness center paying out instructors"),
+                DoingBusinessAs: moov.String("Whole Body Fitness"),
+                Email: moov.String("amanda@classbooker.dev"),
                 IndustryCodes: &shared.CreateProfileBusinessIndustryCodes{
-                    Mcc: petstore.String("7997"),
-                    Naics: petstore.String("713940"),
-                    Sic: petstore.String("7991"),
+                    Mcc: moov.String("7997"),
+                    Naics: moov.String("713940"),
+                    Sic: moov.String("7991"),
                 },
                 LegalBusinessName: "Whole Body Fitness LLC",
                 Phone: &shared.CreateProfileBusinessPhone{
-                    CountryCode: petstore.String("1"),
-                    Number: petstore.String("8185551212"),
+                    CountryCode: moov.String("1"),
+                    Number: moov.String("8185551212"),
                 },
                 TaxID: &shared.CreateProfileBusinessTaxID{
                     Ein: &shared.Ein{
-                        Number: petstore.String("123-45-6789"),
+                        Number: moov.String("123-45-6789"),
                     },
                 },
-                Website: petstore.String("www.wholebodyfitnessgym.com"),
+                Website: moov.String("www.wholebodyfitnessgym.com"),
             },
             Individual: &shared.CreateProfileIndividual{
                 Address: &shared.CreateProfileIndividualAddress{
-                    AddressLine1: petstore.String("123 Main Street"),
-                    AddressLine2: petstore.String("Apt 302"),
-                    City: petstore.String("Boulder"),
-                    Country: petstore.String("US"),
-                    PostalCode: petstore.String("80301"),
-                    StateOrProvince: petstore.String("CO"),
+                    AddressLine1: moov.String("123 Main Street"),
+                    AddressLine2: moov.String("Apt 302"),
+                    City: moov.String("Boulder"),
+                    Country: moov.String("US"),
+                    PostalCode: moov.String("80301"),
+                    StateOrProvince: moov.String("CO"),
                 },
                 BirthDate: &shared.CreateProfileIndividualBirthDate{
                     Day: 9,
                     Month: 11,
                     Year: 1989,
                 },
-                Email: petstore.String("amanda@classbooker.dev"),
+                Email: moov.String("amanda@classbooker.dev"),
                 GovernmentID: &shared.CreateProfileIndividualGovernmentID{
                     Itin: &shared.CreateProfileIndividualGovernmentIDItin{
-                        Full: petstore.String("123-45-6789"),
-                        LastFour: petstore.String("6789"),
+                        Full: moov.String("123-45-6789"),
+                        LastFour: moov.String("6789"),
                     },
                     Ssn: &shared.CreateProfileIndividualGovernmentIDSsn{
-                        Full: petstore.String("123-45-6789"),
-                        LastFour: petstore.String("6789"),
+                        Full: moov.String("123-45-6789"),
+                        LastFour: moov.String("6789"),
                     },
                 },
                 Name: shared.Name{
-                    FirstName: petstore.String("Amanda"),
-                    LastName: petstore.String("Yang"),
-                    MiddleName: petstore.String("Amanda"),
-                    Suffix: petstore.String("Jr"),
+                    FirstName: moov.String("Amanda"),
+                    LastName: moov.String("Yang"),
+                    MiddleName: moov.String("Amanda"),
+                    Suffix: moov.String("Jr"),
                 },
                 Phone: &shared.CreateProfileIndividualPhone{
-                    CountryCode: petstore.String("1"),
-                    Number: petstore.String("8185551212"),
+                    CountryCode: moov.String("1"),
+                    Number: moov.String("8185551212"),
                 },
             },
         },
         Settings: &shared.CreateAccountRequestSettings{
             AchPayment: &shared.CreateAccountRequestSettingsAchPayment{
-                CompanyName: petstore.String("Whole Body Fitness"),
+                CompanyName: moov.String("Whole Body Fitness"),
             },
             CardPayment: &shared.CreateAccountRequestSettingsCardPayment{
-                StatementDescriptor: petstore.String("Whole Body Fitness"),
+                StatementDescriptor: moov.String("Whole Body Fitness"),
             },
         },
         TermsOfService: &shared.CreateAccountRequestTermsOfService{
-            Token: petstore.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
+            Token: moov.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
         },
     })
     if err != nil {
@@ -255,9 +255,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -305,9 +305,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -359,20 +359,20 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Accounts.List(ctx, operations.ListAccountsRequest{
-        Count: petstore.Int64(359508),
-        Email: petstore.String("Humberto.Turcotte6@yahoo.com"),
-        ForeignID: petstore.String("4528aba-b9a1-11eb-8529-0242ac13003"),
-        IncludeDisconnected: petstore.Bool(false),
-        Name: petstore.String("Carlton O'Hara"),
-        Skip: petstore.Int64(210382),
+        Count: moov.Int64(359508),
+        Email: moov.String("Humberto.Turcotte6@yahoo.com"),
+        ForeignID: moov.String("4528aba-b9a1-11eb-8529-0242ac13003"),
+        IncludeDisconnected: moov.Bool(false),
+        Name: moov.String("Carlton O'Hara"),
+        Skip: moov.Int64(210382),
         Type: shared.AccountTypeBusiness.ToPointer(),
         VerificationStatus: shared.AccountVerificationStatusResubmit.ToPointer(),
     })
@@ -417,9 +417,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -479,9 +479,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -490,21 +490,21 @@ func main() {
         PatchAccountRequest: shared.PatchAccountRequest{
             CustomerSupport: &shared.PatchAccountRequestCustomerSupport{
                 Address: &shared.PatchAccountRequestCustomerSupportAddress{
-                    AddressLine1: petstore.String("123 Main Street"),
-                    AddressLine2: petstore.String("Apt 302"),
-                    City: petstore.String("Boulder"),
-                    Country: petstore.String("US"),
-                    PostalCode: petstore.String("80301"),
-                    StateOrProvince: petstore.String("CO"),
+                    AddressLine1: moov.String("123 Main Street"),
+                    AddressLine2: moov.String("Apt 302"),
+                    City: moov.String("Boulder"),
+                    Country: moov.String("US"),
+                    PostalCode: moov.String("80301"),
+                    StateOrProvince: moov.String("CO"),
                 },
-                Email: petstore.String("amanda@classbooker.dev"),
+                Email: moov.String("amanda@classbooker.dev"),
                 Phone: &shared.PatchAccountRequestCustomerSupportPhone{
-                    CountryCode: petstore.String("1"),
-                    Number: petstore.String("8185551212"),
+                    CountryCode: moov.String("1"),
+                    Number: moov.String("8185551212"),
                 },
-                Website: petstore.String("www.wholebodyfitnessgym.com"),
+                Website: moov.String("www.wholebodyfitnessgym.com"),
             },
-            ForeignID: petstore.String("4528aba-b9a1-11eb-8529-0242ac13003"),
+            ForeignID: moov.String("4528aba-b9a1-11eb-8529-0242ac13003"),
             Metadata: map[string]string{
                 "odit": "quo",
                 "sequi": "tenetur",
@@ -512,82 +512,82 @@ func main() {
             Profile: &shared.PatchAccountRequestProfile{
                 Business: &shared.PatchAccountRequestProfileBusiness{
                     Address: &shared.PatchAccountRequestProfileBusinessAddress{
-                        AddressLine1: petstore.String("123 Main Street"),
-                        AddressLine2: petstore.String("Apt 302"),
-                        City: petstore.String("Boulder"),
-                        Country: petstore.String("US"),
-                        PostalCode: petstore.String("80301"),
-                        StateOrProvince: petstore.String("CO"),
+                        AddressLine1: moov.String("123 Main Street"),
+                        AddressLine2: moov.String("Apt 302"),
+                        City: moov.String("Boulder"),
+                        Country: moov.String("US"),
+                        PostalCode: moov.String("80301"),
+                        StateOrProvince: moov.String("CO"),
                     },
                     BusinessType: shared.PatchAccountRequestProfileBusinessBusinessTypeLlc.ToPointer(),
-                    Description: petstore.String("Local fitness center paying out instructors"),
-                    DoingBusinessAs: petstore.String("Whole Body Fitness"),
-                    Email: petstore.String("amanda@classbooker.dev"),
+                    Description: moov.String("Local fitness center paying out instructors"),
+                    DoingBusinessAs: moov.String("Whole Body Fitness"),
+                    Email: moov.String("amanda@classbooker.dev"),
                     IndustryCodes: &shared.PatchAccountRequestProfileBusinessIndustryCodes{
-                        Mcc: petstore.String("7997"),
-                        Naics: petstore.String("713940"),
-                        Sic: petstore.String("7991"),
+                        Mcc: moov.String("7997"),
+                        Naics: moov.String("713940"),
+                        Sic: moov.String("7991"),
                     },
-                    LegalBusinessName: petstore.String("Whole Body Fitness LLC"),
-                    OwnersProvided: petstore.Bool(false),
+                    LegalBusinessName: moov.String("Whole Body Fitness LLC"),
+                    OwnersProvided: moov.Bool(false),
                     Phone: &shared.PatchAccountRequestProfileBusinessPhone{
-                        CountryCode: petstore.String("1"),
-                        Number: petstore.String("8185551212"),
+                        CountryCode: moov.String("1"),
+                        Number: moov.String("8185551212"),
                     },
                     TaxID: &shared.PatchAccountRequestProfileBusinessTaxID{
                         Ein: &shared.Ein{
-                            Number: petstore.String("123-45-6789"),
+                            Number: moov.String("123-45-6789"),
                         },
                     },
-                    Website: petstore.String("www.wholebodyfitnessgym.com"),
+                    Website: moov.String("www.wholebodyfitnessgym.com"),
                 },
                 Individual: &shared.PatchAccountRequestProfileIndividual{
                     Address: &shared.PatchAccountRequestProfileIndividualAddress{
-                        AddressLine1: petstore.String("123 Main Street"),
-                        AddressLine2: petstore.String("Apt 302"),
-                        City: petstore.String("Boulder"),
-                        Country: petstore.String("US"),
-                        PostalCode: petstore.String("80301"),
-                        StateOrProvince: petstore.String("CO"),
+                        AddressLine1: moov.String("123 Main Street"),
+                        AddressLine2: moov.String("Apt 302"),
+                        City: moov.String("Boulder"),
+                        Country: moov.String("US"),
+                        PostalCode: moov.String("80301"),
+                        StateOrProvince: moov.String("CO"),
                     },
                     BirthDate: &shared.PatchAccountRequestProfileIndividualBirthDate{
                         Day: 9,
                         Month: 11,
                         Year: 1989,
                     },
-                    Email: petstore.String("amanda@classbooker.dev"),
+                    Email: moov.String("amanda@classbooker.dev"),
                     GovernmentID: &shared.PatchAccountRequestProfileIndividualGovernmentID{
                         Itin: &shared.PatchAccountRequestProfileIndividualGovernmentIDItin{
-                            Full: petstore.String("123-45-6789"),
-                            LastFour: petstore.String("6789"),
+                            Full: moov.String("123-45-6789"),
+                            LastFour: moov.String("6789"),
                         },
                         Ssn: &shared.PatchAccountRequestProfileIndividualGovernmentIDSsn{
-                            Full: petstore.String("123-45-6789"),
-                            LastFour: petstore.String("6789"),
+                            Full: moov.String("123-45-6789"),
+                            LastFour: moov.String("6789"),
                         },
                     },
                     Name: &shared.PatchAccountRequestProfileIndividualName{
-                        FirstName: petstore.String("Amanda"),
-                        LastName: petstore.String("Yang"),
-                        MiddleName: petstore.String("Amanda"),
-                        Suffix: petstore.String("Jr"),
+                        FirstName: moov.String("Amanda"),
+                        LastName: moov.String("Yang"),
+                        MiddleName: moov.String("Amanda"),
+                        Suffix: moov.String("Jr"),
                     },
                     Phone: &shared.PatchAccountRequestProfileIndividualPhone{
-                        CountryCode: petstore.String("1"),
-                        Number: petstore.String("8185551212"),
+                        CountryCode: moov.String("1"),
+                        Number: moov.String("8185551212"),
                     },
                 },
             },
             Settings: &shared.PatchAccountRequestSettings{
                 AchPayment: &shared.PatchAccountRequestSettingsAchPayment{
-                    CompanyName: petstore.String("Whole Body Fitness"),
+                    CompanyName: moov.String("Whole Body Fitness"),
                 },
                 CardPayment: &shared.PatchAccountRequestSettingsCardPayment{
-                    StatementDescriptor: petstore.String("Whole Body Fitness"),
+                    StatementDescriptor: moov.String("Whole Body Fitness"),
                 },
             },
             TermsOfService: &shared.PatchAccountRequestTermsOfService{
-                Token: petstore.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
+                Token: moov.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
             },
         },
         AccountID: "5ad019da-1ffe-478f-897b-0074f15471b5",

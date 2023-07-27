@@ -34,9 +34,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -86,9 +86,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -139,9 +139,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -190,25 +190,25 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Wallets.ListTransactions(ctx, operations.ListWalletTransactionsRequest{
         AccountID: "a055b197-cd44-4e2f-92d8-2d3513bb6f48",
-        CompletedEndDateTime: petstore.String("distinctio"),
-        CompletedStartDateTime: petstore.String("nisi"),
-        Count: petstore.Int64(335977),
-        CreatedEndDateTime: petstore.String("nisi"),
-        CreatedStartDateTime: petstore.String("libero"),
-        Skip: petstore.Int64(794507),
-        SourceID: petstore.String("facere"),
-        SourceType: petstore.String("facilis"),
-        Status: petstore.String("ipsum"),
-        TransactionType: petstore.String("ad"),
+        CompletedEndDateTime: moov.String("distinctio"),
+        CompletedStartDateTime: moov.String("nisi"),
+        Count: moov.Int64(335977),
+        CreatedEndDateTime: moov.String("nisi"),
+        CreatedStartDateTime: moov.String("libero"),
+        Skip: moov.Int64(794507),
+        SourceID: moov.String("facere"),
+        SourceType: moov.String("facilis"),
+        Status: moov.String("ipsum"),
+        TransactionType: moov.String("ad"),
         WalletID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {

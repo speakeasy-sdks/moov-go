@@ -33,16 +33,16 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Transfers.Cancel(ctx, operations.CancelTransferRequest{
         CreateReversal: &shared.CreateReversal{
-            Amount: petstore.Int64(1000),
+            Amount: moov.Int64(1000),
         },
         XIdempotencyKey: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
         TransferID: "5e16deab-3fec-4957-8a64-584273a8418d",
@@ -88,9 +88,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -101,33 +101,33 @@ func main() {
                 Currency: "USD",
                 Value: 1204,
             },
-            Description: petstore.String("Pay Instructor for May 15 Class"),
+            Description: moov.String("Pay Instructor for May 15 Class"),
             Destination: &shared.CreateTransferDestination{
                 AchDetails: &shared.CreateACHDetailsBase{
-                    CompanyEntryDescription: petstore.String("Gym Dues"),
-                    OriginatingCompanyName: petstore.String("Whole Body Fit"),
+                    CompanyEntryDescription: moov.String("Gym Dues"),
+                    OriginatingCompanyName: moov.String("Whole Body Fit"),
                 },
-                PaymentMethodID: petstore.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+                PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
             },
             FacilitatorFee: &shared.CreateFacilitatorFee{
-                Markup: petstore.Int64(117380),
-                Total: petstore.Int64(395544),
+                Markup: moov.Int64(117380),
+                Total: moov.Int64(395544),
             },
             Metadata: map[string]string{
                 "consectetur": "aperiam",
             },
             Source: &shared.CreateTransferSource{
                 AchDetails: &shared.CreateAchDetailsSource{
-                    CompanyEntryDescription: petstore.String("Gym Dues"),
+                    CompanyEntryDescription: moov.String("Gym Dues"),
                     DebitHoldPeriod: shared.CreateAchDetailsSourceDebitHoldPeriodTwoDays.ToPointer(),
-                    OriginatingCompanyName: petstore.String("Whole Body Fit"),
+                    OriginatingCompanyName: moov.String("Whole Body Fit"),
                 },
                 CardDetails: &shared.CreateCardDetails{
-                    DynamicDescriptor: petstore.String("WhlBdy *Yoga 11-12"),
+                    DynamicDescriptor: moov.String("WhlBdy *Yoga 11-12"),
                     TransactionSource: shared.TransactionSourceRecurring.ToPointer(),
                 },
-                PaymentMethodID: petstore.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-                TransferID: petstore.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+                PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+                TransferID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
             },
         },
         XIdempotencyKey: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
@@ -173,9 +173,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -186,12 +186,12 @@ func main() {
             Value: 1204,
         },
         Destination: &shared.CreateTransferOptionsDestination{
-            AccountID: petstore.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-            PaymentMethodID: petstore.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            AccountID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
         Source: &shared.CreateTransferOptionsSource{
-            AccountID: petstore.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-            PaymentMethodID: petstore.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            AccountID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
     })
     if err != nil {
@@ -235,15 +235,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Transfers.Get(ctx, operations.GetTransferRequest{
-        AccountID: petstore.String("fb092992-1aef-4b9f-98c4-d86e68e4be05"),
+        AccountID: moov.String("fb092992-1aef-4b9f-98c4-d86e68e4be05"),
         TransferID: "6013f59d-a757-4a59-acfe-f66ef1caa338",
     })
     if err != nil {
@@ -287,9 +287,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -339,9 +339,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -390,16 +390,16 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Transfers.Refund(ctx, operations.RefundTransferRequest{
         CreateRefund: &shared.CreateRefund{
-            Amount: petstore.Int64(1000),
+            Amount: moov.Int64(1000),
         },
         XIdempotencyKey: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
         XWaitFor: shared.WaitForRailResponse.ToPointer(),
@@ -446,9 +446,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -461,7 +461,7 @@ func main() {
                 "alias": "magni",
             },
         },
-        AccountID: petstore.String("611435e1-39db-4c22-99b1-abda8c070e10"),
+        AccountID: moov.String("611435e1-39db-4c22-99b1-abda8c070e10"),
         TransferID: "84cb0672-d1ad-4879-aeb9-665b85efbd02",
     })
     if err != nil {
