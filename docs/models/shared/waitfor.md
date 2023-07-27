@@ -5,6 +5,6 @@ Optional header that indicates whether to return a synchronous response that inc
 
 ## Values
 
-| Name            | Value           |
-| --------------- | --------------- |
-| `RAIL_RESPONSE` | rail-response   |
+| Name                  | Value                 |
+| --------------------- | --------------------- |
+| `WaitForRailResponse` | rail-response         |

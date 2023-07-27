@@ -1,4 +1,4 @@
-# payment_methods
+# PaymentMethods
 
 ## Overview
 
@@ -9,83 +9,109 @@
 
 ### Available Operations
 
-* [get](#get) - Get payment method
-* [list](#list) - List payment methods
+* [Get](#get) - Get payment method
+* [List](#list) - List payment methods
 
-## get
+## Get
 
 Get the specified payment method associated with a Moov account. <br><br> To get a payment method, you must specify the `/accounts/{accountID}/payment-methods.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetPaymentMethodRequest(
-    account_id='57a15be3-e060-4807-a2b6-e3ab8845f059',
-    payment_method_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.payment_methods.get(req)
+    ctx := context.Background()
+    res, err := s.PaymentMethods.Get(ctx, operations.GetPaymentMethodRequest{
+        AccountID: "57a15be3-e060-4807-a2b6-e3ab8845f059",
+        PaymentMethodID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.payment_method is not None:
-    # handle response
+    if res.PaymentMethod != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
 | `request`                                                                                | [operations.GetPaymentMethodRequest](../../models/operations/getpaymentmethodrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 
 
 ### Response
 
-**[operations.GetPaymentMethodResponse](../../models/operations/getpaymentmethodresponse.md)**
+**[*operations.GetPaymentMethodResponse](../../models/operations/getpaymentmethodresponse.md), error**
 
 
-## list
+## List
 
 Retrieve a list of payment methods associated with a Moov account. <br><br> To list payment methods, you must specify the `/accounts/{accountID}/payment-methods.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.ListPaymentMethodsRequest(
-    account_id='7a60ff2a-54a3-41e9-8764-a3e865e7956f',
-    source_id='9251a5a9-da66-40ff-97bf-aad4f9efc1b4',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.payment_methods.list(req)
+    ctx := context.Background()
+    res, err := s.PaymentMethods.List(ctx, operations.ListPaymentMethodsRequest{
+        AccountID: "7a60ff2a-54a3-41e9-8764-a3e865e7956f",
+        SourceID: petstore.String("9251a5a9-da66-40ff-97bf-aad4f9efc1b4"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.payment_methods is not None:
-    # handle response
+    if res.PaymentMethods != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
 | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
 | `request`                                                                                    | [operations.ListPaymentMethodsRequest](../../models/operations/listpaymentmethodsrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 
 
 ### Response
 
-**[operations.ListPaymentMethodsResponse](../../models/operations/listpaymentmethodsresponse.md)**
+**[*operations.ListPaymentMethodsResponse](../../models/operations/listpaymentmethodsresponse.md), error**
 

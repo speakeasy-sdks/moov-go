@@ -7,5 +7,5 @@ Fee you charged your customer for the transfer
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `markup`           | *Optional[int]*    | :heavy_minus_sign: | N/A                |
-| `total`            | *int*              | :heavy_check_mark: | N/A                |
+| `Markup`           | **int64*           | :heavy_minus_sign: | N/A                |
+| `Total`            | *int64*            | :heavy_check_mark: | N/A                |

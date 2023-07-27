@@ -7,5 +7,5 @@ Total or markup fee
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `markup`           | *Optional[int]*    | :heavy_minus_sign: | N/A                |
-| `total`            | *Optional[int]*    | :heavy_minus_sign: | N/A                |
+| `Markup`           | **int64*           | :heavy_minus_sign: | N/A                |
+| `Total`            | **int64*           | :heavy_minus_sign: | N/A                |

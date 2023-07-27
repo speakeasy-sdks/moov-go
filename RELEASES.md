@@ -17,3 +17,11 @@ Based on:
 Based on:
 - OpenAPI Doc 1.0.0 
 - Speakeasy CLI 1.65.1 (2.73.1) https://github.com/speakeasy-api/speakeasy
+
+## 2023-07-27 17:23:53
+### Changes
+Based on:
+- OpenAPI Doc 1.0.0 
+- Speakeasy CLI 1.65.1 (2.73.1) https://github.com/speakeasy-api/speakeasy
+### Releases
+- [Go v0.0.1] https://github.com/speakeasy-sdks/moov-go/releases/tag/v0.0.1 - .

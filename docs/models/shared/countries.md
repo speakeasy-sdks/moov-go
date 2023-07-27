@@ -7,4 +7,4 @@ The Countries of operation for an account
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `countries`        | list[*str*]        | :heavy_check_mark: | N/A                |
+| `Countries`        | []*string*         | :heavy_check_mark: | N/A                |

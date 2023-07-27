@@ -5,9 +5,9 @@ The type of the card
 
 ## Values
 
-| Name      | Value     |
-| --------- | --------- |
-| `DEBIT`   | debit     |
-| `CREDIT`  | credit    |
-| `PREPAID` | prepaid   |
-| `UNKNOWN` | unknown   |
+| Name              | Value             |
+| ----------------- | ----------------- |
+| `CardTypeDebit`   | debit             |
+| `CardTypeCredit`  | credit            |
+| `CardTypePrepaid` | prepaid           |
+| `CardTypeUnknown` | unknown           |

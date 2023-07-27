@@ -1,4 +1,4 @@
-# card_issuing
+# CardIssuing
 
 ## Overview
 
@@ -9,13 +9,13 @@ A Moov wallet can serve as a funding source for issuing virtual cards. Note that
 
 ### Available Operations
 
-* [request_card](#request_card) - Request card
-* [get_card](#get_card) - Get issued card
-* [get_card_full_details](#get_card_full_details) - Get full card details
-* [list_cards](#list_cards) - List issued cards
-* [update_card](#update_card) - Update issued card
+* [RequestCard](#requestcard) - Request card
+* [GetCard](#getcard) - Get issued card
+* [GetCardFullDetails](#getcardfulldetails) - Get full card details
+* [ListCards](#listcards) - List issued cards
+* [UpdateCard](#updatecard) - Update issued card
 
-## request_card
+## RequestCard
 
 Request a virtual card be created
 <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.write` scope.
@@ -23,65 +23,78 @@ Request a virtual card be created
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.PostRequestCardRequest(
-    request_card=shared.RequestCard(
-        authorization_controls=shared.AuthorizationControls(
-            spend_limits=[
-                shared.AuthorizationSpendLimitControl(
-                    amount=10000,
-                    duration=shared.AuthorizationSpendDuration.TRANSACTION,
-                ),
-                shared.AuthorizationSpendLimitControl(
-                    amount=10000,
-                    duration=shared.AuthorizationSpendDuration.TRANSACTION,
-                ),
-            ],
-        ),
-        authorized_user=shared.CreateAuthorizedUser(
-            birth_date=shared.BirthDate(
-                day=9,
-                month=11,
-                year=1989,
-            ),
-            first_name='Jane',
-            last_name='Doe',
-        ),
-        funding_wallet_id='adipisci',
-        memo='dolorum',
-        type=shared.IssuedCardType.SINGLE_USE,
-    ),
-    account_id='1108e0ad-cf4b-4921-879f-ce953f73ef7f',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.card_issuing.request_card(req)
+    ctx := context.Background()
+    res, err := s.CardIssuing.RequestCard(ctx, operations.PostRequestCardRequest{
+        RequestCard: shared.RequestCard{
+            AuthorizationControls: &shared.AuthorizationControls{
+                SpendLimits: []shared.AuthorizationSpendLimitControl{
+                    shared.AuthorizationSpendLimitControl{
+                        Amount: petstore.Int64(10000),
+                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                    },
+                    shared.AuthorizationSpendLimitControl{
+                        Amount: petstore.Int64(10000),
+                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                    },
+                },
+            },
+            AuthorizedUser: &shared.CreateAuthorizedUser{
+                BirthDate: &shared.BirthDate{
+                    Day: 9,
+                    Month: 11,
+                    Year: 1989,
+                },
+                FirstName: petstore.String("Jane"),
+                LastName: petstore.String("Doe"),
+            },
+            FundingWalletID: petstore.String("labore"),
+            Memo: petstore.String("adipisci"),
+            Type: shared.IssuedCardTypeSingleUse.ToPointer(),
+        },
+        AccountID: "a1108e0a-dcf4-4b92-9879-fce953f73ef7",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.issued_card is not None:
-    # handle response
+    if res.IssuedCard != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
 | `request`                                                                              | [operations.PostRequestCardRequest](../../models/operations/postrequestcardrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 
 
 ### Response
 
-**[operations.PostRequestCardResponse](../../models/operations/postrequestcardresponse.md)**
+**[*operations.PostRequestCardResponse](../../models/operations/postrequestcardresponse.md), error**
 
 
-## get_card
+## GetCard
 
 Retrieve a single issued card associated with a Moov account
 <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.read` scope.
@@ -89,40 +102,53 @@ Retrieve a single issued card associated with a Moov account
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetIssuedCardRequest(
-    account_id='bc7abd74-dd39-4c0f-9d2c-ff7c70a45626',
-    issued_card_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.card_issuing.get_card(req)
+    ctx := context.Background()
+    res, err := s.CardIssuing.GetCard(ctx, operations.GetIssuedCardRequest{
+        AccountID: "fbc7abd7-4dd3-49c0-b5d2-cff7c70a4562",
+        IssuedCardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.issued_card is not None:
-    # handle response
+    if res.IssuedCard != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
 | `request`                                                                          | [operations.GetIssuedCardRequest](../../models/operations/getissuedcardrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 
 
 ### Response
 
-**[operations.GetIssuedCardResponse](../../models/operations/getissuedcardresponse.md)**
+**[*operations.GetIssuedCardResponse](../../models/operations/getissuedcardresponse.md), error**
 
 
-## get_card_full_details
+## GetCardFullDetails
 
 Get issued card with PAN, CVV, and expiration. Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
@@ -130,40 +156,53 @@ Get issued card with PAN, CVV, and expiration. Only use this endpoint if you hav
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetFullIssuedCardRequest(
-    account_id='d436813f-16d9-4f5f-8e6c-556146c3e250',
-    issued_card_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.card_issuing.get_card_full_details(req)
+    ctx := context.Background()
+    res, err := s.CardIssuing.GetCardFullDetails(ctx, operations.GetFullIssuedCardRequest{
+        AccountID: "6d436813-f16d-49f5-bce6-c556146c3e25",
+        IssuedCardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.full_issued_card is not None:
-    # handle response
+    if res.FullIssuedCard != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
 | `request`                                                                                  | [operations.GetFullIssuedCardRequest](../../models/operations/getfullissuedcardrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 
 
 ### Response
 
-**[operations.GetFullIssuedCardResponse](../../models/operations/getfullissuedcardresponse.md)**
+**[*operations.GetFullIssuedCardResponse](../../models/operations/getfullissuedcardresponse.md), error**
 
 
-## list_cards
+## ListCards
 
 List Moov issued cards existing for the account.
 <br><br> All supported query parameters are optional.
@@ -172,42 +211,55 @@ List Moov issued cards existing for the account.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.ListIssuedCardsRequest(
-    account_id='fb008c42-e141-4aac-b66c-8dd6b1442907',
-    count=301598,
-    skip=487935,
-    states=shared.IssuedCardState.INACTIVE,
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.card_issuing.list_cards(req)
+    ctx := context.Background()
+    res, err := s.CardIssuing.ListCards(ctx, operations.ListIssuedCardsRequest{
+        AccountID: "0fb008c4-2e14-41aa-8366-c8dd6b144290",
+        Count: petstore.Int64(476477),
+        Skip: petstore.Int64(301598),
+        States: shared.IssuedCardStateInactive.ToPointer(),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.issued_cards is not None:
-    # handle response
+    if res.IssuedCards != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
 | `request`                                                                              | [operations.ListIssuedCardsRequest](../../models/operations/listissuedcardsrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 
 
 ### Response
 
-**[operations.ListIssuedCardsResponse](../../models/operations/listissuedcardsresponse.md)**
+**[*operations.ListIssuedCardsResponse](../../models/operations/listissuedcardsresponse.md), error**
 
 
-## update_card
+## UpdateCard
 
 Update a Moov issued card
 <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.write` scope.
@@ -215,60 +267,73 @@ Update a Moov issued card
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.UpdateIssuedCardRequest(
-    update_issued_card=shared.UpdateIssuedCard(
-        authorization_controls=shared.AuthorizationControls(
-            spend_limits=[
-                shared.AuthorizationSpendLimitControl(
-                    amount=10000,
-                    duration=shared.AuthorizationSpendDuration.TRANSACTION,
-                ),
-                shared.AuthorizationSpendLimitControl(
-                    amount=10000,
-                    duration=shared.AuthorizationSpendDuration.TRANSACTION,
-                ),
-            ],
-        ),
-        authorized_user=shared.CreateAuthorizedUser(
-            birth_date=shared.BirthDate(
-                day=9,
-                month=11,
-                year=1989,
-            ),
-            first_name='Jane',
-            last_name='Doe',
-        ),
-        memo='esse',
-        state=shared.IssuedCardState.PENDING_VERIFICATION,
-    ),
-    account_id='a7bd466d-28c1-40ab-bcdc-a4251904e523',
-    issued_card_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.card_issuing.update_card(req)
+    ctx := context.Background()
+    res, err := s.CardIssuing.UpdateCard(ctx, operations.UpdateIssuedCardRequest{
+        UpdateIssuedCard: shared.UpdateIssuedCard{
+            AuthorizationControls: &shared.AuthorizationControls{
+                SpendLimits: []shared.AuthorizationSpendLimitControl{
+                    shared.AuthorizationSpendLimitControl{
+                        Amount: petstore.Int64(10000),
+                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                    },
+                    shared.AuthorizationSpendLimitControl{
+                        Amount: petstore.Int64(10000),
+                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                    },
+                },
+            },
+            AuthorizedUser: &shared.CreateAuthorizedUser{
+                BirthDate: &shared.BirthDate{
+                    Day: 9,
+                    Month: 11,
+                    Year: 1989,
+                },
+                FirstName: petstore.String("Jane"),
+                LastName: petstore.String("Doe"),
+            },
+            Memo: petstore.String("esse"),
+            State: shared.IssuedCardStateInactive.ToPointer(),
+        },
+        AccountID: "8a7bd466-d28c-410a-b3cd-ca4251904e52",
+        IssuedCardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.status_code == 200:
-    # handle response
+    if res.StatusCode == http.StatusOK {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
 | `request`                                                                                | [operations.UpdateIssuedCardRequest](../../models/operations/updateissuedcardrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 
 
 ### Response
 
-**[operations.UpdateIssuedCardResponse](../../models/operations/updateissuedcardresponse.md)**
+**[*operations.UpdateIssuedCardResponse](../../models/operations/updateissuedcardresponse.md), error**
 

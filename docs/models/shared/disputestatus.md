@@ -5,7 +5,7 @@ Dispute status
 
 ## Values
 
-| Name              | Value             |
-| ----------------- | ----------------- |
-| `RESPONSE_NEEDED` | response-needed   |
-| `RESOLVED`        | resolved          |
+| Name                          | Value                         |
+| ----------------------------- | ----------------------------- |
+| `DisputeStatusResponseNeeded` | response-needed               |
+| `DisputeStatusResolved`       | resolved                      |

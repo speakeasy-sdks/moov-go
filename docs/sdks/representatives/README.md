@@ -1,4 +1,4 @@
-# representatives
+# Representatives
 
 ## Overview
 
@@ -6,209 +6,261 @@ We think of a representative as an individual who can take major actions on beha
 
 ### Available Operations
 
-* [create](#create) - Create representative
-* [delete](#delete) - Delete a representative
-* [get](#get) - Get representative
-* [list](#list) - List representatives
-* [update](#update) - Patch representative
+* [Create](#create) - Create representative
+* [Delete](#delete) - Delete a representative
+* [Get](#get) - Get representative
+* [List](#list) - List representatives
+* [Update](#update) - Patch representative
 
-## create
+## Create
 
 Moov accounts associated with businesses require information regarding individuals who represent the business. You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives.<br><br> To create a representative, you must specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.CreateRepresentativeRequest(
-    create_representative=shared.CreateRepresentative(
-        address=shared.CreateRepresentativeAddress(
-            address_line1='123 Main Street',
-            address_line2='Apt 302',
-            city='Boulder',
-            country='US',
-            postal_code='80301',
-            state_or_province='CO',
-        ),
-        birth_date=shared.CreateRepresentativeBirthDate(
-            day=9,
-            month=11,
-            year=1989,
-        ),
-        email='amanda@classbooker.dev',
-        government_id=shared.CreateRepresentativeGovernmentID(
-            itin=shared.CreateRepresentativeGovernmentIDItin(
-                full='123-45-6789',
-                last_four='6789',
-            ),
-            ssn=shared.CreateRepresentativeGovernmentIDSsn(
-                full='123-45-6789',
-                last_four='6789',
-            ),
-        ),
-        name=shared.CreateRepresentativeName(
-            first_name='Amanda',
-            last_name='Yang',
-            middle_name='Amanda',
-            suffix='Jr',
-        ),
-        phone=shared.CreateRepresentativePhone(
-            country_code='1',
-            number='8185551212',
-        ),
-        responsibilities=shared.CreateRepresentativeResponsibilities(
-            is_controller=False,
-            is_owner=True,
-            job_title='CEO',
-            ownership_percentage=38,
-        ),
-    ),
-    account_id='512c1032-648d-4c2f-a151-99ebfd0e9fe6',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.representatives.create(req)
+    ctx := context.Background()
+    res, err := s.Representatives.Create(ctx, operations.CreateRepresentativeRequest{
+        CreateRepresentative: shared.CreateRepresentative{
+            Address: &shared.CreateRepresentativeAddress{
+                AddressLine1: petstore.String("123 Main Street"),
+                AddressLine2: petstore.String("Apt 302"),
+                City: petstore.String("Boulder"),
+                Country: petstore.String("US"),
+                PostalCode: petstore.String("80301"),
+                StateOrProvince: petstore.String("CO"),
+            },
+            BirthDate: &shared.CreateRepresentativeBirthDate{
+                Day: 9,
+                Month: 11,
+                Year: 1989,
+            },
+            Email: petstore.String("amanda@classbooker.dev"),
+            GovernmentID: &shared.CreateRepresentativeGovernmentID{
+                Itin: &shared.CreateRepresentativeGovernmentIDItin{
+                    Full: petstore.String("123-45-6789"),
+                    LastFour: petstore.String("6789"),
+                },
+                Ssn: &shared.CreateRepresentativeGovernmentIDSsn{
+                    Full: petstore.String("123-45-6789"),
+                    LastFour: petstore.String("6789"),
+                },
+            },
+            Name: &shared.CreateRepresentativeName{
+                FirstName: "Amanda",
+                LastName: "Yang",
+                MiddleName: petstore.String("Amanda"),
+                Suffix: petstore.String("Jr"),
+            },
+            Phone: &shared.CreateRepresentativePhone{
+                CountryCode: petstore.String("1"),
+                Number: petstore.String("8185551212"),
+            },
+            Responsibilities: &shared.CreateRepresentativeResponsibilities{
+                IsController: false,
+                IsOwner: true,
+                JobTitle: "CEO",
+                OwnershipPercentage: 38,
+            },
+        },
+        AccountID: "512c1032-648d-4c2f-a151-99ebfd0e9fe6",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.representative is not None:
-    # handle response
+    if res.Representative != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
 | `request`                                                                                        | [operations.CreateRepresentativeRequest](../../models/operations/createrepresentativerequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 
 
 ### Response
 
-**[operations.CreateRepresentativeResponse](../../models/operations/createrepresentativeresponse.md)**
+**[*operations.CreateRepresentativeResponse](../../models/operations/createrepresentativeresponse.md), error**
 
 
-## delete
+## Delete
 
 Deletes a business representative associated with a Moov account. <br><br> To use this endpoint, you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.DeleteRepresentativeRequest(
-    account_id='c632ca3a-ed01-4179-9631-2fde04771778',
-    representative_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.representatives.delete(req)
+    ctx := context.Background()
+    res, err := s.Representatives.Delete(ctx, operations.DeleteRepresentativeRequest{
+        AccountID: "c632ca3a-ed01-4179-9631-2fde04771778",
+        RepresentativeID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.status_code == 200:
-    # handle response
+    if res.StatusCode == http.StatusOK {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
 | `request`                                                                                        | [operations.DeleteRepresentativeRequest](../../models/operations/deleterepresentativerequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 
 
 ### Response
 
-**[operations.DeleteRepresentativeResponse](../../models/operations/deleterepresentativeresponse.md)**
+**[*operations.DeleteRepresentativeResponse](../../models/operations/deleterepresentativeresponse.md), error**
 
 
-## get
+## Get
 
 Retrieve a specific representative associated with a given Moov account. <br><br> To get a representative, you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetRepresentativeRequest(
-    account_id='ff61d017-4763-460a-95db-6a660659a1ad',
-    representative_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.representatives.get(req)
+    ctx := context.Background()
+    res, err := s.Representatives.Get(ctx, operations.GetRepresentativeRequest{
+        AccountID: "ff61d017-4763-460a-95db-6a660659a1ad",
+        RepresentativeID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.representative is not None:
-    # handle response
+    if res.Representative != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
 | `request`                                                                                  | [operations.GetRepresentativeRequest](../../models/operations/getrepresentativerequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 
 
 ### Response
 
-**[operations.GetRepresentativeResponse](../../models/operations/getrepresentativeresponse.md)**
+**[*operations.GetRepresentativeResponse](../../models/operations/getrepresentativeresponse.md), error**
 
 
-## list
+## List
 
 A Moov account may have multiple representatives depending on the associated business's ownership and management structure. You can use this method to list all the representatives for a given Moov account. Note that Moov accounts associated with an individual do not have representatives. <br><br> To list representatives, you need to specify the `/accounts/{accountID}/representatives.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.ListRepresentativesRequest(
-    account_id='eaab5851-d6c6-445b-88b6-1891baa0fe1a',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.representatives.list(req)
+    ctx := context.Background()
+    res, err := s.Representatives.List(ctx, operations.ListRepresentativesRequest{
+        AccountID: "eaab5851-d6c6-445b-88b6-1891baa0fe1a",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.representatives is not None:
-    # handle response
+    if res.Representatives != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
 | `request`                                                                                      | [operations.ListRepresentativesRequest](../../models/operations/listrepresentativesrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 
 
 ### Response
 
-**[operations.ListRepresentativesResponse](../../models/operations/listrepresentativesresponse.md)**
+**[*operations.ListRepresentativesResponse](../../models/operations/listrepresentativesresponse.md), error**
 
 
-## update
+## Update
 
 If a representative's information has changed you can patch the information associated with a specific representative ID.  
 To patch a representative, you'll need to specify the `/accounts/{accountID}/representatives.write` scope and provide the changed information.
@@ -226,77 +278,90 @@ If you need to update information in a locked state, please contact Moov support
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.PatchRepresentativeRequest(
-    patch_representative_request=shared.PatchRepresentativeRequest(
-        address=shared.PatchRepresentativeRequestAddress(
-            address_line1='123 Main Street',
-            address_line2='Apt 302',
-            city='Boulder',
-            country='US',
-            postal_code='80301',
-            state_or_province='CO',
-        ),
-        birth_date=shared.PatchRepresentativeRequestBirthDate(
-            day=9,
-            month=11,
-            year=1989,
-        ),
-        email='amanda@classbooker.dev',
-        government_id=shared.PatchRepresentativeRequestGovernmentID(
-            itin=shared.PatchRepresentativeRequestGovernmentIDItin(
-                full='123-45-6789',
-                last_four='6789',
-            ),
-            ssn=shared.PatchRepresentativeRequestGovernmentIDSsn(
-                full='123-45-6789',
-                last_four='6789',
-            ),
-        ),
-        name=shared.PatchRepresentativeRequestName(
-            first_name='Amanda',
-            last_name='Yang',
-            middle_name='Amanda',
-            suffix='Jr',
-        ),
-        phone=shared.PatchRepresentativeRequestPhone(
-            country_code='1',
-            number='8185551212',
-        ),
-        responsibilities=shared.PatchRepresentativeRequestResponsibilities(
-            is_controller=False,
-            is_owner=True,
-            job_title='CEO',
-            ownership_percentage=38,
-        ),
-    ),
-    account_id='de008e6f-8c5f-4350-98cd-b5a341814301',
-    representative_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.representatives.update(req)
+    ctx := context.Background()
+    res, err := s.Representatives.Update(ctx, operations.PatchRepresentativeRequest{
+        PatchRepresentativeRequest: shared.PatchRepresentativeRequest{
+            Address: &shared.PatchRepresentativeRequestAddress{
+                AddressLine1: petstore.String("123 Main Street"),
+                AddressLine2: petstore.String("Apt 302"),
+                City: petstore.String("Boulder"),
+                Country: petstore.String("US"),
+                PostalCode: petstore.String("80301"),
+                StateOrProvince: petstore.String("CO"),
+            },
+            BirthDate: &shared.PatchRepresentativeRequestBirthDate{
+                Day: 9,
+                Month: 11,
+                Year: 1989,
+            },
+            Email: petstore.String("amanda@classbooker.dev"),
+            GovernmentID: &shared.PatchRepresentativeRequestGovernmentID{
+                Itin: &shared.PatchRepresentativeRequestGovernmentIDItin{
+                    Full: petstore.String("123-45-6789"),
+                    LastFour: petstore.String("6789"),
+                },
+                Ssn: &shared.PatchRepresentativeRequestGovernmentIDSsn{
+                    Full: petstore.String("123-45-6789"),
+                    LastFour: petstore.String("6789"),
+                },
+            },
+            Name: &shared.PatchRepresentativeRequestName{
+                FirstName: petstore.String("Amanda"),
+                LastName: petstore.String("Yang"),
+                MiddleName: petstore.String("Amanda"),
+                Suffix: petstore.String("Jr"),
+            },
+            Phone: &shared.PatchRepresentativeRequestPhone{
+                CountryCode: petstore.String("1"),
+                Number: petstore.String("8185551212"),
+            },
+            Responsibilities: &shared.PatchRepresentativeRequestResponsibilities{
+                IsController: petstore.Bool(false),
+                IsOwner: petstore.Bool(true),
+                JobTitle: petstore.String("CEO"),
+                OwnershipPercentage: petstore.Int64(38),
+            },
+        },
+        AccountID: "de008e6f-8c5f-4350-98cd-b5a341814301",
+        RepresentativeID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.representative is not None:
-    # handle response
+    if res.Representative != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
 | `request`                                                                                      | [operations.PatchRepresentativeRequest](../../models/operations/patchrepresentativerequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 
 
 ### Response
 
-**[operations.PatchRepresentativeResponse](../../models/operations/patchrepresentativeresponse.md)**
+**[*operations.PatchRepresentativeResponse](../../models/operations/patchrepresentativeresponse.md), error**
 

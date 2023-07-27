@@ -1,4 +1,4 @@
-# institutions
+# Institutions
 
 ## Overview
 
@@ -6,46 +6,59 @@ Lookup ACH and wire participating financial institutions. We recommend using thi
 
 ### Available Operations
 
-* [search](#search) - Search institutions
+* [Search](#search) - Search institutions
 
-## search
+## Search
 
 Search for institutions by their routing number or name. <br><br> To use this endpoint, you need to specify the `/fed.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.SearchInstitutionRequest(
-    limit=499,
-    name='Arnold Ferry',
-    rail=shared.Rail.ACH,
-    routing_number='fugit',
-    state='id',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.institutions.search(req)
+    ctx := context.Background()
+    res, err := s.Institutions.Search(ctx, operations.SearchInstitutionRequest{
+        Limit: petstore.Int64(499),
+        Name: petstore.String("Arnold Ferry"),
+        Rail: shared.RailAch,
+        RoutingNumber: petstore.String("fugit"),
+        State: petstore.String("id"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.financial_institutions is not None:
-    # handle response
+    if res.FinancialInstitutions != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
 | `request`                                                                                  | [operations.SearchInstitutionRequest](../../models/operations/searchinstitutionrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 
 
 ### Response
 
-**[operations.SearchInstitutionResponse](../../models/operations/searchinstitutionresponse.md)**
+**[*operations.SearchInstitutionResponse](../../models/operations/searchinstitutionresponse.md), error**
 
