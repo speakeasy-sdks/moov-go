@@ -1,0 +1,9 @@
+# CreateCardDetails
+
+
+## Fields
+
+| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `dynamic_descriptor`                                                          | *Optional[str]*                                                               | :heavy_minus_sign:                                                            | An optional override of the default card statement descriptor for a transfer. | WhlBdy *Yoga 11-12                                                            |
+| `transaction_source`                                                          | [Optional[TransactionSource]](../../models/shared/transactionsource.md)       | :heavy_minus_sign:                                                            | Describes how the card transaction was initiated                              |                                                                               |

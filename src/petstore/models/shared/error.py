@@ -4,13 +4,14 @@ from __future__ import annotations
 import dataclasses
 from dataclasses_json import Undefined, dataclass_json
 from petstore import utils
+from typing import Optional
 
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
+
 @dataclasses.dataclass
 class Error:
-    r"""unexpected error"""
+    r"""Error response for http requests that failed"""
+    error: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('error'), 'exclude': lambda f: f is None }})
     
-    code: int = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('code') }})
-    message: str = dataclasses.field(metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('message') }})
-    
+

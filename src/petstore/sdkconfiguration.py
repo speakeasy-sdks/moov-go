@@ -3,8 +3,10 @@
 import requests
 from dataclasses import dataclass
 
+
 SERVERS = [
-    'http://petstore.swagger.io/v1',
+    'https://api.moov.io',
+    # Production
 ]
 """Contains the list of servers available to the SDK"""
 
@@ -15,8 +17,9 @@ class SDKConfiguration:
     server_url: str = ''
     server_idx: int = 0
     language: str = 'python'
-    sdk_version: str = '1.0.0'
-    gen_version: str = '2.35.3'
+    openapi_doc_version: str = '1.0.0'
+    sdk_version: str = '1.1.0'
+    gen_version: str = '2.73.1'
 
     def get_server_details(self) -> tuple[str, dict[str, str]]:
         if self.server_url:

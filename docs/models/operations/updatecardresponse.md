@@ -1,0 +1,12 @@
+# UpdateCardResponse
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `card`                                                                                | [Optional[shared.Card]](../../models/shared/card.md)                                  | :heavy_minus_sign:                                                                    | Card updated                                                                          |
+| `content_type`                                                                        | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `status_code`                                                                         | *int*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `raw_response`                                                                        | [requests.Response](https://requests.readthedocs.io/en/latest/api/#requests.Response) | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `update_card_422_application_json_object`                                             | dict[str, *Any*]                                                                      | :heavy_minus_sign:                                                                    | The supplied card data appeared invalid or was declined by the issuer                 |

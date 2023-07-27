@@ -1,0 +1,10 @@
+# PostLinkCardRequest
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `card_request`                                                                                       | [shared.CardRequest](../../models/shared/cardrequest.md)                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `x_wait_for`                                                                                         | [Optional[shared.SchemasWaitFor]](../../models/shared/schemaswaitfor.md)                             | :heavy_minus_sign:                                                                                   | Optional header that indicates whether to return a synchronous response or an asynchronous response. |
+| `account_id`                                                                                         | *str*                                                                                                | :heavy_check_mark:                                                                                   | ID of the account                                                                                    |

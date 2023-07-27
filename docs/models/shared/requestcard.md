@@ -1,0 +1,12 @@
+# RequestCard
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `authorization_controls`                                                        | [Optional[AuthorizationControls]](../../models/shared/authorizationcontrols.md) | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `authorized_user`                                                               | [Optional[CreateAuthorizedUser]](../../models/shared/createauthorizeduser.md)   | :heavy_minus_sign:                                                              | Fields to identify a human                                                      |
+| `funding_wallet_id`                                                             | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `memo`                                                                          | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | Optional descriptive name                                                       |
+| `type`                                                                          | [Optional[IssuedCardType]](../../models/shared/issuedcardtype.md)               | :heavy_minus_sign:                                                              | Type of a Moov issued card                                                      |

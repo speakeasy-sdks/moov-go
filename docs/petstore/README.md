@@ -1,4 +1,0 @@
-# Petstore SDK
-
-### Available Operations
-

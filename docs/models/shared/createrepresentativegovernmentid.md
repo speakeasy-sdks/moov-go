@@ -1,0 +1,9 @@
+# CreateRepresentativeGovernmentID
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `itin`                                                                                                        | [Optional[CreateRepresentativeGovernmentIDItin]](../../models/shared/createrepresentativegovernmentiditin.md) | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
+| `ssn`                                                                                                         | [Optional[CreateRepresentativeGovernmentIDSsn]](../../models/shared/createrepresentativegovernmentidssn.md)   | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |

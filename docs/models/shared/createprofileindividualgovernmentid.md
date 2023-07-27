@@ -1,0 +1,9 @@
+# CreateProfileIndividualGovernmentID
+
+
+## Fields
+
+| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `itin`                                                                                                              | [Optional[CreateProfileIndividualGovernmentIDItin]](../../models/shared/createprofileindividualgovernmentiditin.md) | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
+| `ssn`                                                                                                               | [Optional[CreateProfileIndividualGovernmentIDSsn]](../../models/shared/createprofileindividualgovernmentidssn.md)   | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |
