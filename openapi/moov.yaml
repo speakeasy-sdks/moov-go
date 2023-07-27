@@ -273,6 +273,10 @@ x-tagGroups:
       - Enriched profile
       - Industries
 paths:
+  x-speakeasy-errors:
+    statusCodes: # Defines status codes to handle as errors for all operations.
+      - 4XX
+      - 5XX
   "/oauth2/token":
     post:
       operationId: postOAuth2Token
