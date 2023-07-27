@@ -174,7 +174,7 @@ func New(opts ...SDKOption) *Moov {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "0.0.3",
+			SDKVersion:        "0.0.4",
 			GenVersion:        "2.73.1",
 		},
 	}
