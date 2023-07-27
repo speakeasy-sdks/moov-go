@@ -22,120 +22,17 @@ s = petstore.Petstore(
     ),
 )
 
-req = shared.CreateAccountRequest(
-    account_type=shared.AccountType.BUSINESS,
-    capabilities=[
-        shared.CapabilityID.COLLECT_FUNDS,
-        shared.CapabilityID.WALLET,
-        shared.CapabilityID.CARD_ISSUING,
-    ],
-    customer_support=shared.CreateAccountRequestCustomerSupport(
-        address=shared.CreateAccountRequestCustomerSupportAddress(
-            address_line1='123 Main Street',
-            address_line2='Apt 302',
-            city='Boulder',
-            country='US',
-            postal_code='80301',
-            state_or_province='CO',
-        ),
-        email='amanda@classbooker.dev',
-        phone=shared.CreateAccountRequestCustomerSupportPhone(
-            country_code='1',
-            number='8185551212',
-        ),
-        website='www.wholebodyfitnessgym.com',
-    ),
-    foreign_id='4528aba-b9a1-11eb-8529-0242ac13003',
-    metadata={
-        "nulla": 'corrupti',
-        "illum": 'vel',
-        "error": 'deserunt',
-    },
-    mode=shared.Mode.PRODUCTION,
-    profile=shared.CreateProfile(
-        business=shared.CreateProfileBusiness(
-            address=shared.CreateProfileBusinessAddress(
-                address_line1='123 Main Street',
-                address_line2='Apt 302',
-                city='Boulder',
-                country='US',
-                postal_code='80301',
-                state_or_province='CO',
-            ),
-            business_type=shared.BusinessType.LLC,
-            description='Local fitness center paying out instructors',
-            doing_business_as='Whole Body Fitness',
-            email='amanda@classbooker.dev',
-            industry_codes=shared.CreateProfileBusinessIndustryCodes(
-                mcc='7997',
-                naics='713940',
-                sic='7991',
-            ),
-            legal_business_name='Whole Body Fitness LLC',
-            phone=shared.CreateProfileBusinessPhone(
-                country_code='1',
-                number='8185551212',
-            ),
-            tax_id=shared.CreateProfileBusinessTaxID(
-                ein=shared.Ein(
-                    number='123-45-6789',
-                ),
-            ),
-            website='www.wholebodyfitnessgym.com',
-        ),
-        individual=shared.CreateProfileIndividual(
-            address=shared.CreateProfileIndividualAddress(
-                address_line1='123 Main Street',
-                address_line2='Apt 302',
-                city='Boulder',
-                country='US',
-                postal_code='80301',
-                state_or_province='CO',
-            ),
-            birth_date=shared.CreateProfileIndividualBirthDate(
-                day=9,
-                month=11,
-                year=1989,
-            ),
-            email='amanda@classbooker.dev',
-            government_id=shared.CreateProfileIndividualGovernmentID(
-                itin=shared.CreateProfileIndividualGovernmentIDItin(
-                    full='123-45-6789',
-                    last_four='6789',
-                ),
-                ssn=shared.CreateProfileIndividualGovernmentIDSsn(
-                    full='123-45-6789',
-                    last_four='6789',
-                ),
-            ),
-            name=shared.Name(
-                first_name='Amanda',
-                last_name='Yang',
-                middle_name='Amanda',
-                suffix='Jr',
-            ),
-            phone=shared.CreateProfileIndividualPhone(
-                country_code='1',
-                number='8185551212',
-            ),
-        ),
-    ),
-    settings=shared.CreateAccountRequestSettings(
-        ach_payment=shared.CreateAccountRequestSettingsAchPayment(
-            company_name='Whole Body Fitness',
-        ),
-        card_payment=shared.CreateAccountRequestSettingsCardPayment(
-            statement_descriptor='Whole Body Fitness',
-        ),
-    ),
-    terms_of_service=shared.CreateAccountRequestTermsOfService(
-        token='kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4',
-    ),
+req = shared.ClientCredentialsGrantToAccessTokenRequest(
+    client_id='5clTR_MdVrrkgxw2',
+    client_secret='dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-',
+    grant_type=shared.ClientCredentialsGrantToAccessTokenRequestGrantType.REFRESH_TOKEN,
+    refresh_token='i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6...',
+    scope='/accounts.write',
 )
 
-res = s.account.create(req)
+res = s.access_token.create(req)
 
-if res.account is not None:
+if res.access_token_response is not None:
     # handle response
 ```
 <!-- End SDK Example Usage -->
@@ -144,230 +41,127 @@ if res.account is not None:
 ## Available Resources and Operations
 
 
-### [account](docs/sdks/account/README.md)
+### [access_token](docs/sdks/accesstoken/README.md)
 
-* [create](docs/sdks/account/README.md#create) - Create account
-* [get](docs/sdks/account/README.md#get) - Get account
-* [patch](docs/sdks/account/README.md#patch) - Patch account
+* [create](docs/sdks/accesstoken/README.md#create) - Create access token
+* [revoke](docs/sdks/accesstoken/README.md#revoke) - Revoke access token
 
-### [account_countries](docs/sdks/accountcountries/README.md)
+### [accounts](docs/sdks/accounts/README.md)
 
-* [get](docs/sdks/accountcountries/README.md#get) - Get Account Countries
-* [put](docs/sdks/accountcountries/README.md#put) - Assign Account Countries
+* [assign_country](docs/sdks/accounts/README.md#assign_country) - Assign Account Countries
+* [create](docs/sdks/accounts/README.md#create) - Create account
+* [get](docs/sdks/accounts/README.md#get) - Get account
+* [get_tos_token](docs/sdks/accounts/README.md#get_tos_token) - Get terms of service token
+* [list](docs/sdks/accounts/README.md#list) - List accounts
+* [list_countries](docs/sdks/accounts/README.md#list_countries) - Get Account Countries
+* [update](docs/sdks/accounts/README.md#update) - Patch account
 
-### [account_issued_card_transactions](docs/sdks/accountissuedcardtransactions/README.md)
+### [analytics](docs/sdks/analytics/README.md)
 
-* [list](docs/sdks/accountissuedcardtransactions/README.md#list) - Get account transactions
+* [count_accounts_created](docs/sdks/analytics/README.md#count_accounts_created) - Count the number of profiles created by an individual or business
+* [count_transfer_statuses](docs/sdks/analytics/README.md#count_transfer_statuses) - Count the transfer statuses
+* [largest_transfer](docs/sdks/analytics/README.md#largest_transfer) - Return the largest number of transfers
+* [smallest_transfer](docs/sdks/analytics/README.md#smallest_transfer) - Return the smallest number of transfers
+* [sum_transfers](docs/sdks/analytics/README.md#sum_transfers) - Sum all transfers across intervals
 
-### [analytics_accounts_created](docs/sdks/analyticsaccountscreated/README.md)
+### [bank_accounts](docs/sdks/bankaccounts/README.md)
 
-* [post](docs/sdks/analyticsaccountscreated/README.md#post) - Count the number of profiles created by an individual or business
+* [initiate_micro_deposits](docs/sdks/bankaccounts/README.md#initiate_micro_deposits) - Initiate micro-deposits
+* [complete_micro_deposits](docs/sdks/bankaccounts/README.md#complete_micro_deposits) - Complete micro-deposits
+* [delete](docs/sdks/bankaccounts/README.md#delete) - Delete bank account
+* [get](docs/sdks/bankaccounts/README.md#get) - Get bank account
+* [link](docs/sdks/bankaccounts/README.md#link) - Bank account
+* [list](docs/sdks/bankaccounts/README.md#list) - List bank accounts
 
-### [analytics_transfer_largest](docs/sdks/analyticstransferlargest/README.md)
+### [capabilities](docs/sdks/capabilities/README.md)
 
-* [post](docs/sdks/analyticstransferlargest/README.md#post) - Return the largest number of transfers
+* [delete](docs/sdks/capabilities/README.md#delete) - Disable a capability for an account
+* [get](docs/sdks/capabilities/README.md#get) - Get capability for account
+* [list](docs/sdks/capabilities/README.md#list) - List capabilities for account
+* [request](docs/sdks/capabilities/README.md#request) - Request capabilities
 
-### [analytics_transfer_smallest](docs/sdks/analyticstransfersmallest/README.md)
+### [card_issuing](docs/sdks/cardissuing/README.md)
 
-* [post](docs/sdks/analyticstransfersmallest/README.md#post) - Return the smallest number of transfers
+* [request_card](docs/sdks/cardissuing/README.md#request_card) - Request card
+* [get_card](docs/sdks/cardissuing/README.md#get_card) - Get issued card
+* [get_card_full_details](docs/sdks/cardissuing/README.md#get_card_full_details) - Get full card details
+* [list_cards](docs/sdks/cardissuing/README.md#list_cards) - List issued cards
+* [update_card](docs/sdks/cardissuing/README.md#update_card) - Update issued card
 
-### [analytics_transfer_statuses](docs/sdks/analyticstransferstatuses/README.md)
+### [cards](docs/sdks/cards/README.md)
 
-* [post](docs/sdks/analyticstransferstatuses/README.md#post) - Count the transfer statuses
-
-### [analytics_transfer_sum](docs/sdks/analyticstransfersum/README.md)
-
-* [post](docs/sdks/analyticstransfersum/README.md#post) - Sum all transfers across intervals
-
-### [apple_pay_merchant_domains](docs/sdks/applepaymerchantdomains/README.md)
-
-* [get](docs/sdks/applepaymerchantdomains/README.md#get) - Get Apple Pay domains
-* [post](docs/sdks/applepaymerchantdomains/README.md#post) - Register Apple Pay domains
-* [update](docs/sdks/applepaymerchantdomains/README.md#update) - Update Apple Pay domains
-
-### [apple_pay_session](docs/sdks/applepaysession/README.md)
-
-* [post](docs/sdks/applepaysession/README.md#post) - Create Apple Pay session
-
-### [avatar](docs/sdks/avatar/README.md)
-
-* [get](docs/sdks/avatar/README.md#get) - Get avatar
-
-### [bank_account](docs/sdks/bankaccount/README.md)
-
-* [post](docs/sdks/bankaccount/README.md#post) - Bank account
-
-### [bank_id](docs/sdks/bankid/README.md)
-
-* [delete](docs/sdks/bankid/README.md#delete) - Delete bank account
-* [get](docs/sdks/bankid/README.md#get) - Get bank account
-
-### [capability](docs/sdks/capability/README.md)
-
-* [delete](docs/sdks/capability/README.md#delete) - Disable a capability for an account
-* [get](docs/sdks/capability/README.md#get) - Get capability for account
-* [post](docs/sdks/capability/README.md#post) - Request capabilities
-
-### [card](docs/sdks/card/README.md)
-
-* [delete](docs/sdks/card/README.md#delete) - Disable card
-* [get](docs/sdks/card/README.md#get) - Get card
-* [update](docs/sdks/card/README.md#update) - Update card
-
-### [complete_micro_deposits](docs/sdks/completemicrodeposits/README.md)
-
-* [put](docs/sdks/completemicrodeposits/README.md#put) - Complete micro-deposits
-
-### [dispute](docs/sdks/dispute/README.md)
-
-* [get](docs/sdks/dispute/README.md#get) - Get Dispute by ID
+* [link_apple_pay_token](docs/sdks/cards/README.md#link_apple_pay_token) - Link Apple Pay token
+* [link_card](docs/sdks/cards/README.md#link_card) - Link card
+* [list_cards](docs/sdks/cards/README.md#list_cards) - List cards
+* [create_apple_pay_session](docs/sdks/cards/README.md#create_apple_pay_session) - Create Apple Pay session
+* [delete](docs/sdks/cards/README.md#delete) - Disable card
+* [get](docs/sdks/cards/README.md#get) - Get card
+* [list_apple_pay_domains](docs/sdks/cards/README.md#list_apple_pay_domains) - Get Apple Pay domains
+* [register_apple_pay_domain](docs/sdks/cards/README.md#register_apple_pay_domain) - Register Apple Pay domains
+* [update](docs/sdks/cards/README.md#update) - Update card
+* [update_apple_pay_domains](docs/sdks/cards/README.md#update_apple_pay_domains) - Update Apple Pay domains
 
 ### [disputes](docs/sdks/disputes/README.md)
 
+* [get](docs/sdks/disputes/README.md#get) - Get Dispute by ID
 * [list](docs/sdks/disputes/README.md#list) - List of all disputes
 
-### [enrichment_address](docs/sdks/enrichmentaddress/README.md)
+### [enrichment](docs/sdks/enrichment/README.md)
 
-* [get](docs/sdks/enrichmentaddress/README.md#get) - Get address suggestions
-
-### [enrichment_profile](docs/sdks/enrichmentprofile/README.md)
-
-* [get](docs/sdks/enrichmentprofile/README.md#get) - Get enriched profile
-
-### [file](docs/sdks/file/README.md)
-
-* [upload](docs/sdks/file/README.md#upload) - Upload File
-
-### [file_details](docs/sdks/filedetails/README.md)
-
-* [get](docs/sdks/filedetails/README.md#get) - Get File Details
+* [get_address](docs/sdks/enrichment/README.md#get_address) - Get address suggestions
+* [get_avatar](docs/sdks/enrichment/README.md#get_avatar) - Get avatar
+* [get_industries](docs/sdks/enrichment/README.md#get_industries) - List all industries
+* [get_profile](docs/sdks/enrichment/README.md#get_profile) - Get enriched profile
 
 ### [files](docs/sdks/files/README.md)
 
+* [get](docs/sdks/files/README.md#get) - Get File Details
 * [list](docs/sdks/files/README.md#list) - List files
-
-### [full_issued_card](docs/sdks/fullissuedcard/README.md)
-
-* [get](docs/sdks/fullissuedcard/README.md#get) - Get full card details
-
-### [industries](docs/sdks/industries/README.md)
-
-* [list](docs/sdks/industries/README.md#list) - List all industries
-
-### [initiate_micro_deposits](docs/sdks/initiatemicrodeposits/README.md)
-
-* [post](docs/sdks/initiatemicrodeposits/README.md#post) - Initiate micro-deposits
+* [upload](docs/sdks/files/README.md#upload) - Upload File
 
 ### [institutions](docs/sdks/institutions/README.md)
 
 * [search](docs/sdks/institutions/README.md#search) - Search institutions
 
-### [issued_card](docs/sdks/issuedcard/README.md)
-
-* [get](docs/sdks/issuedcard/README.md#get) - Get issued card
-* [update](docs/sdks/issuedcard/README.md#update) - Update issued card
-
-### [link_apple_pay_token](docs/sdks/linkapplepaytoken/README.md)
-
-* [post](docs/sdks/linkapplepaytoken/README.md#post) - Link Apple Pay token
-
-### [link_card](docs/sdks/linkcard/README.md)
-
-* [post](docs/sdks/linkcard/README.md#post) - Link card
-
-### [list_accounts](docs/sdks/listaccounts/README.md)
-
-* [get](docs/sdks/listaccounts/README.md#get) - List accounts
-
-### [list_bank_accounts](docs/sdks/listbankaccounts/README.md)
-
-* [get](docs/sdks/listbankaccounts/README.md#get) - List bank accounts
-
-### [list_capability](docs/sdks/listcapability/README.md)
-
-* [get](docs/sdks/listcapability/README.md#get) - List capabilities for account
-
-### [list_cards](docs/sdks/listcards/README.md)
-
-* [get](docs/sdks/listcards/README.md#get) - List cards
-
-### [list_issued_cards](docs/sdks/listissuedcards/README.md)
-
-* [get](docs/sdks/listissuedcards/README.md#get) - List issued cards
-
-### [network_i_ds](docs/sdks/networkids/README.md)
-
-* [get](docs/sdks/networkids/README.md#get) - Get network IDs of an account
-
-### [o_auth2_token](docs/sdks/oauth2token/README.md)
-
-* [post](docs/sdks/oauth2token/README.md#post) - Create access token
-* [revoke](docs/sdks/oauth2token/README.md#revoke) - Revoke access token
-
-### [payment_method](docs/sdks/paymentmethod/README.md)
-
-* [get](docs/sdks/paymentmethod/README.md#get) - Get payment method
-
 ### [payment_methods](docs/sdks/paymentmethods/README.md)
 
-* [get](docs/sdks/paymentmethods/README.md#get) - List payment methods
-
-### [refund](docs/sdks/refund/README.md)
-
-* [get](docs/sdks/refund/README.md#get) - Get refund details
-
-### [representative](docs/sdks/representative/README.md)
-
-* [create](docs/sdks/representative/README.md#create) - Create representative
-* [delete](docs/sdks/representative/README.md#delete) - Delete a representative
-* [get](docs/sdks/representative/README.md#get) - Get representative
-* [patch](docs/sdks/representative/README.md#patch) - Patch representative
+* [get](docs/sdks/paymentmethods/README.md#get) - Get payment method
+* [list](docs/sdks/paymentmethods/README.md#list) - List payment methods
 
 ### [representatives](docs/sdks/representatives/README.md)
 
+* [create](docs/sdks/representatives/README.md#create) - Create representative
+* [delete](docs/sdks/representatives/README.md#delete) - Delete a representative
+* [get](docs/sdks/representatives/README.md#get) - Get representative
 * [list](docs/sdks/representatives/README.md#list) - List representatives
+* [update](docs/sdks/representatives/README.md#update) - Patch representative
 
-### [request_card](docs/sdks/requestcard/README.md)
+### [transactions](docs/sdks/transactions/README.md)
 
-* [post](docs/sdks/requestcard/README.md#post) - Request card
-
-### [terms_of_service_token](docs/sdks/termsofservicetoken/README.md)
-
-* [get](docs/sdks/termsofservicetoken/README.md#get) - Get terms of service token
-
-### [transfer](docs/sdks/transfer/README.md)
-
-* [cancel](docs/sdks/transfer/README.md#cancel) - Cancel or refund a card transfer
-* [create](docs/sdks/transfer/README.md#create) - Create a transfer
-* [get](docs/sdks/transfer/README.md#get) - Get a transfer
-* [patch](docs/sdks/transfer/README.md#patch) - Patch transfer metadata
-* [refund](docs/sdks/transfer/README.md#refund) - Refund a transfer
-
-### [transfer_options](docs/sdks/transferoptions/README.md)
-
-* [create](docs/sdks/transferoptions/README.md#create) - Generate transfer options
+* [list](docs/sdks/transactions/README.md#list) - Get account transactions
 
 ### [transfers](docs/sdks/transfers/README.md)
 
-* [get](docs/sdks/transfers/README.md#get) - Get a list of refunds for a card transfer
+* [cancel](docs/sdks/transfers/README.md#cancel) - Cancel or refund a card transfer
+* [create](docs/sdks/transfers/README.md#create) - Create a transfer
+* [generate_options](docs/sdks/transfers/README.md#generate_options) - Generate transfer options
+* [get](docs/sdks/transfers/README.md#get) - Get a transfer
+* [get_refund](docs/sdks/transfers/README.md#get_refund) - Get refund details
+* [list_refunds](docs/sdks/transfers/README.md#list_refunds) - Get a list of refunds for a card transfer
+* [refund](docs/sdks/transfers/README.md#refund) - Refund a transfer
+* [update](docs/sdks/transfers/README.md#update) - Patch transfer metadata
 
 ### [underwriting](docs/sdks/underwriting/README.md)
 
 * [get](docs/sdks/underwriting/README.md#get) - Retrieve underwriting details
 * [update](docs/sdks/underwriting/README.md#update) - Update underwriting details
 
-### [wallet_transaction](docs/sdks/wallettransaction/README.md)
+### [wallets](docs/sdks/wallets/README.md)
 
-* [get](docs/sdks/wallettransaction/README.md#get) - Get wallet transaction
-
-### [wallet_transactions](docs/sdks/wallettransactions/README.md)
-
-* [list](docs/sdks/wallettransactions/README.md#list) - List wallet transactions
-
-### [wallets_for_account](docs/sdks/walletsforaccount/README.md)
-
-* [get](docs/sdks/walletsforaccount/README.md#get) - Get wallet
-* [list](docs/sdks/walletsforaccount/README.md#list) - List wallets
+* [get](docs/sdks/wallets/README.md#get) - Get wallet
+* [get_transaction](docs/sdks/wallets/README.md#get_transaction) - Get wallet transaction
+* [list](docs/sdks/wallets/README.md#list) - List wallets
+* [list_transactions](docs/sdks/wallets/README.md#list_transactions) - List wallet transactions
 <!-- End SDK Available Operations -->
 
 ### Maturity
