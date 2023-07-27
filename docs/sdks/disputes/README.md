@@ -6,7 +6,46 @@ A [dispute](https://docs.moov.io/guides/money-movement/cards/disputes/) is a sit
 
 ### Available Operations
 
+* [get](#get) - Get Dispute by ID
 * [list](#list) - List of all disputes
+
+## get
+
+Returns a user's dispute by ID. <br><br> To use this endpoint, you need to specify the `/accounts/{your-account-id}/transfers.read` scope.
+
+### Example Usage
+
+```python
+import petstore
+from petstore.models import operations, shared
+
+s = petstore.Petstore(
+    security=shared.Security(
+        access_token="",
+    ),
+)
+
+req = operations.GetDisputeRequest(
+    dispute_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
+)
+
+res = s.disputes.get(req)
+
+if res.dispute is not None:
+    # handle response
+```
+
+### Parameters
+
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `request`                                                                    | [operations.GetDisputeRequest](../../models/operations/getdisputerequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+
+
+### Response
+
+**[operations.GetDisputeResponse](../../models/operations/getdisputeresponse.md)**
+
 
 ## list
 
@@ -25,10 +64,10 @@ s = petstore.Petstore(
 )
 
 req = operations.ListDisputesRequest(
-    count=469498,
-    respond_end_date_time='totam',
+    count=676243,
+    respond_end_date_time='corrupti',
     respond_start_date_time='accusamus',
-    skip=306810,
+    skip=272683,
     status=shared.DisputeStatus.RESPONSE_NEEDED,
 )
 

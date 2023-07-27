@@ -13,6 +13,36 @@ class Disputes:
         self.sdk_configuration = sdk_config
         
     
+    def get(self, request: operations.GetDisputeRequest) -> operations.GetDisputeResponse:
+        r"""Get Dispute by ID
+        Returns a user's dispute by ID. <br><br> To use this endpoint, you need to specify the `/accounts/{your-account-id}/transfers.read` scope.
+        """
+        base_url = utils.template_url(*self.sdk_configuration.get_server_details())
+        
+        url = utils.generate_url(operations.GetDisputeRequest, base_url, '/disputes/{disputeID}', request)
+        headers = {}
+        headers['Accept'] = 'application/json'
+        headers['user-agent'] = f'speakeasy-sdk/{self.sdk_configuration.language} {self.sdk_configuration.sdk_version} {self.sdk_configuration.gen_version} {self.sdk_configuration.openapi_doc_version}'
+        
+        client = self.sdk_configuration.security_client
+        
+        http_res = client.request('GET', url, headers=headers)
+        content_type = http_res.headers.get('Content-Type')
+
+        res = operations.GetDisputeResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
+        
+        if http_res.status_code == 200:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[shared.Dispute])
+                res.dispute = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        else:
+            pass
+
+        return res
+
+    
     def list(self, request: operations.ListDisputesRequest) -> operations.ListDisputesResponse:
         r"""List of all disputes
         Returns the list of disputes. <br><br> To use this endpoint, you need to specify the `/accounts/{your-account-id}/transfers.read` scope.

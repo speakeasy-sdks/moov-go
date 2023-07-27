@@ -3,7 +3,7 @@
 from .sdkconfiguration import SDKConfiguration
 from petstore import utils
 from petstore.models import errors, operations, shared
-from typing import Optional
+from typing import Any, Optional
 
 class Transfers:
     r"""A [transfer](https://docs.moov.io/guides/money-movement/) is the movement of money between Moov accounts, from source to destination. Provided you have linked a bank account which has been verified, you can initiate a transfer to another Moov account. All you need to do is note a [paymentMethod](#tag/Payment-methods), the $ amount of the transfer, and a brief description. With Moov, you can also implement transfer groups, allowing you to associate multiple transfers together and run them sequentially. To learn more, read our guide on [transfer groups](https://docs.moov.io/guides/money-movement/transfer-groups/#transfer-statuses)."""
@@ -13,13 +13,165 @@ class Transfers:
         self.sdk_configuration = sdk_config
         
     
-    def get(self, request: operations.GetRefundsRequest) -> operations.GetRefundsResponse:
-        r"""Get a list of refunds for a card transfer
-        Get a list of refunds for a card transfer
+    def cancel(self, request: operations.CancelTransferRequest) -> operations.CancelTransferResponse:
+        r"""Cancel or refund a card transfer
+        Reverses a card transfer by initiating a cancellation or refund depending on the transaction status
         """
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
-        url = utils.generate_url(operations.GetRefundsRequest, base_url, '/transfers/{transferID}/refunds', request)
+        url = utils.generate_url(operations.CancelTransferRequest, base_url, '/transfers/{transferID}/reversals', request)
+        headers = utils.get_headers(request)
+        req_content_type, data, form = utils.serialize_request_body(request, "create_reversal", 'json')
+        if req_content_type not in ('multipart/form-data', 'multipart/mixed'):
+            headers['content-type'] = req_content_type
+        headers['Accept'] = 'application/json;q=1, application/json;q=0'
+        headers['user-agent'] = f'speakeasy-sdk/{self.sdk_configuration.language} {self.sdk_configuration.sdk_version} {self.sdk_configuration.gen_version} {self.sdk_configuration.openapi_doc_version}'
+        
+        client = self.sdk_configuration.security_client
+        
+        http_res = client.request('POST', url, data=data, files=form, headers=headers)
+        content_type = http_res.headers.get('Content-Type')
+
+        res = operations.CancelTransferResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
+        
+        if http_res.status_code in [200, 202, 409]:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[shared.CreatedReversal])
+                res.created_reversal = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        elif http_res.status_code == 400:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[shared.Error])
+                res.error = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        else:
+            pass
+
+        return res
+
+    
+    def create(self, request: operations.CreateTransferRequest) -> operations.CreateTransferResponse:
+        r"""Create a transfer
+        Move money by providing the source, destination, and amount in the request body. <br><br> To create a transfer, you must specify the `/accounts/{yourAccountID}/transfers.write` scope. <br> You can find your account id on the [Business details](https://dashboard.moov.io/settings/business) page.
+        """
+        base_url = utils.template_url(*self.sdk_configuration.get_server_details())
+        
+        url = base_url + '/transfers'
+        headers = utils.get_headers(request)
+        req_content_type, data, form = utils.serialize_request_body(request, "create_transfer", 'json')
+        if req_content_type not in ('multipart/form-data', 'multipart/mixed'):
+            headers['content-type'] = req_content_type
+        if data is None and form is None:
+            raise Exception('request body is required')
+        headers['Accept'] = 'application/json;q=1, application/json;q=0.7, application/json;q=0'
+        headers['user-agent'] = f'speakeasy-sdk/{self.sdk_configuration.language} {self.sdk_configuration.sdk_version} {self.sdk_configuration.gen_version} {self.sdk_configuration.openapi_doc_version}'
+        
+        client = self.sdk_configuration.security_client
+        
+        http_res = client.request('POST', url, data=data, files=form, headers=headers)
+        content_type = http_res.headers.get('Content-Type')
+
+        res = operations.CreateTransferResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
+        
+        if http_res.status_code == 200:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[Any])
+                res.transfer_post_response = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        elif http_res.status_code == 201:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[shared.CreatedTransfer])
+                res.created_transfer = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        elif http_res.status_code in [202, 409]:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[shared.GetTransferFull])
+                res.get_transfer_full = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        else:
+            pass
+
+        return res
+
+    
+    def generate_options(self, request: shared.CreateTransferOptions) -> operations.CreateTransferOptionsResponse:
+        r"""Generate transfer options
+        Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you supply in the request. <br><br> To get transfer options, you must specify the `/accounts/{yourAccountID}/transfers.read` scope. The accountID you include should be associated with the facilitator account. <br> You can find your accountID on the [Business details](https://dashboard.moov.io/settings/business) page.
+        """
+        base_url = utils.template_url(*self.sdk_configuration.get_server_details())
+        
+        url = base_url + '/transfer-options'
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request, "request", 'json')
+        if req_content_type not in ('multipart/form-data', 'multipart/mixed'):
+            headers['content-type'] = req_content_type
+        if data is None and form is None:
+            raise Exception('request body is required')
+        headers['Accept'] = 'application/json'
+        headers['user-agent'] = f'speakeasy-sdk/{self.sdk_configuration.language} {self.sdk_configuration.sdk_version} {self.sdk_configuration.gen_version} {self.sdk_configuration.openapi_doc_version}'
+        
+        client = self.sdk_configuration.security_client
+        
+        http_res = client.request('POST', url, data=data, files=form, headers=headers)
+        content_type = http_res.headers.get('Content-Type')
+
+        res = operations.CreateTransferOptionsResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
+        
+        if http_res.status_code == 200:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[shared.CreatedTransferOptions])
+                res.created_transfer_options = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        else:
+            pass
+
+        return res
+
+    
+    def get(self, request: operations.GetTransferRequest) -> operations.GetTransferResponse:
+        r"""Get a transfer
+        Retrieve full transfer details such as the amount, source, and destination. Payment rail-specific details are included in the source and destination. <br><br> To get a transfer, you must specify the `/accounts/{yourAccountID}/transfers.read` scope. The accountID included must be your facilitator accountID. <br> You can find your accountID on the [Business details](https://dashboard.moov.io/settings/business) page.
+        """
+        base_url = utils.template_url(*self.sdk_configuration.get_server_details())
+        
+        url = utils.generate_url(operations.GetTransferRequest, base_url, '/transfers/{transferID}', request)
+        headers = {}
+        query_params = utils.get_query_params(operations.GetTransferRequest, request)
+        headers['Accept'] = 'application/json'
+        headers['user-agent'] = f'speakeasy-sdk/{self.sdk_configuration.language} {self.sdk_configuration.sdk_version} {self.sdk_configuration.gen_version} {self.sdk_configuration.openapi_doc_version}'
+        
+        client = self.sdk_configuration.security_client
+        
+        http_res = client.request('GET', url, params=query_params, headers=headers)
+        content_type = http_res.headers.get('Content-Type')
+
+        res = operations.GetTransferResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
+        
+        if http_res.status_code == 200:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[shared.GetTransferFull])
+                res.get_transfer_full = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        else:
+            pass
+
+        return res
+
+    
+    def get_refund(self, request: operations.GetRefundRequest) -> operations.GetRefundResponse:
+        r"""Get refund details
+        Get details of a refund for a card transfer
+        """
+        base_url = utils.template_url(*self.sdk_configuration.get_server_details())
+        
+        url = utils.generate_url(operations.GetRefundRequest, base_url, '/transfers/{transferID}/refunds/{refundID}', request)
         headers = {}
         headers['Accept'] = 'application/json'
         headers['user-agent'] = f'speakeasy-sdk/{self.sdk_configuration.language} {self.sdk_configuration.sdk_version} {self.sdk_configuration.gen_version} {self.sdk_configuration.openapi_doc_version}'
@@ -29,12 +181,117 @@ class Transfers:
         http_res = client.request('GET', url, headers=headers)
         content_type = http_res.headers.get('Content-Type')
 
-        res = operations.GetRefundsResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
+        res = operations.GetRefundResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
+        
+        if http_res.status_code == 200:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[shared.GetRefund])
+                res.get_refund = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        else:
+            pass
+
+        return res
+
+    
+    def list_refunds(self, request: operations.ListRefundsRequest) -> operations.ListRefundsResponse:
+        r"""Get a list of refunds for a card transfer
+        Get a list of refunds for a card transfer
+        """
+        base_url = utils.template_url(*self.sdk_configuration.get_server_details())
+        
+        url = utils.generate_url(operations.ListRefundsRequest, base_url, '/transfers/{transferID}/refunds', request)
+        headers = {}
+        headers['Accept'] = 'application/json'
+        headers['user-agent'] = f'speakeasy-sdk/{self.sdk_configuration.language} {self.sdk_configuration.sdk_version} {self.sdk_configuration.gen_version} {self.sdk_configuration.openapi_doc_version}'
+        
+        client = self.sdk_configuration.security_client
+        
+        http_res = client.request('GET', url, headers=headers)
+        content_type = http_res.headers.get('Content-Type')
+
+        res = operations.ListRefundsResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
         
         if http_res.status_code == 200:
             if utils.match_content_type(content_type, 'application/json'):
                 out = utils.unmarshal_json(http_res.text, Optional[list[shared.GetRefund]])
                 res.get_refunds = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        else:
+            pass
+
+        return res
+
+    
+    def refund(self, request: operations.RefundTransferRequest) -> operations.RefundTransferResponse:
+        r"""Refund a transfer
+        <strong>Use the <a href=\"index.html#tag/Transfers/operation/reverseTransfer\">Cancel or refund a card transfer</a> endpoint for more robust cancel and refund options.</strong> <br><br> Initiate a refund for a card transfer <br><br> To initiate a refund, you will need to specify the `/accounts/{accountID}/transfers.write` scope.
+        """
+        base_url = utils.template_url(*self.sdk_configuration.get_server_details())
+        
+        url = utils.generate_url(operations.RefundTransferRequest, base_url, '/transfers/{transferID}/refunds', request)
+        headers = utils.get_headers(request)
+        req_content_type, data, form = utils.serialize_request_body(request, "create_refund", 'json')
+        if req_content_type not in ('multipart/form-data', 'multipart/mixed'):
+            headers['content-type'] = req_content_type
+        headers['Accept'] = 'application/json;q=1, application/json;q=0'
+        headers['user-agent'] = f'speakeasy-sdk/{self.sdk_configuration.language} {self.sdk_configuration.sdk_version} {self.sdk_configuration.gen_version} {self.sdk_configuration.openapi_doc_version}'
+        
+        client = self.sdk_configuration.security_client
+        
+        http_res = client.request('POST', url, data=data, files=form, headers=headers)
+        content_type = http_res.headers.get('Content-Type')
+
+        res = operations.RefundTransferResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
+        
+        if http_res.status_code == 200:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[Any])
+                res.refund_post_response = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        elif http_res.status_code in [202, 409]:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[shared.GetRefund])
+                res.get_refund = out
+            else:
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        else:
+            pass
+
+        return res
+
+    
+    def update(self, request: operations.PatchTransferRequest) -> operations.PatchTransferResponse:
+        r"""Patch transfer metadata
+        Update the metadata contained on a transfer <br><br> To patch a transfer, you must specify the `/accounts/{yourAccountID}/transfers.write` scope. The accountID included must be your facilitator accountID. <br> You can find your account ID on the [Business details](https://dashboard.moov.io/settings/business) page.
+        """
+        base_url = utils.template_url(*self.sdk_configuration.get_server_details())
+        
+        url = utils.generate_url(operations.PatchTransferRequest, base_url, '/transfers/{transferID}', request)
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request, "patch_transfer", 'json')
+        if req_content_type not in ('multipart/form-data', 'multipart/mixed'):
+            headers['content-type'] = req_content_type
+        if data is None and form is None:
+            raise Exception('request body is required')
+        query_params = utils.get_query_params(operations.PatchTransferRequest, request)
+        headers['Accept'] = 'application/json'
+        headers['user-agent'] = f'speakeasy-sdk/{self.sdk_configuration.language} {self.sdk_configuration.sdk_version} {self.sdk_configuration.gen_version} {self.sdk_configuration.openapi_doc_version}'
+        
+        client = self.sdk_configuration.security_client
+        
+        http_res = client.request('PATCH', url, params=query_params, data=data, files=form, headers=headers)
+        content_type = http_res.headers.get('Content-Type')
+
+        res = operations.PatchTransferResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
+        
+        if http_res.status_code == 200:
+            if utils.match_content_type(content_type, 'application/json'):
+                out = utils.unmarshal_json(http_res.text, Optional[shared.GetTransferFull])
+                res.get_transfer_full = out
             else:
                 raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
         else:

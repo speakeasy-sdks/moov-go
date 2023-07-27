@@ -24,12 +24,12 @@ s = petstore.Petstore(
     ),
 )
 
-req = operations.SearchInstitutionsRequest(
+req = operations.SearchInstitutionRequest(
     limit=499,
-    name='Billie Keebler',
-    rail=shared.Rail.WIRE,
-    routing_number='cum',
-    state='commodi',
+    name='Arnold Ferry',
+    rail=shared.Rail.ACH,
+    routing_number='fugit',
+    state='id',
 )
 
 res = s.institutions.search(req)
@@ -40,12 +40,12 @@ if res.financial_institutions is not None:
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `request`                                                                                    | [operations.SearchInstitutionsRequest](../../models/operations/searchinstitutionsrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `request`                                                                                  | [operations.SearchInstitutionRequest](../../models/operations/searchinstitutionrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 
 
 ### Response
 
-**[operations.SearchInstitutionsResponse](../../models/operations/searchinstitutionsresponse.md)**
+**[operations.SearchInstitutionResponse](../../models/operations/searchinstitutionresponse.md)**
 

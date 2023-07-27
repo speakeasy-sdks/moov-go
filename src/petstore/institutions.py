@@ -13,15 +13,15 @@ class Institutions:
         self.sdk_configuration = sdk_config
         
     
-    def search(self, request: operations.SearchInstitutionsRequest) -> operations.SearchInstitutionsResponse:
+    def search(self, request: operations.SearchInstitutionRequest) -> operations.SearchInstitutionResponse:
         r"""Search institutions
         Search for institutions by their routing number or name. <br><br> To use this endpoint, you need to specify the `/fed.read` scope.
         """
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
-        url = utils.generate_url(operations.SearchInstitutionsRequest, base_url, '/institutions/{rail}/search', request)
+        url = utils.generate_url(operations.SearchInstitutionRequest, base_url, '/institutions/{rail}/search', request)
         headers = {}
-        query_params = utils.get_query_params(operations.SearchInstitutionsRequest, request)
+        query_params = utils.get_query_params(operations.SearchInstitutionRequest, request)
         headers['Accept'] = 'application/json'
         headers['user-agent'] = f'speakeasy-sdk/{self.sdk_configuration.language} {self.sdk_configuration.sdk_version} {self.sdk_configuration.gen_version} {self.sdk_configuration.openapi_doc_version}'
         
@@ -30,7 +30,7 @@ class Institutions:
         http_res = client.request('GET', url, params=query_params, headers=headers)
         content_type = http_res.headers.get('Content-Type')
 
-        res = operations.SearchInstitutionsResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
+        res = operations.SearchInstitutionResponse(status_code=http_res.status_code, content_type=content_type, raw_response=http_res)
         
         if http_res.status_code == 200:
             if utils.match_content_type(content_type, 'application/json'):

@@ -27,7 +27,7 @@ s = petstore.Petstore(
 )
 
 req = operations.GetUnderwritingRequest(
-    account_id='fb0b3489-6c3c-4a5a-8fbe-2fd570757792',
+    account_id='bae0be2d-7822-459e-bea4-b5197f92443d',
 )
 
 res = s.underwriting.get(req)
@@ -70,7 +70,7 @@ req = operations.UpdateUnderwritingRequest(
         average_transaction_size=10000,
         max_transaction_size=50000,
     ),
-    account_id='9177deac-646e-4cb5-b340-9e3eb1e5a2b1',
+    account_id='a7ce52b8-95c5-437c-a454-efb0b34896c3',
 )
 
 res = s.underwriting.update(req)
