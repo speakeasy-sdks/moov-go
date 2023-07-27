@@ -1581,6 +1581,7 @@ paths:
   "/accounts/{accountID}/cards":
     post:
       summary: Link card
+      x-speakeasy-usage-example: true
       x-speakeasy-name-override: LinkCard
       operationId: postLinkCard
       description:
