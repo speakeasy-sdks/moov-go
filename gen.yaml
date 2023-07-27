@@ -16,4 +16,4 @@ generation:
 go:
   version: 0.0.3
   maxMethodParams: 0
-  packageName: openapi
+  packageName: github.com/speakeasy-sdks/moov-go
