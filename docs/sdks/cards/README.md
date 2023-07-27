@@ -38,9 +38,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -66,7 +66,7 @@ func main() {
                 TransactionIdentifier: "32b...4f3",
             },
         },
-        AccountID: "3c7e0bc7-178e-4479-af2a-70c688282aa4",
+        AccountID: "e6b7b95b-c0ab-43c2-8c4f-3789fd871f99",
     })
     if err != nil {
         log.Fatal(err)
@@ -111,9 +111,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -121,25 +121,25 @@ func main() {
     res, err := s.Cards.LinkCard(ctx, operations.PostLinkCardRequest{
         CardRequest: shared.CardRequest{
             BillingAddress: &shared.Address{
-                AddressLine1: petstore.String("123 Main Street"),
-                AddressLine2: petstore.String("Apt 302"),
-                City: petstore.String("Boulder"),
-                Country: petstore.String("US"),
-                PostalCode: petstore.String("80301"),
-                StateOrProvince: petstore.String("CO"),
+                AddressLine1: moov.String("123 Main Street"),
+                AddressLine2: moov.String("Apt 302"),
+                City: moov.String("Boulder"),
+                Country: moov.String("US"),
+                PostalCode: moov.String("80301"),
+                StateOrProvince: moov.String("CO"),
             },
-            CardCvv: petstore.String("0123"),
-            CardNumber: petstore.String("atque"),
-            CardOnFile: petstore.Bool(false),
+            CardCvv: moov.String("0123"),
+            CardNumber: moov.String("pariatur"),
+            CardOnFile: moov.Bool(false),
             Expiration: &shared.CardExpiration{
-                Month: petstore.String("01"),
-                Year: petstore.String("21"),
+                Month: moov.String("01"),
+                Year: moov.String("21"),
             },
-            HolderName: petstore.String("Jules Jackson"),
-            MerchantAccountID: petstore.String("2562f222-e981-47ee-97cb-e61e6b7b95bc"),
+            HolderName: moov.String("Jules Jackson"),
+            MerchantAccountID: moov.String("d2efd121-aa6f-41e6-b4bd-b04f15756082"),
         },
         XWaitFor: shared.SchemasWaitForPaymentMethod.ToPointer(),
-        AccountID: "0ab3c20c-4f37-489f-9871-f99dd2efd121",
+        AccountID: "d68ea19f-1d17-4051-b39d-08086a184039",
     })
     if err != nil {
         log.Fatal(err)
@@ -183,15 +183,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Cards.ListCards(ctx, operations.GetListCardsRequest{
-        AccountID: "aa6f1e67-4bdb-404f-9575-6082d68ea19f",
+        AccountID: "4c26071f-93f5-4f06-82da-c7af515cc413",
     })
     if err != nil {
         log.Fatal(err)
@@ -237,9 +237,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -249,7 +249,7 @@ func main() {
             DisplayName: "Example Merchant",
             Domain: "checkout.classbooker.dev",
         },
-        AccountID: "1d170513-39d0-4808-aa18-40394c26071f",
+        AccountID: "aa63aae8-d678-464d-bb67-5fd5e60b375e",
     })
     if err != nil {
         log.Fatal(err)
@@ -292,15 +292,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Cards.Delete(ctx, operations.DeleteCardRequest{
-        AccountID: "93f5f064-2dac-47af-915c-c413aa63aae8",
+        AccountID: "d4f6fbee-41f3-4331-bfe3-5b60eb1ea426",
         CardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -344,15 +344,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Cards.Get(ctx, operations.GetCardRequest{
-        AccountID: "d67864db-b675-4fd5-a60b-375ed4f6fbee",
+        AccountID: "555ba3c2-8744-4ed5-bb88-f3a8d8f5c0b2",
         CardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -398,15 +398,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Cards.ListApplePayDomains(ctx, operations.GetApplePayMerchantDomainsRequest{
-        AccountID: "41f33317-fe35-4b60-ab1e-a426555ba3c2",
+        AccountID: "f2fb7b19-4a27-46b2-a916-fe1f08f4294e",
     })
     if err != nil {
         log.Fatal(err)
@@ -452,9 +452,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -463,12 +463,10 @@ func main() {
         RegisterApplePayMerchantDomains: shared.RegisterApplePayMerchantDomains{
             DisplayName: "Example Merchant",
             Domains: []string{
-                "in",
-                "dolore",
-                "aliquam",
+                "ea",
             },
         },
-        AccountID: "ed53b88f-3a8d-48f5-80b2-f2fb7b194a27",
+        AccountID: "98f447f6-03e8-4b44-9e80-ca55efd20e45",
     })
     if err != nil {
         log.Fatal(err)
@@ -516,9 +514,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -526,21 +524,21 @@ func main() {
     res, err := s.Cards.Update(ctx, operations.UpdateCardRequest{
         CardUpdateRequest: shared.CardUpdateRequest{
             BillingAddress: &shared.UpdateAddress{
-                AddressLine1: petstore.String("123 Main Street"),
-                AddressLine2: petstore.String("Apt 302"),
-                City: petstore.String("Boulder"),
-                Country: petstore.String("US"),
-                PostalCode: petstore.String("80301"),
-                StateOrProvince: petstore.String("CO"),
+                AddressLine1: moov.String("123 Main Street"),
+                AddressLine2: moov.String("Apt 302"),
+                City: moov.String("Boulder"),
+                Country: moov.String("US"),
+                PostalCode: moov.String("80301"),
+                StateOrProvince: moov.String("CO"),
             },
-            CardCvv: petstore.String("123"),
-            CardOnFile: petstore.Bool(false),
+            CardCvv: moov.String("123"),
+            CardOnFile: moov.Bool(false),
             Expiration: &shared.UpdateCardExpiration{
-                Month: petstore.String("01"),
-                Year: petstore.String("21"),
+                Month: moov.String("01"),
+                Year: moov.String("21"),
             },
         },
-        AccountID: "6b26916f-e1f0-48f4-a94e-3698f447f603",
+        AccountID: "7e1858b6-a89f-4be3-a5aa-8e4824d0ab40",
         CardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -587,9 +585,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -597,17 +595,16 @@ func main() {
     res, err := s.Cards.UpdateApplePayDomains(ctx, operations.UpdateApplePayMerchantDomainsRequest{
         UpdateApplePayMerchantDomains: shared.UpdateApplePayMerchantDomains{
             AddDomains: []string{
-                "praesentium",
-                "facilis",
-                "quaerat",
-                "incidunt",
+                "ipsam",
+                "sit",
             },
             RemoveDomains: []string{
-                "debitis",
-                "rem",
+                "quas",
+                "repudiandae",
+                "corporis",
             },
         },
-        AccountID: "0ca55efd-20e4-457e-9858-b6a89fbe3a5a",
+        AccountID: "1862065e-904f-43b1-994b-8abf603a79f9",
     })
     if err != nil {
         log.Fatal(err)

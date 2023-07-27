@@ -30,15 +30,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.PaymentMethods.Get(ctx, operations.GetPaymentMethodRequest{
-        AccountID: "57a15be3-e060-4807-a2b6-e3ab8845f059",
+        AccountID: "e865e795-6f92-451a-9a9d-a660ff57bfaa",
         PaymentMethodID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -82,16 +82,16 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.PaymentMethods.List(ctx, operations.ListPaymentMethodsRequest{
-        AccountID: "7a60ff2a-54a3-41e9-8764-a3e865e7956f",
-        SourceID: petstore.String("9251a5a9-da66-40ff-97bf-aad4f9efc1b4"),
+        AccountID: "d4f9efc1-b451-42c1-8326-48dc2f615199",
+        SourceID: moov.String("ebfd0e9f-e6c6-432c-a3ae-d0117996312f"),
     })
     if err != nil {
         log.Fatal(err)

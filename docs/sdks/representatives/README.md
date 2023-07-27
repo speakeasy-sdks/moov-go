@@ -30,9 +30,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -40,38 +40,38 @@ func main() {
     res, err := s.Representatives.Create(ctx, operations.CreateRepresentativeRequest{
         CreateRepresentative: shared.CreateRepresentative{
             Address: &shared.CreateRepresentativeAddress{
-                AddressLine1: petstore.String("123 Main Street"),
-                AddressLine2: petstore.String("Apt 302"),
-                City: petstore.String("Boulder"),
-                Country: petstore.String("US"),
-                PostalCode: petstore.String("80301"),
-                StateOrProvince: petstore.String("CO"),
+                AddressLine1: moov.String("123 Main Street"),
+                AddressLine2: moov.String("Apt 302"),
+                City: moov.String("Boulder"),
+                Country: moov.String("US"),
+                PostalCode: moov.String("80301"),
+                StateOrProvince: moov.String("CO"),
             },
             BirthDate: &shared.CreateRepresentativeBirthDate{
                 Day: 9,
                 Month: 11,
                 Year: 1989,
             },
-            Email: petstore.String("amanda@classbooker.dev"),
+            Email: moov.String("amanda@classbooker.dev"),
             GovernmentID: &shared.CreateRepresentativeGovernmentID{
                 Itin: &shared.CreateRepresentativeGovernmentIDItin{
-                    Full: petstore.String("123-45-6789"),
-                    LastFour: petstore.String("6789"),
+                    Full: moov.String("123-45-6789"),
+                    LastFour: moov.String("6789"),
                 },
                 Ssn: &shared.CreateRepresentativeGovernmentIDSsn{
-                    Full: petstore.String("123-45-6789"),
-                    LastFour: petstore.String("6789"),
+                    Full: moov.String("123-45-6789"),
+                    LastFour: moov.String("6789"),
                 },
             },
             Name: &shared.CreateRepresentativeName{
                 FirstName: "Amanda",
                 LastName: "Yang",
-                MiddleName: petstore.String("Amanda"),
-                Suffix: petstore.String("Jr"),
+                MiddleName: moov.String("Amanda"),
+                Suffix: moov.String("Jr"),
             },
             Phone: &shared.CreateRepresentativePhone{
-                CountryCode: petstore.String("1"),
-                Number: petstore.String("8185551212"),
+                CountryCode: moov.String("1"),
+                Number: moov.String("8185551212"),
             },
             Responsibilities: &shared.CreateRepresentativeResponsibilities{
                 IsController: false,
@@ -80,7 +80,7 @@ func main() {
                 OwnershipPercentage: 38,
             },
         },
-        AccountID: "512c1032-648d-4c2f-a151-99ebfd0e9fe6",
+        AccountID: "de047717-78ff-461d-8174-76360a15db6a",
     })
     if err != nil {
         log.Fatal(err)
@@ -123,15 +123,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Representatives.Delete(ctx, operations.DeleteRepresentativeRequest{
-        AccountID: "c632ca3a-ed01-4179-9631-2fde04771778",
+        AccountID: "660659a1-adea-4ab5-851d-6c645b08b618",
         RepresentativeID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -175,15 +175,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Representatives.Get(ctx, operations.GetRepresentativeRequest{
-        AccountID: "ff61d017-4763-460a-95db-6a660659a1ad",
+        AccountID: "91baa0fe-1ade-4008-a6f8-c5f350d8cdb5",
         RepresentativeID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -227,15 +227,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Representatives.List(ctx, operations.ListRepresentativesRequest{
-        AccountID: "eaab5851-d6c6-445b-88b6-1891baa0fe1a",
+        AccountID: "a3418143-0104-4218-93d5-208ece7e253b",
     })
     if err != nil {
         log.Fatal(err)
@@ -290,9 +290,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -300,47 +300,47 @@ func main() {
     res, err := s.Representatives.Update(ctx, operations.PatchRepresentativeRequest{
         PatchRepresentativeRequest: shared.PatchRepresentativeRequest{
             Address: &shared.PatchRepresentativeRequestAddress{
-                AddressLine1: petstore.String("123 Main Street"),
-                AddressLine2: petstore.String("Apt 302"),
-                City: petstore.String("Boulder"),
-                Country: petstore.String("US"),
-                PostalCode: petstore.String("80301"),
-                StateOrProvince: petstore.String("CO"),
+                AddressLine1: moov.String("123 Main Street"),
+                AddressLine2: moov.String("Apt 302"),
+                City: moov.String("Boulder"),
+                Country: moov.String("US"),
+                PostalCode: moov.String("80301"),
+                StateOrProvince: moov.String("CO"),
             },
             BirthDate: &shared.PatchRepresentativeRequestBirthDate{
                 Day: 9,
                 Month: 11,
                 Year: 1989,
             },
-            Email: petstore.String("amanda@classbooker.dev"),
+            Email: moov.String("amanda@classbooker.dev"),
             GovernmentID: &shared.PatchRepresentativeRequestGovernmentID{
                 Itin: &shared.PatchRepresentativeRequestGovernmentIDItin{
-                    Full: petstore.String("123-45-6789"),
-                    LastFour: petstore.String("6789"),
+                    Full: moov.String("123-45-6789"),
+                    LastFour: moov.String("6789"),
                 },
                 Ssn: &shared.PatchRepresentativeRequestGovernmentIDSsn{
-                    Full: petstore.String("123-45-6789"),
-                    LastFour: petstore.String("6789"),
+                    Full: moov.String("123-45-6789"),
+                    LastFour: moov.String("6789"),
                 },
             },
             Name: &shared.PatchRepresentativeRequestName{
-                FirstName: petstore.String("Amanda"),
-                LastName: petstore.String("Yang"),
-                MiddleName: petstore.String("Amanda"),
-                Suffix: petstore.String("Jr"),
+                FirstName: moov.String("Amanda"),
+                LastName: moov.String("Yang"),
+                MiddleName: moov.String("Amanda"),
+                Suffix: moov.String("Jr"),
             },
             Phone: &shared.PatchRepresentativeRequestPhone{
-                CountryCode: petstore.String("1"),
-                Number: petstore.String("8185551212"),
+                CountryCode: moov.String("1"),
+                Number: moov.String("8185551212"),
             },
             Responsibilities: &shared.PatchRepresentativeRequestResponsibilities{
-                IsController: petstore.Bool(false),
-                IsOwner: petstore.Bool(true),
-                JobTitle: petstore.String("CEO"),
-                OwnershipPercentage: petstore.Int64(38),
+                IsController: moov.Bool(false),
+                IsOwner: moov.Bool(true),
+                JobTitle: moov.String("CEO"),
+                OwnershipPercentage: moov.Int64(38),
             },
         },
-        AccountID: "de008e6f-8c5f-4350-98cd-b5a341814301",
+        AccountID: "668451c6-c6e2-405e-96de-ab3fec9578a6",
         RepresentativeID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {

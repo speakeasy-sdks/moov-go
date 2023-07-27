@@ -26,18 +26,18 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Transactions.List(ctx, operations.ListAccountIssuedCardTransactionsRequest{
-        AccountID: "0421813d-5208-4ece-be25-3b668451c6c6",
-        Count: petstore.Int64(927212),
-        Skip: petstore.Int64(160393),
-        Status: shared.IssuedCardTransactionStatusPending.ToPointer(),
+        AccountID: "4584273a-8418-4d16-a309-fb0929921aef",
+        Count: moov.Int64(719620),
+        Skip: moov.Int64(608593),
+        Status: shared.IssuedCardTransactionStatusVoided.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)

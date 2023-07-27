@@ -36,15 +36,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.BankAccounts.InitiateMicroDeposits(ctx, operations.PostInitiateMicroDepositsRequest{
-        AccountID: "2a94bb4f-63c9-469e-9a3e-fa77dfb14cd6",
+        AccountID: "74ba4469-b6e2-4141-9598-90afa563e251",
         BankAccountID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -88,9 +88,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -98,11 +98,11 @@ func main() {
     res, err := s.BankAccounts.CompleteMicroDeposits(ctx, operations.PutCompleteMicroDepositsRequest{
         CompleteMicroDepositsRequest: shared.CompleteMicroDepositsRequest{
             Amounts: []int64{
-                675439,
-                881104,
+                984043,
+                891924,
             },
         },
-        AccountID: "395efb9b-a88f-43a6-a997-074ba4469b6e",
+        AccountID: "4c8b711e-5b7f-4d2e-9028-921cddc69260",
         BankAccountID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -146,15 +146,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.BankAccounts.Delete(ctx, operations.DeleteBankAccountRequest{
-        AccountID: "21419598-90af-4a56-be25-16fe4c8b711e",
+        AccountID: "1fb576b0-d5f0-4d30-85fb-b2587053202c",
         BankAccountID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -198,15 +198,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.BankAccounts.Get(ctx, operations.GetBankAccountRequest{
-        AccountID: "5b7fd2ed-0289-421c-9dc6-92601fb576b0",
+        AccountID: "73d5fe9b-90c2-4890-9b3f-e49a8d9cbf48",
         BankAccountID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -250,16 +250,16 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.BankAccounts.Link(ctx, operations.LinkBankAccountRequest{
         BankAccountPayload: shared.BankAccountPayload{},
-        AccountID: "d5f0d30c-5fbb-4258-b053-202c73d5fe9b",
+        AccountID: "633323f9-b77f-43a4-9006-74ebf69280d1",
     })
     if err != nil {
         log.Fatal(err)
@@ -302,15 +302,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.BankAccounts.List(ctx, operations.ListBankAccountsRequest{
-        AccountID: "90c28909-b3fe-449a-8d9c-bf48633323f9",
+        AccountID: "ba77a89e-bf73-47ae-8203-ce5e6a95d8a0",
     })
     if err != nil {
         log.Fatal(err)

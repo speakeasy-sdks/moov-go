@@ -29,15 +29,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Capabilities.Delete(ctx, operations.DeleteCapabilityRequest{
-        AccountID: "b77f3a41-0067-44eb-b692-80d1ba77a89e",
+        AccountID: "d446ce2a-f7a7-43cf-bbe4-53f870b326b5",
         CapabilityID: shared.CapabilityIDWallet,
     })
     if err != nil {
@@ -81,16 +81,16 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Capabilities.Get(ctx, operations.GetCapabilityRequest{
-        AccountID: "f737ae42-03ce-45e6-a95d-8a0d446ce2af",
-        CapabilityID: shared.CapabilityIDCollectFunds,
+        AccountID: "73429cdb-1a84-422b-b679-d2322715bf0c",
+        CapabilityID: shared.CapabilityIDWallet,
     })
     if err != nil {
         log.Fatal(err)
@@ -133,15 +133,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Capabilities.List(ctx, operations.ListCapabilitiesRequest{
-        AccountID: "a73cf3be-453f-4870-b326-b5a73429cdb1",
+        AccountID: "b1e31b8b-90f3-4443-a110-8e0adcf4b921",
     })
     if err != nil {
         log.Fatal(err)
@@ -184,9 +184,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -195,11 +195,11 @@ func main() {
         AddCapabilityRequest: shared.AddCapabilityRequest{
             Capabilities: []shared.CapabilityID{
                 shared.CapabilityIDCollectFunds,
-                shared.CapabilityIDSendFunds,
-                shared.CapabilityIDTransfers,
+                shared.CapabilityIDCollectFunds,
+                shared.CapabilityIDCardIssuing,
             },
         },
-        AccountID: "2bb679d2-3227-415b-b0cb-b1e31b8b90f3",
+        AccountID: "ce953f73-ef7f-4bc7-abd7-4dd39c0f5d2c",
     })
     if err != nil {
         log.Fatal(err)

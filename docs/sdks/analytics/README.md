@@ -30,18 +30,18 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.CountAccountsCreated(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2021-10-04T09:10:06.610Z"),
-        From: types.MustTimeFromString("2022-10-22T18:12:12.288Z"),
-        To: types.MustTimeFromString("2022-04-23T05:56:38.936Z"),
-        Tz: types.MustTimeFromString("2021-11-13T09:08:33.009Z"),
+        Every: types.MustTimeFromString("2022-07-22T03:36:34.615Z"),
+        From: types.MustTimeFromString("2020-02-22T17:45:21.686Z"),
+        To: types.MustTimeFromString("2022-02-08T14:21:47.573Z"),
+        Tz: types.MustTimeFromString("2022-02-26T01:27:36.152Z"),
     })
     if err != nil {
         log.Fatal(err)
@@ -84,18 +84,18 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.CountTransferStatuses(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2022-03-16T09:33:50.291Z"),
-        From: types.MustTimeFromString("2021-12-15T00:41:38.329Z"),
-        To: types.MustTimeFromString("2022-09-20T03:14:35.704Z"),
-        Tz: types.MustTimeFromString("2021-04-10T08:07:33.561Z"),
+        Every: types.MustTimeFromString("2020-11-26T01:41:04.216Z"),
+        From: types.MustTimeFromString("2022-09-14T10:27:07.590Z"),
+        To: types.MustTimeFromString("2020-07-23T21:23:35.691Z"),
+        Tz: types.MustTimeFromString("2022-08-09T06:36:34.417Z"),
     })
     if err != nil {
         log.Fatal(err)
@@ -138,19 +138,19 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.LargestTransfer(ctx, shared.LimitedTimeRange{
-        Count: petstore.Int64(83112),
-        Every: petstore.String("itaque"),
-        From: types.MustTimeFromString("2022-09-06T17:20:08.756Z"),
-        To: types.MustTimeFromString("2022-05-02T09:29:06.042Z"),
-        Tz: petstore.String("quibusdam"),
+        Count: moov.Int64(675439),
+        Every: moov.String("accusamus"),
+        From: types.MustTimeFromString("2022-06-02T20:02:58.167Z"),
+        To: types.MustTimeFromString("2022-02-13T03:59:53.583Z"),
+        Tz: moov.String("delectus"),
     })
     if err != nil {
         log.Fatal(err)
@@ -193,19 +193,19 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.SmallestTransfer(ctx, shared.LimitedTimeRange{
-        Count: petstore.Int64(131797),
-        Every: petstore.String("deserunt"),
-        From: types.MustTimeFromString("2021-04-26T18:54:54.344Z"),
-        To: types.MustTimeFromString("2022-09-26T08:57:48.803Z"),
-        Tz: petstore.String("qui"),
+        Count: moov.Int64(692532),
+        Every: moov.String("provident"),
+        From: types.MustTimeFromString("2021-09-06T10:36:33.442Z"),
+        To: types.MustTimeFromString("2021-12-07T18:13:34.827Z"),
+        Tz: moov.String("sapiente"),
     })
     if err != nil {
         log.Fatal(err)
@@ -248,18 +248,18 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.SumTransfers(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2022-05-31T22:08:47.731Z"),
-        From: types.MustTimeFromString("2022-12-17T07:42:55.593Z"),
-        To: types.MustTimeFromString("2022-03-04T10:29:07.095Z"),
-        Tz: types.MustTimeFromString("2022-12-30T06:52:02.282Z"),
+        Every: types.MustTimeFromString("2022-05-10T22:38:44.806Z"),
+        From: types.MustTimeFromString("2022-07-30T07:01:46.758Z"),
+        To: types.MustTimeFromString("2021-10-15T07:59:26.631Z"),
+        Tz: types.MustTimeFromString("2022-12-24T23:52:02.245Z"),
     })
     if err != nil {
         log.Fatal(err)
