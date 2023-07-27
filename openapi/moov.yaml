@@ -4428,7 +4428,7 @@ components:
             - "$ref": "#/components/schemas/Amount"
         disputes:
           "$ref": "#/components/schemas/GetDisputes"
-    PaymentMethodType:
+    PaymentMethodsType:
       description: The payment method type that represents a payment rail and directionality
       type: string
       enum:
@@ -4769,7 +4769,7 @@ components:
         paymentMethodID:
           "$ref": "#/components/schemas/UUID"
         paymentMethodType:
-          "$ref": "#/components/schemas/PaymentMethodType"
+          "$ref": "#/components/schemas/PaymentMethodsType"
         account:
           "$ref": "#/components/schemas/GetTransferPartialAccount"
         bankAccount:
@@ -4960,7 +4960,7 @@ components:
         paymentMethodID:
           "$ref": "#/components/schemas/UUID"
         paymentMethodType:
-          "$ref": "#/components/schemas/PaymentMethodType"
+          "$ref": "#/components/schemas/PaymentMethodsType"
     PaymentMethodWallet:
       title: Wallet
       description: A method of moving money that is a Moov wallet
@@ -5014,6 +5014,17 @@ components:
         - "$ref": "#/components/schemas/PaymentMethodBankAccount"
         - "$ref": "#/components/schemas/PaymentMethodCard"
         - "$ref": "#/components/schemas/PaymentMethodApplePay"
+      discriminator:
+        propertyName: paymentMethodType
+        mapping:
+          moov-wallet: "#/components/schemas/PaymentMethodWallet"
+          ach-debit-fund: "#/components/schemas/PaymentMethodBankAccount"
+          ach-debit-collect: "#/components/schemas/PaymentMethodBankAccount"
+          ach-credit-standard: "#/components/schemas/PaymentMethodBankAccount"
+          ach-credit-same-day: "#/components/schemas/PaymentMethodBankAccount"
+          rtp-credit: "#/components/schemas/PaymentMethodBankAccount"
+          card-payment: "#/components/schemas/PaymentMethodCard"
+          apple-pay: "#/components/schemas/PaymentMethodApplePay"
       
     CreatedTransferOptions:
       type: object
@@ -5535,7 +5546,7 @@ components:
           type: string
           description: ID of the payment method
         paymentMethodType:
-          "$ref": "#/components/schemas/PaymentMethodType"
+          "$ref": "#/components/schemas/PaymentMethodsType"
         applePay:
           "$ref": "#/components/schemas/ApplePayResponse"
       required:
