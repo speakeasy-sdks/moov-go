@@ -188,11 +188,11 @@ x-speakeasy-name-override:
   - operationId: ^delete.*
     methodNameOverride: delete
   - operationId: ^post.*
-    methodNameOverride: post
+    methodNameOverride: create
   - operationId: ^revoke.*
     methodNameOverride: revoke
   - operationId: ^patch.*
-    methodNameOverride: patch
+    methodNameOverride: update
   - operationId: ^put.*
     methodNameOverride: put
   - operationId: ^list.*
@@ -275,7 +275,6 @@ x-tagGroups:
 paths:
   "/oauth2/token":
     post:
-      x-speakeasy-group: OAuth2Token
       operationId: postOAuth2Token
       summary: Create access token
       description: Use the client_id and client_secret to generate an access token.
@@ -309,7 +308,6 @@ paths:
           "$ref": "#/components/schemas/Empty"
   "/oauth2/revoke":
     post:
-      x-speakeasy-group: OAuth2Token
       operationId: revokeOAuth2Token
       summary: Revoke access token
       description:
@@ -335,8 +333,7 @@ paths:
   "/accounts":
     get:
       summary: List accounts
-      x-speakeasy-group: ListAccounts
-      operationId: getListAccounts
+      operationId: listAccounts
       description: |
         List or search accounts to which the caller is connected.<br><br>
         All supported query parameters are optional. If none are provided
@@ -422,7 +419,6 @@ paths:
           "$ref": "#/components/schemas/Empty"
     post:
       summary: Create account
-      x-speakeasy-group: Account
       operationId: createAccount
       description:
         You can create accounts for your users by passing the required
@@ -464,7 +460,6 @@ paths:
   "/accounts/{accountID}":
     get:
       summary: Get account
-      x-speakeasy-group: Account
       operationId: getAccount
       description:
         Retrieves details for the account with the specified ID. <br><br>
@@ -489,8 +484,8 @@ paths:
           "$ref": "#/components/schemas/Empty"
     patch:
       summary: Patch account
-      x-speakeasy-group: Account
       operationId: patchAccount
+
       description:
         "To patch an account, you must specify the `/accounts/{accountID}/profile.write`
         scope and provide the changed information.  \n\nWhen **can** profile data
@@ -535,7 +530,7 @@ paths:
   "/tos-token":
     get:
       summary: Get terms of service token
-      x-speakeasy-group: TermsOfServiceToken
+      x-speakeasy-name-override: getTosToken
       operationId: getTermsOfServiceToken
       description:
         Generates a non-expiring token that can then be used to accept
@@ -560,8 +555,8 @@ paths:
   "/accounts/{accountID}/countries":
     get:
       summary: Get Account Countries
-      x-speakeasy-group: AccountCountries
       operationId: getAccountCountries
+      x-speakeasy-name-override: listCountries
       description:
         Retrieve the specified countries of operation for an account. <br><br>
         To get the list of countries, you'll need to specify the `/accounts/{accountID}/profile.read`
@@ -583,8 +578,8 @@ paths:
           "$ref": "#/components/schemas/Empty"
     put:
       summary: Assign Account Countries
-      x-speakeasy-group: AccountCountries
       operationId: putAccountCountries
+      x-speakeasy-name-override: assignCountry
       description:
         Assign the countries of operation for an account. This endpoint
         will always overwrite the previously assigned values. <br><br> To update the
@@ -617,7 +612,6 @@ paths:
     post:
       summary: Create representative
       operationId: createRepresentative
-      x-speakeasy-group: Representative
       description:
         Moov accounts associated with businesses require information regarding
         individuals who represent the business. You can provide this information by
@@ -652,7 +646,6 @@ paths:
     get:
       summary: List representatives
       operationId: listRepresentatives
-      x-speakeasy-group: Representatives
       description:
         A Moov account may have multiple representatives depending on the
         associated business's ownership and management structure. You can use this
@@ -681,7 +674,6 @@ paths:
     get:
       summary: Get representative
       operationId: getRepresentative
-      x-speakeasy-group: Representative
       description:
         Retrieve a specific representative associated with a given Moov
         account. <br><br> To get a representative, you'll need to specify the `/accounts/{accountID}/representatives.read`
@@ -707,7 +699,6 @@ paths:
     delete:
       summary: Delete a representative
       operationId: deleteRepresentative
-      x-speakeasy-group: Representative
       description:
         Deletes a business representative associated with a Moov account.
         <br><br> To use this endpoint, you'll need to specify the `/accounts/{accountID}/representatives.write`
@@ -729,7 +720,6 @@ paths:
     patch:
       summary: Patch representative
       operationId: patchRepresentative
-      x-speakeasy-group: Representative
       description:
         "If a representative's information has changed you can patch the
         information associated with a specific representative ID.  \nTo patch a representative,
@@ -776,7 +766,6 @@ paths:
         List the wallets associated with a Moov account. <br><br> To list
         wallets, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
       operationId: listWalletsForAccount
-      x-speakeasy-group: WalletsForAccount
       tags:
         - Wallets
       parameters:
@@ -803,7 +792,6 @@ paths:
         <br><br> To get wallet information, you'll need to specify the `/accounts/{accountID}/wallets.read`
         scope.
       operationId: getWalletForAccount
-      x-speakeasy-group: WalletsForAccount
       tags:
         - Wallets
       parameters:
@@ -830,9 +818,9 @@ paths:
         <br><br> To access this endpoint, you'll need to specify the `/accounts/{accountID}/wallets.read`
         scope.
       operationId: listWalletTransactions
-      x-speakeasy-group: WalletTransactions
+      x-speakeasy-name-override: listTransactions
       tags:
-        - Wallet transactions
+        - Wallets
       parameters:
         - "$ref": "#/components/parameters/AccountID"
         - "$ref": "#/components/parameters/WalletID"
@@ -937,9 +925,9 @@ paths:
         this endpoint, you'll need to specify the `/accounts/{accountID}/wallets.read`
         scope.
       operationId: getWalletTransaction
-      x-speakeasy-group: WalletTransaction
+      x-speakeasy-name-override: getTransaction
       tags:
-        - Wallet transactions
+        - Wallets
       parameters:
         - "$ref": "#/components/parameters/AccountID"
         - "$ref": "#/components/parameters/WalletID"
@@ -971,7 +959,6 @@ paths:
         scope. <br> You can find your account id on the [Business details](https://dashboard.moov.io/settings/business)
         page.
       operationId: createTransfer
-      x-speakeasy-group: Transfer
       tags:
         - Transfers
       parameters:
@@ -1057,7 +1044,6 @@ paths:
         requests in smaller time window increments until you've retrieved all the
         transfers you need.
       operationId: listTransfers
-      x-speakeasy-group: Transfers
       tags:
         - Transfers
       responses:
@@ -1141,7 +1127,6 @@ paths:
         can find your accountID on the [Business details](https://dashboard.moov.io/settings/business)
         page.
       operationId: getTransfer
-      x-speakeasy-group: Transfer
       tags:
         - Transfers
       responses:
@@ -1169,7 +1154,6 @@ paths:
         can find your account ID on the [Business details](https://dashboard.moov.io/settings/business)
         page.
       operationId: patchTransfer
-      x-speakeasy-group: Transfer
       requestBody:
         required: true
         content:
@@ -1200,7 +1184,7 @@ paths:
         account. <br> You can find your accountID on the [Business details](https://dashboard.moov.io/settings/business)
         page."
       operationId: createTransferOptions
-      x-speakeasy-group: TransferOptions
+      x-speakeasy-name-override: generateOptions
       tags:
         - Transfers
       requestBody:
@@ -1231,7 +1215,7 @@ paths:
         <br><br> Initiate a refund for a card transfer <br><br> To initiate a refund,
         you will need to specify the `/accounts/{accountID}/transfers.write` scope.
       operationId: refundTransfer
-      x-speakeasy-group: Transfer
+      
       tags:
         - Transfers
       parameters:
@@ -1302,7 +1286,8 @@ paths:
     get:
       summary: Get a list of refunds for a card transfer
       description: Get a list of refunds for a card transfer
-      operationId: getRefunds
+      operationId: listRefunds
+      x-speakeasy-name-override: listRefunds
       tags:
         - Transfers
       responses:
@@ -1324,7 +1309,7 @@ paths:
       summary: Get refund details
       description: Get details of a refund for a card transfer
       operationId: getRefund
-      x-speakeasy-group: Refund
+      x-speakeasy-name-override: getRefund
       tags:
         - Transfers
       responses:
@@ -1345,7 +1330,6 @@ paths:
         Reverses a card transfer by initiating a cancellation or refund
         depending on the transaction status
       operationId: cancelTransfer
-      x-speakeasy-group: Transfer
       tags:
         - Transfers
       parameters:
@@ -1413,8 +1397,8 @@ paths:
   "/accounts/{accountID}/bank-accounts":
     post:
       summary: Bank account
-      x-speakeasy-group: BankAccount
-      operationId: postBankAccount
+      operationId: linkBankAccount
+      x-speakeasy-name-override: link
       description:
         Link a bank account to an existing Moov account. <br><br> To use
         this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.write`
@@ -1450,8 +1434,7 @@ paths:
           "$ref": "#/components/schemas/Empty"
     get:
       summary: List bank accounts
-      x-speakeasy-group: ListBankAccounts
-      operationId: getListBankAccounts
+      operationId: listBankAccounts
       description:
         List all the bank accounts associated with a particular Moov account.
         <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.read`
@@ -1476,8 +1459,8 @@ paths:
   "/accounts/{accountID}/bank-accounts/{bankAccountID}":
     get:
       summary: Get bank account
-      x-speakeasy-group: BankID
-      operationId: getBankID
+      operationId: getBankAccount
+      
       description:
         Retrieve bank account details (i.e. routing number or account type)
         associated with a specific Moov account. <br><br> To use this endpoint, you
@@ -1502,8 +1485,8 @@ paths:
           "$ref": "#/components/schemas/Empty"
     delete:
       summary: Delete bank account
-      x-speakeasy-group: BankID
-      operationId: deleteBankID
+      operationId: deleteBankAccount
+      
       description:
         Discontinue using a specified bank account linked to a Moov account.
         <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.write`
@@ -1525,7 +1508,7 @@ paths:
   "/accounts/{accountID}/bank-accounts/{bankAccountID}/micro-deposits":
     post:
       summary: Initiate micro-deposits
-      x-speakeasy-group: InitiateMicroDeposits
+      x-speakeasy-name-override: InitiateMicroDeposits
       operationId: postInitiateMicroDeposits
       description:
         Micro-deposits help confirm bank account ownership, helping reduce
@@ -1559,7 +1542,7 @@ paths:
           "$ref": "#/components/schemas/Empty"
     put:
       summary: Complete micro-deposits
-      x-speakeasy-group: CompleteMicroDeposits
+      x-speakeasy-name-override: completeMicroDeposits
       operationId: putCompleteMicroDeposits
       description:
         Complete the micro-deposit validation process by passing the amounts
@@ -1598,7 +1581,7 @@ paths:
   "/accounts/{accountID}/cards":
     post:
       summary: Link card
-      x-speakeasy-group: LinkCard
+      x-speakeasy-name-override: LinkCard
       operationId: postLinkCard
       description:
         "Link a card to an existing Moov account. Only use this endpoint
@@ -1660,7 +1643,7 @@ paths:
           description: Production
     get:
       summary: List cards
-      x-speakeasy-group: ListCards
+      x-speakeasy-name-override: ListCards
       operationId: getListCards
       description:
         List all the cards associated with a Moov account. <br><br> To
@@ -1686,7 +1669,6 @@ paths:
   "/accounts/{accountID}/cards/{cardID}":
     get:
       summary: Get card
-      x-speakeasy-group: Card
       operationId: getCard
       description:
         Fetch a specific card associated with a Moov account. <br><br>
@@ -1712,7 +1694,6 @@ paths:
           "$ref": "#/components/schemas/Empty"
     patch:
       summary: Update card
-      x-speakeasy-group: Card
       operationId: updateCard
       description:
         "Update a Linked Card and/or resubmit it for verification. If a
@@ -1769,7 +1750,6 @@ paths:
           "$ref": "#/components/schemas/Empty"
     delete:
       summary: Disable card
-      x-speakeasy-group: Card
       operationId: deleteCard
       description:
         Disables a card associated with a Moov account. <br><br> To use
@@ -1792,7 +1772,7 @@ paths:
   "/accounts/{accountID}/apple-pay/domains":
     post:
       summary: Register Apple Pay domains
-      x-speakeasy-group: ApplePayMerchantDomains
+      x-speakeasy-name-override: registerApplePayDomain
       operationId: postApplePayMerchantDomains
       description: |
         Add domains to be registered with Apple Pay.
@@ -1829,7 +1809,7 @@ paths:
           "$ref": "#/components/schemas/Empty"
     patch:
       summary: Update Apple Pay domains
-      x-speakeasy-group: ApplePayMerchantDomains
+      x-speakeasy-name-override: updateApplePayDomains
       operationId: updateApplePayMerchantDomains
       description: |
         Add or remove domains to be registered with Apple Pay.
@@ -1862,7 +1842,7 @@ paths:
           "$ref": "#/components/schemas/Empty"
     get:
       summary: Get Apple Pay domains
-      x-speakeasy-group: ApplePayMerchantDomains
+      x-speakeasy-name-override: listApplePayDomains
       operationId: getApplePayMerchantDomains
       description: |
         Get domains registered with Apple Pay.
@@ -1887,7 +1867,7 @@ paths:
   "/accounts/{accountID}/apple-pay/sessions":
     post:
       summary: Create Apple Pay session
-      x-speakeasy-group: ApplePaySession
+      x-speakeasy-name-override: createApplePaySession
       operationId: postApplePaySession
       description: |
         Create a session with Apple Pay to facilitate a payment.
@@ -1919,7 +1899,7 @@ paths:
   "/accounts/{accountID}/apple-pay/tokens":
     post:
       summary: Link Apple Pay token
-      x-speakeasy-group: LinkApplePayToken
+      x-speakeasy-name-override: LinkApplePayToken
       operationId: postLinkApplePayToken
       description: |
         Connect an Apple Pay token to the specified account.
@@ -1952,7 +1932,7 @@ paths:
     get:
       summary: Get network IDs of an account
       operationId: getNetworkIDs
-      x-speakeasy-group: NetworkIDs
+      x-speakeasy-ignore: true
       description:
         "Retrieves network IDs for the account of the specified ID. \n<br><br>
         To get an account, you will need to specify the `/accounts/{accountID}/profile.read`
@@ -1977,7 +1957,7 @@ paths:
   "/issuing/{accountID}/issued-cards":
     post:
       summary: Request card
-      x-speakeasy-group: RequestCard
+      x-speakeasy-name-override: RequestCard
       operationId: postRequestCard
       description: |
         Request a virtual card be created
@@ -2007,8 +1987,8 @@ paths:
           "$ref": "#/components/schemas/Empty"
     get:
       summary: List issued cards
-      x-speakeasy-group: ListIssuedCards
-      operationId: getListIssuedCards
+      x-speakeasy-name-override: listCards
+      operationId: listIssuedCards
       description: |
         List Moov issued cards existing for the account.
         <br><br> All supported query parameters are optional.
@@ -2045,8 +2025,8 @@ paths:
   "/issuing/{accountID}/issued-cards/{issuedCardID}":
     get:
       summary: Get issued card
-      x-speakeasy-group: IssuedCard
       operationId: getIssuedCard
+      x-speakeasy-name-override: getCard
       description: |
         Retrieve a single issued card associated with a Moov account
         <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.read` scope.
@@ -2070,8 +2050,8 @@ paths:
           "$ref": "#/components/schemas/Empty"
     patch:
       summary: Update issued card
-      x-speakeasy-group: IssuedCard
       operationId: updateIssuedCard
+      x-speakeasy-name-override: updateCard
       description: |
         Update a Moov issued card
         <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.write` scope.
@@ -2100,7 +2080,7 @@ paths:
   "/issuing/{accountID}/issued-cards/{issuedCardID}/details":
     get:
       summary: Get full card details
-      x-speakeasy-group: FullIssuedCard
+      x-speakeasy-name-override: getCardFullDetails
       operationId: getFullIssuedCard
       description: |
         Get issued card with PAN, CVV, and expiration. Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
@@ -2129,7 +2109,6 @@ paths:
     get:
       summary: Get account transactions
       operationId: listAccountIssuedCardTransactions
-      x-speakeasy-group: AccountIssuedCardTransactions
       description: "List issued card transactions associated with a Moov account"
       tags:
         - Transactions
@@ -2161,7 +2140,6 @@ paths:
       summary: List of all disputes
       description: Returns the list of disputes. <br><br> To use this endpoint, you
         need to specify the `/accounts/{your-account-id}/transfers.read` scope.
-      x-speakeasy-group: Disputes
       operationId: listDisputes
       tags:
       - Disputes
@@ -2208,10 +2186,9 @@ paths:
       summary: Get Dispute by ID
       description: Returns a user's dispute by ID. <br><br> To use this endpoint,
         you need to specify the `/accounts/{your-account-id}/transfers.read` scope.
-      x-speakeasy-group: Dispute
       operationId: getDispute
       tags:
-      - Disputes
+        - Disputes
       parameters:
       - in: path
         name: disputeID
@@ -2234,7 +2211,6 @@ paths:
     post:
       summary: Upload File
       operationId: uploadFile
-      x-speakeasy-group: File
       description: Upload a file and link it to the provided Moov account. The maximum
         file size is 10MB. Each account is allowed a maximum of 10 files. Acceptable
         file types include csv, jpg, pdf, and png. <br><br> To use this endpoint,
@@ -2269,7 +2245,6 @@ paths:
     get:
       summary: List files
       operationId: listFiles
-      x-speakeasy-group: Files
       description: List all the files associated with a particular Moov account. <br><br>
         To use this endpoint, you need to specify the `/accounts/{accountID}/files.read`
         scope.
@@ -2294,7 +2269,6 @@ paths:
     get:
       summary: Get File Details
       operationId: getFileDetails
-      x-speakeasy-group: FileDetails
       description: Retrieve file details associated with a specific Moov account.
         <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.read`
         scope.
@@ -2320,7 +2294,6 @@ paths:
     get:
       summary: Retrieve underwriting details
       operationId: getUnderwriting
-      x-speakeasy-group: Underwriting
       description:
         Retrieve underwriting associated with a given Moov account. <br><br>
         To get an account's underwriting details, you'll need to specify the `/accounts/{accountID}/underwriting.read`
@@ -2343,7 +2316,6 @@ paths:
     put:
       summary: Update underwriting details
       operationId: updateUnderwriting
-      x-speakeasy-group: Underwriting
       description:
         Update the account's underwriting by passing new values for one
         or more of the fields. <br><br> To update an account's underwriting details,
@@ -2376,8 +2348,7 @@ paths:
   "/accounts/{accountID}/payment-methods":
     get:
       summary: List payment methods
-      operationId: getPaymentMethods
-      x-speakeasy-group: PaymentMethods
+      operationId: listPaymentMethods
       description:
         Retrieve a list of payment methods associated with a Moov account.
         <br><br> To list payment methods, you must specify the `/accounts/{accountID}/payment-methods.read`
@@ -2413,7 +2384,6 @@ paths:
     get:
       summary: Get payment method
       operationId: getPaymentMethod
-      x-speakeasy-group: PaymentMethod
       description:
         Get the specified payment method associated with a Moov account.
         <br><br> To get a payment method, you must specify the `/accounts/{accountID}/payment-methods.read`
@@ -2439,7 +2409,6 @@ paths:
   "/accounts/{accountID}/capabilities/{capabilityID}":
     get:
       summary: Get capability for account
-      x-speakeasy-group: Capability
       operationId: getCapability
       description:
         Retrieve a specific capability that an account has requested. <br><br>
@@ -2465,7 +2434,6 @@ paths:
           "$ref": "#/components/schemas/Empty"
     delete:
       summary: Disable a capability for an account
-      x-speakeasy-group: Capability
       operationId: deleteCapability
       description:
         Disable a specific capability that an account has requested. <br><br>
@@ -2488,8 +2456,7 @@ paths:
   "/accounts/{accountID}/capabilities":
     get:
       summary: List capabilities for account
-      x-speakeasy-group: ListCapability
-      operationId: getListCapabilities
+      operationId: listCapabilities
       description:
         Retrieve all the capabilities an account has requested. <br><br>
         To use this endpoint, you need to specify the `/accounts/{accountID}/capabilities.read`
@@ -2513,7 +2480,7 @@ paths:
           "$ref": "#/components/schemas/Empty"
     post:
       summary: Request capabilities
-      x-speakeasy-group: Capability
+      x-speakeasy-name-override: request
       operationId: postCapability
       description:
         Request capabilities for a specific account. <br><br> To use this
@@ -2557,13 +2524,13 @@ paths:
   "/industries":
     get:
       summary: List all industries
-      operationId: listIndustries
-      x-speakeasy-group: Industries
+      operationId: getIndustries
+      x-speakeasy-name-override: getIndustries
       description: |
         Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.
         <br><br> To list industries, you must specify the `/profile-enrichment.read` scope.
       tags:
-        - Industries
+        - Enrichment
       responses:
         "200":
           description: A list of industries and their codes
@@ -2579,8 +2546,7 @@ paths:
       description:
         Search for institutions by their routing number or name. <br><br>
         To use this endpoint, you need to specify the `/fed.read` scope.
-      operationId: searchInstitutions
-      x-speakeasy-group: Institutions
+      operationId: searchInstitution
       parameters:
         - "$ref": "#/components/parameters/Rail"
         - name: name
@@ -2623,13 +2589,13 @@ paths:
   "/avatars/{uniqueID}":
     get:
       summary: Get avatar
-      x-speakeasy-group: Avatar
+      x-speakeasy-name-override: getAvatar
       operationId: getAvatar
       description: |
         Get avatar image for an account using a unique ID.
         <br><br> To get an avatar, you must specify the `/profile-enrichment.read` scope.
       tags:
-        - Avatars
+        - Enrichment
       parameters:
         - "$ref": "#/components/parameters/UniqueID"
       responses:
@@ -2649,12 +2615,12 @@ paths:
   "/enrichment/address":
     get:
       summary: Get address suggestions
-      operationId: getEnrichmentAddress
-      x-speakeasy-group: EnrichmentAddress
+      operationId: getAddress
+      x-speakeasy-name-override: getAddress
       description: "Fetch enriched address suggestions. Requires a partial address.
         \n<br><br> You must specify the `/profile-enrichment.read` scope.\n"
       tags:
-      - Enriched address
+      - Enrichment
       parameters:
       - name: search
         in: query
@@ -2759,13 +2725,13 @@ paths:
   "/enrichment/profile":
     get:
       summary: Get enriched profile
-      x-speakeasy-group: EnrichmentProfile
+      x-speakeasy-name-override: getProfile
       operationId: getEnrichmentProfile
       description: |
         Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit.
         <br><br> To get enriched profile information, you must specify the `/profile-enrichment.read` scope.
       tags:
-      - Enriched profile
+      - Enrichment
       parameters:
       - name: email
         in: query
@@ -2794,7 +2760,7 @@ paths:
   "/analytics/transfers/sum":
     post:
       summary: Sum all transfers across intervals
-      x-speakeasy-group: AnalyticsTransferSum
+      x-speakeasy-name-override: sumTransfers
       operationId: postAnalyticsTransferSum
       tags:
         - Analytics
@@ -2814,7 +2780,7 @@ paths:
   "/analytics/transfers/largest":
     post:
       summary: Return the largest number of transfers
-      x-speakeasy-group: AnalyticsTransferLargest
+      x-speakeasy-name-override: largestTransfer
       operationId: postAnalyticsTransferLargest
       tags:
         - Analytics
@@ -2834,7 +2800,7 @@ paths:
   "/analytics/transfers/smallest":
     post:
       summary: Return the smallest number of transfers
-      x-speakeasy-group: AnalyticsTransferSmallest
+      x-speakeasy-name-override: smallestTransfer
       operationId: postAnalyticsTransferSmallest
       tags:
         - Analytics
@@ -2854,7 +2820,7 @@ paths:
   "/analytics/transfers/statuses":
     post:
       summary: Count the transfer statuses
-      x-speakeasy-group: AnalyticsTransferStatuses
+      x-speakeasy-name-override: countTransferStatuses
       operationId: postAnalyticsTransferStatuses
       tags:
         - Analytics
@@ -2874,7 +2840,7 @@ paths:
   "/analytics/accounts/profiles-created":
     post:
       summary: Count the number of profiles created by an individual or business
-      x-speakeasy-group: AnalyticsAccountsCreated
+      x-speakeasy-name-override: countAccountsCreated
       operationId: postAnalyticsAccountsCreated
       tags:
         - Analytics
