@@ -5,7 +5,7 @@
    <a href="https://docs.moov.io/api/"><img src="https://img.shields.io/static/v1?label=Docs&message=Docs&color=000&style=for-the-badge" /></a>
    <a href="https://github.com/speakeasy-sdks/moov-go/actions"><img src="https://img.shields.io/github/actions/workflow/status/speakeasy-sdks/moov-go/speakeasy_sdk_generation.yml?style=for-the-badge" /></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" /></a>
-  <a href="https://slack.moov.io/"><img src="https://img.shields.io/static/v1?label=Discord&message=Join&color=7289da&style=for-the-badge" /></a>
+  <a href="https://slack.moov.io/"><img src="https://img.shields.io/static/v1?label=Slack&message=Join&color=7289da&style=for-the-badge" /></a>
 </div>
 
 <!-- Start SDK Installation -->
