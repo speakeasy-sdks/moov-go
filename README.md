@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="https://github.com/speakeasy-sdks/moov-go/assets/6267663/84c3c912-695e-4a03-8fa3-45076cccac26" width="300">
+   <img src="https://github.com/speakeasy-sdks/moov-go/assets/68016351/fd9ab239-6d52-474d-800b-385ee20082d8" width="300">
    <h1>Go SDK</h1>
    <p><strong>Accept, store, send, & spend – all in one place.</strong></p>
    <a href="https://docs.moov.io/api/"><img src="https://img.shields.io/static/v1?label=Docs&message=Docs&color=000&style=for-the-badge" /></a>
