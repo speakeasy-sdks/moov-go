@@ -5,12 +5,12 @@ The results of the card update request
 
 ## Values
 
-| Name                 | Value                |
-| -------------------- | -------------------- |
-| `UNSPECIFIED`        | unspecified          |
-| `ACCOUNT_CLOSED`     | account-closed       |
-| `CONTACT_CARDHOLDER` | contact-cardholder   |
-| `EXPIRATION_UPDATE`  | expiration-update    |
-| `NO_CHANGE`          | no-change            |
-| `NO_MATCH`           | no-match             |
-| `NUMBER_UPDATE`      | number-update        |
+| Name                                | Value                               |
+| ----------------------------------- | ----------------------------------- |
+| `CardUpdateReasonUnspecified`       | unspecified                         |
+| `CardUpdateReasonAccountClosed`     | account-closed                      |
+| `CardUpdateReasonContactCardholder` | contact-cardholder                  |
+| `CardUpdateReasonExpirationUpdate`  | expiration-update                   |
+| `CardUpdateReasonNoChange`          | no-change                           |
+| `CardUpdateReasonNoMatch`           | no-match                            |
+| `CardUpdateReasonNumberUpdate`      | number-update                       |

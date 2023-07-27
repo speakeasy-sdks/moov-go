@@ -1,4 +1,4 @@
-# wallets
+# Wallets
 
 ## Overview
 
@@ -11,173 +11,225 @@ A [Moov wallet](https://docs.moov.io/guides/wallet/) can serve as a funding sour
 
 ### Available Operations
 
-* [get](#get) - Get wallet
-* [get_transaction](#get_transaction) - Get wallet transaction
-* [list](#list) - List wallets
-* [list_transactions](#list_transactions) - List wallet transactions
+* [Get](#get) - Get wallet
+* [GetTransaction](#gettransaction) - Get wallet transaction
+* [List](#list) - List wallets
+* [ListTransactions](#listtransactions) - List wallet transactions
 
-## get
+## Get
 
 Get information on a specific wallet (e.g., the available balance). <br><br> To get wallet information, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetWalletForAccountRequest(
-    account_id='ca5acfbe-2fd5-4707-9779-29177deac646',
-    wallet_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.wallets.get(req)
+    ctx := context.Background()
+    res, err := s.Wallets.Get(ctx, operations.GetWalletForAccountRequest{
+        AccountID: "ca5acfbe-2fd5-4707-9779-29177deac646",
+        WalletID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.wallet is not None:
-    # handle response
+    if res.Wallet != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
 | `request`                                                                                      | [operations.GetWalletForAccountRequest](../../models/operations/getwalletforaccountrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 
 
 ### Response
 
-**[operations.GetWalletForAccountResponse](../../models/operations/getwalletforaccountresponse.md)**
+**[*operations.GetWalletForAccountResponse](../../models/operations/getwalletforaccountresponse.md), error**
 
 
-## get_transaction
+## GetTransaction
 
 Get details on a specific wallet transaction. <br><br> To access this endpoint, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetWalletTransactionRequest(
-    account_id='ecb57340-9e3e-4b1e-9a2b-12eb07f116db',
-    transaction_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-    wallet_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.wallets.get_transaction(req)
+    ctx := context.Background()
+    res, err := s.Wallets.GetTransaction(ctx, operations.GetWalletTransactionRequest{
+        AccountID: "ecb57340-9e3e-4b1e-9a2b-12eb07f116db",
+        TransactionID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+        WalletID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.wallet_transaction is not None:
-    # handle response
+    if res.WalletTransaction != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
 | `request`                                                                                        | [operations.GetWalletTransactionRequest](../../models/operations/getwallettransactionrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 
 
 ### Response
 
-**[operations.GetWalletTransactionResponse](../../models/operations/getwallettransactionresponse.md)**
+**[*operations.GetWalletTransactionResponse](../../models/operations/getwallettransactionresponse.md), error**
 
 
-## list
+## List
 
 List the wallets associated with a Moov account. <br><br> To list wallets, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.ListWalletsForAccountRequest(
-    account_id='99545fc9-5fa8-4897-8e18-9dbb30fcb33e',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.wallets.list(req)
+    ctx := context.Background()
+    res, err := s.Wallets.List(ctx, operations.ListWalletsForAccountRequest{
+        AccountID: "99545fc9-5fa8-4897-8e18-9dbb30fcb33e",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.wallets is not None:
-    # handle response
+    if res.Wallets != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
 | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
 | `request`                                                                                          | [operations.ListWalletsForAccountRequest](../../models/operations/listwalletsforaccountrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 
 
 ### Response
 
-**[operations.ListWalletsForAccountResponse](../../models/operations/listwalletsforaccountresponse.md)**
+**[*operations.ListWalletsForAccountResponse](../../models/operations/listwalletsforaccountresponse.md), error**
 
 
-## list_transactions
+## ListTransactions
 
 List all the transactions associated with a particular Moov wallet. <br><br> To access this endpoint, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.ListWalletTransactionsRequest(
-    account_id='a055b197-cd44-4e2f-92d8-2d3513bb6f48',
-    completed_end_date_time='distinctio',
-    completed_start_date_time='nisi',
-    count=335977,
-    created_end_date_time='nisi',
-    created_start_date_time='libero',
-    skip=794507,
-    source_id='facere',
-    source_type='facilis',
-    status='ipsum',
-    transaction_type='ad',
-    wallet_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.wallets.list_transactions(req)
+    ctx := context.Background()
+    res, err := s.Wallets.ListTransactions(ctx, operations.ListWalletTransactionsRequest{
+        AccountID: "a055b197-cd44-4e2f-92d8-2d3513bb6f48",
+        CompletedEndDateTime: petstore.String("distinctio"),
+        CompletedStartDateTime: petstore.String("nisi"),
+        Count: petstore.Int64(335977),
+        CreatedEndDateTime: petstore.String("nisi"),
+        CreatedStartDateTime: petstore.String("libero"),
+        Skip: petstore.Int64(794507),
+        SourceID: petstore.String("facere"),
+        SourceType: petstore.String("facilis"),
+        Status: petstore.String("ipsum"),
+        TransactionType: petstore.String("ad"),
+        WalletID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.wallet_transactions is not None:
-    # handle response
+    if res.WalletTransactions != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
 | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
 | `request`                                                                                            | [operations.ListWalletTransactionsRequest](../../models/operations/listwallettransactionsrequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
 
 
 ### Response
 
-**[operations.ListWalletTransactionsResponse](../../models/operations/listwallettransactionsresponse.md)**
+**[*operations.ListWalletTransactionsResponse](../../models/operations/listwallettransactionsresponse.md), error**
 

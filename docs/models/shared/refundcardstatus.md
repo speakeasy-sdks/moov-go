@@ -5,10 +5,10 @@ Card status for refunds
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `INITIATED` | initiated   |
-| `CONFIRMED` | confirmed   |
-| `SETTLED`   | settled     |
-| `FAILED`    | failed      |
-| `COMPLETED` | completed   |
+| Name                        | Value                       |
+| --------------------------- | --------------------------- |
+| `RefundCardStatusInitiated` | initiated                   |
+| `RefundCardStatusConfirmed` | confirmed                   |
+| `RefundCardStatusSettled`   | settled                     |
+| `RefundCardStatusFailed`    | failed                      |
+| `RefundCardStatusCompleted` | completed                   |

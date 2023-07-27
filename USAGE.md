@@ -1,27 +1,38 @@
 <!-- Start SDK Example Usage -->
 
 
-```python
-import petstore
-from petstore.models import shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
 )
 
-req = shared.ClientCredentialsGrantToAccessTokenRequest(
-    client_id='5clTR_MdVrrkgxw2',
-    client_secret='dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-',
-    grant_type=shared.ClientCredentialsGrantToAccessTokenRequestGrantType.REFRESH_TOKEN,
-    refresh_token='i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6...',
-    scope='/accounts.write',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.access_token.create(req)
+    ctx := context.Background()
+    res, err := s.AccessToken.Create(ctx, shared.ClientCredentialsGrantToAccessTokenRequest{
+        ClientID: petstore.String("5clTR_MdVrrkgxw2"),
+        ClientSecret: petstore.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
+        GrantType: shared.ClientCredentialsGrantToAccessTokenRequestGrantTypeRefreshToken,
+        RefreshToken: petstore.String("i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6..."),
+        Scope: petstore.String("/accounts.write"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.access_token_response is not None:
-    # handle response
+    if res.AccessTokenResponse != nil {
+        // handle response
+    }
+}
 ```
 <!-- End SDK Example Usage -->

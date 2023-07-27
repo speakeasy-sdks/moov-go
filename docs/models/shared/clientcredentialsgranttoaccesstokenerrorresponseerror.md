@@ -3,11 +3,11 @@
 
 ## Values
 
-| Name                     | Value                    |
-| ------------------------ | ------------------------ |
-| `INVALID_REQUEST`        | invalid_request          |
-| `INVALID_CLIENT`         | invalid_client           |
-| `INVALID_GRANT`          | invalid_grant            |
-| `UNAUTHORIZED_CLIENT`    | unauthorized_client      |
-| `UNSUPPORTED_GRANT_TYPE` | unsupported_grant_type   |
-| `INVALID_SCOPE`          | invalid_scope            |
+| Name                                                                        | Value                                                                       |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `ClientCredentialsGrantToAccessTokenErrorResponseErrorInvalidRequest`       | invalid_request                                                             |
+| `ClientCredentialsGrantToAccessTokenErrorResponseErrorInvalidClient`        | invalid_client                                                              |
+| `ClientCredentialsGrantToAccessTokenErrorResponseErrorInvalidGrant`         | invalid_grant                                                               |
+| `ClientCredentialsGrantToAccessTokenErrorResponseErrorUnauthorizedClient`   | unauthorized_client                                                         |
+| `ClientCredentialsGrantToAccessTokenErrorResponseErrorUnsupportedGrantType` | unsupported_grant_type                                                      |
+| `ClientCredentialsGrantToAccessTokenErrorResponseErrorInvalidScope`         | invalid_scope                                                               |

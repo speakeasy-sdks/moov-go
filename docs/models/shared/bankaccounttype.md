@@ -5,8 +5,8 @@ The bank account type
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `CHECKING` | checking   |
-| `SAVINGS`  | savings    |
-| `UNKNOWN`  | unknown    |
+| Name                      | Value                     |
+| ------------------------- | ------------------------- |
+| `BankAccountTypeChecking` | checking                  |
+| `BankAccountTypeSavings`  | savings                   |
+| `BankAccountTypeUnknown`  | unknown                   |

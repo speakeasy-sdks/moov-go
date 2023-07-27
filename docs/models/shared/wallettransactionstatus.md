@@ -5,9 +5,9 @@ Wallet transaction status
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `PENDING`   | pending     |
-| `COMPLETED` | completed   |
-| `CANCELED`  | canceled    |
-| `FAILED`    | failed      |
+| Name                               | Value                              |
+| ---------------------------------- | ---------------------------------- |
+| `WalletTransactionStatusPending`   | pending                            |
+| `WalletTransactionStatusCompleted` | completed                          |
+| `WalletTransactionStatusCanceled`  | canceled                           |
+| `WalletTransactionStatusFailed`    | failed                             |

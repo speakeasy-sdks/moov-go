@@ -5,7 +5,7 @@ The type of holder on a funding source
 
 ## Values
 
-| Name         | Value        |
-| ------------ | ------------ |
-| `INDIVIDUAL` | individual   |
-| `BUSINESS`   | business     |
+| Name                   | Value                  |
+| ---------------------- | ---------------------- |
+| `HolderTypeIndividual` | individual             |
+| `HolderTypeBusiness`   | business               |

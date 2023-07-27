@@ -1,4 +1,4 @@
-# disputes
+# Disputes
 
 ## Overview
 
@@ -6,85 +6,111 @@ A [dispute](https://docs.moov.io/guides/money-movement/cards/disputes/) is a sit
 
 ### Available Operations
 
-* [get](#get) - Get Dispute by ID
-* [list](#list) - List of all disputes
+* [Get](#get) - Get Dispute by ID
+* [List](#list) - List of all disputes
 
-## get
+## Get
 
 Returns a user's dispute by ID. <br><br> To use this endpoint, you need to specify the `/accounts/{your-account-id}/transfers.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetDisputeRequest(
-    dispute_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.disputes.get(req)
+    ctx := context.Background()
+    res, err := s.Disputes.Get(ctx, operations.GetDisputeRequest{
+        DisputeID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.dispute is not None:
-    # handle response
+    if res.Dispute != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
 | `request`                                                                    | [operations.GetDisputeRequest](../../models/operations/getdisputerequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 
 
 ### Response
 
-**[operations.GetDisputeResponse](../../models/operations/getdisputeresponse.md)**
+**[*operations.GetDisputeResponse](../../models/operations/getdisputeresponse.md), error**
 
 
-## list
+## List
 
 Returns the list of disputes. <br><br> To use this endpoint, you need to specify the `/accounts/{your-account-id}/transfers.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.ListDisputesRequest(
-    count=676243,
-    respond_end_date_time='corrupti',
-    respond_start_date_time='accusamus',
-    skip=272683,
-    status=shared.DisputeStatus.RESPONSE_NEEDED,
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.disputes.list(req)
+    ctx := context.Background()
+    res, err := s.Disputes.List(ctx, operations.ListDisputesRequest{
+        Count: petstore.Int64(676243),
+        RespondEndDateTime: petstore.String("corrupti"),
+        RespondStartDateTime: petstore.String("accusamus"),
+        Skip: petstore.Int64(272683),
+        Status: shared.DisputeStatusResponseNeeded.ToPointer(),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.disputes is not None:
-    # handle response
+    if res.Disputes != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
 | `request`                                                                        | [operations.ListDisputesRequest](../../models/operations/listdisputesrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[operations.ListDisputesResponse](../../models/operations/listdisputesresponse.md)**
+**[*operations.ListDisputesResponse](../../models/operations/listdisputesresponse.md), error**
 

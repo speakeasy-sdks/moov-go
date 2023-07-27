@@ -1,4 +1,4 @@
-# underwriting
+# Underwriting
 
 ## Overview
 
@@ -7,86 +7,112 @@
 
 ### Available Operations
 
-* [get](#get) - Retrieve underwriting details
-* [update](#update) - Update underwriting details
+* [Get](#get) - Retrieve underwriting details
+* [Update](#update) - Update underwriting details
 
-## get
+## Get
 
 Retrieve underwriting associated with a given Moov account. <br><br> To get an account's underwriting details, you'll need to specify the `/accounts/{accountID}/underwriting.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetUnderwritingRequest(
-    account_id='bae0be2d-7822-459e-bea4-b5197f92443d',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.underwriting.get(req)
+    ctx := context.Background()
+    res, err := s.Underwriting.Get(ctx, operations.GetUnderwritingRequest{
+        AccountID: "bae0be2d-7822-459e-bea4-b5197f92443d",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.underwriting is not None:
-    # handle response
+    if res.Underwriting != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
 | `request`                                                                              | [operations.GetUnderwritingRequest](../../models/operations/getunderwritingrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 
 
 ### Response
 
-**[operations.GetUnderwritingResponse](../../models/operations/getunderwritingresponse.md)**
+**[*operations.GetUnderwritingResponse](../../models/operations/getunderwritingresponse.md), error**
 
 
-## update
+## Update
 
 Update the account's underwriting by passing new values for one or more of the fields. <br><br> To update an account's underwriting details, you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.UpdateUnderwritingRequest(
-    underwriting_request=shared.UnderwritingRequest(
-        average_monthly_transaction_volume=250000,
-        average_transaction_size=10000,
-        max_transaction_size=50000,
-    ),
-    account_id='a7ce52b8-95c5-437c-a454-efb0b34896c3',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.underwriting.update(req)
+    ctx := context.Background()
+    res, err := s.Underwriting.Update(ctx, operations.UpdateUnderwritingRequest{
+        UnderwritingRequest: shared.UnderwritingRequest{
+            AverageMonthlyTransactionVolume: petstore.Int64(250000),
+            AverageTransactionSize: petstore.Int64(10000),
+            MaxTransactionSize: petstore.Int64(50000),
+        },
+        AccountID: "a7ce52b8-95c5-437c-a454-efb0b34896c3",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.underwriting is not None:
-    # handle response
+    if res.Underwriting != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
 | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
 | `request`                                                                                    | [operations.UpdateUnderwritingRequest](../../models/operations/updateunderwritingrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 
 
 ### Response
 
-**[operations.UpdateUnderwritingResponse](../../models/operations/updateunderwritingresponse.md)**
+**[*operations.UpdateUnderwritingResponse](../../models/operations/updateunderwritingresponse.md), error**
 

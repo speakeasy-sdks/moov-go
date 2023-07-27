@@ -5,10 +5,10 @@ ACH status
 
 ## Values
 
-| Name         | Value        |
-| ------------ | ------------ |
-| `INITIATED`  | initiated    |
-| `ORIGINATED` | originated   |
-| `CORRECTED`  | corrected    |
-| `RETURNED`   | returned     |
-| `COMPLETED`  | completed    |
+| Name                  | Value                 |
+| --------------------- | --------------------- |
+| `ACHStatusInitiated`  | initiated             |
+| `ACHStatusOriginated` | originated            |
+| `ACHStatusCorrected`  | corrected             |
+| `ACHStatusReturned`   | returned              |
+| `ACHStatusCompleted`  | completed             |

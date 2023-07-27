@@ -1,4 +1,4 @@
-# cards
+# Cards
 
 ## Overview
 
@@ -6,18 +6,18 @@ You can link credit or debit cards to Moov accounts. You can use a card as a sou
 
 ### Available Operations
 
-* [link_apple_pay_token](#link_apple_pay_token) - Link Apple Pay token
-* [link_card](#link_card) - Link card
-* [list_cards](#list_cards) - List cards
-* [create_apple_pay_session](#create_apple_pay_session) - Create Apple Pay session
-* [delete](#delete) - Disable card
-* [get](#get) - Get card
-* [list_apple_pay_domains](#list_apple_pay_domains) - Get Apple Pay domains
-* [register_apple_pay_domain](#register_apple_pay_domain) - Register Apple Pay domains
-* [update](#update) - Update card
-* [update_apple_pay_domains](#update_apple_pay_domains) - Update Apple Pay domains
+* [LinkApplePayToken](#linkapplepaytoken) - Link Apple Pay token
+* [LinkCard](#linkcard) - Link card
+* [ListCards](#listcards) - List cards
+* [CreateApplePaySession](#createapplepaysession) - Create Apple Pay session
+* [Delete](#delete) - Disable card
+* [Get](#get) - Get card
+* [ListApplePayDomains](#listapplepaydomains) - Get Apple Pay domains
+* [RegisterApplePayDomain](#registerapplepaydomain) - Register Apple Pay domains
+* [Update](#update) - Update card
+* [UpdateApplePayDomains](#updateapplepaydomains) - Update Apple Pay domains
 
-## link_apple_pay_token
+## LinkApplePayToken
 
 Connect an Apple Pay token to the specified account.
 The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
@@ -26,59 +26,72 @@ The `token` data is defined by Apple Pay and should be passed through from Apple
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.PostLinkApplePayTokenRequest(
-    link_apple_pay=shared.LinkApplePay(
-        token=shared.LinkApplePayToken(
-            payment_data=shared.LinkApplePayTokenPaymentData(
-                data='3+f4oOTwPa6f1UZ6tG...CE=',
-                header=shared.LinkApplePayTokenPaymentDataHeader(
-                    ephemeral_public_key='MFkwEK...Md==',
-                    public_key_hash='l0CnXdMv...D1I=',
-                    transaction_id='32b...4f3',
-                ),
-                signature='MIAGCSqGSIb3DQ.AAAA==',
-                version='EC_v1',
-            ),
-            payment_method=shared.LinkApplePayTokenPaymentMethod(
-                display_name='Visa 1234',
-                network='Visa',
-                type='debit',
-            ),
-            transaction_identifier='32b...4f3',
-        ),
-    ),
-    account_id='c7e0bc71-78e4-4796-b2a7-0c688282aa48',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.cards.link_apple_pay_token(req)
+    ctx := context.Background()
+    res, err := s.Cards.LinkApplePayToken(ctx, operations.PostLinkApplePayTokenRequest{
+        LinkApplePay: shared.LinkApplePay{
+            Token: shared.LinkApplePayToken{
+                PaymentData: shared.LinkApplePayTokenPaymentData{
+                    Data: "3+f4oOTwPa6f1UZ6tG...CE=",
+                    Header: shared.LinkApplePayTokenPaymentDataHeader{
+                        EphemeralPublicKey: "MFkwEK...Md==",
+                        PublicKeyHash: "l0CnXdMv...D1I=",
+                        TransactionID: "32b...4f3",
+                    },
+                    Signature: "MIAGCSqGSIb3DQ.AAAA==",
+                    Version: "EC_v1",
+                },
+                PaymentMethod: shared.LinkApplePayTokenPaymentMethod{
+                    DisplayName: "Visa 1234",
+                    Network: "Visa",
+                    Type: "debit",
+                },
+                TransactionIdentifier: "32b...4f3",
+            },
+        },
+        AccountID: "3c7e0bc7-178e-4479-af2a-70c688282aa4",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.linked_apple_pay_payment_method is not None:
-    # handle response
+    if res.LinkedApplePayPaymentMethod != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
 | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
 | `request`                                                                                          | [operations.PostLinkApplePayTokenRequest](../../models/operations/postlinkapplepaytokenrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 
 
 ### Response
 
-**[operations.PostLinkApplePayTokenResponse](../../models/operations/postlinkapplepaytokenresponse.md)**
+**[*operations.PostLinkApplePayTokenResponse](../../models/operations/postlinkapplepaytokenresponse.md), error**
 
 
-## link_card
+## LinkCard
 
 Link a card to an existing Moov account. Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
 <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.write` scope.
@@ -86,98 +99,124 @@ Link a card to an existing Moov account. Only use this endpoint if you have prov
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.PostLinkCardRequest(
-    card_request=shared.CardRequest(
-        billing_address=shared.Address(
-            address_line1='123 Main Street',
-            address_line2='Apt 302',
-            city='Boulder',
-            country='US',
-            postal_code='80301',
-            state_or_province='CO',
-        ),
-        card_cvv='0123',
-        card_number='explicabo',
-        card_on_file=False,
-        expiration=shared.CardExpiration(
-            month='01',
-            year='21',
-        ),
-        holder_name='Jules Jackson',
-        merchant_account_id='562f222e-9817-4ee1-bcbe-61e6b7b95bc0',
-    ),
-    x_wait_for=shared.SchemasWaitFor.PAYMENT_METHOD,
-    account_id='ab3c20c4-f378-49fd-871f-99dd2efd121a',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.cards.link_card(req)
+    ctx := context.Background()
+    res, err := s.Cards.LinkCard(ctx, operations.PostLinkCardRequest{
+        CardRequest: shared.CardRequest{
+            BillingAddress: &shared.Address{
+                AddressLine1: petstore.String("123 Main Street"),
+                AddressLine2: petstore.String("Apt 302"),
+                City: petstore.String("Boulder"),
+                Country: petstore.String("US"),
+                PostalCode: petstore.String("80301"),
+                StateOrProvince: petstore.String("CO"),
+            },
+            CardCvv: petstore.String("0123"),
+            CardNumber: petstore.String("atque"),
+            CardOnFile: petstore.Bool(false),
+            Expiration: &shared.CardExpiration{
+                Month: petstore.String("01"),
+                Year: petstore.String("21"),
+            },
+            HolderName: petstore.String("Jules Jackson"),
+            MerchantAccountID: petstore.String("2562f222-e981-47ee-97cb-e61e6b7b95bc"),
+        },
+        XWaitFor: shared.SchemasWaitForPaymentMethod.ToPointer(),
+        AccountID: "0ab3c20c-4f37-489f-9871-f99dd2efd121",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.card is not None:
-    # handle response
+    if res.Card != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
 | `request`                                                                        | [operations.PostLinkCardRequest](../../models/operations/postlinkcardrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
-| `server_url`                                                                     | *Optional[str]*                                                                  | :heavy_minus_sign:                                                               | An optional server URL to use.                                                   |
+| `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
 
 ### Response
 
-**[operations.PostLinkCardResponse](../../models/operations/postlinkcardresponse.md)**
+**[*operations.PostLinkCardResponse](../../models/operations/postlinkcardresponse.md), error**
 
 
-## list_cards
+## ListCards
 
 List all the cards associated with a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetListCardsRequest(
-    account_id='a6f1e674-bdb0-44f1-9756-082d68ea19f1',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.cards.list_cards(req)
+    ctx := context.Background()
+    res, err := s.Cards.ListCards(ctx, operations.GetListCardsRequest{
+        AccountID: "aa6f1e67-4bdb-404f-9575-6082d68ea19f",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.cards is not None:
-    # handle response
+    if res.Cards != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
 | `request`                                                                        | [operations.GetListCardsRequest](../../models/operations/getlistcardsrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[operations.GetListCardsResponse](../../models/operations/getlistcardsresponse.md)**
+**[*operations.GetListCardsResponse](../../models/operations/getlistcardsresponse.md), error**
 
 
-## create_apple_pay_session
+## CreateApplePaySession
 
 Create a session with Apple Pay to facilitate a payment.
 A successful response from this endpoint should be passed through to Apple Pay unchanged.
@@ -186,121 +225,160 @@ A successful response from this endpoint should be passed through to Apple Pay u
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.PostApplePaySessionRequest(
-    create_apple_pay_session=shared.CreateApplePaySession(
-        display_name='Example Merchant',
-        domain='checkout.classbooker.dev',
-    ),
-    account_id='d1705133-9d08-4086-a184-0394c26071f9',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.cards.create_apple_pay_session(req)
+    ctx := context.Background()
+    res, err := s.Cards.CreateApplePaySession(ctx, operations.PostApplePaySessionRequest{
+        CreateApplePaySession: shared.CreateApplePaySession{
+            DisplayName: "Example Merchant",
+            Domain: "checkout.classbooker.dev",
+        },
+        AccountID: "1d170513-39d0-4808-aa18-40394c26071f",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.apple_pay_session is not None:
-    # handle response
+    if res.ApplePaySession != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
 | `request`                                                                                      | [operations.PostApplePaySessionRequest](../../models/operations/postapplepaysessionrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 
 
 ### Response
 
-**[operations.PostApplePaySessionResponse](../../models/operations/postapplepaysessionresponse.md)**
+**[*operations.PostApplePaySessionResponse](../../models/operations/postapplepaysessionresponse.md), error**
 
 
-## delete
+## Delete
 
 Disables a card associated with a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.DeleteCardRequest(
-    account_id='3f5f0642-dac7-4af5-95cc-413aa63aae8d',
-    card_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.cards.delete(req)
+    ctx := context.Background()
+    res, err := s.Cards.Delete(ctx, operations.DeleteCardRequest{
+        AccountID: "93f5f064-2dac-47af-915c-c413aa63aae8",
+        CardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.status_code == 200:
-    # handle response
+    if res.StatusCode == http.StatusOK {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
 | `request`                                                                    | [operations.DeleteCardRequest](../../models/operations/deletecardrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 
 
 ### Response
 
-**[operations.DeleteCardResponse](../../models/operations/deletecardresponse.md)**
+**[*operations.DeleteCardResponse](../../models/operations/deletecardresponse.md), error**
 
 
-## get
+## Get
 
 Fetch a specific card associated with a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.read` scope.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetCardRequest(
-    account_id='67864dbb-675f-4d5e-a0b3-75ed4f6fbee4',
-    card_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.cards.get(req)
+    ctx := context.Background()
+    res, err := s.Cards.Get(ctx, operations.GetCardRequest{
+        AccountID: "d67864db-b675-4fd5-a60b-375ed4f6fbee",
+        CardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.card is not None:
-    # handle response
+    if res.Card != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |
 | `request`                                                              | [operations.GetCardRequest](../../models/operations/getcardrequest.md) | :heavy_check_mark:                                                     | The request object to use for the request.                             |
 
 
 ### Response
 
-**[operations.GetCardResponse](../../models/operations/getcardresponse.md)**
+**[*operations.GetCardResponse](../../models/operations/getcardresponse.md), error**
 
 
-## list_apple_pay_domains
+## ListApplePayDomains
 
 Get domains registered with Apple Pay.
 <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/apple-pay.read` scope.
@@ -308,39 +386,52 @@ Get domains registered with Apple Pay.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.GetApplePayMerchantDomainsRequest(
-    account_id='1f33317f-e35b-460e-b1ea-426555ba3c28',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.cards.list_apple_pay_domains(req)
+    ctx := context.Background()
+    res, err := s.Cards.ListApplePayDomains(ctx, operations.GetApplePayMerchantDomainsRequest{
+        AccountID: "41f33317-fe35-4b60-ab1e-a426555ba3c2",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.apple_pay_merchant_domains is not None:
-    # handle response
+    if res.ApplePayMerchantDomains != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
 | `request`                                                                                                    | [operations.GetApplePayMerchantDomainsRequest](../../models/operations/getapplepaymerchantdomainsrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
 
 
 ### Response
 
-**[operations.GetApplePayMerchantDomainsResponse](../../models/operations/getapplepaymerchantdomainsresponse.md)**
+**[*operations.GetApplePayMerchantDomainsResponse](../../models/operations/getapplepaymerchantdomainsresponse.md), error**
 
 
-## register_apple_pay_domain
+## RegisterApplePayDomain
 
 Add domains to be registered with Apple Pay.
 <br><br> Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/money-movement/cards/apple-pay/#step-1-register-your-domains) with Apple.
@@ -349,46 +440,60 @@ Add domains to be registered with Apple Pay.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.PostApplePayMerchantDomainsRequest(
-    register_apple_pay_merchant_domains=shared.RegisterApplePayMerchantDomains(
-        display_name='Example Merchant',
-        domains=[
-            'dolore',
-            'aliquam',
-        ],
-    ),
-    account_id='ed53b88f-3a8d-48f5-80b2-f2fb7b194a27',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.cards.register_apple_pay_domain(req)
+    ctx := context.Background()
+    res, err := s.Cards.RegisterApplePayDomain(ctx, operations.PostApplePayMerchantDomainsRequest{
+        RegisterApplePayMerchantDomains: shared.RegisterApplePayMerchantDomains{
+            DisplayName: "Example Merchant",
+            Domains: []string{
+                "in",
+                "dolore",
+                "aliquam",
+            },
+        },
+        AccountID: "ed53b88f-3a8d-48f5-80b2-f2fb7b194a27",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.apple_pay_merchant_domains is not None:
-    # handle response
+    if res.ApplePayMerchantDomains != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
 | `request`                                                                                                      | [operations.PostApplePayMerchantDomainsRequest](../../models/operations/postapplepaymerchantdomainsrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
 
 
 ### Response
 
-**[operations.PostApplePayMerchantDomainsResponse](../../models/operations/postapplepaymerchantdomainsresponse.md)**
+**[*operations.PostApplePayMerchantDomainsResponse](../../models/operations/postapplepaymerchantdomainsresponse.md), error**
 
 
-## update
+## Update
 
 Update a Linked Card and/or resubmit it for verification. If a value is provided for CVV, 
 a new verification ($0 authorization) will be submitted for the card. Updating the expiration date or 
@@ -399,56 +504,69 @@ Only use this endpoint if you have provided Moov with a copy of your PCI attesta
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.UpdateCardRequest(
-    card_update_request=shared.CardUpdateRequest(
-        billing_address=shared.UpdateAddress(
-            address_line1='123 Main Street',
-            address_line2='Apt 302',
-            city='Boulder',
-            country='US',
-            postal_code='80301',
-            state_or_province='CO',
-        ),
-        card_cvv='123',
-        card_on_file=False,
-        expiration=shared.UpdateCardExpiration(
-            month='01',
-            year='21',
-        ),
-    ),
-    account_id='6b26916f-e1f0-48f4-a94e-3698f447f603',
-    card_id='ec7e1848-dc80-4ab0-8827-dd7fc0737b43',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.cards.update(req)
+    ctx := context.Background()
+    res, err := s.Cards.Update(ctx, operations.UpdateCardRequest{
+        CardUpdateRequest: shared.CardUpdateRequest{
+            BillingAddress: &shared.UpdateAddress{
+                AddressLine1: petstore.String("123 Main Street"),
+                AddressLine2: petstore.String("Apt 302"),
+                City: petstore.String("Boulder"),
+                Country: petstore.String("US"),
+                PostalCode: petstore.String("80301"),
+                StateOrProvince: petstore.String("CO"),
+            },
+            CardCvv: petstore.String("123"),
+            CardOnFile: petstore.Bool(false),
+            Expiration: &shared.UpdateCardExpiration{
+                Month: petstore.String("01"),
+                Year: petstore.String("21"),
+            },
+        },
+        AccountID: "6b26916f-e1f0-48f4-a94e-3698f447f603",
+        CardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.card is not None:
-    # handle response
+    if res.Card != nil {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
 | `request`                                                                    | [operations.UpdateCardRequest](../../models/operations/updatecardrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 
 
 ### Response
 
-**[operations.UpdateCardResponse](../../models/operations/updatecardresponse.md)**
+**[*operations.UpdateCardResponse](../../models/operations/updatecardresponse.md), error**
 
 
-## update_apple_pay_domains
+## UpdateApplePayDomains
 
 Add or remove domains to be registered with Apple Pay.
 <br><br> Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/money-movement/cards/apple-pay/#step-1-register-your-domains) with Apple.
@@ -457,46 +575,59 @@ Add or remove domains to be registered with Apple Pay.
 
 ### Example Usage
 
-```python
-import petstore
-from petstore.models import operations, shared
+```go
+package main
 
-s = petstore.Petstore(
-    security=shared.Security(
-        access_token="",
-    ),
+import(
+	"context"
+	"log"
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
 )
 
-req = operations.UpdateApplePayMerchantDomainsRequest(
-    update_apple_pay_merchant_domains=shared.UpdateApplePayMerchantDomains(
-        add_domains=[
-            'praesentium',
-            'facilis',
-            'quaerat',
-            'incidunt',
-        ],
-        remove_domains=[
-            'debitis',
-            'rem',
-        ],
-    ),
-    account_id='0ca55efd-20e4-457e-9858-b6a89fbe3a5a',
-)
+func main() {
+    s := petstore.New(
+        petstore.WithSecurity(shared.Security{
+            AccessToken: petstore.String(""),
+        }),
+    )
 
-res = s.cards.update_apple_pay_domains(req)
+    ctx := context.Background()
+    res, err := s.Cards.UpdateApplePayDomains(ctx, operations.UpdateApplePayMerchantDomainsRequest{
+        UpdateApplePayMerchantDomains: shared.UpdateApplePayMerchantDomains{
+            AddDomains: []string{
+                "praesentium",
+                "facilis",
+                "quaerat",
+                "incidunt",
+            },
+            RemoveDomains: []string{
+                "debitis",
+                "rem",
+            },
+        },
+        AccountID: "0ca55efd-20e4-457e-9858-b6a89fbe3a5a",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if res.status_code == 200:
-    # handle response
+    if res.StatusCode == http.StatusOK {
+        // handle response
+    }
+}
 ```
 
 ### Parameters
 
 | Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |
 | `request`                                                                                                          | [operations.UpdateApplePayMerchantDomainsRequest](../../models/operations/updateapplepaymerchantdomainsrequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
 
 
 ### Response
 
-**[operations.UpdateApplePayMerchantDomainsResponse](../../models/operations/updateapplepaymerchantdomainsresponse.md)**
+**[*operations.UpdateApplePayMerchantDomainsResponse](../../models/operations/updateapplepaymerchantdomainsresponse.md), error**
 

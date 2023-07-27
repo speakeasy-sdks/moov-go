@@ -14,4 +14,4 @@ The details of a Plaid processor integration for a linked funding source. <br><b
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `token`            | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+| `Token`            | **string*          | :heavy_minus_sign: | N/A                |

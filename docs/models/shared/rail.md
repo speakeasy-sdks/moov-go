@@ -5,7 +5,7 @@ A supported payment rail
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `ACH`  | ach    |
-| `WIRE` | wire   |
+| Name       | Value      |
+| ---------- | ---------- |
+| `RailAch`  | ach        |
+| `RailWire` | wire       |

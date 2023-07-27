@@ -5,4 +5,4 @@
 
 | Field                                                         | Type                                                          | Required                                                      | Description                                                   |
 | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| `token`                                                       | [LinkApplePayToken](../../models/shared/linkapplepaytoken.md) | :heavy_check_mark:                                            | N/A                                                           |
+| `Token`                                                       | [LinkApplePayToken](../../models/shared/linkapplepaytoken.md) | :heavy_check_mark:                                            | N/A                                                           |

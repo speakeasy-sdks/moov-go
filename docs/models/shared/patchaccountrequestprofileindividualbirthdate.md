@@ -7,6 +7,6 @@ Birthdate for an individual
 
 | Field              | Type               | Required           | Description        | Example            |
 | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `day`              | *int*              | :heavy_check_mark: | N/A                | 9                  |
-| `month`            | *int*              | :heavy_check_mark: | N/A                | 11                 |
-| `year`             | *int*              | :heavy_check_mark: | N/A                | 1989               |
+| `Day`              | *int64*            | :heavy_check_mark: | N/A                | 9                  |
+| `Month`            | *int64*            | :heavy_check_mark: | N/A                | 11                 |
+| `Year`             | *int64*            | :heavy_check_mark: | N/A                | 1989               |

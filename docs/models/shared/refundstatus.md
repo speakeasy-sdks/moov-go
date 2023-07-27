@@ -3,9 +3,9 @@
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `CREATED`   | created     |
-| `PENDING`   | pending     |
-| `COMPLETED` | completed   |
-| `FAILED`    | failed      |
+| Name                    | Value                   |
+| ----------------------- | ----------------------- |
+| `RefundStatusCreated`   | created                 |
+| `RefundStatusPending`   | pending                 |
+| `RefundStatusCompleted` | completed               |
+| `RefundStatusFailed`    | failed                  |
