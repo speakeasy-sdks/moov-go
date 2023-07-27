@@ -24,8 +24,8 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
@@ -78,8 +78,8 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {

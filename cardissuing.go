@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 )
 
 // cardIssuing - A Moov wallet can serve as a funding source for issuing virtual cards. Note that we currently only issue Discover cards. Virtual cards can then be used to spend funds from the wallet.
@@ -30,7 +30,12 @@ func newCardIssuing(sdkConfig sdkConfiguration) *cardIssuing {
 // RequestCard - Request card
 // Request a virtual card be created
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.write` scope.
-func (s *cardIssuing) RequestCard(ctx context.Context, request operations.PostRequestCardRequest) (*operations.PostRequestCardResponse, error) {
+func (s *cardIssuing) RequestCard(ctx context.Context, requestCard shared.RequestCard, accountID string) (*operations.PostRequestCardResponse, error) {
+	request := operations.PostRequestCardRequest{
+		RequestCard: requestCard,
+		AccountID:   accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/issuing/{accountID}/issued-cards", request, nil)
 	if err != nil {
@@ -104,7 +109,12 @@ func (s *cardIssuing) RequestCard(ctx context.Context, request operations.PostRe
 // GetCard - Get issued card
 // Retrieve a single issued card associated with a Moov account
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-func (s *cardIssuing) GetCard(ctx context.Context, request operations.GetIssuedCardRequest) (*operations.GetIssuedCardResponse, error) {
+func (s *cardIssuing) GetCard(ctx context.Context, accountID string, issuedCardID string) (*operations.GetIssuedCardResponse, error) {
+	request := operations.GetIssuedCardRequest{
+		AccountID:    accountID,
+		IssuedCardID: issuedCardID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/issuing/{accountID}/issued-cards/{issuedCardID}", request, nil)
 	if err != nil {
@@ -168,7 +178,12 @@ func (s *cardIssuing) GetCard(ctx context.Context, request operations.GetIssuedC
 // GetCardFullDetails - Get full card details
 // Get issued card with PAN, CVV, and expiration. Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
-func (s *cardIssuing) GetCardFullDetails(ctx context.Context, request operations.GetFullIssuedCardRequest) (*operations.GetFullIssuedCardResponse, error) {
+func (s *cardIssuing) GetCardFullDetails(ctx context.Context, accountID string, issuedCardID string) (*operations.GetFullIssuedCardResponse, error) {
+	request := operations.GetFullIssuedCardRequest{
+		AccountID:    accountID,
+		IssuedCardID: issuedCardID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/issuing/{accountID}/issued-cards/{issuedCardID}/details", request, nil)
 	if err != nil {
@@ -233,7 +248,14 @@ func (s *cardIssuing) GetCardFullDetails(ctx context.Context, request operations
 // List Moov issued cards existing for the account.
 // <br><br> All supported query parameters are optional.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-func (s *cardIssuing) ListCards(ctx context.Context, request operations.ListIssuedCardsRequest) (*operations.ListIssuedCardsResponse, error) {
+func (s *cardIssuing) ListCards(ctx context.Context, accountID string, count *int64, skip *int64, states *shared.IssuedCardState) (*operations.ListIssuedCardsResponse, error) {
+	request := operations.ListIssuedCardsRequest{
+		AccountID: accountID,
+		Count:     count,
+		Skip:      skip,
+		States:    states,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/issuing/{accountID}/issued-cards", request, nil)
 	if err != nil {
@@ -301,7 +323,13 @@ func (s *cardIssuing) ListCards(ctx context.Context, request operations.ListIssu
 // UpdateCard - Update issued card
 // Update a Moov issued card
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.write` scope.
-func (s *cardIssuing) UpdateCard(ctx context.Context, request operations.UpdateIssuedCardRequest) (*operations.UpdateIssuedCardResponse, error) {
+func (s *cardIssuing) UpdateCard(ctx context.Context, updateIssuedCard shared.UpdateIssuedCard, accountID string, issuedCardID string) (*operations.UpdateIssuedCardResponse, error) {
+	request := operations.UpdateIssuedCardRequest{
+		UpdateIssuedCard: updateIssuedCard,
+		AccountID:        accountID,
+		IssuedCardID:     issuedCardID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/issuing/{accountID}/issued-cards/{issuedCardID}", request, nil)
 	if err != nil {

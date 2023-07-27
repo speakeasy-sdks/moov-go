@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 	"strings"
 )
 
@@ -28,7 +28,11 @@ func newDisputes(sdkConfig sdkConfiguration) *disputes {
 
 // Get - Get Dispute by ID
 // Returns a user's dispute by ID. <br><br> To use this endpoint, you need to specify the `/accounts/{your-account-id}/transfers.read` scope.
-func (s *disputes) Get(ctx context.Context, request operations.GetDisputeRequest) (*operations.GetDisputeResponse, error) {
+func (s *disputes) Get(ctx context.Context, disputeID string) (*operations.GetDisputeResponse, error) {
+	request := operations.GetDisputeRequest{
+		DisputeID: disputeID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/disputes/{disputeID}", request, nil)
 	if err != nil {

@@ -1,4 +1,4 @@
-module openapi
+module github.com/speakeasy-sdks/moov-go
 
 go 1.14
 

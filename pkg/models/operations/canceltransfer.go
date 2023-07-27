@@ -3,23 +3,16 @@
 package operations
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"net/http"
-	"openapi/pkg/models/shared"
 )
 
 type CancelTransferRequest struct {
-	CreateReversal *shared.CreateReversal `request:"mediaType=application/json"`
 	// Prevents duplicate reversals from being created
 	XIdempotencyKey string `header:"style=simple,explode=false,name=X-Idempotency-Key"`
 	// ID of the Transfer
-	TransferID string `pathParam:"style=simple,explode=false,name=transferID"`
-}
-
-func (o *CancelTransferRequest) GetCreateReversal() *shared.CreateReversal {
-	if o == nil {
-		return nil
-	}
-	return o.CreateReversal
+	TransferID     string                 `pathParam:"style=simple,explode=false,name=transferID"`
+	CreateReversal *shared.CreateReversal `request:"mediaType=application/json"`
 }
 
 func (o *CancelTransferRequest) GetXIdempotencyKey() string {
@@ -34,6 +27,13 @@ func (o *CancelTransferRequest) GetTransferID() string {
 		return ""
 	}
 	return o.TransferID
+}
+
+func (o *CancelTransferRequest) GetCreateReversal() *shared.CreateReversal {
+	if o == nil {
+		return nil
+	}
+	return o.CreateReversal
 }
 
 type CancelTransferResponse struct {

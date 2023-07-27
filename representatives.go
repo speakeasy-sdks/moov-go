@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 )
 
 // representatives - We think of a representative as an individual who can take major actions on behalf of a business. A representative can be the business owner, or anyone who owns 25% or more of the business. Some examples of representatives are the CEO, CFO, COO, or president. We require all business accounts to have valid information for at least one representative. Moov accounts must have verified business representatives before a business account can send funds, collect money from other accounts, or store funds in a wallet. To learn more, read our guide on [business representatives](https://docs.moov.io/guides/accounts/business-representatives/).
@@ -27,7 +27,12 @@ func newRepresentatives(sdkConfig sdkConfiguration) *representatives {
 
 // Create - Create representative
 // Moov accounts associated with businesses require information regarding individuals who represent the business. You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives.<br><br> To create a representative, you must specify the `/accounts/{accountID}/representatives.write` scope.
-func (s *representatives) Create(ctx context.Context, request operations.CreateRepresentativeRequest) (*operations.CreateRepresentativeResponse, error) {
+func (s *representatives) Create(ctx context.Context, createRepresentative shared.CreateRepresentative, accountID string) (*operations.CreateRepresentativeResponse, error) {
+	request := operations.CreateRepresentativeRequest{
+		CreateRepresentative: createRepresentative,
+		AccountID:            accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/representatives", request, nil)
 	if err != nil {
@@ -102,7 +107,12 @@ func (s *representatives) Create(ctx context.Context, request operations.CreateR
 
 // Delete - Delete a representative
 // Deletes a business representative associated with a Moov account. <br><br> To use this endpoint, you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
-func (s *representatives) Delete(ctx context.Context, request operations.DeleteRepresentativeRequest) (*operations.DeleteRepresentativeResponse, error) {
+func (s *representatives) Delete(ctx context.Context, accountID string, representativeID string) (*operations.DeleteRepresentativeResponse, error) {
+	request := operations.DeleteRepresentativeRequest{
+		AccountID:        accountID,
+		RepresentativeID: representativeID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/representatives/{representativeID}", request, nil)
 	if err != nil {
@@ -155,7 +165,12 @@ func (s *representatives) Delete(ctx context.Context, request operations.DeleteR
 
 // Get - Get representative
 // Retrieve a specific representative associated with a given Moov account. <br><br> To get a representative, you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
-func (s *representatives) Get(ctx context.Context, request operations.GetRepresentativeRequest) (*operations.GetRepresentativeResponse, error) {
+func (s *representatives) Get(ctx context.Context, accountID string, representativeID string) (*operations.GetRepresentativeResponse, error) {
+	request := operations.GetRepresentativeRequest{
+		AccountID:        accountID,
+		RepresentativeID: representativeID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/representatives/{representativeID}", request, nil)
 	if err != nil {
@@ -218,7 +233,11 @@ func (s *representatives) Get(ctx context.Context, request operations.GetReprese
 
 // List - List representatives
 // A Moov account may have multiple representatives depending on the associated business's ownership and management structure. You can use this method to list all the representatives for a given Moov account. Note that Moov accounts associated with an individual do not have representatives. <br><br> To list representatives, you need to specify the `/accounts/{accountID}/representatives.read` scope.
-func (s *representatives) List(ctx context.Context, request operations.ListRepresentativesRequest) (*operations.ListRepresentativesResponse, error) {
+func (s *representatives) List(ctx context.Context, accountID string) (*operations.ListRepresentativesResponse, error) {
+	request := operations.ListRepresentativesRequest{
+		AccountID: accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/representatives", request, nil)
 	if err != nil {
@@ -294,7 +313,13 @@ func (s *representatives) List(ctx context.Context, request operations.ListRepre
 //   - Verified representatives cannot change any existing profile data.
 //
 // If you need to update information in a locked state, please contact Moov support.
-func (s *representatives) Update(ctx context.Context, request operations.PatchRepresentativeRequest) (*operations.PatchRepresentativeResponse, error) {
+func (s *representatives) Update(ctx context.Context, patchRepresentativeRequest shared.PatchRepresentativeRequest, accountID string, representativeID string) (*operations.PatchRepresentativeResponse, error) {
+	request := operations.PatchRepresentativeRequest{
+		PatchRepresentativeRequest: patchRepresentativeRequest,
+		AccountID:                  accountID,
+		RepresentativeID:           representativeID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/representatives/{representativeID}", request, nil)
 	if err != nil {

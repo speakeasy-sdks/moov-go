@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 	"strings"
 )
 
@@ -28,7 +28,13 @@ func newTransfers(sdkConfig sdkConfiguration) *transfers {
 
 // Cancel - Cancel or refund a card transfer
 // Reverses a card transfer by initiating a cancellation or refund depending on the transaction status
-func (s *transfers) Cancel(ctx context.Context, request operations.CancelTransferRequest) (*operations.CancelTransferResponse, error) {
+func (s *transfers) Cancel(ctx context.Context, xIdempotencyKey string, transferID string, createReversal *shared.CreateReversal) (*operations.CancelTransferResponse, error) {
+	request := operations.CancelTransferRequest{
+		XIdempotencyKey: xIdempotencyKey,
+		TransferID:      transferID,
+		CreateReversal:  createReversal,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/transfers/{transferID}/reversals", request, nil)
 	if err != nil {
@@ -116,7 +122,13 @@ func (s *transfers) Cancel(ctx context.Context, request operations.CancelTransfe
 
 // Create - Create a transfer
 // Move money by providing the source, destination, and amount in the request body. <br><br> To create a transfer, you must specify the `/accounts/{yourAccountID}/transfers.write` scope. <br> You can find your account id on the [Business details](https://dashboard.moov.io/settings/business) page.
-func (s *transfers) Create(ctx context.Context, request operations.CreateTransferRequest) (*operations.CreateTransferResponse, error) {
+func (s *transfers) Create(ctx context.Context, createTransfer shared.CreateTransfer, xIdempotencyKey string, xWaitFor *shared.WaitFor) (*operations.CreateTransferResponse, error) {
+	request := operations.CreateTransferRequest{
+		CreateTransfer:  createTransfer,
+		XIdempotencyKey: xIdempotencyKey,
+		XWaitFor:        xWaitFor,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/transfers"
 
@@ -284,7 +296,12 @@ func (s *transfers) GenerateOptions(ctx context.Context, request shared.CreateTr
 
 // Get - Get a transfer
 // Retrieve full transfer details such as the amount, source, and destination. Payment rail-specific details are included in the source and destination. <br><br> To get a transfer, you must specify the `/accounts/{yourAccountID}/transfers.read` scope. The accountID included must be your facilitator accountID. <br> You can find your accountID on the [Business details](https://dashboard.moov.io/settings/business) page.
-func (s *transfers) Get(ctx context.Context, request operations.GetTransferRequest) (*operations.GetTransferResponse, error) {
+func (s *transfers) Get(ctx context.Context, transferID string, accountID *string) (*operations.GetTransferResponse, error) {
+	request := operations.GetTransferRequest{
+		TransferID: transferID,
+		AccountID:  accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/transfers/{transferID}", request, nil)
 	if err != nil {
@@ -349,7 +366,12 @@ func (s *transfers) Get(ctx context.Context, request operations.GetTransferReque
 
 // GetRefund - Get refund details
 // Get details of a refund for a card transfer
-func (s *transfers) GetRefund(ctx context.Context, request operations.GetRefundRequest) (*operations.GetRefundResponse, error) {
+func (s *transfers) GetRefund(ctx context.Context, refundID string, transferID string) (*operations.GetRefundResponse, error) {
+	request := operations.GetRefundRequest{
+		RefundID:   refundID,
+		TransferID: transferID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/transfers/{transferID}/refunds/{refundID}", request, nil)
 	if err != nil {
@@ -410,7 +432,11 @@ func (s *transfers) GetRefund(ctx context.Context, request operations.GetRefundR
 
 // ListRefunds - Get a list of refunds for a card transfer
 // Get a list of refunds for a card transfer
-func (s *transfers) ListRefunds(ctx context.Context, request operations.ListRefundsRequest) (*operations.ListRefundsResponse, error) {
+func (s *transfers) ListRefunds(ctx context.Context, transferID string) (*operations.ListRefundsResponse, error) {
+	request := operations.ListRefundsRequest{
+		TransferID: transferID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/transfers/{transferID}/refunds", request, nil)
 	if err != nil {
@@ -471,7 +497,14 @@ func (s *transfers) ListRefunds(ctx context.Context, request operations.ListRefu
 
 // Refund - Refund a transfer
 // <strong>Use the <a href="index.html#tag/Transfers/operation/reverseTransfer">Cancel or refund a card transfer</a> endpoint for more robust cancel and refund options.</strong> <br><br> Initiate a refund for a card transfer <br><br> To initiate a refund, you will need to specify the `/accounts/{accountID}/transfers.write` scope.
-func (s *transfers) Refund(ctx context.Context, request operations.RefundTransferRequest) (*operations.RefundTransferResponse, error) {
+func (s *transfers) Refund(ctx context.Context, xIdempotencyKey string, transferID string, createRefund *shared.CreateRefund, xWaitFor *shared.WaitFor) (*operations.RefundTransferResponse, error) {
+	request := operations.RefundTransferRequest{
+		XIdempotencyKey: xIdempotencyKey,
+		TransferID:      transferID,
+		CreateRefund:    createRefund,
+		XWaitFor:        xWaitFor,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/transfers/{transferID}/refunds", request, nil)
 	if err != nil {
@@ -559,7 +592,13 @@ func (s *transfers) Refund(ctx context.Context, request operations.RefundTransfe
 
 // Update - Patch transfer metadata
 // Update the metadata contained on a transfer <br><br> To patch a transfer, you must specify the `/accounts/{yourAccountID}/transfers.write` scope. The accountID included must be your facilitator accountID. <br> You can find your account ID on the [Business details](https://dashboard.moov.io/settings/business) page.
-func (s *transfers) Update(ctx context.Context, request operations.PatchTransferRequest) (*operations.PatchTransferResponse, error) {
+func (s *transfers) Update(ctx context.Context, patchTransfer shared.PatchTransfer, transferID string, accountID *string) (*operations.PatchTransferResponse, error) {
+	request := operations.PatchTransferRequest{
+		PatchTransfer: patchTransfer,
+		TransferID:    transferID,
+		AccountID:     accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/transfers/{transferID}", request, nil)
 	if err != nil {

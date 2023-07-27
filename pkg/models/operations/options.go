@@ -4,7 +4,7 @@ package operations
 
 import (
 	"errors"
-	"openapi/pkg/utils"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
 var ErrUnsupportedOption = errors.New("unsupported option")

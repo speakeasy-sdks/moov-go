@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 	"strings"
 )
 

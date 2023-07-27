@@ -24,9 +24,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -35,53 +35,52 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Representatives.Create(ctx, operations.CreateRepresentativeRequest{
-        CreateRepresentative: shared.CreateRepresentative{
-            Address: &shared.CreateRepresentativeAddress{
-                AddressLine1: moov.String("123 Main Street"),
-                AddressLine2: moov.String("Apt 302"),
-                City: moov.String("Boulder"),
-                Country: moov.String("US"),
-                PostalCode: moov.String("80301"),
-                StateOrProvince: moov.String("CO"),
+    createRepresentative := shared.CreateRepresentative{
+        Address: &shared.CreateRepresentativeAddress{
+            AddressLine1: moov.String("123 Main Street"),
+            AddressLine2: moov.String("Apt 302"),
+            City: moov.String("Boulder"),
+            Country: moov.String("US"),
+            PostalCode: moov.String("80301"),
+            StateOrProvince: moov.String("CO"),
+        },
+        BirthDate: &shared.CreateRepresentativeBirthDate{
+            Day: 9,
+            Month: 11,
+            Year: 1989,
+        },
+        Email: moov.String("amanda@classbooker.dev"),
+        GovernmentID: &shared.CreateRepresentativeGovernmentID{
+            Itin: &shared.CreateRepresentativeGovernmentIDItin{
+                Full: moov.String("123-45-6789"),
+                LastFour: moov.String("6789"),
             },
-            BirthDate: &shared.CreateRepresentativeBirthDate{
-                Day: 9,
-                Month: 11,
-                Year: 1989,
-            },
-            Email: moov.String("amanda@classbooker.dev"),
-            GovernmentID: &shared.CreateRepresentativeGovernmentID{
-                Itin: &shared.CreateRepresentativeGovernmentIDItin{
-                    Full: moov.String("123-45-6789"),
-                    LastFour: moov.String("6789"),
-                },
-                Ssn: &shared.CreateRepresentativeGovernmentIDSsn{
-                    Full: moov.String("123-45-6789"),
-                    LastFour: moov.String("6789"),
-                },
-            },
-            Name: &shared.CreateRepresentativeName{
-                FirstName: "Amanda",
-                LastName: "Yang",
-                MiddleName: moov.String("Amanda"),
-                Suffix: moov.String("Jr"),
-            },
-            Phone: &shared.CreateRepresentativePhone{
-                CountryCode: moov.String("1"),
-                Number: moov.String("8185551212"),
-            },
-            Responsibilities: &shared.CreateRepresentativeResponsibilities{
-                IsController: false,
-                IsOwner: true,
-                JobTitle: "CEO",
-                OwnershipPercentage: 38,
+            Ssn: &shared.CreateRepresentativeGovernmentIDSsn{
+                Full: moov.String("123-45-6789"),
+                LastFour: moov.String("6789"),
             },
         },
-        AccountID: "de047717-78ff-461d-8174-76360a15db6a",
-    })
+        Name: &shared.CreateRepresentativeName{
+            FirstName: "Amanda",
+            LastName: "Yang",
+            MiddleName: moov.String("Amanda"),
+            Suffix: moov.String("Jr"),
+        },
+        Phone: &shared.CreateRepresentativePhone{
+            CountryCode: moov.String("1"),
+            Number: moov.String("8185551212"),
+        },
+        Responsibilities: &shared.CreateRepresentativeResponsibilities{
+            IsController: false,
+            IsOwner: true,
+            JobTitle: "CEO",
+            OwnershipPercentage: 38,
+        },
+    }
+    accountID := "312fde04-7717-478f-b61d-017476360a15"
+
+    ctx := context.Background()
+    res, err := s.Representatives.Create(ctx, createRepresentative, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -94,10 +93,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `request`                                                                                        | [operations.CreateRepresentativeRequest](../../models/operations/createrepresentativerequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
+| `createRepresentative`                                                     | [shared.CreateRepresentative](../../models/shared/createrepresentative.md) | :heavy_check_mark:                                                         | N/A                                                                        |
+| `accountID`                                                                | *string*                                                                   | :heavy_check_mark:                                                         | ID of the account                                                          |
 
 
 ### Response
@@ -117,9 +117,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -128,12 +128,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "db6a6606-59a1-4ade-aab5-851d6c645b08"
+    representativeID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.Representatives.Delete(ctx, operations.DeleteRepresentativeRequest{
-        AccountID: "660659a1-adea-4ab5-851d-6c645b08b618",
-        RepresentativeID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.Representatives.Delete(ctx, accountID, representativeID)
     if err != nil {
         log.Fatal(err)
     }
@@ -146,10 +145,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `request`                                                                                        | [operations.DeleteRepresentativeRequest](../../models/operations/deleterepresentativerequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |                                                       |
+| `representativeID`                                    | *string*                                              | :heavy_check_mark:                                    | ID of the representative                              | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
 
 
 ### Response
@@ -169,9 +169,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -180,12 +180,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "b61891ba-a0fe-41ad-a008-e6f8c5f350d8"
+    representativeID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.Representatives.Get(ctx, operations.GetRepresentativeRequest{
-        AccountID: "91baa0fe-1ade-4008-a6f8-c5f350d8cdb5",
-        RepresentativeID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.Representatives.Get(ctx, accountID, representativeID)
     if err != nil {
         log.Fatal(err)
     }
@@ -198,10 +197,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
-| `request`                                                                                  | [operations.GetRepresentativeRequest](../../models/operations/getrepresentativerequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |                                                       |
+| `representativeID`                                    | *string*                                              | :heavy_check_mark:                                    | ID of the representative                              | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
 
 
 ### Response
@@ -221,9 +221,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -232,11 +232,10 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "cdb5a341-8143-4010-8218-13d5208ece7e"
 
     ctx := context.Background()
-    res, err := s.Representatives.List(ctx, operations.ListRepresentativesRequest{
-        AccountID: "a3418143-0104-4218-93d5-208ece7e253b",
-    })
+    res, err := s.Representatives.List(ctx, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -249,10 +248,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.ListRepresentativesRequest](../../models/operations/listrepresentativesrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |
 
 
 ### Response
@@ -284,9 +283,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -295,54 +294,53 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Representatives.Update(ctx, operations.PatchRepresentativeRequest{
-        PatchRepresentativeRequest: shared.PatchRepresentativeRequest{
-            Address: &shared.PatchRepresentativeRequestAddress{
-                AddressLine1: moov.String("123 Main Street"),
-                AddressLine2: moov.String("Apt 302"),
-                City: moov.String("Boulder"),
-                Country: moov.String("US"),
-                PostalCode: moov.String("80301"),
-                StateOrProvince: moov.String("CO"),
+    patchRepresentativeRequest := shared.PatchRepresentativeRequest{
+        Address: &shared.PatchRepresentativeRequestAddress{
+            AddressLine1: moov.String("123 Main Street"),
+            AddressLine2: moov.String("Apt 302"),
+            City: moov.String("Boulder"),
+            Country: moov.String("US"),
+            PostalCode: moov.String("80301"),
+            StateOrProvince: moov.String("CO"),
+        },
+        BirthDate: &shared.PatchRepresentativeRequestBirthDate{
+            Day: 9,
+            Month: 11,
+            Year: 1989,
+        },
+        Email: moov.String("amanda@classbooker.dev"),
+        GovernmentID: &shared.PatchRepresentativeRequestGovernmentID{
+            Itin: &shared.PatchRepresentativeRequestGovernmentIDItin{
+                Full: moov.String("123-45-6789"),
+                LastFour: moov.String("6789"),
             },
-            BirthDate: &shared.PatchRepresentativeRequestBirthDate{
-                Day: 9,
-                Month: 11,
-                Year: 1989,
-            },
-            Email: moov.String("amanda@classbooker.dev"),
-            GovernmentID: &shared.PatchRepresentativeRequestGovernmentID{
-                Itin: &shared.PatchRepresentativeRequestGovernmentIDItin{
-                    Full: moov.String("123-45-6789"),
-                    LastFour: moov.String("6789"),
-                },
-                Ssn: &shared.PatchRepresentativeRequestGovernmentIDSsn{
-                    Full: moov.String("123-45-6789"),
-                    LastFour: moov.String("6789"),
-                },
-            },
-            Name: &shared.PatchRepresentativeRequestName{
-                FirstName: moov.String("Amanda"),
-                LastName: moov.String("Yang"),
-                MiddleName: moov.String("Amanda"),
-                Suffix: moov.String("Jr"),
-            },
-            Phone: &shared.PatchRepresentativeRequestPhone{
-                CountryCode: moov.String("1"),
-                Number: moov.String("8185551212"),
-            },
-            Responsibilities: &shared.PatchRepresentativeRequestResponsibilities{
-                IsController: moov.Bool(false),
-                IsOwner: moov.Bool(true),
-                JobTitle: moov.String("CEO"),
-                OwnershipPercentage: moov.Int64(38),
+            Ssn: &shared.PatchRepresentativeRequestGovernmentIDSsn{
+                Full: moov.String("123-45-6789"),
+                LastFour: moov.String("6789"),
             },
         },
-        AccountID: "668451c6-c6e2-405e-96de-ab3fec9578a6",
-        RepresentativeID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+        Name: &shared.PatchRepresentativeRequestName{
+            FirstName: moov.String("Amanda"),
+            LastName: moov.String("Yang"),
+            MiddleName: moov.String("Amanda"),
+            Suffix: moov.String("Jr"),
+        },
+        Phone: &shared.PatchRepresentativeRequestPhone{
+            CountryCode: moov.String("1"),
+            Number: moov.String("8185551212"),
+        },
+        Responsibilities: &shared.PatchRepresentativeRequestResponsibilities{
+            IsController: moov.Bool(false),
+            IsOwner: moov.Bool(true),
+            JobTitle: moov.String("CEO"),
+            OwnershipPercentage: moov.Int64(38),
+        },
+    }
+    accountID := "253b6684-51c6-4c6e-a05e-16deab3fec95"
+    representativeID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+
+    ctx := context.Background()
+    res, err := s.Representatives.Update(ctx, patchRepresentativeRequest, accountID, representativeID)
     if err != nil {
         log.Fatal(err)
     }
@@ -355,10 +353,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.PatchRepresentativeRequest](../../models/operations/patchrepresentativerequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |                                                                                        |
+| `patchRepresentativeRequest`                                                           | [shared.PatchRepresentativeRequest](../../models/shared/patchrepresentativerequest.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |                                                                                        |
+| `accountID`                                                                            | *string*                                                                               | :heavy_check_mark:                                                                     | ID of the account                                                                      |                                                                                        |
+| `representativeID`                                                                     | *string*                                                                               | :heavy_check_mark:                                                                     | ID of the representative                                                               | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                   |
 
 
 ### Response

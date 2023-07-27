@@ -20,9 +20,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -31,14 +31,13 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "78a64584-273a-4841-8d16-2309fb092992"
+    count := 81369
+    skip := 686362
+    status := shared.IssuedCardTransactionStatusVoided
 
     ctx := context.Background()
-    res, err := s.Transactions.List(ctx, operations.ListAccountIssuedCardTransactionsRequest{
-        AccountID: "4584273a-8418-4d16-a309-fb0929921aef",
-        Count: moov.Int64(719620),
-        Skip: moov.Int64(608593),
-        Status: shared.IssuedCardTransactionStatusVoided.ToPointer(),
-    })
+    res, err := s.Transactions.List(ctx, accountID, count, skip, status)
     if err != nil {
         log.Fatal(err)
     }
@@ -51,10 +50,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
-| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
-| `request`                                                                                                                  | [operations.ListAccountIssuedCardTransactionsRequest](../../models/operations/listaccountissuedcardtransactionsrequest.md) | :heavy_check_mark:                                                                                                         | The request object to use for the request.                                                                                 |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `ctx`                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                     | :heavy_check_mark:                                                                        | The context to use for the request.                                                       |
+| `accountID`                                                                               | *string*                                                                                  | :heavy_check_mark:                                                                        | ID of the account                                                                         |
+| `count`                                                                                   | **int64*                                                                                  | :heavy_minus_sign:                                                                        | Optional parameter to limit the number of results in the query                            |
+| `skip`                                                                                    | **int64*                                                                                  | :heavy_minus_sign:                                                                        | The number of items to offset before starting to collect the result set                   |
+| `status`                                                                                  | [*shared.IssuedCardTransactionStatus](../../models/shared/issuedcardtransactionstatus.md) | :heavy_minus_sign:                                                                        | Optional parameters to filter results IssuedCardTransactions.                             |
 
 
 ### Response

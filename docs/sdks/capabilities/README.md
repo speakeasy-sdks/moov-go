@@ -23,9 +23,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -34,12 +34,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "d446ce2a-f7a7-43cf-bbe4-53f870b326b5"
+    capabilityID := shared.CapabilityIDWallet
 
     ctx := context.Background()
-    res, err := s.Capabilities.Delete(ctx, operations.DeleteCapabilityRequest{
-        AccountID: "d446ce2a-f7a7-43cf-bbe4-53f870b326b5",
-        CapabilityID: shared.CapabilityIDWallet,
-    })
+    res, err := s.Capabilities.Delete(ctx, accountID, capabilityID)
     if err != nil {
         log.Fatal(err)
     }
@@ -52,10 +51,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.DeleteCapabilityRequest](../../models/operations/deletecapabilityrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `ctx`                                                      | [context.Context](https://pkg.go.dev/context#Context)      | :heavy_check_mark:                                         | The context to use for the request.                        |
+| `accountID`                                                | *string*                                                   | :heavy_check_mark:                                         | ID of the account                                          |
+| `capabilityID`                                             | [shared.CapabilityID](../../models/shared/capabilityid.md) | :heavy_check_mark:                                         | The requested capability identifier                        |
 
 
 ### Response
@@ -75,9 +75,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -86,12 +86,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "73429cdb-1a84-422b-b679-d2322715bf0c"
+    capabilityID := shared.CapabilityIDWallet
 
     ctx := context.Background()
-    res, err := s.Capabilities.Get(ctx, operations.GetCapabilityRequest{
-        AccountID: "73429cdb-1a84-422b-b679-d2322715bf0c",
-        CapabilityID: shared.CapabilityIDWallet,
-    })
+    res, err := s.Capabilities.Get(ctx, accountID, capabilityID)
     if err != nil {
         log.Fatal(err)
     }
@@ -104,10 +103,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
-| `request`                                                                          | [operations.GetCapabilityRequest](../../models/operations/getcapabilityrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `ctx`                                                      | [context.Context](https://pkg.go.dev/context#Context)      | :heavy_check_mark:                                         | The context to use for the request.                        |
+| `accountID`                                                | *string*                                                   | :heavy_check_mark:                                         | ID of the account                                          |
+| `capabilityID`                                             | [shared.CapabilityID](../../models/shared/capabilityid.md) | :heavy_check_mark:                                         | The requested capability identifier                        |
 
 
 ### Response
@@ -127,9 +127,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -138,11 +138,10 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "b1e31b8b-90f3-4443-a110-8e0adcf4b921"
 
     ctx := context.Background()
-    res, err := s.Capabilities.List(ctx, operations.ListCapabilitiesRequest{
-        AccountID: "b1e31b8b-90f3-4443-a110-8e0adcf4b921",
-    })
+    res, err := s.Capabilities.List(ctx, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -155,10 +154,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.ListCapabilitiesRequest](../../models/operations/listcapabilitiesrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |
 
 
 ### Response
@@ -178,9 +177,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -189,18 +188,17 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    addCapabilityRequest := shared.AddCapabilityRequest{
+        Capabilities: []shared.CapabilityID{
+            shared.CapabilityIDCollectFunds,
+            shared.CapabilityIDCollectFunds,
+            shared.CapabilityIDCardIssuing,
+        },
+    }
+    accountID := "ce953f73-ef7f-4bc7-abd7-4dd39c0f5d2c"
 
     ctx := context.Background()
-    res, err := s.Capabilities.Request(ctx, operations.PostCapabilityRequest{
-        AddCapabilityRequest: shared.AddCapabilityRequest{
-            Capabilities: []shared.CapabilityID{
-                shared.CapabilityIDCollectFunds,
-                shared.CapabilityIDCollectFunds,
-                shared.CapabilityIDCardIssuing,
-            },
-        },
-        AccountID: "ce953f73-ef7f-4bc7-abd7-4dd39c0f5d2c",
-    })
+    res, err := s.Capabilities.Request(ctx, addCapabilityRequest, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -213,10 +211,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.PostCapabilityRequest](../../models/operations/postcapabilityrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
+| `addCapabilityRequest`                                                     | [shared.AddCapabilityRequest](../../models/shared/addcapabilityrequest.md) | :heavy_check_mark:                                                         | N/A                                                                        |
+| `accountID`                                                                | *string*                                                                   | :heavy_check_mark:                                                         | ID of the account                                                          |
 
 
 ### Response

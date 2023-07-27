@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 	"strings"
 )
 
@@ -91,7 +91,11 @@ func (s *enrichment) GetAddress(ctx context.Context, request operations.GetAddre
 // GetAvatar - Get avatar
 // Get avatar image for an account using a unique ID.
 // <br><br> To get an avatar, you must specify the `/profile-enrichment.read` scope.
-func (s *enrichment) GetAvatar(ctx context.Context, request operations.GetAvatarRequest) (*operations.GetAvatarResponse, error) {
+func (s *enrichment) GetAvatar(ctx context.Context, uniqueID string) (*operations.GetAvatarResponse, error) {
+	request := operations.GetAvatarRequest{
+		UniqueID: uniqueID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/avatars/{uniqueID}", request, nil)
 	if err != nil {
@@ -206,7 +210,11 @@ func (s *enrichment) GetIndustries(ctx context.Context) (*operations.GetIndustri
 // GetProfile - Get enriched profile
 // Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit.
 // <br><br> To get enriched profile information, you must specify the `/profile-enrichment.read` scope.
-func (s *enrichment) GetProfile(ctx context.Context, request operations.GetEnrichmentProfileRequest) (*operations.GetEnrichmentProfileResponse, error) {
+func (s *enrichment) GetProfile(ctx context.Context, email string) (*operations.GetEnrichmentProfileResponse, error) {
+	request := operations.GetEnrichmentProfileRequest{
+		Email: email,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/enrichment/profile"
 

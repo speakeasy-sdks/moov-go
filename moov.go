@@ -4,9 +4,9 @@ package moov
 
 import (
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"net/http"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 	"time"
 )
 
@@ -174,7 +174,7 @@ func New(opts ...SDKOption) *Moov {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "0.1.0",
+			SDKVersion:        "0.1.1",
 			GenVersion:        "2.75.1",
 		},
 	}

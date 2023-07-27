@@ -28,9 +28,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -39,12 +39,11 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "12eb07f1-16db-4995-85fc-95fa88970e18"
+    walletID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.Wallets.Get(ctx, operations.GetWalletForAccountRequest{
-        AccountID: "f116db99-545f-4c95-ba88-970e189dbb30",
-        WalletID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.Wallets.Get(ctx, accountID, walletID)
     if err != nil {
         log.Fatal(err)
     }
@@ -57,10 +56,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.GetWalletForAccountRequest](../../models/operations/getwalletforaccountrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |                                                       |
+| `walletID`                                            | *string*                                              | :heavy_check_mark:                                    | ID of the wallet                                      | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
 
 
 ### Response
@@ -80,9 +80,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -91,13 +91,12 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "9dbb30fc-b33e-4a05-9b19-7cd44e2f52d8"
+    transactionID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    walletID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
-    res, err := s.Wallets.GetTransaction(ctx, operations.GetWalletTransactionRequest{
-        AccountID: "fcb33ea0-55b1-497c-944e-2f52d82d3513",
-        TransactionID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-        WalletID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
-    })
+    res, err := s.Wallets.GetTransaction(ctx, accountID, transactionID, walletID)
     if err != nil {
         log.Fatal(err)
     }
@@ -110,10 +109,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `request`                                                                                        | [operations.GetWalletTransactionRequest](../../models/operations/getwallettransactionrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |                                                       |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |                                                       |
+| `transactionID`                                       | *string*                                              | :heavy_check_mark:                                    | ID associated with the wallet transaction.            | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
+| `walletID`                                            | *string*                                              | :heavy_check_mark:                                    | ID of the wallet                                      | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                  |
 
 
 ### Response
@@ -133,9 +134,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -144,11 +145,10 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "2d3513bb-6f48-4b65-abcd-b35ff2e4b275"
 
     ctx := context.Background()
-    res, err := s.Wallets.List(ctx, operations.ListWalletsForAccountRequest{
-        AccountID: "bb6f48b6-56bc-4db3-9ff2-e4b27537a8cd",
-    })
+    res, err := s.Wallets.List(ctx, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -161,10 +161,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
-| `request`                                                                                          | [operations.ListWalletsForAccountRequest](../../models/operations/listwalletsforaccountrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |
 
 
 ### Response
@@ -184,9 +184,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -198,17 +198,17 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Wallets.ListTransactions(ctx, operations.ListWalletTransactionsRequest{
-        AccountID: "9e7319c1-77d5-425f-b7b1-14eeb52ff785",
-        CompletedEndDateTime: moov.String("repellat"),
-        CompletedStartDateTime: moov.String("quisquam"),
-        Count: moov.Int64(197259),
-        CreatedEndDateTime: moov.String("nihil"),
-        CreatedStartDateTime: moov.String("deleniti"),
-        Skip: moov.Int64(75566),
-        SourceID: moov.String("labore"),
-        SourceType: moov.String("assumenda"),
-        Status: moov.String("aliquam"),
-        TransactionType: moov.String("quisquam"),
+        AccountID: "37a8cd9e-7319-4c17-bd52-5f77b114eeb5",
+        CompletedEndDateTime: moov.String("eos"),
+        CompletedStartDateTime: moov.String("reiciendis"),
+        Count: moov.Int64(939161),
+        CreatedEndDateTime: moov.String("reprehenderit"),
+        CreatedStartDateTime: moov.String("praesentium"),
+        Skip: moov.Int64(367046),
+        SourceID: moov.String("repellat"),
+        SourceType: moov.String("quisquam"),
+        Status: moov.String("sequi"),
+        TransactionType: moov.String("nihil"),
         WalletID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {

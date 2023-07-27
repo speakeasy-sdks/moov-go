@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 )
 
 // cards - You can link credit or debit cards to Moov accounts. You can use a card as a source for making transfers, which charges the card. To link a card to a Moov account and avoid some of the burden of PCI compliance, use the [card link Moov Drop](https://docs.moov.io/moovjs/drops/card-link). You cannot add a card via the Dashboard. If you're linking a card via API, you must provide Moov with a copy of your PCI attestation of compliance. When testing cards, use the designated [card numbers for test mode](https://docs.moov.io/guides/set-up-your-account/test-mode/#cards). You must contact Moov before going live in production with cards. Read our guide on [cards](https://docs.moov.io/guides/sources/cards/) for more information.
@@ -29,7 +29,12 @@ func newCards(sdkConfig sdkConfiguration) *cards {
 // Connect an Apple Pay token to the specified account.
 // The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.write` scope.
-func (s *cards) LinkApplePayToken(ctx context.Context, request operations.PostLinkApplePayTokenRequest) (*operations.PostLinkApplePayTokenResponse, error) {
+func (s *cards) LinkApplePayToken(ctx context.Context, linkApplePay shared.LinkApplePay, accountID string) (*operations.PostLinkApplePayTokenResponse, error) {
+	request := operations.PostLinkApplePayTokenRequest{
+		LinkApplePay: linkApplePay,
+		AccountID:    accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/apple-pay/tokens", request, nil)
 	if err != nil {
@@ -103,7 +108,13 @@ func (s *cards) LinkApplePayToken(ctx context.Context, request operations.PostLi
 // LinkCard - Link card
 // Link a card to an existing Moov account. Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.write` scope.
-func (s *cards) LinkCard(ctx context.Context, request operations.PostLinkCardRequest, opts ...operations.Option) (*operations.PostLinkCardResponse, error) {
+func (s *cards) LinkCard(ctx context.Context, cardRequest shared.CardRequest, accountID string, xWaitFor *shared.SchemasWaitFor, opts ...operations.Option) (*operations.PostLinkCardResponse, error) {
+	request := operations.PostLinkCardRequest{
+		CardRequest: cardRequest,
+		AccountID:   accountID,
+		XWaitFor:    xWaitFor,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionServerURL,
@@ -206,7 +217,11 @@ func (s *cards) LinkCard(ctx context.Context, request operations.PostLinkCardReq
 
 // ListCards - List cards
 // List all the cards associated with a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.read` scope.
-func (s *cards) ListCards(ctx context.Context, request operations.GetListCardsRequest) (*operations.GetListCardsResponse, error) {
+func (s *cards) ListCards(ctx context.Context, accountID string) (*operations.GetListCardsResponse, error) {
+	request := operations.GetListCardsRequest{
+		AccountID: accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/cards", request, nil)
 	if err != nil {
@@ -271,7 +286,12 @@ func (s *cards) ListCards(ctx context.Context, request operations.GetListCardsRe
 // Create a session with Apple Pay to facilitate a payment.
 // A successful response from this endpoint should be passed through to Apple Pay unchanged.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-func (s *cards) CreateApplePaySession(ctx context.Context, request operations.PostApplePaySessionRequest) (*operations.PostApplePaySessionResponse, error) {
+func (s *cards) CreateApplePaySession(ctx context.Context, createApplePaySession shared.CreateApplePaySession, accountID string) (*operations.PostApplePaySessionResponse, error) {
+	request := operations.PostApplePaySessionRequest{
+		CreateApplePaySession: createApplePaySession,
+		AccountID:             accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/apple-pay/sessions", request, nil)
 	if err != nil {
@@ -344,7 +364,12 @@ func (s *cards) CreateApplePaySession(ctx context.Context, request operations.Po
 
 // Delete - Disable card
 // Disables a card associated with a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.write` scope.
-func (s *cards) Delete(ctx context.Context, request operations.DeleteCardRequest) (*operations.DeleteCardResponse, error) {
+func (s *cards) Delete(ctx context.Context, accountID string, cardID string) (*operations.DeleteCardResponse, error) {
+	request := operations.DeleteCardRequest{
+		AccountID: accountID,
+		CardID:    cardID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/cards/{cardID}", request, nil)
 	if err != nil {
@@ -397,7 +422,12 @@ func (s *cards) Delete(ctx context.Context, request operations.DeleteCardRequest
 
 // Get - Get card
 // Fetch a specific card associated with a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.read` scope.
-func (s *cards) Get(ctx context.Context, request operations.GetCardRequest) (*operations.GetCardResponse, error) {
+func (s *cards) Get(ctx context.Context, accountID string, cardID string) (*operations.GetCardResponse, error) {
+	request := operations.GetCardRequest{
+		AccountID: accountID,
+		CardID:    cardID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/cards/{cardID}", request, nil)
 	if err != nil {
@@ -461,7 +491,11 @@ func (s *cards) Get(ctx context.Context, request operations.GetCardRequest) (*op
 // ListApplePayDomains - Get Apple Pay domains
 // Get domains registered with Apple Pay.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/apple-pay.read` scope.
-func (s *cards) ListApplePayDomains(ctx context.Context, request operations.GetApplePayMerchantDomainsRequest) (*operations.GetApplePayMerchantDomainsResponse, error) {
+func (s *cards) ListApplePayDomains(ctx context.Context, accountID string) (*operations.GetApplePayMerchantDomainsResponse, error) {
+	request := operations.GetApplePayMerchantDomainsRequest{
+		AccountID: accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/apple-pay/domains", request, nil)
 	if err != nil {
@@ -526,7 +560,12 @@ func (s *cards) ListApplePayDomains(ctx context.Context, request operations.GetA
 // Add domains to be registered with Apple Pay.
 // <br><br> Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/money-movement/cards/apple-pay/#step-1-register-your-domains) with Apple.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-func (s *cards) RegisterApplePayDomain(ctx context.Context, request operations.PostApplePayMerchantDomainsRequest) (*operations.PostApplePayMerchantDomainsResponse, error) {
+func (s *cards) RegisterApplePayDomain(ctx context.Context, registerApplePayMerchantDomains shared.RegisterApplePayMerchantDomains, accountID string) (*operations.PostApplePayMerchantDomainsResponse, error) {
+	request := operations.PostApplePayMerchantDomainsRequest{
+		RegisterApplePayMerchantDomains: registerApplePayMerchantDomains,
+		AccountID:                       accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/apple-pay/domains", request, nil)
 	if err != nil {
@@ -607,7 +646,13 @@ func (s *cards) RegisterApplePayDomain(ctx context.Context, request operations.P
 // address will update the information stored on file for the card but will not be verified.
 // Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.write` scope.
-func (s *cards) Update(ctx context.Context, request operations.UpdateCardRequest) (*operations.UpdateCardResponse, error) {
+func (s *cards) Update(ctx context.Context, cardUpdateRequest shared.CardUpdateRequest, accountID string, cardID string) (*operations.UpdateCardResponse, error) {
+	request := operations.UpdateCardRequest{
+		CardUpdateRequest: cardUpdateRequest,
+		AccountID:         accountID,
+		CardID:            cardID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/cards/{cardID}", request, nil)
 	if err != nil {
@@ -696,7 +741,12 @@ func (s *cards) Update(ctx context.Context, request operations.UpdateCardRequest
 // Add or remove domains to be registered with Apple Pay.
 // <br><br> Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/money-movement/cards/apple-pay/#step-1-register-your-domains) with Apple.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-func (s *cards) UpdateApplePayDomains(ctx context.Context, request operations.UpdateApplePayMerchantDomainsRequest) (*operations.UpdateApplePayMerchantDomainsResponse, error) {
+func (s *cards) UpdateApplePayDomains(ctx context.Context, updateApplePayMerchantDomains shared.UpdateApplePayMerchantDomains, accountID string) (*operations.UpdateApplePayMerchantDomainsResponse, error) {
+	request := operations.UpdateApplePayMerchantDomainsRequest{
+		UpdateApplePayMerchantDomains: updateApplePayMerchantDomains,
+		AccountID:                     accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/apple-pay/domains", request, nil)
 	if err != nil {

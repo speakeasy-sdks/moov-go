@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 )
 
 // bankAccounts - To transfer money with Moov, you’ll need to link a bank account to your Moov account, then verify that account. You can link a bank account to a Moov account by providing the bank account number, routing number, and Moov account ID.
@@ -31,7 +31,12 @@ func newBankAccounts(sdkConfig sdkConfiguration) *bankAccounts {
 
 // InitiateMicroDeposits - Initiate micro-deposits
 // Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of unauthorized activity. Use this method to initiate the micro-deposit verification, sending two small credit transfers to the bank account you want to confirm. If you request micro-deposits before 4:15PM ET, they will appear that same day. If you request micro-deposits any time after 4:15PM ET, they will appear the next banking day. When the two credits are initiated, Moov simultaneously initiates a debit to recoup the micro-deposits.<br><br> `sandbox` - Micro-deposits initiated for a `sandbox` bank account will always be `$0.00` / `$0.00` and instantly verifiable once initiated. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-func (s *bankAccounts) InitiateMicroDeposits(ctx context.Context, request operations.PostInitiateMicroDepositsRequest) (*operations.PostInitiateMicroDepositsResponse, error) {
+func (s *bankAccounts) InitiateMicroDeposits(ctx context.Context, accountID string, bankAccountID string) (*operations.PostInitiateMicroDepositsResponse, error) {
+	request := operations.PostInitiateMicroDepositsRequest{
+		AccountID:     accountID,
+		BankAccountID: bankAccountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/bank-accounts/{bankAccountID}/micro-deposits", request, nil)
 	if err != nil {
@@ -86,7 +91,13 @@ func (s *bankAccounts) InitiateMicroDeposits(ctx context.Context, request operat
 
 // CompleteMicroDeposits - Complete micro-deposits
 // Complete the micro-deposit validation process by passing the amounts of the two transfers within three tries. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-func (s *bankAccounts) CompleteMicroDeposits(ctx context.Context, request operations.PutCompleteMicroDepositsRequest) (*operations.PutCompleteMicroDepositsResponse, error) {
+func (s *bankAccounts) CompleteMicroDeposits(ctx context.Context, completeMicroDepositsRequest shared.CompleteMicroDepositsRequest, accountID string, bankAccountID string) (*operations.PutCompleteMicroDepositsResponse, error) {
+	request := operations.PutCompleteMicroDepositsRequest{
+		CompleteMicroDepositsRequest: completeMicroDepositsRequest,
+		AccountID:                    accountID,
+		BankAccountID:                bankAccountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/bank-accounts/{bankAccountID}/micro-deposits", request, nil)
 	if err != nil {
@@ -161,7 +172,12 @@ func (s *bankAccounts) CompleteMicroDeposits(ctx context.Context, request operat
 
 // Delete - Delete bank account
 // Discontinue using a specified bank account linked to a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-func (s *bankAccounts) Delete(ctx context.Context, request operations.DeleteBankAccountRequest) (*operations.DeleteBankAccountResponse, error) {
+func (s *bankAccounts) Delete(ctx context.Context, accountID string, bankAccountID string) (*operations.DeleteBankAccountResponse, error) {
+	request := operations.DeleteBankAccountRequest{
+		AccountID:     accountID,
+		BankAccountID: bankAccountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/bank-accounts/{bankAccountID}", request, nil)
 	if err != nil {
@@ -214,7 +230,12 @@ func (s *bankAccounts) Delete(ctx context.Context, request operations.DeleteBank
 
 // Get - Get bank account
 // Retrieve bank account details (i.e. routing number or account type) associated with a specific Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-func (s *bankAccounts) Get(ctx context.Context, request operations.GetBankAccountRequest) (*operations.GetBankAccountResponse, error) {
+func (s *bankAccounts) Get(ctx context.Context, accountID string, bankAccountID string) (*operations.GetBankAccountResponse, error) {
+	request := operations.GetBankAccountRequest{
+		AccountID:     accountID,
+		BankAccountID: bankAccountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/bank-accounts/{bankAccountID}", request, nil)
 	if err != nil {
@@ -277,7 +298,12 @@ func (s *bankAccounts) Get(ctx context.Context, request operations.GetBankAccoun
 
 // Link - Bank account
 // Link a bank account to an existing Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-func (s *bankAccounts) Link(ctx context.Context, request operations.LinkBankAccountRequest) (*operations.LinkBankAccountResponse, error) {
+func (s *bankAccounts) Link(ctx context.Context, bankAccountPayload shared.BankAccountPayload, accountID string) (*operations.LinkBankAccountResponse, error) {
+	request := operations.LinkBankAccountRequest{
+		BankAccountPayload: bankAccountPayload,
+		AccountID:          accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/bank-accounts", request, nil)
 	if err != nil {
@@ -354,7 +380,11 @@ func (s *bankAccounts) Link(ctx context.Context, request operations.LinkBankAcco
 
 // List - List bank accounts
 // List all the bank accounts associated with a particular Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-func (s *bankAccounts) List(ctx context.Context, request operations.ListBankAccountsRequest) (*operations.ListBankAccountsResponse, error) {
+func (s *bankAccounts) List(ctx context.Context, accountID string) (*operations.ListBankAccountsResponse, error) {
+	request := operations.ListBankAccountsRequest{
+		AccountID: accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/bank-accounts", request, nil)
 	if err != nil {

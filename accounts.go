@@ -6,12 +6,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"openapi/pkg/models/operations"
-	"openapi/pkg/models/sdkerrors"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/utils"
 	"strings"
 )
 
@@ -32,7 +32,12 @@ func newAccounts(sdkConfig sdkConfiguration) *accounts {
 
 // AssignCountry - Assign Account Countries
 // Assign the countries of operation for an account. This endpoint will always overwrite the previously assigned values. <br><br> To update the account countries, you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-func (s *accounts) AssignCountry(ctx context.Context, request operations.PutAccountCountriesRequest) (*operations.PutAccountCountriesResponse, error) {
+func (s *accounts) AssignCountry(ctx context.Context, countries shared.Countries, accountID string) (*operations.PutAccountCountriesResponse, error) {
+	request := operations.PutAccountCountriesRequest{
+		Countries: countries,
+		AccountID: accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/countries", request, nil)
 	if err != nil {
@@ -177,7 +182,11 @@ func (s *accounts) Create(ctx context.Context, request shared.CreateAccountReque
 
 // Get - Get account
 // Retrieves details for the account with the specified ID. <br><br> To get an account, you will need to specify the `/accounts/{accountID}/profile.read` scope.
-func (s *accounts) Get(ctx context.Context, request operations.GetAccountRequest) (*operations.GetAccountResponse, error) {
+func (s *accounts) Get(ctx context.Context, accountID string) (*operations.GetAccountResponse, error) {
+	request := operations.GetAccountRequest{
+		AccountID: accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}", request, nil)
 	if err != nil {
@@ -365,7 +374,11 @@ func (s *accounts) List(ctx context.Context, request operations.ListAccountsRequ
 
 // ListCountries - Get Account Countries
 // Retrieve the specified countries of operation for an account. <br><br> To get the list of countries, you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-func (s *accounts) ListCountries(ctx context.Context, request operations.GetAccountCountriesRequest) (*operations.GetAccountCountriesResponse, error) {
+func (s *accounts) ListCountries(ctx context.Context, accountID string) (*operations.GetAccountCountriesResponse, error) {
+	request := operations.GetAccountCountriesRequest{
+		AccountID: accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/countries", request, nil)
 	if err != nil {
@@ -440,7 +453,12 @@ func (s *accounts) ListCountries(ctx context.Context, request operations.GetAcco
 //   - Verified accounts cannot change any existing profile data.
 //
 // If you need to update information in a locked state, please contact Moov support.
-func (s *accounts) Update(ctx context.Context, request operations.PatchAccountRequest) (*operations.PatchAccountResponse, error) {
+func (s *accounts) Update(ctx context.Context, patchAccountRequest shared.PatchAccountRequest, accountID string) (*operations.PatchAccountResponse, error) {
+	request := operations.PatchAccountRequest{
+		PatchAccountRequest: patchAccountRequest,
+		AccountID:           accountID,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}", request, nil)
 	if err != nil {

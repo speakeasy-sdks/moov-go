@@ -3,8 +3,8 @@
 package operations
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"net/http"
-	"openapi/pkg/models/shared"
 )
 
 var PostLinkCardServerList = []string{
@@ -13,10 +13,10 @@ var PostLinkCardServerList = []string{
 
 type PostLinkCardRequest struct {
 	CardRequest shared.CardRequest `request:"mediaType=application/json"`
-	// Optional header that indicates whether to return a synchronous response or an asynchronous response.
-	XWaitFor *shared.SchemasWaitFor `header:"style=simple,explode=false,name=X-Wait-For"`
 	// ID of the account
 	AccountID string `pathParam:"style=simple,explode=false,name=accountID"`
+	// Optional header that indicates whether to return a synchronous response or an asynchronous response.
+	XWaitFor *shared.SchemasWaitFor `header:"style=simple,explode=false,name=X-Wait-For"`
 }
 
 func (o *PostLinkCardRequest) GetCardRequest() shared.CardRequest {
@@ -26,18 +26,18 @@ func (o *PostLinkCardRequest) GetCardRequest() shared.CardRequest {
 	return o.CardRequest
 }
 
-func (o *PostLinkCardRequest) GetXWaitFor() *shared.SchemasWaitFor {
-	if o == nil {
-		return nil
-	}
-	return o.XWaitFor
-}
-
 func (o *PostLinkCardRequest) GetAccountID() string {
 	if o == nil {
 		return ""
 	}
 	return o.AccountID
+}
+
+func (o *PostLinkCardRequest) GetXWaitFor() *shared.SchemasWaitFor {
+	if o == nil {
+		return nil
+	}
+	return o.XWaitFor
 }
 
 type PostLinkCardResponse struct {

@@ -22,9 +22,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -33,11 +33,10 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    accountID := "efb0b348-96c3-4ca5-acfb-e2fd57075779"
 
     ctx := context.Background()
-    res, err := s.Underwriting.Get(ctx, operations.GetUnderwritingRequest{
-        AccountID: "4896c3ca-5acf-4be2-bd57-07577929177d",
-    })
+    res, err := s.Underwriting.Get(ctx, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -50,10 +49,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.GetUnderwritingRequest](../../models/operations/getunderwritingrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |
 
 
 ### Response
@@ -73,9 +72,9 @@ package main
 import(
 	"context"
 	"log"
-	"openapi"
-	"openapi/pkg/models/shared"
-	"openapi/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
@@ -84,16 +83,15 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
+    underwritingRequest := shared.UnderwritingRequest{
+        AverageMonthlyTransactionVolume: moov.Int64(250000),
+        AverageTransactionSize: moov.Int64(10000),
+        MaxTransactionSize: moov.Int64(50000),
+    }
+    accountID := "29177dea-c646-4ecb-9734-09e3eb1e5a2b"
 
     ctx := context.Background()
-    res, err := s.Underwriting.Update(ctx, operations.UpdateUnderwritingRequest{
-        UnderwritingRequest: shared.UnderwritingRequest{
-            AverageMonthlyTransactionVolume: moov.Int64(250000),
-            AverageTransactionSize: moov.Int64(10000),
-            MaxTransactionSize: moov.Int64(50000),
-        },
-        AccountID: "eac646ec-b573-4409-a3eb-1e5a2b12eb07",
-    })
+    res, err := s.Underwriting.Update(ctx, underwritingRequest, accountID)
     if err != nil {
         log.Fatal(err)
     }
@@ -106,10 +104,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.UpdateUnderwritingRequest](../../models/operations/updateunderwritingrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
+| `underwritingRequest`                                                    | [shared.UnderwritingRequest](../../models/shared/underwritingrequest.md) | :heavy_check_mark:                                                       | N/A                                                                      |
+| `accountID`                                                              | *string*                                                                 | :heavy_check_mark:                                                       | ID of the account                                                        |
 
 
 ### Response

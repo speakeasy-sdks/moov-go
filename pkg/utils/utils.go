@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"openapi/pkg/types"
+	"github.com/speakeasy-sdks/moov-go/pkg/types"
 )
 
 const (

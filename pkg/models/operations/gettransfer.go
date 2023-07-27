@@ -3,22 +3,15 @@
 package operations
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"net/http"
-	"openapi/pkg/models/shared"
 )
 
 type GetTransferRequest struct {
-	// ID of a connected account
-	AccountID *string `queryParam:"style=form,explode=true,name=accountID"`
 	// ID of the Transfer
 	TransferID string `pathParam:"style=simple,explode=false,name=transferID"`
-}
-
-func (o *GetTransferRequest) GetAccountID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.AccountID
+	// ID of a connected account
+	AccountID *string `queryParam:"style=form,explode=true,name=accountID"`
 }
 
 func (o *GetTransferRequest) GetTransferID() string {
@@ -26,6 +19,13 @@ func (o *GetTransferRequest) GetTransferID() string {
 		return ""
 	}
 	return o.TransferID
+}
+
+func (o *GetTransferRequest) GetAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
 }
 
 type GetTransferResponse struct {
