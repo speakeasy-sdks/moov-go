@@ -28,15 +28,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Underwriting.Get(ctx, operations.GetUnderwritingRequest{
-        AccountID: "bae0be2d-7822-459e-bea4-b5197f92443d",
+        AccountID: "4896c3ca-5acf-4be2-bd57-07577929177d",
     })
     if err != nil {
         log.Fatal(err)
@@ -79,20 +79,20 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Underwriting.Update(ctx, operations.UpdateUnderwritingRequest{
         UnderwritingRequest: shared.UnderwritingRequest{
-            AverageMonthlyTransactionVolume: petstore.Int64(250000),
-            AverageTransactionSize: petstore.Int64(10000),
-            MaxTransactionSize: petstore.Int64(50000),
+            AverageMonthlyTransactionVolume: moov.Int64(250000),
+            AverageTransactionSize: moov.Int64(10000),
+            MaxTransactionSize: moov.Int64(50000),
         },
-        AccountID: "a7ce52b8-95c5-437c-a454-efb0b34896c3",
+        AccountID: "eac646ec-b573-4409-a3eb-1e5a2b12eb07",
     })
     if err != nil {
         log.Fatal(err)

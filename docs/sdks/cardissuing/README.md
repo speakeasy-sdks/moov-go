@@ -35,9 +35,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -47,11 +47,19 @@ func main() {
             AuthorizationControls: &shared.AuthorizationControls{
                 SpendLimits: []shared.AuthorizationSpendLimitControl{
                     shared.AuthorizationSpendLimitControl{
-                        Amount: petstore.Int64(10000),
+                        Amount: moov.Int64(10000),
                         Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
                     },
                     shared.AuthorizationSpendLimitControl{
-                        Amount: petstore.Int64(10000),
+                        Amount: moov.Int64(10000),
+                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                    },
+                    shared.AuthorizationSpendLimitControl{
+                        Amount: moov.Int64(10000),
+                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                    },
+                    shared.AuthorizationSpendLimitControl{
+                        Amount: moov.Int64(10000),
                         Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
                     },
                 },
@@ -62,14 +70,14 @@ func main() {
                     Month: 11,
                     Year: 1989,
                 },
-                FirstName: petstore.String("Jane"),
-                LastName: petstore.String("Doe"),
+                FirstName: moov.String("Jane"),
+                LastName: moov.String("Doe"),
             },
-            FundingWalletID: petstore.String("labore"),
-            Memo: petstore.String("adipisci"),
+            FundingWalletID: moov.String("doloribus"),
+            Memo: moov.String("iusto"),
             Type: shared.IssuedCardTypeSingleUse.ToPointer(),
         },
-        AccountID: "a1108e0a-dcf4-4b92-9879-fce953f73ef7",
+        AccountID: "c70a4562-6d43-4681-bf16-d9f5fce6c556",
     })
     if err != nil {
         log.Fatal(err)
@@ -114,15 +122,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.CardIssuing.GetCard(ctx, operations.GetIssuedCardRequest{
-        AccountID: "fbc7abd7-4dd3-49c0-b5d2-cff7c70a4562",
+        AccountID: "146c3e25-0fb0-408c-82e1-41aac366c8dd",
         IssuedCardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -168,15 +176,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.CardIssuing.GetCardFullDetails(ctx, operations.GetFullIssuedCardRequest{
-        AccountID: "6d436813-f16d-49f5-bce6-c556146c3e25",
+        AccountID: "6b144290-7474-4778-a7bd-466d28c10ab3",
         IssuedCardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -223,17 +231,17 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.CardIssuing.ListCards(ctx, operations.ListIssuedCardsRequest{
-        AccountID: "0fb008c4-2e14-41aa-8366-c8dd6b144290",
-        Count: petstore.Int64(476477),
-        Skip: petstore.Int64(301598),
+        AccountID: "cdca4251-904e-4523-87e0-bc7178e4796f",
+        Count: moov.Int64(174112),
+        Skip: moov.Int64(645570),
         States: shared.IssuedCardStateInactive.ToPointer(),
     })
     if err != nil {
@@ -279,9 +287,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -291,11 +299,7 @@ func main() {
             AuthorizationControls: &shared.AuthorizationControls{
                 SpendLimits: []shared.AuthorizationSpendLimitControl{
                     shared.AuthorizationSpendLimitControl{
-                        Amount: petstore.Int64(10000),
-                        Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                    },
-                    shared.AuthorizationSpendLimitControl{
-                        Amount: petstore.Int64(10000),
+                        Amount: moov.Int64(10000),
                         Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
                     },
                 },
@@ -306,13 +310,13 @@ func main() {
                     Month: 11,
                     Year: 1989,
                 },
-                FirstName: petstore.String("Jane"),
-                LastName: petstore.String("Doe"),
+                FirstName: moov.String("Jane"),
+                LastName: moov.String("Doe"),
             },
-            Memo: petstore.String("esse"),
+            Memo: moov.String("porro"),
             State: shared.IssuedCardStateInactive.ToPointer(),
         },
-        AccountID: "8a7bd466-d28c-410a-b3cd-ca4251904e52",
+        AccountID: "88282aa4-8256-42f2-a2e9-817ee17cbe61",
         IssuedCardID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {

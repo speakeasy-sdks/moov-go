@@ -15,7 +15,7 @@ transactions.go
 transfers.go
 underwriting.go
 wallets.go
-petstore.go
+moov.go
 go.mod
 go.sum
 pkg/models/sdkerrors/sdkerror.go
@@ -268,7 +268,7 @@ pkg/models/shared/wallettransactiontype.go
 pkg/models/shared/wallettransactionstatus.go
 pkg/models/shared/wallettransactionsourcetype.go
 pkg/models/shared/security.go
-docs/sdks/petstore/README.md
+docs/sdks/moov/README.md
 docs/sdks/accesstoken/README.md
 docs/sdks/accounts/README.md
 docs/sdks/analytics/README.md

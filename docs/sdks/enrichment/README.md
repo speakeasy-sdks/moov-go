@@ -27,27 +27,27 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAddress(ctx, operations.GetAddressRequest{
-        ExcludeStates: petstore.String("atque"),
-        IncludeCities: petstore.String("fugit"),
-        IncludeStates: petstore.String("ut"),
-        IncludeZipcodes: petstore.String("fugiat"),
-        MaxResults: petstore.Int64(30235),
-        PreferCities: petstore.String("culpa"),
-        PreferGeolocation: petstore.String("expedita"),
-        PreferRatio: petstore.Int64(299643),
-        PreferStates: petstore.String("consequatur"),
-        PreferZipcodes: petstore.String("esse"),
-        Search: "ipsam",
-        Selected: petstore.String("sit"),
-        Source: petstore.String("voluptatum"),
+        ExcludeStates: moov.String("est"),
+        IncludeCities: moov.String("quidem"),
+        IncludeStates: moov.String("reprehenderit"),
+        IncludeZipcodes: moov.String("facere"),
+        MaxResults: moov.Int64(685092),
+        PreferCities: moov.String("praesentium"),
+        PreferGeolocation: moov.String("mollitia"),
+        PreferRatio: moov.Int64(333965),
+        PreferStates: moov.String("voluptatem"),
+        PreferZipcodes: moov.String("quisquam"),
+        Search: "repudiandae",
+        Selected: moov.String("quasi"),
+        Source: moov.String("atque"),
     })
     if err != nil {
         log.Fatal(err)
@@ -92,15 +92,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAvatar(ctx, operations.GetAvatarRequest{
-        UniqueID: "quas",
+        UniqueID: "reprehenderit",
     })
     if err != nil {
         log.Fatal(err)
@@ -144,9 +144,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -194,15 +194,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Enrichment.GetProfile(ctx, operations.GetEnrichmentProfileRequest{
-        Email: "Foster.Borer@hotmail.com",
+        Email: "Josie_Hoppe9@hotmail.com",
     })
     if err != nil {
         log.Fatal(err)

@@ -34,15 +34,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Wallets.Get(ctx, operations.GetWalletForAccountRequest{
-        AccountID: "ca5acfbe-2fd5-4707-9779-29177deac646",
+        AccountID: "f116db99-545f-4c95-ba88-970e189dbb30",
         WalletID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -86,15 +86,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Wallets.GetTransaction(ctx, operations.GetWalletTransactionRequest{
-        AccountID: "ecb57340-9e3e-4b1e-9a2b-12eb07f116db",
+        AccountID: "fcb33ea0-55b1-497c-944e-2f52d82d3513",
         TransactionID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
         WalletID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
@@ -139,15 +139,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Wallets.List(ctx, operations.ListWalletsForAccountRequest{
-        AccountID: "99545fc9-5fa8-4897-8e18-9dbb30fcb33e",
+        AccountID: "bb6f48b6-56bc-4db3-9ff2-e4b27537a8cd",
     })
     if err != nil {
         log.Fatal(err)
@@ -190,25 +190,25 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Wallets.ListTransactions(ctx, operations.ListWalletTransactionsRequest{
-        AccountID: "a055b197-cd44-4e2f-92d8-2d3513bb6f48",
-        CompletedEndDateTime: petstore.String("distinctio"),
-        CompletedStartDateTime: petstore.String("nisi"),
-        Count: petstore.Int64(335977),
-        CreatedEndDateTime: petstore.String("nisi"),
-        CreatedStartDateTime: petstore.String("libero"),
-        Skip: petstore.Int64(794507),
-        SourceID: petstore.String("facere"),
-        SourceType: petstore.String("facilis"),
-        Status: petstore.String("ipsum"),
-        TransactionType: petstore.String("ad"),
+        AccountID: "9e7319c1-77d5-425f-b7b1-14eeb52ff785",
+        CompletedEndDateTime: moov.String("repellat"),
+        CompletedStartDateTime: moov.String("quisquam"),
+        Count: moov.Int64(197259),
+        CreatedEndDateTime: moov.String("nihil"),
+        CreatedStartDateTime: moov.String("deleniti"),
+        Skip: moov.Int64(75566),
+        SourceID: moov.String("labore"),
+        SourceType: moov.String("assumenda"),
+        Status: moov.String("aliquam"),
+        TransactionType: moov.String("quisquam"),
         WalletID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {

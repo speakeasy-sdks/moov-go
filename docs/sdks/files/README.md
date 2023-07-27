@@ -28,15 +28,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Files.Get(ctx, operations.GetFileDetailsRequest{
-        AccountID: "2065e904-f3b1-4194-b8ab-f603a79f9dfe",
+        AccountID: "73d689ee-e952-46f8-9986-e881ead4f0e1",
         FileID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {
@@ -80,15 +80,15 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Files.List(ctx, operations.ListFilesRequest{
-        AccountID: "0ab7da8a-50ce-4187-b86b-c173d689eee9",
+        AccountID: "012563f9-4e29-4e97-be92-2a57a15be3e0",
     })
     if err != nil {
         log.Fatal(err)
@@ -131,9 +131,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -141,12 +141,12 @@ func main() {
     res, err := s.Files.Upload(ctx, operations.UploadFileRequest{
         FileUploadRequest: shared.FileUploadRequest{
             File: shared.FileUploadRequestFile{
-                Content: []byte("minima"),
-                File: "aspernatur",
+                Content: []byte("iure"),
+                File: "ipsa",
             },
-            FilePurpose: shared.FilePurposeBusinessVerification,
+            FilePurpose: shared.FilePurposeMerchantUnderwriting,
         },
-        AccountID: "f8d986e8-81ea-4d4f-8e10-12563f94e29e",
+        AccountID: "07e2b6e3-ab88-445f-8597-a60ff2a54a31",
     })
     if err != nil {
         log.Fatal(err)

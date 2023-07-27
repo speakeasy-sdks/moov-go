@@ -27,9 +27,9 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
@@ -78,18 +78,18 @@ import(
 )
 
 func main() {
-    s := petstore.New(
-        petstore.WithSecurity(shared.Security{
-            AccessToken: petstore.String(""),
+    s := moov.New(
+        moov.WithSecurity(shared.Security{
+            AccessToken: moov.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Disputes.List(ctx, operations.ListDisputesRequest{
-        Count: petstore.Int64(676243),
-        RespondEndDateTime: petstore.String("corrupti"),
-        RespondStartDateTime: petstore.String("accusamus"),
-        Skip: petstore.Int64(272683),
+        Count: moov.Int64(833819),
+        RespondEndDateTime: moov.String("delectus"),
+        RespondStartDateTime: moov.String("voluptates"),
+        Skip: moov.Int64(16871),
         Status: shared.DisputeStatusResponseNeeded.ToPointer(),
     })
     if err != nil {
