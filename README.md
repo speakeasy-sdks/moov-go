@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="https://github.com/speakeasy-sdks/moov-go/assets/6267663/84c3c912-695e-4a03-8fa3-45076cccac26">
+   <img src="https://github.com/speakeasy-sdks/moov-go/assets/6267663/84c3c912-695e-4a03-8fa3-45076cccac26" width="300">
    <h1>Go SDK</h1>
    <p><strong>The modern way of proving identity</strong></p>
    <a href="https://docs.moov.io/api/"><img src="https://img.shields.io/static/v1?label=Docs&message=Docs&color=000&style=for-the-badge" /></a>
