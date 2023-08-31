@@ -10,7 +10,7 @@ import (
 
 // CreatedReversalSynchronousRefundResponseFailureCode - This field is deprecated and will be removed in December 2023.
 //
-// Deprecated: this type will be removed in a future release, please migrate away from it as soon as possible.
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type CreatedReversalSynchronousRefundResponseFailureCode string
 
 const (
@@ -109,7 +109,7 @@ type CreatedReversalSynchronousRefundResponse struct {
 	CreatedOn   *time.Time         `json:"createdOn,omitempty"`
 	// This field is deprecated and will be removed in December 2023.
 	//
-	// Deprecated: this field will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	FailureCode *CreatedReversalSynchronousRefundResponseFailureCode `json:"failureCode,omitempty"`
 	// UUID v4
 	RefundID  *string       `json:"refundID,omitempty"`

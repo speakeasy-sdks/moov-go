@@ -174,8 +174,8 @@ func New(opts ...SDKOption) *Moov {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "0.1.1",
-			GenVersion:        "2.75.1",
+			SDKVersion:        "0.2.0",
+			GenVersion:        "2.89.1",
 		},
 	}
 	for _, opt := range opts {

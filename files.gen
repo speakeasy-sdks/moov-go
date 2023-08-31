@@ -695,3 +695,4 @@ docs/models/shared/wallettransactionsourcetype.md
 docs/models/shared/schemeoauth2credentials.md
 docs/models/shared/security.md
 pkg/models/operations/options.go
+.gitattributes

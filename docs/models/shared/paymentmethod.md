@@ -1,5 +1,7 @@
 # PaymentMethod
 
+Successfully retrieved payment method
+
 
 ## Supported Types
 
