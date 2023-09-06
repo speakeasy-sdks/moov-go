@@ -34,8 +34,8 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "d446ce2a-f7a7-43cf-bbe4-53f870b326b5"
-    capabilityID := shared.CapabilityIDWallet
+    accountID := "5e6a95d8-a0d4-446c-a2af-7a73cf3be453"
+    capabilityID := shared.CapabilityIDCardIssuing
 
     ctx := context.Background()
     res, err := s.Capabilities.Delete(ctx, accountID, capabilityID)
@@ -86,8 +86,8 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "73429cdb-1a84-422b-b679-d2322715bf0c"
-    capabilityID := shared.CapabilityIDWallet
+    accountID := "870b326b-5a73-4429-8db1-a8422bb679d2"
+    capabilityID := shared.CapabilityIDSendFunds
 
     ctx := context.Background()
     res, err := s.Capabilities.Get(ctx, accountID, capabilityID)
@@ -138,7 +138,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "b1e31b8b-90f3-4443-a110-8e0adcf4b921"
+    accountID := "22715bf0-cbb1-4e31-b8b9-0f3443a1108e"
 
     ctx := context.Background()
     res, err := s.Capabilities.List(ctx, accountID)
@@ -190,12 +190,10 @@ func main() {
     )
     addCapabilityRequest := shared.AddCapabilityRequest{
         Capabilities: []shared.CapabilityID{
-            shared.CapabilityIDCollectFunds,
-            shared.CapabilityIDCollectFunds,
-            shared.CapabilityIDCardIssuing,
+            shared.CapabilityIDTransfers,
         },
     }
-    accountID := "ce953f73-ef7f-4bc7-abd7-4dd39c0f5d2c"
+    accountID := "adcf4b92-1879-4fce-953f-73ef7fbc7abd"
 
     ctx := context.Background()
     res, err := s.Capabilities.Request(ctx, addCapabilityRequest, accountID)

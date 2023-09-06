@@ -35,10 +35,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Institutions.Search(ctx, operations.SearchInstitutionRequest{
         Limit: moov.Int64(499),
-        Name: moov.String("Joanne Parisian DVM"),
+        Name: moov.String("Kelley Dibbert"),
         Rail: shared.RailWire,
-        RoutingNumber: moov.String("quaerat"),
-        State: moov.String("molestiae"),
+        RoutingNumber: moov.String("rem"),
+        State: moov.String("aliquam"),
     })
     if err != nil {
         log.Fatal(err)

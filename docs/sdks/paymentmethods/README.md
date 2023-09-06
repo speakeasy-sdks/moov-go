@@ -35,7 +35,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "64a3e865-e795-46f9-a51a-5a9da660ff57"
+    accountID := "5f0597a6-0ff2-4a54-a31e-94764a3e865e"
     paymentMethodID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -87,8 +87,8 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "bfaad4f9-efc1-4b45-92c1-032648dc2f61"
-    sourceID := "5199ebfd-0e9f-4e6c-a32c-a3aed0117996"
+    accountID := "7956f925-1a5a-49da-a60f-f57bfaad4f9e"
+    sourceID := "fc1b4512-c103-4264-8dc2-f615199ebfd0"
 
     ctx := context.Background()
     res, err := s.PaymentMethods.List(ctx, accountID, sourceID)

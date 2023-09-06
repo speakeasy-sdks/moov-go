@@ -85,10 +85,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Disputes.List(ctx, operations.ListDisputesRequest{
-        Count: moov.Int64(833819),
-        RespondEndDateTime: moov.String("delectus"),
-        RespondStartDateTime: moov.String("voluptates"),
-        Skip: moov.Int64(16871),
+        Count: moov.Int64(279068),
+        RespondEndDateTime: moov.String("reiciendis"),
+        RespondStartDateTime: moov.String("dolorem"),
+        Skip: moov.Int64(690894),
         Status: shared.DisputeStatusResponseNeeded.ToPointer(),
     })
     if err != nil {

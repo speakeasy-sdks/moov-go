@@ -47,18 +47,6 @@ func main() {
                     Amount: moov.Int64(10000),
                     Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
                 },
-                shared.AuthorizationSpendLimitControl{
-                    Amount: moov.Int64(10000),
-                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                },
-                shared.AuthorizationSpendLimitControl{
-                    Amount: moov.Int64(10000),
-                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                },
-                shared.AuthorizationSpendLimitControl{
-                    Amount: moov.Int64(10000),
-                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                },
             },
         },
         AuthorizedUser: &shared.CreateAuthorizedUser{
@@ -70,11 +58,11 @@ func main() {
             FirstName: moov.String("Jane"),
             LastName: moov.String("Doe"),
         },
-        FundingWalletID: moov.String("doloribus"),
-        Memo: moov.String("iusto"),
+        FundingWalletID: moov.String("ducimus"),
+        Memo: moov.String("dolore"),
         Type: shared.IssuedCardTypeSingleUse.ToPointer(),
     }
-    accountID := "c70a4562-6d43-4681-bf16-d9f5fce6c556"
+    accountID := "dd39c0f5-d2cf-4f7c-b0a4-5626d436813f"
 
     ctx := context.Background()
     res, err := s.CardIssuing.RequestCard(ctx, requestCard, accountID)
@@ -127,7 +115,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "146c3e25-0fb0-408c-82e1-41aac366c8dd"
+    accountID := "16d9f5fc-e6c5-4561-86c3-e250fb008c42"
     issuedCardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -181,7 +169,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "6b144290-7474-4778-a7bd-466d28c10ab3"
+    accountID := "e141aac3-66c8-4dd6-b144-2907474778a7"
     issuedCardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -236,10 +224,10 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "cdca4251-904e-4523-87e0-bc7178e4796f"
-    count := 174112
-    skip := 645570
-    states := shared.IssuedCardStateInactive
+    accountID := "bd466d28-c10a-4b3c-9ca4-251904e523c7"
+    count := 925164
+    skip := 44612
+    states := shared.IssuedCardStatePendingVerification
 
     ctx := context.Background()
     res, err := s.CardIssuing.ListCards(ctx, accountID, count, skip, states)
@@ -312,10 +300,10 @@ func main() {
             FirstName: moov.String("Jane"),
             LastName: moov.String("Doe"),
         },
-        Memo: moov.String("porro"),
+        Memo: moov.String("quod"),
         State: shared.IssuedCardStateInactive.ToPointer(),
     }
-    accountID := "88282aa4-8256-42f2-a2e9-817ee17cbe61"
+    accountID := "178e4796-f2a7-40c6-8828-2aa482562f22"
     issuedCardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()

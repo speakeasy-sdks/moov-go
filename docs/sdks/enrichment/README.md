@@ -35,19 +35,19 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAddress(ctx, operations.GetAddressRequest{
-        ExcludeStates: moov.String("est"),
-        IncludeCities: moov.String("quidem"),
-        IncludeStates: moov.String("reprehenderit"),
-        IncludeZipcodes: moov.String("facere"),
-        MaxResults: moov.Int64(685092),
-        PreferCities: moov.String("praesentium"),
-        PreferGeolocation: moov.String("mollitia"),
-        PreferRatio: moov.Int64(333965),
-        PreferStates: moov.String("voluptatem"),
-        PreferZipcodes: moov.String("quisquam"),
-        Search: "repudiandae",
-        Selected: moov.String("quasi"),
-        Source: moov.String("atque"),
+        ExcludeStates: moov.String("dicta"),
+        IncludeCities: moov.String("architecto"),
+        IncludeStates: moov.String("occaecati"),
+        IncludeZipcodes: moov.String("labore"),
+        MaxResults: moov.Int64(695270),
+        PreferCities: moov.String("atque"),
+        PreferGeolocation: moov.String("laborum"),
+        PreferRatio: moov.Int64(724148),
+        PreferStates: moov.String("tenetur"),
+        PreferZipcodes: moov.String("laboriosam"),
+        Search: "alias",
+        Selected: moov.String("amet"),
+        Source: moov.String("deserunt"),
     })
     if err != nil {
         log.Fatal(err)
@@ -97,7 +97,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    uniqueID := "reprehenderit"
+    uniqueID := "voluptate"
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAvatar(ctx, uniqueID)
@@ -198,7 +198,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    email := "asperiores"
+    email := "unde"
 
     ctx := context.Background()
     res, err := s.Enrichment.GetProfile(ctx, email)

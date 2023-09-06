@@ -31,10 +31,10 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "78a64584-273a-4841-8d16-2309fb092992"
-    count := 81369
-    skip := 686362
-    status := shared.IssuedCardTransactionStatusVoided
+    accountID := "1c6c6e20-5e16-4dea-b3fe-c9578a645842"
+    count := 495970
+    skip := 200516
+    status := shared.IssuedCardTransactionStatusDeclined
 
     ctx := context.Background()
     res, err := s.Transactions.List(ctx, accountID, count, skip, status)

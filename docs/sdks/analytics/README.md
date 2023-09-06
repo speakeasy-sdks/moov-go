@@ -38,10 +38,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Analytics.CountAccountsCreated(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2022-07-22T03:36:34.615Z"),
-        From: types.MustTimeFromString("2020-02-22T17:45:21.686Z"),
-        To: types.MustTimeFromString("2022-02-08T14:21:47.573Z"),
-        Tz: types.MustTimeFromString("2022-02-26T01:27:36.152Z"),
+        Every: types.MustTimeFromString("2022-10-02T04:55:20.234Z"),
+        From: types.MustTimeFromString("2021-04-10T02:35:06.342Z"),
+        To: types.MustTimeFromString("2022-05-29T21:42:45.399Z"),
+        Tz: types.MustTimeFromString("2021-04-14T09:13:11.675Z"),
     })
     if err != nil {
         log.Fatal(err)
@@ -92,10 +92,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Analytics.CountTransferStatuses(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2020-11-26T01:41:04.216Z"),
-        From: types.MustTimeFromString("2022-09-14T10:27:07.590Z"),
-        To: types.MustTimeFromString("2020-07-23T21:23:35.691Z"),
-        Tz: types.MustTimeFromString("2022-08-09T06:36:34.417Z"),
+        Every: types.MustTimeFromString("2022-07-22T03:36:34.615Z"),
+        From: types.MustTimeFromString("2020-02-22T17:45:21.686Z"),
+        To: types.MustTimeFromString("2022-02-08T14:21:47.573Z"),
+        Tz: types.MustTimeFromString("2022-02-26T01:27:36.152Z"),
     })
     if err != nil {
         log.Fatal(err)
@@ -146,11 +146,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Analytics.LargestTransfer(ctx, shared.LimitedTimeRange{
-        Count: moov.Int64(675439),
-        Every: moov.String("accusamus"),
-        From: types.MustTimeFromString("2022-06-02T20:02:58.167Z"),
-        To: types.MustTimeFromString("2022-02-13T03:59:53.583Z"),
-        Tz: moov.String("delectus"),
+        Count: moov.Int64(978571),
+        Every: moov.String("rerum"),
+        From: types.MustTimeFromString("2022-09-14T10:27:07.590Z"),
+        To: types.MustTimeFromString("2020-07-23T21:23:35.691Z"),
+        Tz: moov.String("ea"),
     })
     if err != nil {
         log.Fatal(err)
@@ -201,11 +201,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Analytics.SmallestTransfer(ctx, shared.LimitedTimeRange{
-        Count: moov.Int64(692532),
-        Every: moov.String("provident"),
-        From: types.MustTimeFromString("2021-09-06T10:36:33.442Z"),
-        To: types.MustTimeFromString("2021-12-07T18:13:34.827Z"),
-        Tz: moov.String("sapiente"),
+        Count: moov.Int64(396506),
+        Every: moov.String("laborum"),
+        From: types.MustTimeFromString("2022-04-02T11:21:13.260Z"),
+        To: types.MustTimeFromString("2022-05-17T08:24:52.669Z"),
+        Tz: moov.String("accusamus"),
     })
     if err != nil {
         log.Fatal(err)
@@ -256,10 +256,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Analytics.SumTransfers(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2022-05-10T22:38:44.806Z"),
-        From: types.MustTimeFromString("2022-07-30T07:01:46.758Z"),
-        To: types.MustTimeFromString("2021-10-15T07:59:26.631Z"),
-        Tz: types.MustTimeFromString("2022-12-24T23:52:02.245Z"),
+        Every: types.MustTimeFromString("2020-12-03T16:16:10.882Z"),
+        From: types.MustTimeFromString("2021-07-20T13:32:41.687Z"),
+        To: types.MustTimeFromString("2021-12-31T00:47:48.012Z"),
+        Tz: types.MustTimeFromString("2021-02-02T01:24:52.629Z"),
     })
     if err != nil {
         log.Fatal(err)

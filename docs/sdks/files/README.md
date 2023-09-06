@@ -33,7 +33,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "86bc173d-689e-4ee9-926f-8d986e881ead"
+    accountID := "f9dfe0ab-7da8-4a50-8e18-7f86bc173d68"
     fileID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -85,7 +85,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "4f0e1012-563f-494e-a9e9-73e922a57a15"
+    accountID := "9eee9526-f8d9-486e-881e-ad4f0e101256"
 
     ctx := context.Background()
     res, err := s.Files.List(ctx, accountID)
@@ -137,12 +137,12 @@ func main() {
     )
     fileUploadRequest := shared.FileUploadRequest{
         File: shared.FileUploadRequestFile{
-            Content: []byte("quidem"),
-            File: "eveniet",
+            Content: []byte("velit"),
+            File: "a",
         },
-        FilePurpose: shared.FilePurposeIdentityVerification,
+        FilePurpose: shared.FilePurposeMerchantUnderwriting,
     }
-    accountID := "e060807e-2b6e-43ab-8845-f0597a60ff2a"
+    accountID := "4e29e973-e922-4a57-a15b-e3e060807e2b"
 
     ctx := context.Background()
     res, err := s.Files.Upload(ctx, fileUploadRequest, accountID)

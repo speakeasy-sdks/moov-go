@@ -47,7 +47,7 @@ func main() {
             "United States",
         },
     }
-    accountID := "92059293-96fe-4a75-96eb-10faaa2352c5"
+    accountID := "39205929-396f-4ea7-996e-b10faaa2352c"
 
     ctx := context.Background()
     res, err := s.Accounts.AssignCountry(ctx, countries, accountID)
@@ -103,8 +103,6 @@ func main() {
         AccountType: shared.AccountTypeBusiness,
         Capabilities: []shared.CapabilityID{
             shared.CapabilityIDSendFunds,
-            shared.CapabilityIDSendFunds,
-            shared.CapabilityIDCollectFunds,
         },
         CustomerSupport: &shared.CreateAccountRequestCustomerSupport{
             Address: &shared.CreateAccountRequestCustomerSupportAddress{
@@ -124,7 +122,7 @@ func main() {
         },
         ForeignID: moov.String("4528aba-b9a1-11eb-8529-0242ac13003"),
         Metadata: map[string]string{
-            "iure": "culpa",
+            "omnis": "nemo",
         },
         Mode: shared.ModeProduction.ToPointer(),
         Profile: shared.CreateProfile{
@@ -253,7 +251,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "ff1a3a2f-a946-4773-9251-aa52c3f5ad01"
+    accountID := "5907aff1-a3a2-4fa9-8677-39251aa52c3f"
 
     ctx := context.Background()
     res, err := s.Accounts.Get(ctx, accountID)
@@ -359,14 +357,14 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Accounts.List(ctx, operations.ListAccountsRequest{
-        Count: moov.Int64(622846),
-        Email: moov.String("Margie_Boyer87@hotmail.com"),
+        Count: moov.Int64(368725),
+        Email: moov.String("Reid62@yahoo.com"),
         ForeignID: moov.String("4528aba-b9a1-11eb-8529-0242ac13003"),
         IncludeDisconnected: moov.Bool(false),
-        Name: moov.String("Miss Irma Wolff"),
-        Skip: moov.Int64(739264),
+        Name: moov.String("Neal Boyer"),
+        Skip: moov.Int64(878194),
         Type: shared.AccountTypeBusiness.ToPointer(),
-        VerificationStatus: shared.AccountVerificationStatusUnverified.ToPointer(),
+        VerificationStatus: shared.AccountVerificationStatusResubmit.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)
@@ -414,7 +412,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "074f1547-1b5e-46e1-bb99-d488e1e91e45"
+    accountID := "8f097b00-74f1-4547-9b5e-6e13b99d488e"
 
     ctx := context.Background()
     res, err := s.Accounts.ListCountries(ctx, accountID)
@@ -494,7 +492,7 @@ func main() {
         },
         ForeignID: moov.String("4528aba-b9a1-11eb-8529-0242ac13003"),
         Metadata: map[string]string{
-            "est": "quibusdam",
+            "quasi": "repudiandae",
         },
         Profile: &shared.PatchAccountRequestProfile{
             Business: &shared.PatchAccountRequestProfileBusiness{
@@ -577,7 +575,7 @@ func main() {
             Token: moov.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
         },
     }
-    accountID := "2abd4426-9802-4d50-aa94-bb4f63c969e9"
+    accountID := "91e450ad-2abd-4442-a980-2d502a94bb4f"
 
     ctx := context.Background()
     res, err := s.Accounts.Update(ctx, patchAccountRequest, accountID)

@@ -63,7 +63,7 @@ func main() {
             TransactionIdentifier: "32b...4f3",
         },
     }
-    accountID := "e6b7b95b-c0ab-43c2-8c4f-3789fd871f99"
+    accountID := "2e9817ee-17cb-4e61-a6b7-b95bc0ab3c20"
 
     ctx := context.Background()
     res, err := s.Cards.LinkApplePayToken(ctx, linkApplePay, accountID)
@@ -126,16 +126,16 @@ func main() {
             StateOrProvince: moov.String("CO"),
         },
         CardCvv: moov.String("0123"),
-        CardNumber: moov.String("pariatur"),
+        CardNumber: moov.String("minus"),
         CardOnFile: moov.Bool(false),
         Expiration: &shared.CardExpiration{
             Month: moov.String("01"),
             Year: moov.String("21"),
         },
         HolderName: moov.String("Jules Jackson"),
-        MerchantAccountID: moov.String("d2efd121-aa6f-41e6-b4bd-b04f15756082"),
+        MerchantAccountID: moov.String("4f3789fd-871f-499d-92ef-d121aa6f1e67"),
     }
-    accountID := "d68ea19f-1d17-4051-b39d-08086a184039"
+    accountID := "4bdb04f1-5756-4082-968e-a19f1d170513"
     xWaitFor := shared.SchemasWaitForPaymentMethod
 
     ctx := context.Background()
@@ -189,7 +189,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "4c26071f-93f5-4f06-82da-c7af515cc413"
+    accountID := "39d08086-a184-4039-8c26-071f93f5f064"
 
     ctx := context.Background()
     res, err := s.Cards.ListCards(ctx, accountID)
@@ -246,7 +246,7 @@ func main() {
         DisplayName: "Example Merchant",
         Domain: "checkout.classbooker.dev",
     }
-    accountID := "aa63aae8-d678-464d-bb67-5fd5e60b375e"
+    accountID := "2dac7af5-15cc-4413-aa63-aae8d67864db"
 
     ctx := context.Background()
     res, err := s.Cards.CreateApplePaySession(ctx, createApplePaySession, accountID)
@@ -297,7 +297,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "d4f6fbee-41f3-4331-bfe3-5b60eb1ea426"
+    accountID := "b675fd5e-60b3-475e-94f6-fbee41f33317"
     cardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -349,7 +349,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "555ba3c2-8744-4ed5-bb88-f3a8d8f5c0b2"
+    accountID := "fe35b60e-b1ea-4426-955b-a3c28744ed53"
     cardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -403,7 +403,7 @@ func main() {
             AccessToken: moov.String(""),
         }),
     )
-    accountID := "f2fb7b19-4a27-46b2-a916-fe1f08f4294e"
+    accountID := "b88f3a8d-8f5c-40b2-b2fb-7b194a276b26"
 
     ctx := context.Background()
     res, err := s.Cards.ListApplePayDomains(ctx, accountID)
@@ -459,10 +459,10 @@ func main() {
     registerApplePayMerchantDomains := shared.RegisterApplePayMerchantDomains{
         DisplayName: "Example Merchant",
         Domains: []string{
-            "ea",
+            "unde",
         },
     }
-    accountID := "98f447f6-03e8-4b44-9e80-ca55efd20e45"
+    accountID := "16fe1f08-f429-44e3-a98f-447f603e8b44"
 
     ctx := context.Background()
     res, err := s.Cards.RegisterApplePayDomain(ctx, registerApplePayMerchantDomains, accountID)
@@ -534,7 +534,7 @@ func main() {
             Year: moov.String("21"),
         },
     }
-    accountID := "7e1858b6-a89f-4be3-a5aa-8e4824d0ab40"
+    accountID := "5e80ca55-efd2-40e4-97e1-858b6a89fbe3"
     cardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -592,16 +592,13 @@ func main() {
     )
     updateApplePayMerchantDomains := shared.UpdateApplePayMerchantDomains{
         AddDomains: []string{
-            "ipsam",
-            "sit",
+            "dolorum",
         },
         RemoveDomains: []string{
-            "quas",
-            "repudiandae",
-            "corporis",
+            "nostrum",
         },
     }
-    accountID := "1862065e-904f-43b1-994b-8abf603a79f9"
+    accountID := "aa8e4824-d0ab-4407-9088-e51862065e90"
 
     ctx := context.Background()
     res, err := s.Cards.UpdateApplePayDomains(ctx, updateApplePayMerchantDomains, accountID)
