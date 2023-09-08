@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-// ApplePayMerchantDomains - Domains registered with Apple Pay
 type ApplePayMerchantDomains struct {
 	// ID of Account
 	AccountID *string    `json:"accountID,omitempty"`

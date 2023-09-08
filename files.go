@@ -25,7 +25,7 @@ func newFiles(sdkConfig sdkConfiguration) *files {
 	}
 }
 
-// Get - Get File Details
+// Get File Details
 // Retrieve file details associated with a specific Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.read` scope.
 func (s *files) Get(ctx context.Context, accountID string, fileID string) (*operations.GetFileDetailsResponse, error) {
 	request := operations.GetFileDetailsRequest{
@@ -93,7 +93,7 @@ func (s *files) Get(ctx context.Context, accountID string, fileID string) (*oper
 	return res, nil
 }
 
-// List - List files
+// List files
 // List all the files associated with a particular Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.read` scope.
 func (s *files) List(ctx context.Context, accountID string) (*operations.ListFilesResponse, error) {
 	request := operations.ListFilesRequest{
@@ -160,7 +160,7 @@ func (s *files) List(ctx context.Context, accountID string) (*operations.ListFil
 	return res, nil
 }
 
-// Upload - Upload File
+// Upload File
 // Upload a file and link it to the provided Moov account. The maximum file size is 10MB. Each account is allowed a maximum of 10 files. Acceptable file types include csv, jpg, pdf, and png. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.write` scope.
 func (s *files) Upload(ctx context.Context, fileUploadRequest shared.FileUploadRequest, accountID string) (*operations.UploadFileResponse, error) {
 	request := operations.UploadFileRequest{

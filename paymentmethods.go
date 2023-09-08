@@ -27,7 +27,7 @@ func newPaymentMethods(sdkConfig sdkConfiguration) *paymentMethods {
 	}
 }
 
-// Get - Get payment method
+// Get payment method
 // Get the specified payment method associated with a Moov account. <br><br> To get a payment method, you must specify the `/accounts/{accountID}/payment-methods.read` scope.
 func (s *paymentMethods) Get(ctx context.Context, accountID string, paymentMethodID string) (*operations.GetPaymentMethodResponse, error) {
 	request := operations.GetPaymentMethodRequest{
@@ -95,7 +95,7 @@ func (s *paymentMethods) Get(ctx context.Context, accountID string, paymentMetho
 	return res, nil
 }
 
-// List - List payment methods
+// List payment methods
 // Retrieve a list of payment methods associated with a Moov account. <br><br> To list payment methods, you must specify the `/accounts/{accountID}/payment-methods.read` scope.
 func (s *paymentMethods) List(ctx context.Context, accountID string, sourceID *string) (*operations.ListPaymentMethodsResponse, error) {
 	request := operations.ListPaymentMethodsRequest{

@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-// CreatedTransfer - A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
 type CreatedTransfer struct {
 	CreatedOn *time.Time `json:"createdOn,omitempty"`
 	// ID of Transfer

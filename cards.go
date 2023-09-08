@@ -420,7 +420,7 @@ func (s *cards) Delete(ctx context.Context, accountID string, cardID string) (*o
 	return res, nil
 }
 
-// Get - Get card
+// Get card
 // Fetch a specific card associated with a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.read` scope.
 func (s *cards) Get(ctx context.Context, accountID string, cardID string) (*operations.GetCardResponse, error) {
 	request := operations.GetCardRequest{
@@ -640,7 +640,7 @@ func (s *cards) RegisterApplePayDomain(ctx context.Context, registerApplePayMerc
 	return res, nil
 }
 
-// Update - Update card
+// Update card
 // Update a Linked Card and/or resubmit it for verification. If a value is provided for CVV,
 // a new verification ($0 authorization) will be submitted for the card. Updating the expiration date or
 // address will update the information stored on file for the card but will not be verified.

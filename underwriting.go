@@ -90,7 +90,7 @@ func (s *underwriting) Get(ctx context.Context, accountID string) (*operations.G
 	return res, nil
 }
 
-// Update - Update underwriting details
+// Update underwriting details
 // Update the account's underwriting by passing new values for one or more of the fields. <br><br> To update an account's underwriting details, you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 func (s *underwriting) Update(ctx context.Context, underwritingRequest shared.UnderwritingRequest, accountID string) (*operations.UpdateUnderwritingResponse, error) {
 	request := operations.UpdateUnderwritingRequest{

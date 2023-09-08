@@ -108,7 +108,7 @@ func (s *accounts) AssignCountry(ctx context.Context, countries shared.Countries
 	return res, nil
 }
 
-// Create - Create account
+// Create account
 // You can create accounts for your users by passing the required information to Moov. <br><br> Note that `mode` field is only required when creating a facilitator account. All non-facilitator account creation requests will ignore the mode field provided and be set to the calling facilitator's mode. <br><br> If you are creating an account with the business type "llc", "partnership", or "privateCorporation", you will need to also provide [business representatives](https://docs.moov.io/api/#tag/Representatives) after creating the account for verification purposes. Once you've added your business owners as representatives, you'll then need to [patch your Moov account](https://docs.moov.io/api/#operation/patchAccount) to indicate that ownership information is complete. Read more on our [business verification requirements here](https://docs.moov.io/guides/accounts/business-verification/). <br><br> When creating an account, you will need to specify the `/accounts.write` scope.
 func (s *accounts) Create(ctx context.Context, request shared.CreateAccountRequest) (*operations.CreateAccountResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
@@ -180,7 +180,7 @@ func (s *accounts) Create(ctx context.Context, request shared.CreateAccountReque
 	return res, nil
 }
 
-// Get - Get account
+// Get account
 // Retrieves details for the account with the specified ID. <br><br> To get an account, you will need to specify the `/accounts/{accountID}/profile.read` scope.
 func (s *accounts) Get(ctx context.Context, accountID string) (*operations.GetAccountResponse, error) {
 	request := operations.GetAccountRequest{
@@ -303,7 +303,7 @@ func (s *accounts) GetTosToken(ctx context.Context) (*operations.GetTermsOfServi
 	return res, nil
 }
 
-// List - List accounts
+// List accounts
 // List or search accounts to which the caller is connected.<br><br>
 // All supported query parameters are optional. If none are provided
 // the response will include all connected accounts. Pagination is

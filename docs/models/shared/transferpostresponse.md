@@ -1,7 +1,5 @@
 # TransferPostResponse
 
-Successfully created a transfer
-
 
 ## Supported Types
 

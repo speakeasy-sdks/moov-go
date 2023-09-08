@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-// IssuedCard - Card created
 type IssuedCard struct {
 	AuthorizationControls *AuthorizationControls `json:"authorizationControls,omitempty"`
 	// Fields to identify a human

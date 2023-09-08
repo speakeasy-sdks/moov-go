@@ -1,7 +1,5 @@
 # CreatedReversal
 
-Successfully initiated a reversal
-
 
 ## Fields
 

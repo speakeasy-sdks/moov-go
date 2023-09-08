@@ -83,7 +83,7 @@ func (s *capabilities) Delete(ctx context.Context, accountID string, capabilityI
 	return res, nil
 }
 
-// Get - Get capability for account
+// Get capability for account
 // Retrieve a specific capability that an account has requested. <br><br> To use this endpoint, you must specify the `/accounts/{accountID}/capabilities.read` scope.
 func (s *capabilities) Get(ctx context.Context, accountID string, capabilityID shared.CapabilityID) (*operations.GetCapabilityResponse, error) {
 	request := operations.GetCapabilityRequest{
@@ -151,7 +151,7 @@ func (s *capabilities) Get(ctx context.Context, accountID string, capabilityID s
 	return res, nil
 }
 
-// List - List capabilities for account
+// List capabilities for account
 // Retrieve all the capabilities an account has requested. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/capabilities.read` scope.
 func (s *capabilities) List(ctx context.Context, accountID string) (*operations.ListCapabilitiesResponse, error) {
 	request := operations.ListCapabilitiesRequest{
@@ -216,7 +216,7 @@ func (s *capabilities) List(ctx context.Context, accountID string) (*operations.
 	return res, nil
 }
 
-// Request - Request capabilities
+// Request capabilities
 // Request capabilities for a specific account. <br><br> To use this endpoint, you must specify the `/accounts/{accountID}/capabilities.write` scope.
 func (s *capabilities) Request(ctx context.Context, addCapabilityRequest shared.AddCapabilityRequest, accountID string) (*operations.PostCapabilityResponse, error) {
 	request := operations.PostCapabilityRequest{

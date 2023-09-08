@@ -166,7 +166,6 @@ func (o *CreatedReversalSynchronousRefundResponse) GetUpdatedOn() *time.Time {
 	return o.UpdatedOn
 }
 
-// CreatedReversal - Successfully initiated a reversal
 type CreatedReversal struct {
 	Cancellation *CreatedCancellation                      `json:"cancellation,omitempty"`
 	Refund       *CreatedReversalSynchronousRefundResponse `json:"refund,omitempty"`

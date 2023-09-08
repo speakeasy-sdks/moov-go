@@ -29,7 +29,7 @@ func newWallets(sdkConfig sdkConfiguration) *wallets {
 	}
 }
 
-// Get - Get wallet
+// Get wallet
 // Get information on a specific wallet (e.g., the available balance). <br><br> To get wallet information, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 func (s *wallets) Get(ctx context.Context, accountID string, walletID string) (*operations.GetWalletForAccountResponse, error) {
 	request := operations.GetWalletForAccountRequest{
@@ -166,7 +166,7 @@ func (s *wallets) GetTransaction(ctx context.Context, accountID string, transact
 	return res, nil
 }
 
-// List - List wallets
+// List wallets
 // List the wallets associated with a Moov account. <br><br> To list wallets, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 func (s *wallets) List(ctx context.Context, accountID string) (*operations.ListWalletsForAccountResponse, error) {
 	request := operations.ListWalletsForAccountRequest{

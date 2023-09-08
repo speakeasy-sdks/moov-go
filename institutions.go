@@ -25,7 +25,7 @@ func newInstitutions(sdkConfig sdkConfiguration) *institutions {
 	}
 }
 
-// Search - Search institutions
+// Search institutions
 // Search for institutions by their routing number or name. <br><br> To use this endpoint, you need to specify the `/fed.read` scope.
 func (s *institutions) Search(ctx context.Context, request operations.SearchInstitutionRequest) (*operations.SearchInstitutionResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())

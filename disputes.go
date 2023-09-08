@@ -26,7 +26,7 @@ func newDisputes(sdkConfig sdkConfiguration) *disputes {
 	}
 }
 
-// Get - Get Dispute by ID
+// Get Dispute by ID
 // Returns a user's dispute by ID. <br><br> To use this endpoint, you need to specify the `/accounts/{your-account-id}/transfers.read` scope.
 func (s *disputes) Get(ctx context.Context, disputeID string) (*operations.GetDisputeResponse, error) {
 	request := operations.GetDisputeRequest{
@@ -91,7 +91,7 @@ func (s *disputes) Get(ctx context.Context, disputeID string) (*operations.GetDi
 	return res, nil
 }
 
-// List - List of all disputes
+// List of all disputes
 // Returns the list of disputes. <br><br> To use this endpoint, you need to specify the `/accounts/{your-account-id}/transfers.read` scope.
 func (s *disputes) List(ctx context.Context, request operations.ListDisputesRequest) (*operations.ListDisputesResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())

@@ -465,7 +465,6 @@ func (u CreatedTransferOptionsSourceOptions) MarshalJSON() ([]byte, error) {
 	return nil, nil
 }
 
-// CreatedTransferOptions - Succesfully created transfer options
 type CreatedTransferOptions struct {
 	DestinationOptions []CreatedTransferOptionsDestinationOptions `json:"destinationOptions,omitempty"`
 	SourceOptions      []CreatedTransferOptionsSourceOptions      `json:"sourceOptions,omitempty"`

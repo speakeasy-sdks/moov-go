@@ -28,7 +28,7 @@ func newAccessToken(sdkConfig sdkConfiguration) *accessToken {
 	}
 }
 
-// Create - Create access token
+// Create access token
 // Use the client_id and client_secret to generate an access token.
 func (s *accessToken) Create(ctx context.Context, request shared.ClientCredentialsGrantToAccessTokenRequest) (*operations.PostOAuth2TokenResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
@@ -108,7 +108,7 @@ func (s *accessToken) Create(ctx context.Context, request shared.ClientCredentia
 	return res, nil
 }
 
-// Revoke - Revoke access token
+// Revoke access token
 // Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed
 func (s *accessToken) Revoke(ctx context.Context, request shared.RevokeTokenRequest1) (*operations.RevokeOAuth2TokenResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())

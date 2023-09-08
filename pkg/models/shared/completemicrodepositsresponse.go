@@ -2,7 +2,6 @@
 
 package shared
 
-// CompleteMicroDepositsResponse - Micro-Deposits Successfully verified
 type CompleteMicroDepositsResponse struct {
 	// The micro-deposit status
 	Status *MicroDepositStatus `json:"status,omitempty"`

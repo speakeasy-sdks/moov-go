@@ -1,7 +1,5 @@
 # CompleteMicroDepositsResponse
 
-Micro-Deposits Successfully verified
-
 
 ## Fields
 

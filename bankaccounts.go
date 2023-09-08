@@ -170,7 +170,7 @@ func (s *bankAccounts) CompleteMicroDeposits(ctx context.Context, completeMicroD
 	return res, nil
 }
 
-// Delete - Delete bank account
+// Delete bank account
 // Discontinue using a specified bank account linked to a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 func (s *bankAccounts) Delete(ctx context.Context, accountID string, bankAccountID string) (*operations.DeleteBankAccountResponse, error) {
 	request := operations.DeleteBankAccountRequest{
@@ -228,7 +228,7 @@ func (s *bankAccounts) Delete(ctx context.Context, accountID string, bankAccount
 	return res, nil
 }
 
-// Get - Get bank account
+// Get bank account
 // Retrieve bank account details (i.e. routing number or account type) associated with a specific Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 func (s *bankAccounts) Get(ctx context.Context, accountID string, bankAccountID string) (*operations.GetBankAccountResponse, error) {
 	request := operations.GetBankAccountRequest{
@@ -378,7 +378,7 @@ func (s *bankAccounts) Link(ctx context.Context, bankAccountPayload shared.BankA
 	return res, nil
 }
 
-// List - List bank accounts
+// List bank accounts
 // List all the bank accounts associated with a particular Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 func (s *bankAccounts) List(ctx context.Context, accountID string) (*operations.ListBankAccountsResponse, error) {
 	request := operations.ListBankAccountsRequest{

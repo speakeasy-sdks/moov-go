@@ -25,7 +25,7 @@ func newRepresentatives(sdkConfig sdkConfiguration) *representatives {
 	}
 }
 
-// Create - Create representative
+// Create representative
 // Moov accounts associated with businesses require information regarding individuals who represent the business. You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives.<br><br> To create a representative, you must specify the `/accounts/{accountID}/representatives.write` scope.
 func (s *representatives) Create(ctx context.Context, createRepresentative shared.CreateRepresentative, accountID string) (*operations.CreateRepresentativeResponse, error) {
 	request := operations.CreateRepresentativeRequest{
@@ -105,7 +105,7 @@ func (s *representatives) Create(ctx context.Context, createRepresentative share
 	return res, nil
 }
 
-// Delete - Delete a representative
+// Delete a representative
 // Deletes a business representative associated with a Moov account. <br><br> To use this endpoint, you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 func (s *representatives) Delete(ctx context.Context, accountID string, representativeID string) (*operations.DeleteRepresentativeResponse, error) {
 	request := operations.DeleteRepresentativeRequest{
@@ -163,7 +163,7 @@ func (s *representatives) Delete(ctx context.Context, accountID string, represen
 	return res, nil
 }
 
-// Get - Get representative
+// Get representative
 // Retrieve a specific representative associated with a given Moov account. <br><br> To get a representative, you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 func (s *representatives) Get(ctx context.Context, accountID string, representativeID string) (*operations.GetRepresentativeResponse, error) {
 	request := operations.GetRepresentativeRequest{
@@ -231,7 +231,7 @@ func (s *representatives) Get(ctx context.Context, accountID string, representat
 	return res, nil
 }
 
-// List - List representatives
+// List representatives
 // A Moov account may have multiple representatives depending on the associated business's ownership and management structure. You can use this method to list all the representatives for a given Moov account. Note that Moov accounts associated with an individual do not have representatives. <br><br> To list representatives, you need to specify the `/accounts/{accountID}/representatives.read` scope.
 func (s *representatives) List(ctx context.Context, accountID string) (*operations.ListRepresentativesResponse, error) {
 	request := operations.ListRepresentativesRequest{
