@@ -170,7 +170,7 @@ func WithSecurity(security shared.Security) SDKOption {
 }
 
 func WithRetryConfig(retryConfig utils.RetryConfig) SDKOption {
-	return func(sdk *SDK) {
+	return func(sdk *Moov) {
 		sdk.sdkConfiguration.RetryConfig = &retryConfig
 	}
 }
@@ -181,8 +181,8 @@ func New(opts ...SDKOption) *Moov {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "0.4.0",
-			GenVersion:        "2.107.0",
+			SDKVersion:        "0.5.0",
+			GenVersion:        "2.115.2",
 		},
 	}
 	for _, opt := range opts {

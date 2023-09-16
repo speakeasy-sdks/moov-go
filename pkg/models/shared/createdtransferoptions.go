@@ -234,7 +234,8 @@ func (u CreatedTransferOptionsDestinationOptions) MarshalJSON() ([]byte, error) 
 		return json.Marshal(u.PaymentMethodApplePay)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
+
 }
 
 type CreatedTransferOptionsSourceOptionsType string
@@ -462,7 +463,8 @@ func (u CreatedTransferOptionsSourceOptions) MarshalJSON() ([]byte, error) {
 		return json.Marshal(u.PaymentMethodApplePay)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
+
 }
 
 type CreatedTransferOptions struct {

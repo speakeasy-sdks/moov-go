@@ -103,9 +103,7 @@ pkg/models/operations/getwalletforaccount.go
 pkg/models/operations/getwallettransaction.go
 pkg/models/operations/listwalletsforaccount.go
 pkg/models/operations/listwallettransactions.go
-pkg/models/shared/accesstokenresponse.go
 pkg/models/shared/clientcredentialsgranttoaccesstokenresponse.go
-pkg/models/shared/accesstokenerrorresponse.go
 pkg/models/shared/clientcredentialsgranttoaccesstokenerrorresponse.go
 pkg/models/shared/clientcredentialsgranttoaccesstokenrequest.go
 pkg/models/shared/revoketokenrequest1.go
@@ -420,10 +418,8 @@ docs/models/operations/listwalletsforaccountrequest.md
 docs/models/operations/listwalletsforaccountresponse.md
 docs/models/operations/listwallettransactionsrequest.md
 docs/models/operations/listwallettransactionsresponse.md
-docs/models/shared/accesstokenresponse.md
 docs/models/shared/clientcredentialsgranttoaccesstokenresponsetokentype.md
 docs/models/shared/clientcredentialsgranttoaccesstokenresponse.md
-docs/models/shared/accesstokenerrorresponse.md
 docs/models/shared/clientcredentialsgranttoaccesstokenerrorresponseerror.md
 docs/models/shared/clientcredentialsgranttoaccesstokenerrorresponse.md
 docs/models/shared/clientcredentialsgranttoaccesstokenrequestgranttype.md

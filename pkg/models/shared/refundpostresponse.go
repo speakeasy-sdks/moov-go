@@ -73,5 +73,6 @@ func (u RefundPostResponse) MarshalJSON() ([]byte, error) {
 		return json.Marshal(u.GetRefund)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
+
 }

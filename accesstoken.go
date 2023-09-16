@@ -79,24 +79,24 @@ func (s *accessToken) Create(ctx context.Context, request shared.ClientCredentia
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.AccessTokenResponse
+			var out *shared.ClientCredentialsGrantToAccessTokenResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
-			res.AccessTokenResponse = out
+			res.ClientCredentialsGrantToAccessTokenResponse = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.AccessTokenErrorResponse
+			var out *shared.ClientCredentialsGrantToAccessTokenErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
-			res.AccessTokenErrorResponse = out
+			res.ClientCredentialsGrantToAccessTokenErrorResponse = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
