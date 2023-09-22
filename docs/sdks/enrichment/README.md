@@ -21,33 +21,33 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAddress(ctx, operations.GetAddressRequest{
-        ExcludeStates: moov.String("est"),
-        IncludeCities: moov.String("quidem"),
-        IncludeStates: moov.String("reprehenderit"),
-        IncludeZipcodes: moov.String("facere"),
-        MaxResults: moov.Int64(685092),
-        PreferCities: moov.String("praesentium"),
-        PreferGeolocation: moov.String("mollitia"),
-        PreferRatio: moov.Int64(333965),
-        PreferStates: moov.String("voluptatem"),
-        PreferZipcodes: moov.String("quisquam"),
-        Search: "repudiandae",
-        Selected: moov.String("quasi"),
-        Source: moov.String("atque"),
+        ExcludeStates: moovgo.String("doloremque"),
+        IncludeCities: moovgo.String("repudiandae"),
+        IncludeStates: moovgo.String("dicta"),
+        IncludeZipcodes: moovgo.String("accusantium"),
+        MaxResults: moovgo.Int64(106429),
+        PreferCities: moovgo.String("dolores"),
+        PreferGeolocation: moovgo.String("enim"),
+        PreferRatio: moovgo.Int64(389135),
+        PreferStates: moovgo.String("velit"),
+        PreferZipcodes: moovgo.String("a"),
+        Search: "molestias",
+        Selected: moovgo.String("magnam"),
+        Source: moovgo.String("saepe"),
     })
     if err != nil {
         log.Fatal(err)
@@ -86,18 +86,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    uniqueID := "reprehenderit"
+    uniqueID := "consequuntur"
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAvatar(ctx, uniqueID)
@@ -138,14 +138,14 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
@@ -187,18 +187,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    email := "asperiores"
+    email := "occaecati"
 
     ctx := context.Background()
     res, err := s.Enrichment.GetProfile(ctx, email)

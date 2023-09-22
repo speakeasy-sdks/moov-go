@@ -4,6 +4,8 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/types"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"net/http"
 )
 
@@ -14,7 +16,18 @@ type RefundTransferRequest struct {
 	TransferID   string               `pathParam:"style=simple,explode=false,name=transferID"`
 	CreateRefund *shared.CreateRefund `request:"mediaType=application/json"`
 	// Optional header that indicates whether to return a synchronous response that includes the full refund and card transaction details or an asynchronous response indicating the refund was created (this is the default response if the header is omitted).
-	XWaitFor *shared.WaitFor `header:"style=simple,explode=false,name=X-Wait-For"`
+	xWaitFor *string `const:"rail-response" header:"style=simple,explode=false,name=X-Wait-For"`
+}
+
+func (r RefundTransferRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RefundTransferRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *RefundTransferRequest) GetXIdempotencyKey() string {
@@ -38,11 +51,8 @@ func (o *RefundTransferRequest) GetCreateRefund() *shared.CreateRefund {
 	return o.CreateRefund
 }
 
-func (o *RefundTransferRequest) GetXWaitFor() *shared.WaitFor {
-	if o == nil {
-		return nil
-	}
-	return o.XWaitFor
+func (o *RefundTransferRequest) GetXWaitFor() *string {
+	return types.String("rail-response")
 }
 
 type RefundTransferResponse struct {

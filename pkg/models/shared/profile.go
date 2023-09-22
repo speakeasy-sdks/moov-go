@@ -2,6 +2,10 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 type ProfileBusinessAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`
@@ -115,8 +119,19 @@ type ProfileBusiness struct {
 	Phone             *ProfileBusinessPhone         `json:"phone,omitempty"`
 	Representatives   []Representative              `json:"representatives,omitempty"`
 	// Indicates whether a tax ID has been provided for this Business
-	TaxIDProvided bool    `json:"taxIDProvided"`
+	TaxIDProvided *bool   `default:"false" json:"taxIDProvided"`
 	Website       *string `json:"website,omitempty"`
+}
+
+func (p ProfileBusiness) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *ProfileBusiness) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ProfileBusiness) GetAddress() *ProfileBusinessAddress {
@@ -189,9 +204,9 @@ func (o *ProfileBusiness) GetRepresentatives() []Representative {
 	return o.Representatives
 }
 
-func (o *ProfileBusiness) GetTaxIDProvided() bool {
+func (o *ProfileBusiness) GetTaxIDProvided() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.TaxIDProvided
 }
@@ -277,14 +292,25 @@ func (o *ProfileIndividualPhone) GetNumber() *string {
 type ProfileIndividual struct {
 	Address *ProfileIndividualAddress `json:"address,omitempty"`
 	// Indicates whether this Individual's birth date has been provided
-	BirthDateProvided bool `json:"birthDateProvided"`
+	BirthDateProvided *bool `default:"false" json:"birthDateProvided"`
 	// Email Address
 	Email *string `json:"email,omitempty"`
 	// Indicates whether a government ID (SSN, ITIN, etc.) has been provided for this Individual
-	GovernmentIDProvided bool `json:"governmentIDProvided"`
+	GovernmentIDProvided *bool `default:"false" json:"governmentIDProvided"`
 	// Name for an individual
 	Name  Name                    `json:"name"`
 	Phone *ProfileIndividualPhone `json:"phone,omitempty"`
+}
+
+func (p ProfileIndividual) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *ProfileIndividual) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ProfileIndividual) GetAddress() *ProfileIndividualAddress {
@@ -294,9 +320,9 @@ func (o *ProfileIndividual) GetAddress() *ProfileIndividualAddress {
 	return o.Address
 }
 
-func (o *ProfileIndividual) GetBirthDateProvided() bool {
+func (o *ProfileIndividual) GetBirthDateProvided() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.BirthDateProvided
 }
@@ -308,9 +334,9 @@ func (o *ProfileIndividual) GetEmail() *string {
 	return o.Email
 }
 
-func (o *ProfileIndividual) GetGovernmentIDProvided() bool {
+func (o *ProfileIndividual) GetGovernmentIDProvided() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.GovernmentIDProvided
 }

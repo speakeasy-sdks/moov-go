@@ -28,18 +28,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "12eb07f1-16db-4995-85fc-95fa88970e18"
+    accountID := "ea055b19-7cd4-44e2-b52d-82d3513bb6f4"
     walletID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -80,18 +80,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "9dbb30fc-b33e-4a05-9b19-7cd44e2f52d8"
+    accountID := "8b656bcd-b35f-4f2e-8b27-537a8cd9e731"
     transactionID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
     walletID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
@@ -134,18 +134,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "2d3513bb-6f48-4b65-abcd-b35ff2e4b275"
+    accountID := "9c177d52-5f77-4b11-8eeb-52ff785fc378"
 
     ctx := context.Background()
     res, err := s.Wallets.List(ctx, accountID)
@@ -184,31 +184,31 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Wallets.ListTransactions(ctx, operations.ListWalletTransactionsRequest{
-        AccountID: "37a8cd9e-7319-4c17-bd52-5f77b114eeb5",
-        CompletedEndDateTime: moov.String("eos"),
-        CompletedStartDateTime: moov.String("reiciendis"),
-        Count: moov.Int64(939161),
-        CreatedEndDateTime: moov.String("reprehenderit"),
-        CreatedStartDateTime: moov.String("praesentium"),
-        Skip: moov.Int64(367046),
-        SourceID: moov.String("repellat"),
-        SourceType: moov.String("quisquam"),
-        Status: moov.String("sequi"),
-        TransactionType: moov.String("nihil"),
+        AccountID: "14d4c98e-0c2b-4b89-ab75-dad636c60050",
+        CompletedEndDateTime: moovgo.String("amet"),
+        CompletedStartDateTime: moovgo.String("illum"),
+        Count: moovgo.Int64(506863),
+        CreatedEndDateTime: moovgo.String("quidem"),
+        CreatedStartDateTime: moovgo.String("cum"),
+        Skip: moovgo.Int64(230411),
+        SourceID: moovgo.String("quasi"),
+        SourceType: moovgo.String("dicta"),
+        Status: moovgo.String("laudantium"),
+        TransactionType: moovgo.String("doloremque"),
         WalletID: "ec7e1848-dc80-4ab0-8827-dd7fc0737b43",
     })
     if err != nil {

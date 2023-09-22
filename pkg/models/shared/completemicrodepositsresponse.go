@@ -2,15 +2,27 @@
 
 package shared
 
-// CompleteMicroDepositsResponse - Micro-Deposits Successfully verified
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/types"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 type CompleteMicroDepositsResponse struct {
 	// The micro-deposit status
-	Status *MicroDepositStatus `json:"status,omitempty"`
+	status *string `const:"verified" json:"status,omitempty"`
 }
 
-func (o *CompleteMicroDepositsResponse) GetStatus() *MicroDepositStatus {
-	if o == nil {
-		return nil
+func (c CompleteMicroDepositsResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CompleteMicroDepositsResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
 	}
-	return o.Status
+	return nil
+}
+
+func (o *CompleteMicroDepositsResponse) GetStatus() *string {
+	return types.String("verified")
 }
