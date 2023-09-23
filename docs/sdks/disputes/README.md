@@ -21,15 +21,15 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     disputeID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
@@ -71,24 +71,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Disputes.List(ctx, operations.ListDisputesRequest{
-        Count: moov.Int64(833819),
-        RespondEndDateTime: moov.String("delectus"),
-        RespondStartDateTime: moov.String("voluptates"),
-        Skip: moov.Int64(16871),
+        Count: moovgo.Int64(680697),
+        RespondEndDateTime: moovgo.String("repellendus"),
+        RespondStartDateTime: moovgo.String("labore"),
+        Skip: moovgo.Int64(968287),
         Status: shared.DisputeStatusResponseNeeded.ToPointer(),
     })
     if err != nil {

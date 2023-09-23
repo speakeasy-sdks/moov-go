@@ -5,12 +5,13 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
 // GetRefundFailureCode - This field is deprecated and will be removed in December 2023.
 //
-// Deprecated: this type will be removed in a future release, please migrate away from it as soon as possible.
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type GetRefundFailureCode string
 
 const (
@@ -109,12 +110,23 @@ type GetRefund struct {
 	CreatedOn   *time.Time         `json:"createdOn,omitempty"`
 	// This field is deprecated and will be removed in December 2023.
 	//
-	// Deprecated: this field will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	FailureCode *GetRefundFailureCode `json:"failureCode,omitempty"`
 	// UUID v4
 	RefundID  *string       `json:"refundID,omitempty"`
 	Status    *RefundStatus `json:"status,omitempty"`
 	UpdatedOn *time.Time    `json:"updatedOn,omitempty"`
+}
+
+func (g GetRefund) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetRefund) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, true); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GetRefund) GetAmount() *Amount {

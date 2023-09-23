@@ -2,6 +2,10 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // GetTransferFullSourceDestinationApplePay - Describes an Apple Pay token on a Moov account.
 type GetTransferFullSourceDestinationApplePay struct {
 	// The card brand
@@ -158,7 +162,7 @@ type GetTransferFullSourceDestinationCard struct {
 	// UUID v4
 	CardID *string `json:"cardID,omitempty"`
 	// Indicates cardholder has authorized card to be stored for future payments
-	CardOnFile *bool `json:"cardOnFile,omitempty"`
+	CardOnFile *bool `default:"false" json:"cardOnFile"`
 	// The type of the card
 	CardType *CardType `json:"cardType,omitempty"`
 	// The results of submitting cardholder data to a card network for verification
@@ -176,6 +180,17 @@ type GetTransferFullSourceDestinationCard struct {
 	LastFourCardNumber *string `json:"lastFourCardNumber,omitempty"`
 	// Moov account ID of the merchant or entity authorized to store the card. Defaults to your platform account ID if cardOnFile is set to true and no other account is provided
 	MerchantAccountID *string `json:"merchantAccountID,omitempty"`
+}
+
+func (g GetTransferFullSourceDestinationCard) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetTransferFullSourceDestinationCard) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GetTransferFullSourceDestinationCard) GetBillingAddress() *Address {

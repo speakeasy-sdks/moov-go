@@ -2,6 +2,10 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // Card - Describes a card on a Moov account
 type Card struct {
 	BillingAddress *Address `json:"billingAddress,omitempty"`
@@ -13,7 +17,7 @@ type Card struct {
 	// UUID v4
 	CardID *string `json:"cardID,omitempty"`
 	// Indicates cardholder has authorized card to be stored for future payments
-	CardOnFile *bool `json:"cardOnFile,omitempty"`
+	CardOnFile *bool `default:"false" json:"cardOnFile"`
 	// The type of the card
 	CardType *CardType `json:"cardType,omitempty"`
 	// The results of submitting cardholder data to a card network for verification
@@ -31,6 +35,17 @@ type Card struct {
 	LastFourCardNumber *string `json:"lastFourCardNumber,omitempty"`
 	// Moov account ID of the merchant or entity authorized to store the card. Defaults to your platform account ID if cardOnFile is set to true and no other account is provided
 	MerchantAccountID *string `json:"merchantAccountID,omitempty"`
+}
+
+func (c Card) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *Card) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Card) GetBillingAddress() *Address {

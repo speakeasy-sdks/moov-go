@@ -5,6 +5,7 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -50,6 +51,17 @@ type Document struct {
 	ParseErrors []string     `json:"parseErrors,omitempty"`
 	Type        DocumentType `json:"type"`
 	UploadedAt  time.Time    `json:"uploadedAt"`
+}
+
+func (d Document) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *Document) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Document) GetContentType() string {

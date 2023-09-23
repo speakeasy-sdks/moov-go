@@ -24,24 +24,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/types"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.CountAccountsCreated(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2022-07-22T03:36:34.615Z"),
-        From: types.MustTimeFromString("2020-02-22T17:45:21.686Z"),
-        To: types.MustTimeFromString("2022-02-08T14:21:47.573Z"),
-        Tz: types.MustTimeFromString("2022-02-26T01:27:36.152Z"),
+        Every: types.MustTimeFromString("2022-12-07T10:53:17.121Z"),
+        From: types.MustTimeFromString("2021-01-23T15:47:23.464Z"),
+        To: types.MustTimeFromString("2022-05-11T16:07:41.164Z"),
+        Tz: types.MustTimeFromString("2022-10-12T05:44:19.260Z"),
     })
     if err != nil {
         log.Fatal(err)
@@ -78,24 +78,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/types"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.CountTransferStatuses(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2020-11-26T01:41:04.216Z"),
-        From: types.MustTimeFromString("2022-09-14T10:27:07.590Z"),
-        To: types.MustTimeFromString("2020-07-23T21:23:35.691Z"),
-        Tz: types.MustTimeFromString("2022-08-09T06:36:34.417Z"),
+        Every: types.MustTimeFromString("2022-07-30T07:35:03.817Z"),
+        From: types.MustTimeFromString("2022-11-26T12:00:10.052Z"),
+        To: types.MustTimeFromString("2022-01-06T19:47:24.047Z"),
+        Tz: types.MustTimeFromString("2022-03-21T22:14:24.691Z"),
     })
     if err != nil {
         log.Fatal(err)
@@ -132,25 +132,25 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/types"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.LargestTransfer(ctx, shared.LimitedTimeRange{
-        Count: moov.Int64(675439),
-        Every: moov.String("accusamus"),
-        From: types.MustTimeFromString("2022-06-02T20:02:58.167Z"),
-        To: types.MustTimeFromString("2022-02-13T03:59:53.583Z"),
-        Tz: moov.String("delectus"),
+        Count: moovgo.Int64(806194),
+        Every: moovgo.String("deleniti"),
+        From: types.MustTimeFromString("2022-02-08T00:19:59.821Z"),
+        To: types.MustTimeFromString("2022-11-25T15:46:28.441Z"),
+        Tz: moovgo.String("repudiandae"),
     })
     if err != nil {
         log.Fatal(err)
@@ -187,25 +187,25 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/types"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.SmallestTransfer(ctx, shared.LimitedTimeRange{
-        Count: moov.Int64(692532),
-        Every: moov.String("provident"),
-        From: types.MustTimeFromString("2021-09-06T10:36:33.442Z"),
-        To: types.MustTimeFromString("2021-12-07T18:13:34.827Z"),
-        Tz: moov.String("sapiente"),
+        Count: moovgo.Int64(352312),
+        Every: moovgo.String("expedita"),
+        From: types.MustTimeFromString("2022-01-01T10:06:00.916Z"),
+        To: types.MustTimeFromString("2022-07-21T08:29:53.942Z"),
+        Tz: moovgo.String("saepe"),
     })
     if err != nil {
         log.Fatal(err)
@@ -242,24 +242,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/types"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.SumTransfers(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2022-05-10T22:38:44.806Z"),
-        From: types.MustTimeFromString("2022-07-30T07:01:46.758Z"),
-        To: types.MustTimeFromString("2021-10-15T07:59:26.631Z"),
-        Tz: types.MustTimeFromString("2022-12-24T23:52:02.245Z"),
+        Every: types.MustTimeFromString("2022-11-20T20:56:20.791Z"),
+        From: types.MustTimeFromString("2022-06-29T11:09:23.468Z"),
+        To: types.MustTimeFromString("2022-09-01T04:49:52.515Z"),
+        Tz: types.MustTimeFromString("2022-03-22T15:30:46.869Z"),
     })
     if err != nil {
         log.Fatal(err)
