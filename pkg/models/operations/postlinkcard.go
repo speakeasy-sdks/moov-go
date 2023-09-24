@@ -4,6 +4,8 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/types"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"net/http"
 )
 
@@ -16,7 +18,18 @@ type PostLinkCardRequest struct {
 	// ID of the account
 	AccountID string `pathParam:"style=simple,explode=false,name=accountID"`
 	// Optional header that indicates whether to return a synchronous response or an asynchronous response.
-	XWaitFor *shared.SchemasWaitFor `header:"style=simple,explode=false,name=X-Wait-For"`
+	xWaitFor *string `const:"payment-method" header:"style=simple,explode=false,name=X-Wait-For"`
+}
+
+func (p PostLinkCardRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PostLinkCardRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *PostLinkCardRequest) GetCardRequest() shared.CardRequest {
@@ -33,11 +46,8 @@ func (o *PostLinkCardRequest) GetAccountID() string {
 	return o.AccountID
 }
 
-func (o *PostLinkCardRequest) GetXWaitFor() *shared.SchemasWaitFor {
-	if o == nil {
-		return nil
-	}
-	return o.XWaitFor
+func (o *PostLinkCardRequest) GetXWaitFor() *string {
+	return types.String("payment-method")
 }
 
 type PostLinkCardResponse struct {

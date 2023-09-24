@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -80,6 +81,17 @@ type GetTransferFull struct {
 	Status *TransferStatus `json:"status,omitempty"`
 	// UUID v4
 	TransferID *string `json:"transferID,omitempty"`
+}
+
+func (g GetTransferFull) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetTransferFull) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, true); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GetTransferFull) GetAmount() *Amount {

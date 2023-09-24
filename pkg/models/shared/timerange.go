@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -12,6 +13,17 @@ type TimeRange struct {
 	From  *time.Time `json:"from,omitempty"`
 	To    *time.Time `json:"to,omitempty"`
 	Tz    *time.Time `json:"tz,omitempty"`
+}
+
+func (t TimeRange) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TimeRange) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *TimeRange) GetEvery() *time.Time {

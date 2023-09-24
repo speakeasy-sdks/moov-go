@@ -3,9 +3,8 @@
 package shared
 
 import (
-	"bytes"
-	"encoding/json"
 	"errors"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
 type BankAccountPayloadType string
@@ -63,39 +62,30 @@ func CreateBankAccountPayloadMx(mx Mx) BankAccountPayload {
 }
 
 func (u *BankAccountPayload) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	bankAccount := new(BankAccount)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&bankAccount); err == nil {
+	if err := utils.UnmarshalJSON(data, &bankAccount, "", true, true); err == nil {
 		u.BankAccount = bankAccount
 		u.Type = BankAccountPayloadTypeBankAccount
 		return nil
 	}
 
 	plaid := new(Plaid)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&plaid); err == nil {
+	if err := utils.UnmarshalJSON(data, &plaid, "", true, true); err == nil {
 		u.Plaid = plaid
 		u.Type = BankAccountPayloadTypePlaid
 		return nil
 	}
 
 	plaidLink := new(PlaidLink)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&plaidLink); err == nil {
+	if err := utils.UnmarshalJSON(data, &plaidLink, "", true, true); err == nil {
 		u.PlaidLink = plaidLink
 		u.Type = BankAccountPayloadTypePlaidLink
 		return nil
 	}
 
 	mx := new(Mx)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&mx); err == nil {
+	if err := utils.UnmarshalJSON(data, &mx, "", true, true); err == nil {
 		u.Mx = mx
 		u.Type = BankAccountPayloadTypeMx
 		return nil
@@ -106,20 +96,20 @@ func (u *BankAccountPayload) UnmarshalJSON(data []byte) error {
 
 func (u BankAccountPayload) MarshalJSON() ([]byte, error) {
 	if u.BankAccount != nil {
-		return json.Marshal(u.BankAccount)
+		return utils.MarshalJSON(u.BankAccount, "", true)
 	}
 
 	if u.Plaid != nil {
-		return json.Marshal(u.Plaid)
+		return utils.MarshalJSON(u.Plaid, "", true)
 	}
 
 	if u.PlaidLink != nil {
-		return json.Marshal(u.PlaidLink)
+		return utils.MarshalJSON(u.PlaidLink, "", true)
 	}
 
 	if u.Mx != nil {
-		return json.Marshal(u.Mx)
+		return utils.MarshalJSON(u.Mx, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }

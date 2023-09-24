@@ -20,21 +20,21 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "78a64584-273a-4841-8d16-2309fb092992"
-    count := 81369
-    skip := 686362
-    status := shared.IssuedCardTransactionStatusVoided
+    accountID := "e4be0560-13f5-49da-b57a-59ecfef66ef1"
+    count := 791880
+    skip := 685478
+    status := shared.IssuedCardTransactionStatusDeclined
 
     ctx := context.Background()
     res, err := s.Transactions.List(ctx, accountID, count, skip, status)
