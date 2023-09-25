@@ -2,6 +2,10 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // PatchRepresentativeRequestAddress - Residential address for an individual. Business addresses not accepted.
 type PatchRepresentativeRequestAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
@@ -197,12 +201,23 @@ func (o *PatchRepresentativeRequestPhone) GetNumber() *string {
 // PatchRepresentativeRequestResponsibilities - Describes the job responsibilities of an individual
 type PatchRepresentativeRequestResponsibilities struct {
 	// Indicates whether this individual has significant management responsibilities within the business
-	IsController *bool `json:"isController,omitempty"`
+	IsController *bool `default:"false" json:"isController"`
 	// If `true`, this field indicates that this individual has an ownership stake of at least 25% in the business. If the representative does not own at least 25% of the business, this field should be `false`.
-	IsOwner  *bool   `json:"isOwner,omitempty"`
+	IsOwner  *bool   `default:"false" json:"isOwner"`
 	JobTitle *string `json:"jobTitle,omitempty"`
 	// The percentage of ownership this individual has in the business (required if `isOwner` is `true`)
 	OwnershipPercentage *int64 `json:"ownershipPercentage,omitempty"`
+}
+
+func (p PatchRepresentativeRequestResponsibilities) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchRepresentativeRequestResponsibilities) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *PatchRepresentativeRequestResponsibilities) GetIsController() *bool {

@@ -1,7 +1,5 @@
 # RefundPostResponse
 
-Successfully initiated a card refund
-
 
 ## Supported Types
 

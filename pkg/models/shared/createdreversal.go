@@ -5,12 +5,13 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
 // CreatedReversalSynchronousRefundResponseFailureCode - This field is deprecated and will be removed in December 2023.
 //
-// Deprecated: this type will be removed in a future release, please migrate away from it as soon as possible.
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type CreatedReversalSynchronousRefundResponseFailureCode string
 
 const (
@@ -109,12 +110,23 @@ type CreatedReversalSynchronousRefundResponse struct {
 	CreatedOn   *time.Time         `json:"createdOn,omitempty"`
 	// This field is deprecated and will be removed in December 2023.
 	//
-	// Deprecated: this field will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	FailureCode *CreatedReversalSynchronousRefundResponseFailureCode `json:"failureCode,omitempty"`
 	// UUID v4
 	RefundID  *string       `json:"refundID,omitempty"`
 	Status    *RefundStatus `json:"status,omitempty"`
 	UpdatedOn *time.Time    `json:"updatedOn,omitempty"`
+}
+
+func (c CreatedReversalSynchronousRefundResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreatedReversalSynchronousRefundResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CreatedReversalSynchronousRefundResponse) GetAmount() *Amount {
@@ -166,7 +178,6 @@ func (o *CreatedReversalSynchronousRefundResponse) GetUpdatedOn() *time.Time {
 	return o.UpdatedOn
 }
 
-// CreatedReversal - Successfully initiated a reversal
 type CreatedReversal struct {
 	Cancellation *CreatedCancellation                      `json:"cancellation,omitempty"`
 	Refund       *CreatedReversalSynchronousRefundResponse `json:"refund,omitempty"`

@@ -1,7 +1,5 @@
 # CreatedTransferOptions
 
-Succesfully created transfer options
-
 
 ## Fields
 

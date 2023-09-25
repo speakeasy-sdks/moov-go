@@ -2,7 +2,7 @@
 
 package shared
 
-// Countries - The Countries of operation for an account
+// The Countries of operation for an account
 type Countries struct {
 	Countries []string `json:"countries"`
 }

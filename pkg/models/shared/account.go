@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -165,6 +166,17 @@ type AccountTermsOfService struct {
 	AcceptedIP   string    `json:"acceptedIP"`
 }
 
+func (a AccountTermsOfService) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AccountTermsOfService) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o *AccountTermsOfService) GetAcceptedDate() time.Time {
 	if o == nil {
 		return time.Time{}
@@ -202,6 +214,17 @@ type Account struct {
 	UpdatedOn      time.Time              `json:"updatedOn"`
 	// Describes identity verification status and relevant identity verification documents
 	Verification *Verification `json:"verification,omitempty"`
+}
+
+func (a Account) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *Account) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Account) GetAccountID() string {

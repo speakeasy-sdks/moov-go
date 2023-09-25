@@ -27,21 +27,21 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     xIdempotencyKey := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
-    transferID := "fb9f58c4-d86e-468e-8be0-56013f59da75"
+    transferID := "3383c2be-b477-4373-88d7-2f64d1db1f2c"
     createReversal := &shared.CreateReversal{
-        Amount: moov.Int64(1000),
+        Amount: moovgo.Int64(1000),
     }
 
     ctx := context.Background()
@@ -83,15 +83,15 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     createTransfer := shared.CreateTransfer{
@@ -99,38 +99,37 @@ func main() {
             Currency: "USD",
             Value: 1204,
         },
-        Description: moov.String("Pay Instructor for May 15 Class"),
+        Description: moovgo.String("Pay Instructor for May 15 Class"),
         Destination: &shared.CreateTransferDestination{
             AchDetails: &shared.CreateACHDetailsBase{
-                CompanyEntryDescription: moov.String("Gym Dues"),
-                OriginatingCompanyName: moov.String("Whole Body Fit"),
+                CompanyEntryDescription: moovgo.String("Gym Dues"),
+                OriginatingCompanyName: moovgo.String("Whole Body Fit"),
             },
-            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            PaymentMethodID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
         FacilitatorFee: &shared.CreateFacilitatorFee{
-            Markup: moov.Int64(444587),
-            Total: moov.Int64(667715),
+            Markup: moovgo.Int64(304198),
+            Total: moovgo.Int64(247045),
         },
         Metadata: map[string]string{
-            "sint": "accusamus",
-            "impedit": "hic",
+            "illo": "accusantium",
         },
         Source: &shared.CreateTransferSource{
             AchDetails: &shared.CreateAchDetailsSource{
-                CompanyEntryDescription: moov.String("Gym Dues"),
+                CompanyEntryDescription: moovgo.String("Gym Dues"),
                 DebitHoldPeriod: shared.CreateAchDetailsSourceDebitHoldPeriodTwoDays.ToPointer(),
-                OriginatingCompanyName: moov.String("Whole Body Fit"),
+                OriginatingCompanyName: moovgo.String("Whole Body Fit"),
             },
             CardDetails: &shared.CreateCardDetails{
-                DynamicDescriptor: moov.String("WhlBdy *Yoga 11-12"),
-                TransactionSource: shared.TransactionSourceUnscheduled.ToPointer(),
+                DynamicDescriptor: moovgo.String("WhlBdy *Yoga 11-12"),
+                TransactionSource: shared.TransactionSourceRecurring.ToPointer(),
             },
-            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-            TransferID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            PaymentMethodID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            TransferID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
     }
     xIdempotencyKey := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
-    xWaitFor := shared.WaitForRailResponse
+    xWaitFor := "ea"
 
     ctx := context.Background()
     res, err := s.Transfers.Create(ctx, createTransfer, xIdempotencyKey, xWaitFor)
@@ -151,7 +150,7 @@ func main() {
 | `ctx`                                                                                                                                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                     | The context to use for the request.                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                        |
 | `createTransfer`                                                                                                                                                                                                                                       | [shared.CreateTransfer](../../models/shared/createtransfer.md)                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                        |
 | `xIdempotencyKey`                                                                                                                                                                                                                                      | *string*                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                     | Prevents duplicate transfers from being created. Note that we only accept UUID v4.                                                                                                                                                                     | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                                                                                                                                                                                   |
-| `xWaitFor`                                                                                                                                                                                                                                             | [*shared.WaitFor](../../models/shared/waitfor.md)                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                     | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an asynchronous response indicating the transfer was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                        |
+| `xWaitFor`                                                                                                                                                                                                                                             | **string*                                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                     | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an asynchronous response indicating the transfer was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                        |
 
 
 ### Response
@@ -171,14 +170,14 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
@@ -189,12 +188,12 @@ func main() {
             Value: 1204,
         },
         Destination: &shared.CreateTransferOptionsDestination{
-            AccountID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            AccountID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            PaymentMethodID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
         Source: &shared.CreateTransferOptionsSource{
-            AccountID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            AccountID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            PaymentMethodID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
     })
     if err != nil {
@@ -232,19 +231,19 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    transferID := "f66ef1ca-a338-43c2-beb4-77373c8d72f6"
-    accountID := "4d1db1f2-c431-4066-9e96-349e1cf9e06e"
+    transferID := "1e96349e-1cf9-4e06-a3a4-37000ae6b6bc"
+    accountID := "9b8f759e-ac55-4a97-81d3-11352965bb8a"
 
     ctx := context.Background()
     res, err := s.Transfers.Get(ctx, transferID, accountID)
@@ -284,19 +283,19 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     refundID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
-    transferID := "3a437000-ae6b-46bc-9b8f-759eac55a974"
+    transferID := "72026114-35e1-439d-bc22-59b1abda8c07"
 
     ctx := context.Background()
     res, err := s.Transfers.GetRefund(ctx, refundID, transferID)
@@ -336,18 +335,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    transferID := "1d311352-965b-4b8a-b202-611435e139db"
+    transferID := "0e1084cb-0672-4d1a-9879-eeb9665b85ef"
 
     ctx := context.Background()
     res, err := s.Transfers.ListRefunds(ctx, transferID)
@@ -386,23 +385,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     xIdempotencyKey := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
-    transferID := "c2259b1a-bda8-4c07-8e10-84cb0672d1ad"
+    transferID := "bd02bae0-be2d-4782-a59e-3ea4b5197f92"
     createRefund := &shared.CreateRefund{
-        Amount: moov.Int64(1000),
+        Amount: moovgo.Int64(1000),
     }
-    xWaitFor := shared.WaitForRailResponse
+    xWaitFor := "numquam"
 
     ctx := context.Background()
     res, err := s.Transfers.Refund(ctx, xIdempotencyKey, transferID, createRefund, xWaitFor)
@@ -424,7 +423,7 @@ func main() {
 | `xIdempotencyKey`                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                        | Prevents duplicate refunds from being created. Note that we only accept UUID v4.                                                                                                                                                                          | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                                                                                                                                                                                      |
 | `transferID`                                                                                                                                                                                                                                              | *string*                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                        | ID of the Transfer                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                           |
 | `createRefund`                                                                                                                                                                                                                                            | [*shared.CreateRefund](../../models/shared/createrefund.md)                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                        | N/A                                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                           |
-| `xWaitFor`                                                                                                                                                                                                                                                | [*shared.WaitFor](../../models/shared/waitfor.md)                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                        | Optional header that indicates whether to return a synchronous response that includes the full refund and card transaction details or an asynchronous response indicating the refund was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                           |
+| `xWaitFor`                                                                                                                                                                                                                                                | **string*                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                        | Optional header that indicates whether to return a synchronous response that includes the full refund and card transaction details or an asynchronous response indicating the refund was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                           |
 
 
 ### Response
@@ -444,26 +443,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     patchTransfer := shared.PatchTransfer{
         Metadata: map[string]string{
-            "molestiae": "provident",
-            "accusamus": "necessitatibus",
-            "tempore": "sint",
+            "numquam": "nesciunt",
         },
     }
-    transferID := "665b85ef-bd02-4bae-8be2-d782259e3ea4"
-    accountID := "b5197f92-443d-4a7c-a52b-895c537c6454"
+    transferID := "da7ce52b-895c-4537-8645-4efb0b34896c"
+    accountID := "3ca5acfb-e2fd-4570-b577-929177deac64"
 
     ctx := context.Background()
     res, err := s.Transfers.Update(ctx, patchTransfer, transferID, accountID)
