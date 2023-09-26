@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -12,6 +13,17 @@ type CreatedRefund struct {
 	CreatedOn *time.Time `json:"createdOn,omitempty"`
 	// UUID v4
 	RefundID *string `json:"refundID,omitempty"`
+}
+
+func (c CreatedRefund) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreatedRefund) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CreatedRefund) GetAmount() *Amount {

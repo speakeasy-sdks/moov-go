@@ -8,11 +8,14 @@ import (
 )
 
 type CreateTransferOptionsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Succesfully created transfer options
 	CreatedTransferOptions *shared.CreatedTransferOptions
-	StatusCode             int
-	RawResponse            *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 }
 
 func (o *CreateTransferOptionsResponse) GetContentType() string {

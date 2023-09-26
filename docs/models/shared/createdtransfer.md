@@ -1,7 +1,5 @@
 # CreatedTransfer
 
-A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
-
 
 ## Fields
 

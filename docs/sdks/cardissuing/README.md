@@ -29,35 +29,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     requestCard := shared.RequestCard{
         AuthorizationControls: &shared.AuthorizationControls{
             SpendLimits: []shared.AuthorizationSpendLimitControl{
                 shared.AuthorizationSpendLimitControl{
-                    Amount: moov.Int64(10000),
-                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                },
-                shared.AuthorizationSpendLimitControl{
-                    Amount: moov.Int64(10000),
-                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                },
-                shared.AuthorizationSpendLimitControl{
-                    Amount: moov.Int64(10000),
-                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
-                },
-                shared.AuthorizationSpendLimitControl{
-                    Amount: moov.Int64(10000),
-                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                    Amount: moovgo.Int64(10000),
+                    Duration: moovgo.String("inventore"),
                 },
             },
         },
@@ -67,14 +55,14 @@ func main() {
                 Month: 11,
                 Year: 1989,
             },
-            FirstName: moov.String("Jane"),
-            LastName: moov.String("Doe"),
+            FirstName: moovgo.String("Jane"),
+            LastName: moovgo.String("Doe"),
         },
-        FundingWalletID: moov.String("doloribus"),
-        Memo: moov.String("iusto"),
-        Type: shared.IssuedCardTypeSingleUse.ToPointer(),
+        FundingWalletID: moovgo.String("non"),
+        Memo: moovgo.String("et"),
+        Type: moovgo.String("dolorum"),
     }
-    accountID := "c70a4562-6d43-4681-bf16-d9f5fce6c556"
+    accountID := "ac366c8d-d6b1-4442-9074-74778a7bd466"
 
     ctx := context.Background()
     res, err := s.CardIssuing.RequestCard(ctx, requestCard, accountID)
@@ -116,18 +104,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "146c3e25-0fb0-408c-82e1-41aac366c8dd"
+    accountID := "d28c10ab-3cdc-4a42-9190-4e523c7e0bc7"
     issuedCardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -170,18 +158,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "6b144290-7474-4778-a7bd-466d28c10ab3"
+    accountID := "178e4796-f2a7-40c6-8828-2aa482562f22"
     issuedCardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -225,21 +213,21 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "cdca4251-904e-4523-87e0-bc7178e4796f"
-    count := 174112
-    skip := 645570
-    states := shared.IssuedCardStateInactive
+    accountID := "2e9817ee-17cb-4e61-a6b7-b95bc0ab3c20"
+    count := 796392
+    skip := 308286
+    states := shared.IssuedCardStateClosed
 
     ctx := context.Background()
     res, err := s.CardIssuing.ListCards(ctx, accountID, count, skip, states)
@@ -283,23 +271,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     updateIssuedCard := shared.UpdateIssuedCard{
         AuthorizationControls: &shared.AuthorizationControls{
             SpendLimits: []shared.AuthorizationSpendLimitControl{
                 shared.AuthorizationSpendLimitControl{
-                    Amount: moov.Int64(10000),
-                    Duration: shared.AuthorizationSpendDurationTransaction.ToPointer(),
+                    Amount: moovgo.Int64(10000),
+                    Duration: moovgo.String("consectetur"),
                 },
             },
         },
@@ -309,13 +297,13 @@ func main() {
                 Month: 11,
                 Year: 1989,
             },
-            FirstName: moov.String("Jane"),
-            LastName: moov.String("Doe"),
+            FirstName: moovgo.String("Jane"),
+            LastName: moovgo.String("Doe"),
         },
-        Memo: moov.String("porro"),
-        State: shared.IssuedCardStateInactive.ToPointer(),
+        Memo: moovgo.String("esse"),
+        State: shared.IssuedCardStatePendingVerification.ToPointer(),
     }
-    accountID := "88282aa4-8256-42f2-a2e9-817ee17cbe61"
+    accountID := "9fd871f9-9dd2-4efd-921a-a6f1e674bdb0"
     issuedCardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
