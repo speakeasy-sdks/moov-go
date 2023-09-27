@@ -4,12 +4,13 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"net/http"
 )
 
 type ListAccountsRequest struct {
 	// Optional parameter to limit the number of results in the query
-	Count *int64 `queryParam:"style=form,explode=true,name=count"`
+	Count *int64 `default:"20" queryParam:"style=form,explode=true,name=count"`
 	// Filter connected accounts by email address.<br><br>
 	// Provide the full email address to filter by email.
 	//
@@ -40,6 +41,17 @@ type ListAccountsRequest struct {
 	// Filter by the `verificationStatus` of accounts.
 	//
 	VerificationStatus *shared.AccountVerificationStatus `queryParam:"style=form,explode=true,name=verification_status"`
+}
+
+func (l ListAccountsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListAccountsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListAccountsRequest) GetCount() *int64 {
@@ -100,9 +112,12 @@ func (o *ListAccountsRequest) GetVerificationStatus() *shared.AccountVerificatio
 
 type ListAccountsResponse struct {
 	// All connected accounts matching the filter parameters
-	Accounts    []shared.Account
+	Accounts []shared.Account
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

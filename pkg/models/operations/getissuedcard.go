@@ -29,10 +29,13 @@ func (o *GetIssuedCardRequest) GetIssuedCardID() string {
 }
 
 type GetIssuedCardResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Successfully retrieved card
-	IssuedCard  *shared.IssuedCard
-	StatusCode  int
+	IssuedCard *shared.IssuedCard
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

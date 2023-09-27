@@ -3,9 +3,8 @@
 package shared
 
 import (
-	"bytes"
-	"encoding/json"
 	"errors"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
 type TransferPostResponseType string
@@ -41,21 +40,16 @@ func CreateTransferPostResponseGetTransferFull(getTransferFull GetTransferFull) 
 }
 
 func (u *TransferPostResponse) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	createdTransfer := new(CreatedTransfer)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&createdTransfer); err == nil {
+	if err := utils.UnmarshalJSON(data, &createdTransfer, "", true, true); err == nil {
 		u.CreatedTransfer = createdTransfer
 		u.Type = TransferPostResponseTypeCreatedTransfer
 		return nil
 	}
 
 	getTransferFull := new(GetTransferFull)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&getTransferFull); err == nil {
+	if err := utils.UnmarshalJSON(data, &getTransferFull, "", true, true); err == nil {
 		u.GetTransferFull = getTransferFull
 		u.Type = TransferPostResponseTypeGetTransferFull
 		return nil
@@ -66,12 +60,12 @@ func (u *TransferPostResponse) UnmarshalJSON(data []byte) error {
 
 func (u TransferPostResponse) MarshalJSON() ([]byte, error) {
 	if u.CreatedTransfer != nil {
-		return json.Marshal(u.CreatedTransfer)
+		return utils.MarshalJSON(u.CreatedTransfer, "", true)
 	}
 
 	if u.GetTransferFull != nil {
-		return json.Marshal(u.GetTransferFull)
+		return utils.MarshalJSON(u.GetTransferFull, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
