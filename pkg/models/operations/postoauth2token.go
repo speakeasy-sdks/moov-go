@@ -9,26 +9,29 @@ import (
 
 type PostOAuth2TokenResponse struct {
 	// Failure create token
-	AccessTokenErrorResponse *shared.AccessTokenErrorResponse
+	ClientCredentialsGrantToAccessTokenErrorResponse *shared.ClientCredentialsGrantToAccessTokenErrorResponse
 	// Successfully exchanged the code to create a token
-	AccessTokenResponse *shared.AccessTokenResponse
-	ContentType         string
-	StatusCode          int
-	RawResponse         *http.Response
+	ClientCredentialsGrantToAccessTokenResponse *shared.ClientCredentialsGrantToAccessTokenResponse
+	// HTTP response content type for this operation
+	ContentType string
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 }
 
-func (o *PostOAuth2TokenResponse) GetAccessTokenErrorResponse() *shared.AccessTokenErrorResponse {
+func (o *PostOAuth2TokenResponse) GetClientCredentialsGrantToAccessTokenErrorResponse() *shared.ClientCredentialsGrantToAccessTokenErrorResponse {
 	if o == nil {
 		return nil
 	}
-	return o.AccessTokenErrorResponse
+	return o.ClientCredentialsGrantToAccessTokenErrorResponse
 }
 
-func (o *PostOAuth2TokenResponse) GetAccessTokenResponse() *shared.AccessTokenResponse {
+func (o *PostOAuth2TokenResponse) GetClientCredentialsGrantToAccessTokenResponse() *shared.ClientCredentialsGrantToAccessTokenResponse {
 	if o == nil {
 		return nil
 	}
-	return o.AccessTokenResponse
+	return o.ClientCredentialsGrantToAccessTokenResponse
 }
 
 func (o *PostOAuth2TokenResponse) GetContentType() string {

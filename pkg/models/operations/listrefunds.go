@@ -20,10 +20,13 @@ func (o *ListRefundsRequest) GetTransferID() string {
 }
 
 type ListRefundsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// List of refunds
-	GetRefunds  []shared.GetRefund
-	StatusCode  int
+	GetRefunds []shared.GetRefund
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

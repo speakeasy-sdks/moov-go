@@ -17,46 +17,44 @@ go get github.com/speakeasy-sdks/moov-go
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
-
-
 ```go
 package main
 
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     cardRequest := shared.CardRequest{
         BillingAddress: &shared.Address{
-            AddressLine1: moov.String("123 Main Street"),
-            AddressLine2: moov.String("Apt 302"),
-            City: moov.String("Boulder"),
-            Country: moov.String("US"),
-            PostalCode: moov.String("80301"),
-            StateOrProvince: moov.String("CO"),
+            AddressLine1: moovgo.String("123 Main Street"),
+            AddressLine2: moovgo.String("Apt 302"),
+            City: moovgo.String("Boulder"),
+            Country: moovgo.String("US"),
+            PostalCode: moovgo.String("80301"),
+            StateOrProvince: moovgo.String("CO"),
         },
-        CardCvv: moov.String("0123"),
-        CardNumber: moov.String("corrupti"),
-        CardOnFile: moov.Bool(false),
+        CardCvv: moovgo.String("0123"),
+        CardNumber: moovgo.String("esse"),
+        CardOnFile: moovgo.Bool(false),
         Expiration: &shared.CardExpiration{
-            Month: moov.String("01"),
-            Year: moov.String("21"),
+            Month: moovgo.String("01"),
+            Year: moovgo.String("21"),
         },
-        HolderName: moov.String("Jules Jackson"),
-        MerchantAccountID: moov.String("9bd9d8d6-9a67-44e0-b467-cc8796ed151a"),
+        HolderName: moovgo.String("Jules Jackson"),
+        MerchantAccountID: moovgo.String("39205929-396f-4ea7-996e-b10faaa2352c"),
     }
-    accountID := "05dfc2dd-f7cc-478c-a1ba-928fc816742c"
-    xWaitFor := shared.SchemasWaitForPaymentMethod
+    accountID := "5955907a-ff1a-43a2-ba94-67739251aa52"
+    xWaitFor := "quo"
 
     ctx := context.Background()
     res, err := s.Cards.LinkCard(ctx, cardRequest, accountID, xWaitFor)
@@ -197,6 +195,38 @@ func main() {
 * [List](docs/sdks/wallets/README.md#list) - List wallets
 * [ListTransactions](docs/sdks/wallets/README.md#listtransactions) - List wallet transactions
 <!-- End SDK Available Operations -->
+
+
+
+<!-- Start Dev Containers -->
+
+
+
+<!-- End Dev Containers -->
+
+
+
+<!-- Start Pagination -->
+# Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `nil`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+
+
+<!-- End Pagination -->
+
+
+
+<!-- Start Go Types -->
+
+<!-- End Go Types -->
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->
+
+
 
 ### Maturity
 

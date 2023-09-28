@@ -1,7 +1,5 @@
 # IssuedCard
 
-Card created
-
 
 ## Fields
 
@@ -17,4 +15,4 @@ Card created
 | `LastFourCardNumber`                                                   | **string*                                                              | :heavy_minus_sign:                                                     | N/A                                                                    | 1234                                                                   |
 | `Memo`                                                                 | **string*                                                              | :heavy_minus_sign:                                                     | Optional descriptive name                                              |                                                                        |
 | `State`                                                                | [*IssuedCardState](../../models/shared/issuedcardstate.md)             | :heavy_minus_sign:                                                     | State of a Moov issued card                                            |                                                                        |
-| `Type`                                                                 | [*IssuedCardType](../../models/shared/issuedcardtype.md)               | :heavy_minus_sign:                                                     | Type of a Moov issued card                                             |                                                                        |
+| `Type`                                                                 | **string*                                                              | :heavy_minus_sign:                                                     | Type of a Moov issued card                                             |                                                                        |

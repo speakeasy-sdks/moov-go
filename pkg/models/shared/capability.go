@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -21,6 +22,17 @@ type Capability struct {
 	// The status of the capability requested for an account
 	Status    CapabilityStatus `json:"status"`
 	UpdatedOn time.Time        `json:"updatedOn"`
+}
+
+func (c Capability) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *Capability) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Capability) GetAccountID() *string {

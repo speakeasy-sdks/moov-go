@@ -28,10 +28,13 @@ func (o *PutAccountCountriesRequest) GetAccountID() string {
 }
 
 type PutAccountCountriesResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// countries assigned to account
-	Countries   *shared.Countries
-	StatusCode  int
+	Countries *shared.Countries
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

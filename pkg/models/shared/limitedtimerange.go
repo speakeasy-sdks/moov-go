@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -13,6 +14,17 @@ type LimitedTimeRange struct {
 	From  *time.Time `json:"from,omitempty"`
 	To    *time.Time `json:"to,omitempty"`
 	Tz    *string    `json:"tz,omitempty"`
+}
+
+func (l LimitedTimeRange) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *LimitedTimeRange) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *LimitedTimeRange) GetCount() *int64 {
