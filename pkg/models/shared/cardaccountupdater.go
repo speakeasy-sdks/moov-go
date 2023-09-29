@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -11,6 +12,17 @@ type CardAccountUpdater struct {
 	// The results of the card update request
 	UpdateType *CardUpdateReason `json:"updateType,omitempty"`
 	UpdatedOn  *time.Time        `json:"updatedOn,omitempty"`
+}
+
+func (c CardAccountUpdater) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CardAccountUpdater) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CardAccountUpdater) GetUpdateType() *CardUpdateReason {

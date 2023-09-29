@@ -3,10 +3,11 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/types"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
-// IssuedCard - Card created
 type IssuedCard struct {
 	AuthorizationControls *AuthorizationControls `json:"authorizationControls,omitempty"`
 	// Fields to identify a human
@@ -25,7 +26,18 @@ type IssuedCard struct {
 	// State of a Moov issued card
 	State *IssuedCardState `json:"state,omitempty"`
 	// Type of a Moov issued card
-	Type *IssuedCardType `json:"type,omitempty"`
+	type_ *string `const:"single-use" json:"type,omitempty"`
+}
+
+func (i IssuedCard) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *IssuedCard) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *IssuedCard) GetAuthorizationControls() *AuthorizationControls {
@@ -98,9 +110,6 @@ func (o *IssuedCard) GetState() *IssuedCardState {
 	return o.State
 }
 
-func (o *IssuedCard) GetType() *IssuedCardType {
-	if o == nil {
-		return nil
-	}
-	return o.Type
+func (o *IssuedCard) GetType() *string {
+	return types.String("single-use")
 }

@@ -6,12 +6,12 @@ package shared
 type Verification struct {
 	// This field is deprecated but available for use until February 2023.
 	//
-	// Deprecated: this field will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	Details   *VerificationStatusDetails `json:"details,omitempty"`
 	Documents []Document                 `json:"documents,omitempty"`
 	// This field is deprecated but available for use until February 2023.
 	//
-	// Deprecated: this field will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	Status VerificationStatus `json:"status"`
 	// The status of an identity verification for a profile
 	VerificationStatus *AccountVerificationStatus `json:"verificationStatus,omitempty"`

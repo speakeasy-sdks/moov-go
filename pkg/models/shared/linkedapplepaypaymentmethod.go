@@ -2,7 +2,6 @@
 
 package shared
 
-// LinkedApplePayPaymentMethod - Apple Pay token linked
 type LinkedApplePayPaymentMethod struct {
 	// Describes an Apple Pay token on a Moov account.
 	ApplePay ApplePayResponse `json:"applePay"`

@@ -2,7 +2,7 @@
 
 package shared
 
-// Error - Error response for http requests that failed
+// Error response for http requests that failed
 type Error struct {
 	Error *string `json:"error,omitempty"`
 }

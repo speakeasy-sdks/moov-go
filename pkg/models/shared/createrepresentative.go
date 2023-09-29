@@ -2,6 +2,10 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // CreateRepresentativeAddress - Residential address for an individual. Business addresses not accepted.
 type CreateRepresentativeAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
@@ -201,24 +205,35 @@ func (o *CreateRepresentativePhone) GetNumber() *string {
 // CreateRepresentativeResponsibilities - Describes the job responsibilities of an individual
 type CreateRepresentativeResponsibilities struct {
 	// Indicates whether this individual has significant management responsibilities within the business
-	IsController bool `json:"isController"`
+	IsController *bool `default:"false" json:"isController"`
 	// If `true`, this field indicates that this individual has an ownership stake of at least 25% in the business. If the representative does not own at least 25% of the business, this field should be `false`.
-	IsOwner  bool   `json:"isOwner"`
+	IsOwner  *bool  `default:"false" json:"isOwner"`
 	JobTitle string `json:"jobTitle"`
 	// The percentage of ownership this individual has in the business (required if `isOwner` is `true`)
 	OwnershipPercentage int64 `json:"ownershipPercentage"`
 }
 
-func (o *CreateRepresentativeResponsibilities) GetIsController() bool {
+func (c CreateRepresentativeResponsibilities) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateRepresentativeResponsibilities) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CreateRepresentativeResponsibilities) GetIsController() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.IsController
 }
 
-func (o *CreateRepresentativeResponsibilities) GetIsOwner() bool {
+func (o *CreateRepresentativeResponsibilities) GetIsOwner() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.IsOwner
 }

@@ -29,10 +29,13 @@ func (o *GetFileDetailsRequest) GetFileID() string {
 }
 
 type GetFileDetailsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Successfully retrieved file Details
-	File        *shared.File
-	StatusCode  int
+	File *shared.File
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

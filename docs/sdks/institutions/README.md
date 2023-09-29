@@ -1,4 +1,5 @@
 # Institutions
+(*Institutions*)
 
 ## Overview
 
@@ -20,25 +21,25 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Institutions.Search(ctx, operations.SearchInstitutionRequest{
-        Limit: moov.Int64(499),
-        Name: moov.String("Joanne Parisian DVM"),
-        Rail: shared.RailWire,
-        RoutingNumber: moov.String("quaerat"),
-        State: moov.String("molestiae"),
+        Limit: moovgo.Int64(499),
+        Name: moovgo.String("Fantastic"),
+        Rail: shared.RailAch,
+        RoutingNumber: moovgo.String("Ashburn Awesome"),
+        State: moovgo.String("architectures Omnigender"),
     })
     if err != nil {
         log.Fatal(err)

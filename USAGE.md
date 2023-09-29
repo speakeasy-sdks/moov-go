@@ -7,38 +7,38 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     cardRequest := shared.CardRequest{
         BillingAddress: &shared.Address{
-            AddressLine1: moov.String("123 Main Street"),
-            AddressLine2: moov.String("Apt 302"),
-            City: moov.String("Boulder"),
-            Country: moov.String("US"),
-            PostalCode: moov.String("80301"),
-            StateOrProvince: moov.String("CO"),
+            AddressLine1: moovgo.String("123 Main Street"),
+            AddressLine2: moovgo.String("Apt 302"),
+            City: moovgo.String("Boulder"),
+            Country: moovgo.String("US"),
+            PostalCode: moovgo.String("80301"),
+            StateOrProvince: moovgo.String("CO"),
         },
-        CardCvv: moov.String("0123"),
-        CardNumber: moov.String("corrupti"),
-        CardOnFile: moov.Bool(false),
+        CardCvv: moovgo.String("0123"),
+        CardNumber: moovgo.String("lavender parallel"),
+        CardOnFile: moovgo.Bool(false),
         Expiration: &shared.CardExpiration{
-            Month: moov.String("01"),
-            Year: moov.String("21"),
+            Month: moovgo.String("01"),
+            Year: moovgo.String("21"),
         },
-        HolderName: moov.String("Jules Jackson"),
-        MerchantAccountID: moov.String("9bd9d8d6-9a67-44e0-b467-cc8796ed151a"),
+        HolderName: moovgo.String("Jules Jackson"),
+        MerchantAccountID: moovgo.String("cf08cf1d-c7b4-48ba-8e01-3b33b1b7a8af"),
     }
-    accountID := "05dfc2dd-f7cc-478c-a1ba-928fc816742c"
-    xWaitFor := shared.SchemasWaitForPaymentMethod
+    accountID := "1bc7a2ba-2e98-4e21-8b15-24f359b041e3"
+    xWaitFor := "circuit"
 
     ctx := context.Background()
     res, err := s.Cards.LinkCard(ctx, cardRequest, accountID, xWaitFor)

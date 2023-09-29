@@ -2,6 +2,11 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/types"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 type RequestCard struct {
 	AuthorizationControls *AuthorizationControls `json:"authorizationControls,omitempty"`
 	// Fields to identify a human
@@ -10,7 +15,18 @@ type RequestCard struct {
 	// Optional descriptive name
 	Memo *string `json:"memo,omitempty"`
 	// Type of a Moov issued card
-	Type *IssuedCardType `json:"type,omitempty"`
+	type_ *string `const:"single-use" json:"type,omitempty"`
+}
+
+func (r RequestCard) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RequestCard) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *RequestCard) GetAuthorizationControls() *AuthorizationControls {
@@ -41,9 +57,6 @@ func (o *RequestCard) GetMemo() *string {
 	return o.Memo
 }
 
-func (o *RequestCard) GetType() *IssuedCardType {
-	if o == nil {
-		return nil
-	}
-	return o.Type
+func (o *RequestCard) GetType() *string {
+	return types.String("single-use")
 }

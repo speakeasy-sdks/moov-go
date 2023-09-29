@@ -31,9 +31,12 @@ func (o *GetBankAccountRequest) GetBankAccountID() string {
 type GetBankAccountResponse struct {
 	// Successfully retrieved bank account
 	BankAccountResponse *shared.BankAccountResponse
-	ContentType         string
-	StatusCode          int
-	RawResponse         *http.Response
+	// HTTP response content type for this operation
+	ContentType string
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 }
 
 func (o *GetBankAccountResponse) GetBankAccountResponse() *shared.BankAccountResponse {
