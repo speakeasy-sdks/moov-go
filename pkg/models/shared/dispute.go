@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -20,6 +21,17 @@ type Dispute struct {
 	Status *DisputeStatus `json:"status,omitempty"`
 	// Details about transfer
 	Transfer *Transfer `json:"transfer,omitempty"`
+}
+
+func (d Dispute) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *Dispute) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Dispute) GetAmount() *Amount {

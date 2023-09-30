@@ -1,4 +1,5 @@
 # PaymentMethods
+(*PaymentMethods*)
 
 ## Overview
 
@@ -24,18 +25,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "64a3e865-e795-46f9-a51a-5a9da660ff57"
+    accountID := "b18d8d81-fd7b-4764-a31e-475cb1f36591"
     paymentMethodID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -76,19 +77,19 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "bfaad4f9-efc1-4b45-92c1-032648dc2f61"
-    sourceID := "5199ebfd-0e9f-4e6c-a32c-a3aed0117996"
+    accountID := "c184a429-302e-4aca-80db-f1718b882a50"
+    sourceID := "80555741-9e79-40e2-b205-5dd402eb66ec"
 
     ctx := context.Background()
     res, err := s.PaymentMethods.List(ctx, accountID, sourceID)

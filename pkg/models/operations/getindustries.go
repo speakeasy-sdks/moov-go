@@ -8,10 +8,13 @@ import (
 )
 
 type GetIndustriesResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// A list of industries and their codes
-	Industries  *shared.Industries
-	StatusCode  int
+	Industries *shared.Industries
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

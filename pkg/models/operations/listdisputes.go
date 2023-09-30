@@ -4,12 +4,13 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"net/http"
 )
 
 type ListDisputesRequest struct {
 	// Optional parameter to limit the number of results in the query
-	Count *int64 `queryParam:"style=form,explode=true,name=count"`
+	Count *int64 `default:"20" queryParam:"style=form,explode=true,name=count"`
 	// Optional date-time which exclusively filters all disputes with respond by before this date-time.
 	RespondEndDateTime *string `queryParam:"style=form,explode=true,name=respondEndDateTime"`
 	// Optional date-time which inclusively filters all disputes with respond by after this date-time.
@@ -18,6 +19,17 @@ type ListDisputesRequest struct {
 	Skip *int64 `queryParam:"style=form,explode=true,name=skip"`
 	// Optional dispute status by which to filter the disputes.
 	Status *shared.DisputeStatus `queryParam:"style=form,explode=true,name=status"`
+}
+
+func (l ListDisputesRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListDisputesRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListDisputesRequest) GetCount() *int64 {
@@ -56,10 +68,13 @@ func (o *ListDisputesRequest) GetStatus() *shared.DisputeStatus {
 }
 
 type ListDisputesResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// List of dispute details
-	Disputes    []shared.Dispute
-	StatusCode  int
+	Disputes []shared.Dispute
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

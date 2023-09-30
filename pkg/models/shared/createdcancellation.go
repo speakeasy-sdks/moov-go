@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -10,6 +11,17 @@ type CreatedCancellation struct {
 	CreatedOn *time.Time `json:"createdOn,omitempty"`
 	// Cancellation status
 	Status *CancellationStatus `json:"status,omitempty"`
+}
+
+func (c CreatedCancellation) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreatedCancellation) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CreatedCancellation) GetCreatedOn() *time.Time {
