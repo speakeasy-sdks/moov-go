@@ -3,10 +3,10 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
-// ApplePayMerchantDomains - Domains registered with Apple Pay
 type ApplePayMerchantDomains struct {
 	// ID of Account
 	AccountID *string    `json:"accountID,omitempty"`
@@ -18,6 +18,17 @@ type ApplePayMerchantDomains struct {
 	//
 	Domains   []string   `json:"domains,omitempty"`
 	UpdatedOn *time.Time `json:"updatedOn,omitempty"`
+}
+
+func (a ApplePayMerchantDomains) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *ApplePayMerchantDomains) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ApplePayMerchantDomains) GetAccountID() *string {

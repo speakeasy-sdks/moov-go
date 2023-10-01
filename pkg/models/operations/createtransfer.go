@@ -4,6 +4,8 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/types"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"net/http"
 )
 
@@ -12,7 +14,18 @@ type CreateTransferRequest struct {
 	// Prevents duplicate transfers from being created. Note that we only accept UUID v4.
 	XIdempotencyKey string `header:"style=simple,explode=false,name=X-Idempotency-Key"`
 	// Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
-	XWaitFor *shared.WaitFor `header:"style=simple,explode=false,name=X-Wait-For"`
+	xWaitFor *string `const:"rail-response" header:"style=simple,explode=false,name=X-Wait-For"`
+}
+
+func (c CreateTransferRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateTransferRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CreateTransferRequest) GetCreateTransfer() shared.CreateTransfer {
@@ -29,21 +42,21 @@ func (o *CreateTransferRequest) GetXIdempotencyKey() string {
 	return o.XIdempotencyKey
 }
 
-func (o *CreateTransferRequest) GetXWaitFor() *shared.WaitFor {
-	if o == nil {
-		return nil
-	}
-	return o.XWaitFor
+func (o *CreateTransferRequest) GetXWaitFor() *string {
+	return types.String("rail-response")
 }
 
 type CreateTransferResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
 	CreatedTransfer *shared.CreatedTransfer
 	// A transfer was successfully created but a timeout occurred while waiting for a synchronous response. Rail-specific details may be missing from the response object.
 	GetTransferFull *shared.GetTransferFull
-	StatusCode      int
-	RawResponse     *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// Successfully created a transfer
 	TransferPostResponse *shared.TransferPostResponse
 }

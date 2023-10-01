@@ -2,6 +2,10 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // CardUpdateRequest - Describes properties of a card to update
 type CardUpdateRequest struct {
 	// Provide address fields as necessary to patch the currently saved address.
@@ -13,11 +17,22 @@ type CardUpdateRequest struct {
 	//
 	CardCvv *string `json:"cardCvv,omitempty"`
 	// Indicates cardholder has authorized card to be stored for future payments
-	CardOnFile *bool `json:"cardOnFile,omitempty"`
+	CardOnFile *bool `default:"false" json:"cardOnFile"`
 	// Provide expiration date fields as necessary to patch the currently saved date.
 	// Omit any fields that should not be changed.
 	//
 	Expiration *UpdateCardExpiration `json:"expiration,omitempty"`
+}
+
+func (c CardUpdateRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CardUpdateRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CardUpdateRequest) GetBillingAddress() *UpdateAddress {

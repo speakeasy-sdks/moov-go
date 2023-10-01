@@ -3,9 +3,8 @@
 package shared
 
 import (
-	"bytes"
-	"encoding/json"
 	"errors"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
 type AccessTokenResponseType string
@@ -30,12 +29,9 @@ func CreateAccessTokenResponseClientCredentialsGrantToAccessTokenResponse(client
 }
 
 func (u *AccessTokenResponse) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	clientCredentialsGrantToAccessTokenResponse := new(ClientCredentialsGrantToAccessTokenResponse)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&clientCredentialsGrantToAccessTokenResponse); err == nil {
+	if err := utils.UnmarshalJSON(data, &clientCredentialsGrantToAccessTokenResponse, "", true, true); err == nil {
 		u.ClientCredentialsGrantToAccessTokenResponse = clientCredentialsGrantToAccessTokenResponse
 		u.Type = AccessTokenResponseTypeClientCredentialsGrantToAccessTokenResponse
 		return nil
@@ -46,8 +42,8 @@ func (u *AccessTokenResponse) UnmarshalJSON(data []byte) error {
 
 func (u AccessTokenResponse) MarshalJSON() ([]byte, error) {
 	if u.ClientCredentialsGrantToAccessTokenResponse != nil {
-		return json.Marshal(u.ClientCredentialsGrantToAccessTokenResponse)
+		return utils.MarshalJSON(u.ClientCredentialsGrantToAccessTokenResponse, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }

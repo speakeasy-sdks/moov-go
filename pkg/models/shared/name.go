@@ -2,7 +2,7 @@
 
 package shared
 
-// Name - Name for an individual
+// Name for an individual
 type Name struct {
 	// Name this person was given. This is usually the the same as first name.
 	FirstName *string `json:"firstName,omitempty"`

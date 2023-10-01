@@ -35,8 +35,8 @@ func (e *RevokeTokenRequestTokenTypeHint) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// RevokeTokenRequest1 - Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed
-type RevokeTokenRequest1 struct {
+// RevokeTokenRequest - Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed
+type RevokeTokenRequest struct {
 	// If not specified in `Authorization: Basic` it can be specified here
 	ClientID *string `form:"name=client_id"`
 	// If not specified in `Authorization: Basic` it can be specified here
@@ -47,28 +47,28 @@ type RevokeTokenRequest1 struct {
 	TokenTypeHint *RevokeTokenRequestTokenTypeHint `form:"name=token_type_hint"`
 }
 
-func (o *RevokeTokenRequest1) GetClientID() *string {
+func (o *RevokeTokenRequest) GetClientID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ClientID
 }
 
-func (o *RevokeTokenRequest1) GetClientSecret() *string {
+func (o *RevokeTokenRequest) GetClientSecret() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ClientSecret
 }
 
-func (o *RevokeTokenRequest1) GetToken() string {
+func (o *RevokeTokenRequest) GetToken() string {
 	if o == nil {
 		return ""
 	}
 	return o.Token
 }
 
-func (o *RevokeTokenRequest1) GetTokenTypeHint() *RevokeTokenRequestTokenTypeHint {
+func (o *RevokeTokenRequest) GetTokenTypeHint() *RevokeTokenRequestTokenTypeHint {
 	if o == nil {
 		return nil
 	}

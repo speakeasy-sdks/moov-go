@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"net/http"
 )
 
@@ -15,7 +16,7 @@ type ListWalletTransactionsRequest struct {
 	// Optional date-time which inclusively filters all transactions completed after this date-time
 	CompletedStartDateTime *string `queryParam:"style=form,explode=true,name=completedStartDateTime"`
 	// Optional parameter to limit the number of results in the query
-	Count *int64 `queryParam:"style=form,explode=true,name=count"`
+	Count *int64 `default:"20" queryParam:"style=form,explode=true,name=count"`
 	// Optional date-time which exclusively filters all transactions created before this date-time
 	CreatedEndDateTime *string `queryParam:"style=form,explode=true,name=createdEndDateTime"`
 	// Optional date-time which inclusively filters all transactions created after this date-time
@@ -32,6 +33,17 @@ type ListWalletTransactionsRequest struct {
 	TransactionType *string `queryParam:"style=form,explode=true,name=transactionType"`
 	// ID of the wallet
 	WalletID string `pathParam:"style=simple,explode=false,name=walletID"`
+}
+
+func (l ListWalletTransactionsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListWalletTransactionsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListWalletTransactionsRequest) GetAccountID() string {
@@ -119,8 +131,11 @@ func (o *ListWalletTransactionsRequest) GetWalletID() string {
 }
 
 type ListWalletTransactionsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Transactions associated with the wallet
 	WalletTransactions []shared.WalletTransaction

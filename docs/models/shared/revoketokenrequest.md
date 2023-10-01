@@ -1,4 +1,4 @@
-# RevokeTokenRequest1
+# RevokeTokenRequest
 
 Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed
 

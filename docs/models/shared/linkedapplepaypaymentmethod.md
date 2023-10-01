@@ -1,7 +1,5 @@
 # LinkedApplePayPaymentMethod
 
-Apple Pay token linked
-
 
 ## Fields
 

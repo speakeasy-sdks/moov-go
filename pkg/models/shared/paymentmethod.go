@@ -3,10 +3,10 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
 type PaymentMethodType string
@@ -33,6 +33,7 @@ type PaymentMethod struct {
 
 func CreatePaymentMethodAchCreditSameDay(achCreditSameDay PaymentMethodBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchCreditSameDay
+
 	typStr := PaymentMethodsType(typ)
 	achCreditSameDay.PaymentMethodType = &typStr
 
@@ -44,6 +45,7 @@ func CreatePaymentMethodAchCreditSameDay(achCreditSameDay PaymentMethodBankAccou
 
 func CreatePaymentMethodAchCreditStandard(achCreditStandard PaymentMethodBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchCreditStandard
+
 	typStr := PaymentMethodsType(typ)
 	achCreditStandard.PaymentMethodType = &typStr
 
@@ -55,6 +57,7 @@ func CreatePaymentMethodAchCreditStandard(achCreditStandard PaymentMethodBankAcc
 
 func CreatePaymentMethodAchDebitCollect(achDebitCollect PaymentMethodBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchDebitCollect
+
 	typStr := PaymentMethodsType(typ)
 	achDebitCollect.PaymentMethodType = &typStr
 
@@ -66,6 +69,7 @@ func CreatePaymentMethodAchDebitCollect(achDebitCollect PaymentMethodBankAccount
 
 func CreatePaymentMethodAchDebitFund(achDebitFund PaymentMethodBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchDebitFund
+
 	typStr := PaymentMethodsType(typ)
 	achDebitFund.PaymentMethodType = &typStr
 
@@ -77,6 +81,7 @@ func CreatePaymentMethodAchDebitFund(achDebitFund PaymentMethodBankAccount) Paym
 
 func CreatePaymentMethodApplePay(applePay PaymentMethodApplePay) PaymentMethod {
 	typ := PaymentMethodTypeApplePay
+
 	typStr := PaymentMethodsType(typ)
 	applePay.PaymentMethodType = &typStr
 
@@ -88,6 +93,7 @@ func CreatePaymentMethodApplePay(applePay PaymentMethodApplePay) PaymentMethod {
 
 func CreatePaymentMethodCardPayment(cardPayment PaymentMethodCard) PaymentMethod {
 	typ := PaymentMethodTypeCardPayment
+
 	typStr := PaymentMethodsType(typ)
 	cardPayment.PaymentMethodType = &typStr
 
@@ -99,6 +105,7 @@ func CreatePaymentMethodCardPayment(cardPayment PaymentMethodCard) PaymentMethod
 
 func CreatePaymentMethodMoovWallet(moovWallet PaymentMethodWallet) PaymentMethod {
 	typ := PaymentMethodTypeMoovWallet
+
 	typStr := PaymentMethodsType(typ)
 	moovWallet.PaymentMethodType = &typStr
 
@@ -110,6 +117,7 @@ func CreatePaymentMethodMoovWallet(moovWallet PaymentMethodWallet) PaymentMethod
 
 func CreatePaymentMethodRtpCredit(rtpCredit PaymentMethodBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeRtpCredit
+
 	typStr := PaymentMethodsType(typ)
 	rtpCredit.PaymentMethodType = &typStr
 
@@ -120,7 +128,6 @@ func CreatePaymentMethodRtpCredit(rtpCredit PaymentMethodBankAccount) PaymentMet
 }
 
 func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	type discriminator struct {
 		PaymentMethodType string
@@ -133,9 +140,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 
 	switch dis.PaymentMethodType {
 	case "ach-credit-same-day":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := d.Decode(&paymentMethodBankAccount); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -143,9 +149,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeAchCreditSameDay
 		return nil
 	case "ach-credit-standard":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := d.Decode(&paymentMethodBankAccount); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -153,9 +158,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeAchCreditStandard
 		return nil
 	case "ach-debit-collect":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := d.Decode(&paymentMethodBankAccount); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -163,9 +167,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeAchDebitCollect
 		return nil
 	case "ach-debit-fund":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := d.Decode(&paymentMethodBankAccount); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -173,9 +176,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeAchDebitFund
 		return nil
 	case "apple-pay":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodApplePay := new(PaymentMethodApplePay)
-		if err := d.Decode(&paymentMethodApplePay); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodApplePay, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -183,9 +185,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeApplePay
 		return nil
 	case "card-payment":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodCard := new(PaymentMethodCard)
-		if err := d.Decode(&paymentMethodCard); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodCard, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -193,9 +194,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeCardPayment
 		return nil
 	case "moov-wallet":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodWallet := new(PaymentMethodWallet)
-		if err := d.Decode(&paymentMethodWallet); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodWallet, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -203,9 +203,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeMoovWallet
 		return nil
 	case "rtp-credit":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := d.Decode(&paymentMethodBankAccount); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -219,20 +218,20 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 
 func (u PaymentMethod) MarshalJSON() ([]byte, error) {
 	if u.PaymentMethodWallet != nil {
-		return json.Marshal(u.PaymentMethodWallet)
+		return utils.MarshalJSON(u.PaymentMethodWallet, "", true)
 	}
 
 	if u.PaymentMethodBankAccount != nil {
-		return json.Marshal(u.PaymentMethodBankAccount)
+		return utils.MarshalJSON(u.PaymentMethodBankAccount, "", true)
 	}
 
 	if u.PaymentMethodCard != nil {
-		return json.Marshal(u.PaymentMethodCard)
+		return utils.MarshalJSON(u.PaymentMethodCard, "", true)
 	}
 
 	if u.PaymentMethodApplePay != nil {
-		return json.Marshal(u.PaymentMethodApplePay)
+		return utils.MarshalJSON(u.PaymentMethodApplePay, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }

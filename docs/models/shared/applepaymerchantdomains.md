@@ -1,7 +1,5 @@
 # ApplePayMerchantDomains
 
-Domains registered with Apple Pay
-
 
 ## Fields
 

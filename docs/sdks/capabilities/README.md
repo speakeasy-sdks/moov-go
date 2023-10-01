@@ -1,4 +1,5 @@
 # Capabilities
+(*Capabilities*)
 
 ## Overview
 
@@ -23,19 +24,19 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "d446ce2a-f7a7-43cf-bbe4-53f870b326b5"
-    capabilityID := shared.CapabilityIDWallet
+    accountID := "8db863f6-ef9b-413a-8a70-cb816b33de6b"
+    capabilityID := shared.CapabilityIDCardIssuing
 
     ctx := context.Background()
     res, err := s.Capabilities.Delete(ctx, accountID, capabilityID)
@@ -75,19 +76,19 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "73429cdb-1a84-422b-b679-d2322715bf0c"
-    capabilityID := shared.CapabilityIDWallet
+    accountID := "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+    capabilityID := shared.CapabilityIDSendFunds
 
     ctx := context.Background()
     res, err := s.Capabilities.Get(ctx, accountID, capabilityID)
@@ -127,18 +128,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "b1e31b8b-90f3-4443-a110-8e0adcf4b921"
+    accountID := "c184a429-302e-4aca-80db-f1718b882a50"
 
     ctx := context.Background()
     res, err := s.Capabilities.List(ctx, accountID)
@@ -177,25 +178,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     addCapabilityRequest := shared.AddCapabilityRequest{
         Capabilities: []shared.CapabilityID{
-            shared.CapabilityIDCollectFunds,
-            shared.CapabilityIDCollectFunds,
-            shared.CapabilityIDCardIssuing,
+            shared.CapabilityIDTransfers,
         },
     }
-    accountID := "ce953f73-ef7f-4bc7-abd7-4dd39c0f5d2c"
+    accountID := "12e6e103-56d1-4f09-9ae6-2352496ce763"
 
     ctx := context.Background()
     res, err := s.Capabilities.Request(ctx, addCapabilityRequest, accountID)

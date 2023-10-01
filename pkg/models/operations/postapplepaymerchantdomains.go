@@ -30,9 +30,12 @@ func (o *PostApplePayMerchantDomainsRequest) GetAccountID() string {
 type PostApplePayMerchantDomainsResponse struct {
 	// Domains registered with Apple Pay
 	ApplePayMerchantDomains *shared.ApplePayMerchantDomains
-	ContentType             string
-	StatusCode              int
-	RawResponse             *http.Response
+	// HTTP response content type for this operation
+	ContentType string
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 }
 
 func (o *PostApplePayMerchantDomainsResponse) GetApplePayMerchantDomains() *shared.ApplePayMerchantDomains {

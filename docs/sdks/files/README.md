@@ -1,4 +1,5 @@
 # Files
+(*Files*)
 
 ## Overview
 
@@ -22,18 +23,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "86bc173d-689e-4ee9-926f-8d986e881ead"
+    accountID := "b18d8d81-fd7b-4764-a31e-475cb1f36591"
     fileID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -74,18 +75,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "4f0e1012-563f-494e-a9e9-73e922a57a15"
+    accountID := "c184a429-302e-4aca-80db-f1718b882a50"
 
     ctx := context.Background()
     res, err := s.Files.List(ctx, accountID)
@@ -124,25 +125,25 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     fileUploadRequest := shared.FileUploadRequest{
         File: shared.FileUploadRequestFile{
-            Content: []byte("quidem"),
-            File: "eveniet",
+            Content: []byte("F?SRSKG@^n"),
+            File: "ullam",
         },
         FilePurpose: shared.FilePurposeIdentityVerification,
     }
-    accountID := "e060807e-2b6e-43ab-8845-f0597a60ff2a"
+    accountID := "45729517-0ea7-42db-8948-9aba3b26010e"
 
     ctx := context.Background()
     res, err := s.Files.Upload(ctx, fileUploadRequest, accountID)

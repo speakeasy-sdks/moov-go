@@ -28,10 +28,13 @@ func (o *UploadFileRequest) GetAccountID() string {
 }
 
 type UploadFileResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// File added
-	File        *shared.File
-	StatusCode  int
+	File *shared.File
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 
