@@ -2,8 +2,13 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // Plaid - Describes the account to link to the Moov account using a Plaid processor token.
 type Plaid struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The details of a Plaid processor integration for a linked funding source. <br><br> `sandbox` - When linking a bank account to a `sandbox` account using a Plaid processor token a default bank account response will be used. The following default data will be used to generate the bank account in this flow:
 	// ```
 	//   RoutingNumber: "011401533",
@@ -13,6 +18,24 @@ type Plaid struct {
 	// ```
 	//
 	Plaid *PlaidIntegration `json:"plaid,omitempty"`
+}
+
+func (p Plaid) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *Plaid) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Plaid) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *Plaid) GetPlaid() *PlaidIntegration {

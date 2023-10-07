@@ -5,15 +5,35 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
 type PatchAccountRequestCustomerSupportAddress struct {
-	AddressLine1    *string `json:"addressLine1,omitempty"`
-	AddressLine2    *string `json:"addressLine2,omitempty"`
-	City            *string `json:"city,omitempty"`
-	Country         *string `json:"country,omitempty"`
-	PostalCode      *string `json:"postalCode,omitempty"`
-	StateOrProvince *string `json:"stateOrProvince,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	AddressLine1         *string                `json:"addressLine1,omitempty"`
+	AddressLine2         *string                `json:"addressLine2,omitempty"`
+	City                 *string                `json:"city,omitempty"`
+	Country              *string                `json:"country,omitempty"`
+	PostalCode           *string                `json:"postalCode,omitempty"`
+	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
+}
+
+func (p PatchAccountRequestCustomerSupportAddress) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestCustomerSupportAddress) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestCustomerSupportAddress) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestCustomerSupportAddress) GetAddressLine1() *string {
@@ -59,8 +79,27 @@ func (o *PatchAccountRequestCustomerSupportAddress) GetStateOrProvince() *string
 }
 
 type PatchAccountRequestCustomerSupportPhone struct {
-	CountryCode *string `json:"countryCode,omitempty"`
-	Number      *string `json:"number,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	CountryCode          *string                `json:"countryCode,omitempty"`
+	Number               *string                `json:"number,omitempty"`
+}
+
+func (p PatchAccountRequestCustomerSupportPhone) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestCustomerSupportPhone) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestCustomerSupportPhone) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestCustomerSupportPhone) GetCountryCode() *string {
@@ -79,11 +118,30 @@ func (o *PatchAccountRequestCustomerSupportPhone) GetNumber() *string {
 
 // PatchAccountRequestCustomerSupport - User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account
 type PatchAccountRequestCustomerSupport struct {
-	Address *PatchAccountRequestCustomerSupportAddress `json:"address,omitempty"`
+	AdditionalProperties map[string]interface{}                     `additionalProperties:"true" json:"-"`
+	Address              *PatchAccountRequestCustomerSupportAddress `json:"address,omitempty"`
 	// Email Address
 	Email   *string                                  `json:"email,omitempty"`
 	Phone   *PatchAccountRequestCustomerSupportPhone `json:"phone,omitempty"`
 	Website *string                                  `json:"website,omitempty"`
+}
+
+func (p PatchAccountRequestCustomerSupport) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestCustomerSupport) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestCustomerSupport) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestCustomerSupport) GetAddress() *PatchAccountRequestCustomerSupportAddress {
@@ -115,12 +173,31 @@ func (o *PatchAccountRequestCustomerSupport) GetWebsite() *string {
 }
 
 type PatchAccountRequestProfileBusinessAddress struct {
-	AddressLine1    *string `json:"addressLine1,omitempty"`
-	AddressLine2    *string `json:"addressLine2,omitempty"`
-	City            *string `json:"city,omitempty"`
-	Country         *string `json:"country,omitempty"`
-	PostalCode      *string `json:"postalCode,omitempty"`
-	StateOrProvince *string `json:"stateOrProvince,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	AddressLine1         *string                `json:"addressLine1,omitempty"`
+	AddressLine2         *string                `json:"addressLine2,omitempty"`
+	City                 *string                `json:"city,omitempty"`
+	Country              *string                `json:"country,omitempty"`
+	PostalCode           *string                `json:"postalCode,omitempty"`
+	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
+}
+
+func (p PatchAccountRequestProfileBusinessAddress) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileBusinessAddress) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileBusinessAddress) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileBusinessAddress) GetAddressLine1() *string {
@@ -216,9 +293,28 @@ func (e *PatchAccountRequestProfileBusinessBusinessType) UnmarshalJSON(data []by
 
 // PatchAccountRequestProfileBusinessIndustryCodes - Describes industry specific identifiers
 type PatchAccountRequestProfileBusinessIndustryCodes struct {
-	Mcc   *string `json:"mcc,omitempty"`
-	Naics *string `json:"naics,omitempty"`
-	Sic   *string `json:"sic,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Mcc                  *string                `json:"mcc,omitempty"`
+	Naics                *string                `json:"naics,omitempty"`
+	Sic                  *string                `json:"sic,omitempty"`
+}
+
+func (p PatchAccountRequestProfileBusinessIndustryCodes) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileBusinessIndustryCodes) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileBusinessIndustryCodes) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileBusinessIndustryCodes) GetMcc() *string {
@@ -243,8 +339,27 @@ func (o *PatchAccountRequestProfileBusinessIndustryCodes) GetSic() *string {
 }
 
 type PatchAccountRequestProfileBusinessPhone struct {
-	CountryCode *string `json:"countryCode,omitempty"`
-	Number      *string `json:"number,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	CountryCode          *string                `json:"countryCode,omitempty"`
+	Number               *string                `json:"number,omitempty"`
+}
+
+func (p PatchAccountRequestProfileBusinessPhone) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileBusinessPhone) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileBusinessPhone) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileBusinessPhone) GetCountryCode() *string {
@@ -263,7 +378,26 @@ func (o *PatchAccountRequestProfileBusinessPhone) GetNumber() *string {
 
 // PatchAccountRequestProfileBusinessTaxID - An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
 type PatchAccountRequestProfileBusinessTaxID struct {
-	Ein *Ein `json:"ein,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Ein                  *Ein                   `json:"ein,omitempty"`
+}
+
+func (p PatchAccountRequestProfileBusinessTaxID) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileBusinessTaxID) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileBusinessTaxID) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileBusinessTaxID) GetEin() *Ein {
@@ -275,17 +409,36 @@ func (o *PatchAccountRequestProfileBusinessTaxID) GetEin() *Ein {
 
 // PatchAccountRequestProfileBusiness - Describes the fields available when patching a business
 type PatchAccountRequestProfileBusiness struct {
-	Address           *PatchAccountRequestProfileBusinessAddress       `json:"address,omitempty"`
-	BusinessType      *PatchAccountRequestProfileBusinessBusinessType  `json:"businessType,omitempty"`
-	Description       *string                                          `json:"description,omitempty"`
-	DoingBusinessAs   *string                                          `json:"doingBusinessAs,omitempty"`
-	Email             *string                                          `json:"email,omitempty"`
-	IndustryCodes     *PatchAccountRequestProfileBusinessIndustryCodes `json:"industryCodes,omitempty"`
-	LegalBusinessName *string                                          `json:"legalBusinessName,omitempty"`
-	OwnersProvided    *bool                                            `json:"ownersProvided,omitempty"`
-	Phone             *PatchAccountRequestProfileBusinessPhone         `json:"phone,omitempty"`
-	TaxID             *PatchAccountRequestProfileBusinessTaxID         `json:"taxID,omitempty"`
-	Website           *string                                          `json:"website,omitempty"`
+	AdditionalProperties map[string]interface{}                           `additionalProperties:"true" json:"-"`
+	Address              *PatchAccountRequestProfileBusinessAddress       `json:"address,omitempty"`
+	BusinessType         *PatchAccountRequestProfileBusinessBusinessType  `json:"businessType,omitempty"`
+	Description          *string                                          `json:"description,omitempty"`
+	DoingBusinessAs      *string                                          `json:"doingBusinessAs,omitempty"`
+	Email                *string                                          `json:"email,omitempty"`
+	IndustryCodes        *PatchAccountRequestProfileBusinessIndustryCodes `json:"industryCodes,omitempty"`
+	LegalBusinessName    *string                                          `json:"legalBusinessName,omitempty"`
+	OwnersProvided       *bool                                            `json:"ownersProvided,omitempty"`
+	Phone                *PatchAccountRequestProfileBusinessPhone         `json:"phone,omitempty"`
+	TaxID                *PatchAccountRequestProfileBusinessTaxID         `json:"taxID,omitempty"`
+	Website              *string                                          `json:"website,omitempty"`
+}
+
+func (p PatchAccountRequestProfileBusiness) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileBusiness) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileBusiness) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileBusiness) GetAddress() *PatchAccountRequestProfileBusinessAddress {
@@ -366,12 +519,31 @@ func (o *PatchAccountRequestProfileBusiness) GetWebsite() *string {
 }
 
 type PatchAccountRequestProfileIndividualAddress struct {
-	AddressLine1    *string `json:"addressLine1,omitempty"`
-	AddressLine2    *string `json:"addressLine2,omitempty"`
-	City            *string `json:"city,omitempty"`
-	Country         *string `json:"country,omitempty"`
-	PostalCode      *string `json:"postalCode,omitempty"`
-	StateOrProvince *string `json:"stateOrProvince,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	AddressLine1         *string                `json:"addressLine1,omitempty"`
+	AddressLine2         *string                `json:"addressLine2,omitempty"`
+	City                 *string                `json:"city,omitempty"`
+	Country              *string                `json:"country,omitempty"`
+	PostalCode           *string                `json:"postalCode,omitempty"`
+	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
+}
+
+func (p PatchAccountRequestProfileIndividualAddress) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileIndividualAddress) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileIndividualAddress) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileIndividualAddress) GetAddressLine1() *string {
@@ -418,9 +590,28 @@ func (o *PatchAccountRequestProfileIndividualAddress) GetStateOrProvince() *stri
 
 // PatchAccountRequestProfileIndividualBirthDate - Birthdate for an individual
 type PatchAccountRequestProfileIndividualBirthDate struct {
-	Day   int64 `json:"day"`
-	Month int64 `json:"month"`
-	Year  int64 `json:"year"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Day                  int64                  `json:"day"`
+	Month                int64                  `json:"month"`
+	Year                 int64                  `json:"year"`
+}
+
+func (p PatchAccountRequestProfileIndividualBirthDate) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileIndividualBirthDate) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileIndividualBirthDate) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileIndividualBirthDate) GetDay() int64 {
@@ -445,8 +636,27 @@ func (o *PatchAccountRequestProfileIndividualBirthDate) GetYear() int64 {
 }
 
 type PatchAccountRequestProfileIndividualGovernmentIDItin struct {
-	Full     *string `json:"full,omitempty"`
-	LastFour *string `json:"lastFour,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Full                 *string                `json:"full,omitempty"`
+	LastFour             *string                `json:"lastFour,omitempty"`
+}
+
+func (p PatchAccountRequestProfileIndividualGovernmentIDItin) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileIndividualGovernmentIDItin) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileIndividualGovernmentIDItin) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileIndividualGovernmentIDItin) GetFull() *string {
@@ -464,8 +674,27 @@ func (o *PatchAccountRequestProfileIndividualGovernmentIDItin) GetLastFour() *st
 }
 
 type PatchAccountRequestProfileIndividualGovernmentIDSsn struct {
-	Full     *string `json:"full,omitempty"`
-	LastFour *string `json:"lastFour,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Full                 *string                `json:"full,omitempty"`
+	LastFour             *string                `json:"lastFour,omitempty"`
+}
+
+func (p PatchAccountRequestProfileIndividualGovernmentIDSsn) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileIndividualGovernmentIDSsn) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileIndividualGovernmentIDSsn) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileIndividualGovernmentIDSsn) GetFull() *string {
@@ -483,8 +712,27 @@ func (o *PatchAccountRequestProfileIndividualGovernmentIDSsn) GetLastFour() *str
 }
 
 type PatchAccountRequestProfileIndividualGovernmentID struct {
-	Itin *PatchAccountRequestProfileIndividualGovernmentIDItin `json:"itin,omitempty"`
-	Ssn  *PatchAccountRequestProfileIndividualGovernmentIDSsn  `json:"ssn,omitempty"`
+	AdditionalProperties map[string]interface{}                                `additionalProperties:"true" json:"-"`
+	Itin                 *PatchAccountRequestProfileIndividualGovernmentIDItin `json:"itin,omitempty"`
+	Ssn                  *PatchAccountRequestProfileIndividualGovernmentIDSsn  `json:"ssn,omitempty"`
+}
+
+func (p PatchAccountRequestProfileIndividualGovernmentID) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileIndividualGovernmentID) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileIndividualGovernmentID) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileIndividualGovernmentID) GetItin() *PatchAccountRequestProfileIndividualGovernmentIDItin {
@@ -503,6 +751,7 @@ func (o *PatchAccountRequestProfileIndividualGovernmentID) GetSsn() *PatchAccoun
 
 // PatchAccountRequestProfileIndividualName - Name for an individual
 type PatchAccountRequestProfileIndividualName struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// Name this person was given. This is usually the the same as first name.
 	FirstName *string `json:"firstName,omitempty"`
 	// Family name of this person. This is usually the the same as last name.
@@ -511,6 +760,24 @@ type PatchAccountRequestProfileIndividualName struct {
 	MiddleName *string `json:"middleName,omitempty"`
 	// Suffix of a given name
 	Suffix *string `json:"suffix,omitempty"`
+}
+
+func (p PatchAccountRequestProfileIndividualName) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileIndividualName) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileIndividualName) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileIndividualName) GetFirstName() *string {
@@ -542,8 +809,27 @@ func (o *PatchAccountRequestProfileIndividualName) GetSuffix() *string {
 }
 
 type PatchAccountRequestProfileIndividualPhone struct {
-	CountryCode *string `json:"countryCode,omitempty"`
-	Number      *string `json:"number,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	CountryCode          *string                `json:"countryCode,omitempty"`
+	Number               *string                `json:"number,omitempty"`
+}
+
+func (p PatchAccountRequestProfileIndividualPhone) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileIndividualPhone) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileIndividualPhone) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileIndividualPhone) GetCountryCode() *string {
@@ -562,12 +848,31 @@ func (o *PatchAccountRequestProfileIndividualPhone) GetNumber() *string {
 
 // PatchAccountRequestProfileIndividual - Describes the fields available when patching an individual
 type PatchAccountRequestProfileIndividual struct {
-	Address      *PatchAccountRequestProfileIndividualAddress      `json:"address,omitempty"`
-	BirthDate    *PatchAccountRequestProfileIndividualBirthDate    `json:"birthDate,omitempty"`
-	Email        *string                                           `json:"email,omitempty"`
-	GovernmentID *PatchAccountRequestProfileIndividualGovernmentID `json:"governmentID,omitempty"`
-	Name         *PatchAccountRequestProfileIndividualName         `json:"name,omitempty"`
-	Phone        *PatchAccountRequestProfileIndividualPhone        `json:"phone,omitempty"`
+	AdditionalProperties map[string]interface{}                            `additionalProperties:"true" json:"-"`
+	Address              *PatchAccountRequestProfileIndividualAddress      `json:"address,omitempty"`
+	BirthDate            *PatchAccountRequestProfileIndividualBirthDate    `json:"birthDate,omitempty"`
+	Email                *string                                           `json:"email,omitempty"`
+	GovernmentID         *PatchAccountRequestProfileIndividualGovernmentID `json:"governmentID,omitempty"`
+	Name                 *PatchAccountRequestProfileIndividualName         `json:"name,omitempty"`
+	Phone                *PatchAccountRequestProfileIndividualPhone        `json:"phone,omitempty"`
+}
+
+func (p PatchAccountRequestProfileIndividual) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfileIndividual) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfileIndividual) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfileIndividual) GetAddress() *PatchAccountRequestProfileIndividualAddress {
@@ -615,8 +920,27 @@ func (o *PatchAccountRequestProfileIndividual) GetPhone() *PatchAccountRequestPr
 // PatchAccountRequestProfile - Describes the fields available when patching a profile.
 // Each object can be patched independent of patching the other fields.
 type PatchAccountRequestProfile struct {
-	Business   *PatchAccountRequestProfileBusiness   `json:"business,omitempty"`
-	Individual *PatchAccountRequestProfileIndividual `json:"individual,omitempty"`
+	AdditionalProperties map[string]interface{}                `additionalProperties:"true" json:"-"`
+	Business             *PatchAccountRequestProfileBusiness   `json:"business,omitempty"`
+	Individual           *PatchAccountRequestProfileIndividual `json:"individual,omitempty"`
+}
+
+func (p PatchAccountRequestProfile) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestProfile) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestProfile) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestProfile) GetBusiness() *PatchAccountRequestProfileBusiness {
@@ -635,8 +959,27 @@ func (o *PatchAccountRequestProfile) GetIndividual() *PatchAccountRequestProfile
 
 // PatchAccountRequestSettingsAchPayment - User provided settings to manage ACH payments
 type PatchAccountRequestSettingsAchPayment struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The description that shows up on ACH transactions. This will default to the account's display name on account creation.
 	CompanyName *string `json:"companyName,omitempty"`
+}
+
+func (p PatchAccountRequestSettingsAchPayment) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestSettingsAchPayment) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestSettingsAchPayment) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestSettingsAchPayment) GetCompanyName() *string {
@@ -648,8 +991,27 @@ func (o *PatchAccountRequestSettingsAchPayment) GetCompanyName() *string {
 
 // PatchAccountRequestSettingsCardPayment - User provided settings to manage card payments. This data is only allowed on a business account
 type PatchAccountRequestSettingsCardPayment struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
 	StatementDescriptor *string `json:"statementDescriptor,omitempty"`
+}
+
+func (p PatchAccountRequestSettingsCardPayment) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestSettingsCardPayment) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestSettingsCardPayment) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestSettingsCardPayment) GetStatementDescriptor() *string {
@@ -661,8 +1023,27 @@ func (o *PatchAccountRequestSettingsCardPayment) GetStatementDescriptor() *strin
 
 // PatchAccountRequestSettings - User provided settings to manage an account
 type PatchAccountRequestSettings struct {
-	AchPayment  *PatchAccountRequestSettingsAchPayment  `json:"achPayment,omitempty"`
-	CardPayment *PatchAccountRequestSettingsCardPayment `json:"cardPayment,omitempty"`
+	AdditionalProperties map[string]interface{}                  `additionalProperties:"true" json:"-"`
+	AchPayment           *PatchAccountRequestSettingsAchPayment  `json:"achPayment,omitempty"`
+	CardPayment          *PatchAccountRequestSettingsCardPayment `json:"cardPayment,omitempty"`
+}
+
+func (p PatchAccountRequestSettings) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestSettings) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestSettings) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestSettings) GetAchPayment() *PatchAccountRequestSettingsAchPayment {
@@ -681,7 +1062,26 @@ func (o *PatchAccountRequestSettings) GetCardPayment() *PatchAccountRequestSetti
 
 // PatchAccountRequestTermsOfService - An encrypted value used to record acceptance of Moov's Terms of Service
 type PatchAccountRequestTermsOfService struct {
-	Token *string `json:"token,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Token                *string                `json:"token,omitempty"`
+}
+
+func (p PatchAccountRequestTermsOfService) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequestTermsOfService) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequestTermsOfService) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequestTermsOfService) GetToken() *string {
@@ -693,13 +1093,32 @@ func (o *PatchAccountRequestTermsOfService) GetToken() *string {
 
 // PatchAccountRequest - Describes the fields available when patching a Moov Account
 type PatchAccountRequest struct {
-	CustomerSupport *PatchAccountRequestCustomerSupport `json:"customerSupport,omitempty"`
-	ForeignID       *string                             `json:"foreignID,omitempty"`
+	AdditionalProperties map[string]interface{}              `additionalProperties:"true" json:"-"`
+	CustomerSupport      *PatchAccountRequestCustomerSupport `json:"customerSupport,omitempty"`
+	ForeignID            *string                             `json:"foreignID,omitempty"`
 	// Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
 	Metadata       map[string]string                  `json:"metadata,omitempty"`
 	Profile        *PatchAccountRequestProfile        `json:"profile,omitempty"`
 	Settings       *PatchAccountRequestSettings       `json:"settings,omitempty"`
 	TermsOfService *PatchAccountRequestTermsOfService `json:"termsOfService,omitempty"`
+}
+
+func (p PatchAccountRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PatchAccountRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PatchAccountRequest) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PatchAccountRequest) GetCustomerSupport() *PatchAccountRequestCustomerSupport {

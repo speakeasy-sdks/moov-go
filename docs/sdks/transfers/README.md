@@ -1,4 +1,5 @@
 # Transfers
+(*Transfers*)
 
 ## Overview
 
@@ -27,21 +28,20 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    xIdempotencyKey := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
-    transferID := "fb9f58c4-d86e-468e-8be0-56013f59da75"
+    var xIdempotencyKey string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    var transferID string = "03fa7112-315a-4072-a9f2-43f3f1ec962e"
     createReversal := &shared.CreateReversal{
-        Amount: moov.Int64(1000),
+        Amount: moovgo.Int64(1000),
     }
 
     ctx := context.Background()
@@ -83,54 +83,51 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     createTransfer := shared.CreateTransfer{
         Amount: &shared.Amount{
+            AdditionalProperties: map[string]interface{}{
+                "online": "Configuration",
+            },
             Currency: "USD",
             Value: 1204,
         },
-        Description: moov.String("Pay Instructor for May 15 Class"),
+        Description: moovgo.String("Pay Instructor for May 15 Class"),
         Destination: &shared.CreateTransferDestination{
             AchDetails: &shared.CreateACHDetailsBase{
-                CompanyEntryDescription: moov.String("Gym Dues"),
-                OriginatingCompanyName: moov.String("Whole Body Fit"),
+                CompanyEntryDescription: moovgo.String("Gym Dues"),
+                OriginatingCompanyName: moovgo.String("Whole Body Fit"),
             },
-            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            PaymentMethodID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
-        FacilitatorFee: &shared.CreateFacilitatorFee{
-            Markup: moov.Int64(444587),
-            Total: moov.Int64(667715),
-        },
+        FacilitatorFee: &shared.CreateFacilitatorFee{},
         Metadata: map[string]string{
-            "sint": "accusamus",
-            "impedit": "hic",
+            "Money": "blue",
         },
         Source: &shared.CreateTransferSource{
             AchDetails: &shared.CreateAchDetailsSource{
-                CompanyEntryDescription: moov.String("Gym Dues"),
+                CompanyEntryDescription: moovgo.String("Gym Dues"),
                 DebitHoldPeriod: shared.CreateAchDetailsSourceDebitHoldPeriodTwoDays.ToPointer(),
-                OriginatingCompanyName: moov.String("Whole Body Fit"),
+                OriginatingCompanyName: moovgo.String("Whole Body Fit"),
             },
             CardDetails: &shared.CreateCardDetails{
-                DynamicDescriptor: moov.String("WhlBdy *Yoga 11-12"),
-                TransactionSource: shared.TransactionSourceUnscheduled.ToPointer(),
+                DynamicDescriptor: moovgo.String("WhlBdy *Yoga 11-12"),
             },
-            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-            TransferID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            PaymentMethodID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            TransferID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
     }
-    xIdempotencyKey := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
-    xWaitFor := shared.WaitForRailResponse
+    var xIdempotencyKey string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    var xWaitFor *shared.WaitFor = shared.WaitForRailResponse
 
     ctx := context.Background()
     res, err := s.Transfers.Create(ctx, createTransfer, xIdempotencyKey, xWaitFor)
@@ -171,30 +168,33 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Transfers.GenerateOptions(ctx, shared.CreateTransferOptions{
         Amount: shared.Amount{
+            AdditionalProperties: map[string]interface{}{
+                "Human": "Incredible",
+            },
             Currency: "USD",
             Value: 1204,
         },
         Destination: &shared.CreateTransferOptionsDestination{
-            AccountID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            AccountID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            PaymentMethodID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
         Source: &shared.CreateTransferOptionsSource{
-            AccountID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
-            PaymentMethodID: moov.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            AccountID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
+            PaymentMethodID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
     })
     if err != nil {
@@ -232,19 +232,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    transferID := "f66ef1ca-a338-43c2-beb4-77373c8d72f6"
-    accountID := "4d1db1f2-c431-4066-9e96-349e1cf9e06e"
+    var transferID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+    var accountID *string = "58ccc65b-c928-4154-952e-30c048b8c2b5"
 
     ctx := context.Background()
     res, err := s.Transfers.Get(ctx, transferID, accountID)
@@ -284,19 +283,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    refundID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
-    transferID := "3a437000-ae6b-46bc-9b8f-759eac55a974"
+    var refundID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    var transferID string = "dcb7cb00-9cc1-4b92-8e6f-29c9d50583d5"
 
     ctx := context.Background()
     res, err := s.Transfers.GetRefund(ctx, refundID, transferID)
@@ -336,18 +334,17 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    transferID := "1d311352-965b-4b8a-b202-611435e139db"
+    var transferID string = "7fdf7d4f-a689-4415-8f2e-71877eebee60"
 
     ctx := context.Background()
     res, err := s.Transfers.ListRefunds(ctx, transferID)
@@ -386,23 +383,22 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    xIdempotencyKey := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
-    transferID := "c2259b1a-bda8-4c07-8e10-84cb0672d1ad"
+    var xIdempotencyKey string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    var transferID string = "94e35bc6-be02-470f-a21a-a226b055b594"
     createRefund := &shared.CreateRefund{
-        Amount: moov.Int64(1000),
+        Amount: moovgo.Int64(1000),
     }
-    xWaitFor := shared.WaitForRailResponse
+    var xWaitFor *shared.WaitFor = shared.WaitForRailResponse
 
     ctx := context.Background()
     res, err := s.Transfers.Refund(ctx, xIdempotencyKey, transferID, createRefund, xWaitFor)
@@ -444,26 +440,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     patchTransfer := shared.PatchTransfer{
         Metadata: map[string]string{
-            "molestiae": "provident",
-            "accusamus": "necessitatibus",
-            "tempore": "sint",
+            "Van": "East",
         },
     }
-    transferID := "665b85ef-bd02-4bae-8be2-d782259e3ea4"
-    accountID := "b5197f92-443d-4a7c-a52b-895c537c6454"
+    var transferID string = "bf4aa77f-204e-4775-8c35-2acfe54077ca"
+    var accountID *string = "bf6805c5-ca71-4871-8355-ad7d4e1b5845"
 
     ctx := context.Background()
     res, err := s.Transfers.Update(ctx, patchTransfer, transferID, accountID)

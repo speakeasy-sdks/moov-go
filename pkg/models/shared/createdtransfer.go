@@ -3,14 +3,25 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
-// CreatedTransfer - A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
 type CreatedTransfer struct {
 	CreatedOn *time.Time `json:"createdOn,omitempty"`
 	// ID of Transfer
 	TransferID *string `json:"transferID,omitempty"`
+}
+
+func (c CreatedTransfer) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreatedTransfer) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CreatedTransfer) GetCreatedOn() *time.Time {

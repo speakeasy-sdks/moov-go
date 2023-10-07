@@ -1,4 +1,5 @@
 # Analytics
+(*Analytics*)
 
 ## Overview
 
@@ -24,24 +25,22 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/types"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.CountAccountsCreated(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2022-07-22T03:36:34.615Z"),
-        From: types.MustTimeFromString("2020-02-22T17:45:21.686Z"),
-        To: types.MustTimeFromString("2022-02-08T14:21:47.573Z"),
-        Tz: types.MustTimeFromString("2022-02-26T01:27:36.152Z"),
+        AdditionalProperties: map[string]interface{}{
+            "Buckinghamshire": "Pasadena",
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -78,24 +77,22 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/types"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.CountTransferStatuses(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2020-11-26T01:41:04.216Z"),
-        From: types.MustTimeFromString("2022-09-14T10:27:07.590Z"),
-        To: types.MustTimeFromString("2020-07-23T21:23:35.691Z"),
-        Tz: types.MustTimeFromString("2022-08-09T06:36:34.417Z"),
+        AdditionalProperties: map[string]interface{}{
+            "Health": "elf",
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -132,25 +129,22 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/types"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.LargestTransfer(ctx, shared.LimitedTimeRange{
-        Count: moov.Int64(675439),
-        Every: moov.String("accusamus"),
-        From: types.MustTimeFromString("2022-06-02T20:02:58.167Z"),
-        To: types.MustTimeFromString("2022-02-13T03:59:53.583Z"),
-        Tz: moov.String("delectus"),
+        AdditionalProperties: map[string]interface{}{
+            "Corporate": "Account",
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -187,25 +181,22 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/types"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.SmallestTransfer(ctx, shared.LimitedTimeRange{
-        Count: moov.Int64(692532),
-        Every: moov.String("provident"),
-        From: types.MustTimeFromString("2021-09-06T10:36:33.442Z"),
-        To: types.MustTimeFromString("2021-12-07T18:13:34.827Z"),
-        Tz: moov.String("sapiente"),
+        AdditionalProperties: map[string]interface{}{
+            "North": "vastly",
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -242,24 +233,22 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/types"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Analytics.SumTransfers(ctx, shared.TimeRange{
-        Every: types.MustTimeFromString("2022-05-10T22:38:44.806Z"),
-        From: types.MustTimeFromString("2022-07-30T07:01:46.758Z"),
-        To: types.MustTimeFromString("2021-10-15T07:59:26.631Z"),
-        Tz: types.MustTimeFromString("2022-12-24T23:52:02.245Z"),
+        AdditionalProperties: map[string]interface{}{
+            "even": "maximize",
+        },
     })
     if err != nil {
         log.Fatal(err)

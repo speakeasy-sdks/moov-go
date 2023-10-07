@@ -2,12 +2,35 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // Wallet - A Moov wallet to store funds for transfers.
 type Wallet struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// A representation of money containing an integer value and it's currency.
 	AvailableBalance *Amount `json:"availableBalance,omitempty"`
 	// UUID v4
 	WalletID *string `json:"walletID,omitempty"`
+}
+
+func (w Wallet) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(w, "", false)
+}
+
+func (w *Wallet) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Wallet) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *Wallet) GetAvailableBalance() *Amount {

@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -34,6 +35,17 @@ type WalletTransaction struct {
 	TransactionType *WalletTransactionType `json:"transactionType,omitempty"`
 	// UUID v4
 	WalletID *string `json:"walletID,omitempty"`
+}
+
+func (w WalletTransaction) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(w, "", false)
+}
+
+func (w *WalletTransaction) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *WalletTransaction) GetAvailableBalance() *int64 {

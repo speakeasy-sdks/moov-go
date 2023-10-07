@@ -3,9 +3,8 @@
 package shared
 
 import (
-	"bytes"
-	"encoding/json"
 	"errors"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
 type RefundPostResponseType string
@@ -41,21 +40,16 @@ func CreateRefundPostResponseGetRefund(getRefund GetRefund) RefundPostResponse {
 }
 
 func (u *RefundPostResponse) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	createdRefund := new(CreatedRefund)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&createdRefund); err == nil {
+	if err := utils.UnmarshalJSON(data, &createdRefund, "", true, true); err == nil {
 		u.CreatedRefund = createdRefund
 		u.Type = RefundPostResponseTypeCreatedRefund
 		return nil
 	}
 
 	getRefund := new(GetRefund)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&getRefund); err == nil {
+	if err := utils.UnmarshalJSON(data, &getRefund, "", true, true); err == nil {
 		u.GetRefund = getRefund
 		u.Type = RefundPostResponseTypeGetRefund
 		return nil
@@ -66,12 +60,12 @@ func (u *RefundPostResponse) UnmarshalJSON(data []byte) error {
 
 func (u RefundPostResponse) MarshalJSON() ([]byte, error) {
 	if u.CreatedRefund != nil {
-		return json.Marshal(u.CreatedRefund)
+		return utils.MarshalJSON(u.CreatedRefund, "", true)
 	}
 
 	if u.GetRefund != nil {
-		return json.Marshal(u.GetRefund)
+		return utils.MarshalJSON(u.GetRefund, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }

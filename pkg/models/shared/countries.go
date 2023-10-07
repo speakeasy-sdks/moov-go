@@ -2,9 +2,32 @@
 
 package shared
 
-// Countries - The Countries of operation for an account
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
+// The Countries of operation for an account
 type Countries struct {
-	Countries []string `json:"countries"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Countries            []string               `json:"countries"`
+}
+
+func (c Countries) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *Countries) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Countries) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *Countries) GetCountries() []string {

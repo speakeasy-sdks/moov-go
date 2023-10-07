@@ -2,8 +2,13 @@
 
 package shared
 
-// Name - Name for an individual
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
+// Name for an individual
 type Name struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// Name this person was given. This is usually the the same as first name.
 	FirstName *string `json:"firstName,omitempty"`
 	// Family name of this person. This is usually the the same as last name.
@@ -12,6 +17,24 @@ type Name struct {
 	MiddleName *string `json:"middleName,omitempty"`
 	// Suffix of a given name
 	Suffix *string `json:"suffix,omitempty"`
+}
+
+func (n Name) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(n, "", false)
+}
+
+func (n *Name) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &n, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Name) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *Name) GetFirstName() *string {

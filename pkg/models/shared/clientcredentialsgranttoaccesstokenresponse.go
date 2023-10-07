@@ -5,6 +5,7 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
 // ClientCredentialsGrantToAccessTokenResponseTokenType - Type of token returned. Opaque is not parse-able while JWT follows JWT spec.
@@ -37,6 +38,7 @@ func (e *ClientCredentialsGrantToAccessTokenResponseTokenType) UnmarshalJSON(dat
 
 // ClientCredentialsGrantToAccessTokenResponse - Device model
 type ClientCredentialsGrantToAccessTokenResponse struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// String passed to the authorization server to gain access to the system
 	AccessToken *string `json:"access_token,omitempty"`
 	// Number of seconds the token is valid for.
@@ -47,6 +49,24 @@ type ClientCredentialsGrantToAccessTokenResponse struct {
 	Scope *string `json:"scope,omitempty"`
 	// Type of token returned. Opaque is not parse-able while JWT follows JWT spec.
 	TokenType *ClientCredentialsGrantToAccessTokenResponseTokenType `json:"token_type,omitempty"`
+}
+
+func (c ClientCredentialsGrantToAccessTokenResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ClientCredentialsGrantToAccessTokenResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ClientCredentialsGrantToAccessTokenResponse) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *ClientCredentialsGrantToAccessTokenResponse) GetAccessToken() *string {

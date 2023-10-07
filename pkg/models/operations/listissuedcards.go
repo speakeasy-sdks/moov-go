@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"net/http"
 )
 
@@ -11,12 +12,23 @@ type ListIssuedCardsRequest struct {
 	// ID of the account
 	AccountID string `pathParam:"style=simple,explode=false,name=accountID"`
 	// Optional parameter to limit the number of results in the query
-	Count *int64 `queryParam:"style=form,explode=true,name=count"`
+	Count *int64 `default:"20" queryParam:"style=form,explode=true,name=count"`
 	// The number of items to offset before starting to collect the result set
 	Skip *int64 `queryParam:"style=form,explode=true,name=skip"`
 	// Optional, comma-separated states to filter the Moov list issued cards response.
 	//
 	States *shared.IssuedCardState `queryParam:"style=form,explode=true,name=states"`
+}
+
+func (l ListIssuedCardsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListIssuedCardsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListIssuedCardsRequest) GetAccountID() string {
@@ -48,10 +60,13 @@ func (o *ListIssuedCardsRequest) GetStates() *shared.IssuedCardState {
 }
 
 type ListIssuedCardsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Successfully retrieved cards
 	IssuedCards []shared.IssuedCard
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

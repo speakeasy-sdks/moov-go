@@ -2,9 +2,32 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 type WireLocation struct {
-	City  *string `json:"city,omitempty"`
-	State *string `json:"state,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	City                 *string                `json:"city,omitempty"`
+	State                *string                `json:"state,omitempty"`
+}
+
+func (w WireLocation) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(w, "", false)
+}
+
+func (w *WireLocation) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *WireLocation) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *WireLocation) GetCity() *string {

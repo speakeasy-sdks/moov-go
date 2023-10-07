@@ -1,7 +1,5 @@
 # AccessTokenErrorResponse
 
-Failure create token
-
 
 ## Supported Types
 

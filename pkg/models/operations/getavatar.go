@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"io"
 	"net/http"
 )
 
@@ -19,11 +20,15 @@ func (o *GetAvatarRequest) GetUniqueID() string {
 }
 
 type GetAvatarResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// The avatar image
-	GetAvatar200ImageWildcardBinaryString []byte
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	GetAvatar200ImageWildcardBinaryString io.ReadCloser
 }
 
 func (o *GetAvatarResponse) GetContentType() string {
@@ -47,7 +52,7 @@ func (o *GetAvatarResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *GetAvatarResponse) GetGetAvatar200ImageWildcardBinaryString() []byte {
+func (o *GetAvatarResponse) GetGetAvatar200ImageWildcardBinaryString() io.ReadCloser {
 	if o == nil {
 		return nil
 	}

@@ -1,4 +1,5 @@
 # Underwriting
+(*Underwriting*)
 
 ## Overview
 
@@ -22,18 +23,17 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "efb0b348-96c3-4ca5-acfb-e2fd57075779"
+    var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
     ctx := context.Background()
     res, err := s.Underwriting.Get(ctx, accountID)
@@ -72,23 +72,25 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     underwritingRequest := shared.UnderwritingRequest{
-        AverageMonthlyTransactionVolume: moov.Int64(250000),
-        AverageTransactionSize: moov.Int64(10000),
-        MaxTransactionSize: moov.Int64(50000),
+        AdditionalProperties: map[string]interface{}{
+            "Van": "East",
+        },
+        AverageMonthlyTransactionVolume: moovgo.Int64(250000),
+        AverageTransactionSize: moovgo.Int64(10000),
+        MaxTransactionSize: moovgo.Int64(50000),
     }
-    accountID := "29177dea-c646-4ecb-9734-09e3eb1e5a2b"
+    var accountID string = "bf4aa77f-204e-4775-8c35-2acfe54077ca"
 
     ctx := context.Background()
     res, err := s.Underwriting.Update(ctx, underwritingRequest, accountID)

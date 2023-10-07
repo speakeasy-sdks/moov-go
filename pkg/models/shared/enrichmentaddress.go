@@ -2,14 +2,37 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // EnrichmentAddress - Describes a suggested address
 type EnrichmentAddress struct {
-	AddressLine1    *string `json:"addressLine1,omitempty"`
-	AddressLine2    *string `json:"addressLine2,omitempty"`
-	City            *string `json:"city,omitempty"`
-	Entries         *int64  `json:"entries,omitempty"`
-	PostalCode      *string `json:"postalCode,omitempty"`
-	StateOrProvince *string `json:"stateOrProvince,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	AddressLine1         *string                `json:"addressLine1,omitempty"`
+	AddressLine2         *string                `json:"addressLine2,omitempty"`
+	City                 *string                `json:"city,omitempty"`
+	Entries              *int64                 `json:"entries,omitempty"`
+	PostalCode           *string                `json:"postalCode,omitempty"`
+	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
+}
+
+func (e EnrichmentAddress) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EnrichmentAddress) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *EnrichmentAddress) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *EnrichmentAddress) GetAddressLine1() *string {

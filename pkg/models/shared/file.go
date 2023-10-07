@@ -3,11 +3,13 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
 // File - Describes a file linked to a Moov account
 type File struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	AccountID *string    `json:"accountID,omitempty"`
 	CreatedOn *time.Time `json:"createdOn,omitempty"`
@@ -20,6 +22,24 @@ type File struct {
 	// The file status
 	FileStatus *FileStatus `json:"fileStatus,omitempty"`
 	UpdatedOn  *time.Time  `json:"updatedOn,omitempty"`
+}
+
+func (f File) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(f, "", false)
+}
+
+func (f *File) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &f, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *File) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *File) GetAccountID() *string {

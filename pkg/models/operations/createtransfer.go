@@ -37,13 +37,16 @@ func (o *CreateTransferRequest) GetXWaitFor() *shared.WaitFor {
 }
 
 type CreateTransferResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// A transfer was successfully created but an error occurred while generating the synchronous response. The asynchronous response object will be returned.
 	CreatedTransfer *shared.CreatedTransfer
 	// A transfer was successfully created but a timeout occurred while waiting for a synchronous response. Rail-specific details may be missing from the response object.
 	GetTransferFull *shared.GetTransferFull
-	StatusCode      int
-	RawResponse     *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// Successfully created a transfer
 	TransferPostResponse *shared.TransferPostResponse
 }

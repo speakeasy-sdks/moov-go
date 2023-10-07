@@ -28,11 +28,14 @@ func (o *CreateRepresentativeRequest) GetAccountID() string {
 }
 
 type CreateRepresentativeResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// representative created
 	Representative *shared.Representative
-	StatusCode     int
-	RawResponse    *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 }
 
 func (o *CreateRepresentativeResponse) GetContentType() string {

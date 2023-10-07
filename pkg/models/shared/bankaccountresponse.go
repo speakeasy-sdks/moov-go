@@ -2,8 +2,13 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // BankAccountResponse - Describes a bank account on a Moov account.
 type BankAccountResponse struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	BankAccountID *string `json:"bankAccountID,omitempty"`
 	// The bank account type
@@ -18,6 +23,24 @@ type BankAccountResponse struct {
 	RoutingNumber         *string     `json:"routingNumber,omitempty"`
 	// The bank account status
 	Status *BankAccountStatus `json:"status,omitempty"`
+}
+
+func (b BankAccountResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(b, "", false)
+}
+
+func (b *BankAccountResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *BankAccountResponse) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *BankAccountResponse) GetBankAccountID() *string {

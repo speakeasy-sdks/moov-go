@@ -1,4 +1,5 @@
 # Cards
+(*Cards*)
 
 ## Overview
 
@@ -32,15 +33,14 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     linkApplePay := shared.LinkApplePay{
@@ -63,7 +63,7 @@ func main() {
             TransactionIdentifier: "32b...4f3",
         },
     }
-    accountID := "e6b7b95b-c0ab-43c2-8c4f-3789fd871f99"
+    var accountID string = "1f061848-80f9-474a-a77b-17cb1fda3296"
 
     ctx := context.Background()
     res, err := s.Cards.LinkApplePayToken(ctx, linkApplePay, accountID)
@@ -105,38 +105,40 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     cardRequest := shared.CardRequest{
+        AdditionalProperties: map[string]interface{}{
+            "transmit": "sultan",
+        },
         BillingAddress: &shared.Address{
-            AddressLine1: moov.String("123 Main Street"),
-            AddressLine2: moov.String("Apt 302"),
-            City: moov.String("Boulder"),
-            Country: moov.String("US"),
-            PostalCode: moov.String("80301"),
-            StateOrProvince: moov.String("CO"),
+            AdditionalProperties: map[string]interface{}{
+                "female": "McAllen",
+            },
+            AddressLine1: moovgo.String("123 Main Street"),
+            AddressLine2: moovgo.String("Apt 302"),
+            City: moovgo.String("Boulder"),
+            Country: moovgo.String("US"),
+            PostalCode: moovgo.String("80301"),
+            StateOrProvince: moovgo.String("CO"),
         },
-        CardCvv: moov.String("0123"),
-        CardNumber: moov.String("pariatur"),
-        CardOnFile: moov.Bool(false),
+        CardCvv: moovgo.String("0123"),
         Expiration: &shared.CardExpiration{
-            Month: moov.String("01"),
-            Year: moov.String("21"),
+            Month: moovgo.String("01"),
+            Year: moovgo.String("21"),
         },
-        HolderName: moov.String("Jules Jackson"),
-        MerchantAccountID: moov.String("d2efd121-aa6f-41e6-b4bd-b04f15756082"),
+        HolderName: moovgo.String("Jules Jackson"),
     }
-    accountID := "d68ea19f-1d17-4051-b39d-08086a184039"
-    xWaitFor := shared.SchemasWaitForPaymentMethod
+    var accountID string = "cf1dc7b4-8ba0-4e01-bb33-b1b7a8af1bc7"
+    var xWaitFor *shared.SchemasWaitFor = shared.SchemasWaitForPaymentMethod
 
     ctx := context.Background()
     res, err := s.Cards.LinkCard(ctx, cardRequest, accountID, xWaitFor)
@@ -178,18 +180,17 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "4c26071f-93f5-4f06-82da-c7af515cc413"
+    var accountID string = "3540bb23-258b-486f-9192-4d7f6c3c94e4"
 
     ctx := context.Background()
     res, err := s.Cards.ListCards(ctx, accountID)
@@ -231,22 +232,21 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     createApplePaySession := shared.CreateApplePaySession{
         DisplayName: "Example Merchant",
         Domain: "checkout.classbooker.dev",
     }
-    accountID := "aa63aae8-d678-464d-bb67-5fd5e60b375e"
+    var accountID string = "94160d72-b710-419d-89b1-719f72571386"
 
     ctx := context.Background()
     res, err := s.Cards.CreateApplePaySession(ctx, createApplePaySession, accountID)
@@ -286,19 +286,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "d4f6fbee-41f3-4331-bfe3-5b60eb1ea426"
-    cardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    var accountID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
+    var cardID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
     res, err := s.Cards.Delete(ctx, accountID, cardID)
@@ -338,19 +337,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "555ba3c2-8744-4ed5-bb88-f3a8d8f5c0b2"
-    cardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+    var cardID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
     res, err := s.Cards.Get(ctx, accountID, cardID)
@@ -392,18 +390,17 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "f2fb7b19-4a27-46b2-a916-fe1f08f4294e"
+    var accountID string = "4611290f-802a-4b57-a6c6-be763a3142ab"
 
     ctx := context.Background()
     res, err := s.Cards.ListApplePayDomains(ctx, accountID)
@@ -445,24 +442,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     registerApplePayMerchantDomains := shared.RegisterApplePayMerchantDomains{
         DisplayName: "Example Merchant",
         Domains: []string{
-            "ea",
+            "checkout.classbooker.dev",
         },
     }
-    accountID := "98f447f6-03e8-4b44-9e80-ca55efd20e45"
+    var accountID string = "a7f34d07-3cbe-4fbd-9d16-8b2a9900d9ad"
 
     ctx := context.Background()
     res, err := s.Cards.RegisterApplePayDomain(ctx, registerApplePayMerchantDomains, accountID)
@@ -507,35 +503,39 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     cardUpdateRequest := shared.CardUpdateRequest{
-        BillingAddress: &shared.UpdateAddress{
-            AddressLine1: moov.String("123 Main Street"),
-            AddressLine2: moov.String("Apt 302"),
-            City: moov.String("Boulder"),
-            Country: moov.String("US"),
-            PostalCode: moov.String("80301"),
-            StateOrProvince: moov.String("CO"),
+        AdditionalProperties: map[string]interface{}{
+            "Van": "East",
         },
-        CardCvv: moov.String("123"),
-        CardOnFile: moov.Bool(false),
+        BillingAddress: &shared.UpdateAddress{
+            AdditionalProperties: map[string]interface{}{
+                "male": "Metal",
+            },
+            AddressLine1: moovgo.String("123 Main Street"),
+            AddressLine2: moovgo.String("Apt 302"),
+            City: moovgo.String("Boulder"),
+            Country: moovgo.String("US"),
+            PostalCode: moovgo.String("80301"),
+            StateOrProvince: moovgo.String("CO"),
+        },
+        CardCvv: moovgo.String("123"),
         Expiration: &shared.UpdateCardExpiration{
-            Month: moov.String("01"),
-            Year: moov.String("21"),
+            Month: moovgo.String("01"),
+            Year: moovgo.String("21"),
         },
     }
-    accountID := "7e1858b6-a89f-4be3-a5aa-8e4824d0ab40"
-    cardID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    var accountID string = "f204e775-4c35-42ac-be54-077cabf6805c"
+    var cardID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
     res, err := s.Cards.Update(ctx, cardUpdateRequest, accountID, cardID)
@@ -579,29 +579,25 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     updateApplePayMerchantDomains := shared.UpdateApplePayMerchantDomains{
         AddDomains: []string{
-            "ipsam",
-            "sit",
+            "pay.classbooker.dev",
         },
         RemoveDomains: []string{
-            "quas",
-            "repudiandae",
-            "corporis",
+            "checkout.classbooker.dev",
         },
     }
-    accountID := "1862065e-904f-43b1-994b-8abf603a79f9"
+    var accountID string = "8073d21a-7f13-415c-bf5b-aa0e8c6d7b6b"
 
     ctx := context.Background()
     res, err := s.Cards.UpdateApplePayDomains(ctx, updateApplePayMerchantDomains, accountID)

@@ -1,7 +1,5 @@
 # IssuedCard
 
-Card created
-
 
 ## Fields
 
