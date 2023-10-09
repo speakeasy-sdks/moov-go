@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
@@ -28,6 +29,17 @@ type FullIssuedCard struct {
 	State *IssuedCardState `json:"state,omitempty"`
 	// Type of a Moov issued card
 	Type *IssuedCardType `json:"type,omitempty"`
+}
+
+func (f FullIssuedCard) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(f, "", false)
+}
+
+func (f *FullIssuedCard) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &f, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *FullIssuedCard) GetAuthorizationControls() *AuthorizationControls {

@@ -29,10 +29,13 @@ func (o *GetRefundRequest) GetTransferID() string {
 }
 
 type GetRefundResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// Refund details
-	GetRefund   *shared.GetRefund
-	StatusCode  int
+	GetRefund *shared.GetRefund
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

@@ -3,51 +3,51 @@
 
 ## Supported Types
 
-### PaymentMethodBankAccount
+### CreatedTransferOptionsDestinationOptionsBankAccount
 
 ```go
-createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsAchCreditSameDay(shared.PaymentMethodBankAccount{/* values here */})
+createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsAchCreditSameDay(shared.CreatedTransferOptionsDestinationOptionsBankAccount{/* values here */})
 ```
 
-### PaymentMethodBankAccount
+### CreatedTransferOptionsDestinationOptionsBankAccount
 
 ```go
-createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsAchCreditStandard(shared.PaymentMethodBankAccount{/* values here */})
+createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsAchCreditStandard(shared.CreatedTransferOptionsDestinationOptionsBankAccount{/* values here */})
 ```
 
-### PaymentMethodBankAccount
+### CreatedTransferOptionsDestinationOptionsBankAccount
 
 ```go
-createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsAchDebitCollect(shared.PaymentMethodBankAccount{/* values here */})
+createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsAchDebitCollect(shared.CreatedTransferOptionsDestinationOptionsBankAccount{/* values here */})
 ```
 
-### PaymentMethodBankAccount
+### CreatedTransferOptionsDestinationOptionsBankAccount
 
 ```go
-createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsAchDebitFund(shared.PaymentMethodBankAccount{/* values here */})
+createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsAchDebitFund(shared.CreatedTransferOptionsDestinationOptionsBankAccount{/* values here */})
 ```
 
-### PaymentMethodApplePay
+### CreatedTransferOptionsDestinationOptionsApplePay
 
 ```go
-createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsApplePay(shared.PaymentMethodApplePay{/* values here */})
+createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsApplePay(shared.CreatedTransferOptionsDestinationOptionsApplePay{/* values here */})
 ```
 
-### PaymentMethodCard
+### CreatedTransferOptionsDestinationOptionsCard
 
 ```go
-createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsCardPayment(shared.PaymentMethodCard{/* values here */})
+createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsCardPayment(shared.CreatedTransferOptionsDestinationOptionsCard{/* values here */})
 ```
 
-### PaymentMethodWallet
+### CreatedTransferOptionsDestinationOptionsWallet
 
 ```go
-createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsMoovWallet(shared.PaymentMethodWallet{/* values here */})
+createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsMoovWallet(shared.CreatedTransferOptionsDestinationOptionsWallet{/* values here */})
 ```
 
-### PaymentMethodBankAccount
+### CreatedTransferOptionsDestinationOptionsBankAccount
 
 ```go
-createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsRtpCredit(shared.PaymentMethodBankAccount{/* values here */})
+createdTransferOptionsDestinationOptions := shared.CreateCreatedTransferOptionsDestinationOptionsRtpCredit(shared.CreatedTransferOptionsDestinationOptionsBankAccount{/* values here */})
 ```
 

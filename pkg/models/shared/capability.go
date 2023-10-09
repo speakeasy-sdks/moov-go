@@ -3,11 +3,13 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
 // Capability - Describes an action or set of actions that an account is permitted to perform
 type Capability struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// ID of Account
 	AccountID *string `json:"accountID,omitempty"`
 	// ID of Capability
@@ -21,6 +23,24 @@ type Capability struct {
 	// The status of the capability requested for an account
 	Status    CapabilityStatus `json:"status"`
 	UpdatedOn time.Time        `json:"updatedOn"`
+}
+
+func (c Capability) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *Capability) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Capability) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *Capability) GetAccountID() *string {

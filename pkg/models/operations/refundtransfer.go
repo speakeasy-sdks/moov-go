@@ -46,13 +46,16 @@ func (o *RefundTransferRequest) GetXWaitFor() *shared.WaitFor {
 }
 
 type RefundTransferResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// A refund was successfully created but an error occurred while waiting for a synchronous response.
 	GetRefund *shared.GetRefund
 	// Successfully initiated a card refund
 	RefundPostResponse *shared.RefundPostResponse
-	StatusCode         int
-	RawResponse        *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 }
 
 func (o *RefundTransferResponse) GetContentType() string {

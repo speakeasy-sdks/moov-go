@@ -2,9 +2,32 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 type Phone struct {
-	CountryCode *string `json:"countryCode,omitempty"`
-	Number      *string `json:"number,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	CountryCode          *string                `json:"countryCode,omitempty"`
+	Number               *string                `json:"number,omitempty"`
+}
+
+func (p Phone) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *Phone) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Phone) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *Phone) GetCountryCode() *string {

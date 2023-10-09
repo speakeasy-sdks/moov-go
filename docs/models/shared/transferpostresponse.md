@@ -1,7 +1,5 @@
 # TransferPostResponse
 
-Successfully created a transfer
-
 
 ## Supported Types
 
@@ -11,9 +9,9 @@ Successfully created a transfer
 transferPostResponse := shared.CreateTransferPostResponseCreatedTransfer(shared.CreatedTransfer{/* values here */})
 ```
 
-### GetTransferFull
+### TransferPostResponseSynchronousTransferResponse
 
 ```go
-transferPostResponse := shared.CreateTransferPostResponseGetTransferFull(shared.GetTransferFull{/* values here */})
+transferPostResponse := shared.CreateTransferPostResponseTransferPostResponseSynchronousTransferResponse(shared.TransferPostResponseSynchronousTransferResponse{/* values here */})
 ```
 

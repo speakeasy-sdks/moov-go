@@ -1,4 +1,5 @@
 # Accounts
+(*Accounts*)
 
 ## Overview
 
@@ -31,23 +32,37 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     countries := shared.Countries{
+        AdditionalProperties: map[string]interface{}{
+            "by": "Northwest",
+        },
         Countries: []string{
-            "United States",
+            "U",
+            "n",
+            "i",
+            "t",
+            "e",
+            "d",
+            " ",
+            "S",
+            "t",
+            "a",
+            "t",
+            "e",
+            "s",
         },
     }
-    accountID := "92059293-96fe-4a75-96eb-10faaa2352c5"
+    var accountID string = "6841150c-bc74-4c84-a981-f74cfa3faf43"
 
     ctx := context.Background()
     res, err := s.Accounts.AssignCountry(ctx, countries, accountID)
@@ -87,124 +102,191 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Accounts.Create(ctx, shared.CreateAccountRequest{
+        AdditionalProperties: map[string]interface{}{
+            "online": "Configuration",
+        },
         AccountType: shared.AccountTypeBusiness,
         Capabilities: []shared.CapabilityID{
-            shared.CapabilityIDSendFunds,
-            shared.CapabilityIDSendFunds,
             shared.CapabilityIDCollectFunds,
         },
         CustomerSupport: &shared.CreateAccountRequestCustomerSupport{
+            AdditionalProperties: map[string]interface{}{
+                "innovative": "blue",
+            },
             Address: &shared.CreateAccountRequestCustomerSupportAddress{
-                AddressLine1: moov.String("123 Main Street"),
-                AddressLine2: moov.String("Apt 302"),
-                City: moov.String("Boulder"),
-                Country: moov.String("US"),
-                PostalCode: moov.String("80301"),
-                StateOrProvince: moov.String("CO"),
+                AdditionalProperties: map[string]interface{}{
+                    "shred": "abnormally",
+                },
+                AddressLine1: moovgo.String("123 Main Street"),
+                AddressLine2: moovgo.String("Apt 302"),
+                City: moovgo.String("Boulder"),
+                Country: moovgo.String("US"),
+                PostalCode: moovgo.String("80301"),
+                StateOrProvince: moovgo.String("CO"),
             },
-            Email: moov.String("amanda@classbooker.dev"),
+            Email: moovgo.String("amanda@classbooker.dev"),
             Phone: &shared.CreateAccountRequestCustomerSupportPhone{
-                CountryCode: moov.String("1"),
-                Number: moov.String("8185551212"),
+                AdditionalProperties: map[string]interface{}{
+                    "deposit": "evolve",
+                },
+                CountryCode: moovgo.String("1"),
+                Number: moovgo.String("8185551212"),
             },
-            Website: moov.String("www.wholebodyfitnessgym.com"),
+            Website: moovgo.String("www.wholebodyfitnessgym.com"),
         },
-        ForeignID: moov.String("4528aba-b9a1-11eb-8529-0242ac13003"),
+        ForeignID: moovgo.String("4528aba-b9a1-11eb-8529-0242ac13003"),
         Metadata: map[string]string{
-            "iure": "culpa",
+            "male": "SUV",
         },
         Mode: shared.ModeProduction.ToPointer(),
         Profile: shared.CreateProfile{
+            AdditionalProperties: map[string]interface{}{
+                "quantify": "Polestar",
+            },
             Business: &shared.CreateProfileBusiness{
+                AdditionalProperties: map[string]interface{}{
+                    "mobile": "National",
+                },
                 Address: &shared.CreateProfileBusinessAddress{
-                    AddressLine1: moov.String("123 Main Street"),
-                    AddressLine2: moov.String("Apt 302"),
-                    City: moov.String("Boulder"),
-                    Country: moov.String("US"),
-                    PostalCode: moov.String("80301"),
-                    StateOrProvince: moov.String("CO"),
+                    AdditionalProperties: map[string]interface{}{
+                        "Durham": "after",
+                    },
+                    AddressLine1: moovgo.String("123 Main Street"),
+                    AddressLine2: moovgo.String("Apt 302"),
+                    City: moovgo.String("Boulder"),
+                    Country: moovgo.String("US"),
+                    PostalCode: moovgo.String("80301"),
+                    StateOrProvince: moovgo.String("CO"),
                 },
                 BusinessType: shared.BusinessTypeLlc,
-                Description: moov.String("Local fitness center paying out instructors"),
-                DoingBusinessAs: moov.String("Whole Body Fitness"),
-                Email: moov.String("amanda@classbooker.dev"),
+                Description: moovgo.String("Local fitness center paying out instructors"),
+                DoingBusinessAs: moovgo.String("Whole Body Fitness"),
+                Email: moovgo.String("amanda@classbooker.dev"),
                 IndustryCodes: &shared.CreateProfileBusinessIndustryCodes{
-                    Mcc: moov.String("7997"),
-                    Naics: moov.String("713940"),
-                    Sic: moov.String("7991"),
+                    AdditionalProperties: map[string]interface{}{
+                        "overriding": "Bike",
+                    },
+                    Mcc: moovgo.String("7997"),
+                    Naics: moovgo.String("713940"),
+                    Sic: moovgo.String("7991"),
                 },
                 LegalBusinessName: "Whole Body Fitness LLC",
                 Phone: &shared.CreateProfileBusinessPhone{
-                    CountryCode: moov.String("1"),
-                    Number: moov.String("8185551212"),
+                    AdditionalProperties: map[string]interface{}{
+                        "female": "Fiat",
+                    },
+                    CountryCode: moovgo.String("1"),
+                    Number: moovgo.String("8185551212"),
                 },
                 TaxID: &shared.CreateProfileBusinessTaxID{
+                    AdditionalProperties: map[string]interface{}{
+                        "easily": "Account",
+                    },
                     Ein: &shared.Ein{
-                        Number: moov.String("123-45-6789"),
+                        AdditionalProperties: map[string]interface{}{
+                            "Northwest": "Direct",
+                        },
+                        Number: moovgo.String("123-45-6789"),
                     },
                 },
-                Website: moov.String("www.wholebodyfitnessgym.com"),
+                Website: moovgo.String("www.wholebodyfitnessgym.com"),
             },
             Individual: &shared.CreateProfileIndividual{
+                AdditionalProperties: map[string]interface{}{
+                    "metrics": "Southfield",
+                },
                 Address: &shared.CreateProfileIndividualAddress{
-                    AddressLine1: moov.String("123 Main Street"),
-                    AddressLine2: moov.String("Apt 302"),
-                    City: moov.String("Boulder"),
-                    Country: moov.String("US"),
-                    PostalCode: moov.String("80301"),
-                    StateOrProvince: moov.String("CO"),
+                    AdditionalProperties: map[string]interface{}{
+                        "Interactions": "Senior",
+                    },
+                    AddressLine1: moovgo.String("123 Main Street"),
+                    AddressLine2: moovgo.String("Apt 302"),
+                    City: moovgo.String("Boulder"),
+                    Country: moovgo.String("US"),
+                    PostalCode: moovgo.String("80301"),
+                    StateOrProvince: moovgo.String("CO"),
                 },
                 BirthDate: &shared.CreateProfileIndividualBirthDate{
+                    AdditionalProperties: map[string]interface{}{
+                        "Mouse": "West",
+                    },
                     Day: 9,
                     Month: 11,
                     Year: 1989,
                 },
-                Email: moov.String("amanda@classbooker.dev"),
+                Email: moovgo.String("amanda@classbooker.dev"),
                 GovernmentID: &shared.CreateProfileIndividualGovernmentID{
+                    AdditionalProperties: map[string]interface{}{
+                        "array": "Edinburg",
+                    },
                     Itin: &shared.CreateProfileIndividualGovernmentIDItin{
-                        Full: moov.String("123-45-6789"),
-                        LastFour: moov.String("6789"),
+                        AdditionalProperties: map[string]interface{}{
+                            "Investor": "transmit",
+                        },
+                        Full: moovgo.String("123-45-6789"),
+                        LastFour: moovgo.String("6789"),
                     },
                     Ssn: &shared.CreateProfileIndividualGovernmentIDSsn{
-                        Full: moov.String("123-45-6789"),
-                        LastFour: moov.String("6789"),
+                        AdditionalProperties: map[string]interface{}{
+                            "likewise": "payment",
+                        },
+                        Full: moovgo.String("123-45-6789"),
+                        LastFour: moovgo.String("6789"),
                     },
                 },
                 Name: shared.Name{
-                    FirstName: moov.String("Amanda"),
-                    LastName: moov.String("Yang"),
-                    MiddleName: moov.String("Amanda"),
-                    Suffix: moov.String("Jr"),
+                    AdditionalProperties: map[string]interface{}{
+                        "1080p": "Rubber",
+                    },
+                    FirstName: moovgo.String("Amanda"),
+                    LastName: moovgo.String("Yang"),
+                    MiddleName: moovgo.String("Amanda"),
+                    Suffix: moovgo.String("Jr"),
                 },
                 Phone: &shared.CreateProfileIndividualPhone{
-                    CountryCode: moov.String("1"),
-                    Number: moov.String("8185551212"),
+                    AdditionalProperties: map[string]interface{}{
+                        "silver": "Indiana",
+                    },
+                    CountryCode: moovgo.String("1"),
+                    Number: moovgo.String("8185551212"),
                 },
             },
         },
         Settings: &shared.CreateAccountRequestSettings{
+            AdditionalProperties: map[string]interface{}{
+                "male": "mmm",
+            },
             AchPayment: &shared.CreateAccountRequestSettingsAchPayment{
-                CompanyName: moov.String("Whole Body Fitness"),
+                AdditionalProperties: map[string]interface{}{
+                    "lavender": "City",
+                },
+                CompanyName: moovgo.String("Whole Body Fitness"),
             },
             CardPayment: &shared.CreateAccountRequestSettingsCardPayment{
-                StatementDescriptor: moov.String("Whole Body Fitness"),
+                AdditionalProperties: map[string]interface{}{
+                    "meanwhile": "incompatible",
+                },
+                StatementDescriptor: moovgo.String("Whole Body Fitness"),
             },
         },
         TermsOfService: &shared.CreateAccountRequestTermsOfService{
-            Token: moov.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
+            AdditionalProperties: map[string]interface{}{
+                "overhang": "Electronic",
+            },
+            Token: moovgo.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
         },
     })
     if err != nil {
@@ -242,18 +324,17 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "ff1a3a2f-a946-4773-9251-aa52c3f5ad01"
+    var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
     ctx := context.Background()
     res, err := s.Accounts.Get(ctx, accountID)
@@ -292,14 +373,14 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
@@ -345,28 +426,22 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.Accounts.List(ctx, operations.ListAccountsRequest{
-        Count: moov.Int64(622846),
-        Email: moov.String("Margie_Boyer87@hotmail.com"),
-        ForeignID: moov.String("4528aba-b9a1-11eb-8529-0242ac13003"),
-        IncludeDisconnected: moov.Bool(false),
-        Name: moov.String("Miss Irma Wolff"),
-        Skip: moov.Int64(739264),
+        ForeignID: moovgo.String("4528aba-b9a1-11eb-8529-0242ac13003"),
         Type: shared.AccountTypeBusiness.ToPointer(),
-        VerificationStatus: shared.AccountVerificationStatusUnverified.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)
@@ -403,18 +478,17 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "074f1547-1b5e-46e1-bb99-d488e1e91e45"
+    var accountID string = "5694ddc2-a16c-425b-bd39-0a53b9fefa9b"
 
     ctx := context.Background()
     res, err := s.Accounts.ListCountries(ctx, accountID)
@@ -464,120 +538,187 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     patchAccountRequest := shared.PatchAccountRequest{
-        CustomerSupport: &shared.PatchAccountRequestCustomerSupport{
-            Address: &shared.PatchAccountRequestCustomerSupportAddress{
-                AddressLine1: moov.String("123 Main Street"),
-                AddressLine2: moov.String("Apt 302"),
-                City: moov.String("Boulder"),
-                Country: moov.String("US"),
-                PostalCode: moov.String("80301"),
-                StateOrProvince: moov.String("CO"),
-            },
-            Email: moov.String("amanda@classbooker.dev"),
-            Phone: &shared.PatchAccountRequestCustomerSupportPhone{
-                CountryCode: moov.String("1"),
-                Number: moov.String("8185551212"),
-            },
-            Website: moov.String("www.wholebodyfitnessgym.com"),
+        AdditionalProperties: map[string]interface{}{
+            "Van": "East",
         },
-        ForeignID: moov.String("4528aba-b9a1-11eb-8529-0242ac13003"),
+        CustomerSupport: &shared.PatchAccountRequestCustomerSupport{
+            AdditionalProperties: map[string]interface{}{
+                "male": "Metal",
+            },
+            Address: &shared.PatchAccountRequestCustomerSupportAddress{
+                AdditionalProperties: map[string]interface{}{
+                    "cheater": "Islands",
+                },
+                AddressLine1: moovgo.String("123 Main Street"),
+                AddressLine2: moovgo.String("Apt 302"),
+                City: moovgo.String("Boulder"),
+                Country: moovgo.String("US"),
+                PostalCode: moovgo.String("80301"),
+                StateOrProvince: moovgo.String("CO"),
+            },
+            Email: moovgo.String("amanda@classbooker.dev"),
+            Phone: &shared.PatchAccountRequestCustomerSupportPhone{
+                AdditionalProperties: map[string]interface{}{
+                    "online": "dynamic",
+                },
+                CountryCode: moovgo.String("1"),
+                Number: moovgo.String("8185551212"),
+            },
+            Website: moovgo.String("www.wholebodyfitnessgym.com"),
+        },
+        ForeignID: moovgo.String("4528aba-b9a1-11eb-8529-0242ac13003"),
         Metadata: map[string]string{
-            "est": "quibusdam",
+            "white": "bifurcated",
         },
         Profile: &shared.PatchAccountRequestProfile{
+            AdditionalProperties: map[string]interface{}{
+                "Forward": "syndicate",
+            },
             Business: &shared.PatchAccountRequestProfileBusiness{
+                AdditionalProperties: map[string]interface{}{
+                    "East": "Baht",
+                },
                 Address: &shared.PatchAccountRequestProfileBusinessAddress{
-                    AddressLine1: moov.String("123 Main Street"),
-                    AddressLine2: moov.String("Apt 302"),
-                    City: moov.String("Boulder"),
-                    Country: moov.String("US"),
-                    PostalCode: moov.String("80301"),
-                    StateOrProvince: moov.String("CO"),
+                    AdditionalProperties: map[string]interface{}{
+                        "Quality": "guestbook",
+                    },
+                    AddressLine1: moovgo.String("123 Main Street"),
+                    AddressLine2: moovgo.String("Apt 302"),
+                    City: moovgo.String("Boulder"),
+                    Country: moovgo.String("US"),
+                    PostalCode: moovgo.String("80301"),
+                    StateOrProvince: moovgo.String("CO"),
                 },
                 BusinessType: shared.PatchAccountRequestProfileBusinessBusinessTypeLlc.ToPointer(),
-                Description: moov.String("Local fitness center paying out instructors"),
-                DoingBusinessAs: moov.String("Whole Body Fitness"),
-                Email: moov.String("amanda@classbooker.dev"),
+                Description: moovgo.String("Local fitness center paying out instructors"),
+                DoingBusinessAs: moovgo.String("Whole Body Fitness"),
+                Email: moovgo.String("amanda@classbooker.dev"),
                 IndustryCodes: &shared.PatchAccountRequestProfileBusinessIndustryCodes{
-                    Mcc: moov.String("7997"),
-                    Naics: moov.String("713940"),
-                    Sic: moov.String("7991"),
+                    AdditionalProperties: map[string]interface{}{
+                        "driver": "users",
+                    },
+                    Mcc: moovgo.String("7997"),
+                    Naics: moovgo.String("713940"),
+                    Sic: moovgo.String("7991"),
                 },
-                LegalBusinessName: moov.String("Whole Body Fitness LLC"),
-                OwnersProvided: moov.Bool(false),
+                LegalBusinessName: moovgo.String("Whole Body Fitness LLC"),
                 Phone: &shared.PatchAccountRequestProfileBusinessPhone{
-                    CountryCode: moov.String("1"),
-                    Number: moov.String("8185551212"),
+                    AdditionalProperties: map[string]interface{}{
+                        "Sharable": "Division",
+                    },
+                    CountryCode: moovgo.String("1"),
+                    Number: moovgo.String("8185551212"),
                 },
                 TaxID: &shared.PatchAccountRequestProfileBusinessTaxID{
+                    AdditionalProperties: map[string]interface{}{
+                        "Northeast": "Wooden",
+                    },
                     Ein: &shared.Ein{
-                        Number: moov.String("123-45-6789"),
+                        AdditionalProperties: map[string]interface{}{
+                            "Internal": "invoice",
+                        },
+                        Number: moovgo.String("123-45-6789"),
                     },
                 },
-                Website: moov.String("www.wholebodyfitnessgym.com"),
+                Website: moovgo.String("www.wholebodyfitnessgym.com"),
             },
             Individual: &shared.PatchAccountRequestProfileIndividual{
+                AdditionalProperties: map[string]interface{}{
+                    "visionary": "Buckinghamshire",
+                },
                 Address: &shared.PatchAccountRequestProfileIndividualAddress{
-                    AddressLine1: moov.String("123 Main Street"),
-                    AddressLine2: moov.String("Apt 302"),
-                    City: moov.String("Boulder"),
-                    Country: moov.String("US"),
-                    PostalCode: moov.String("80301"),
-                    StateOrProvince: moov.String("CO"),
+                    AdditionalProperties: map[string]interface{}{
+                        "frictionless": "haptic",
+                    },
+                    AddressLine1: moovgo.String("123 Main Street"),
+                    AddressLine2: moovgo.String("Apt 302"),
+                    City: moovgo.String("Boulder"),
+                    Country: moovgo.String("US"),
+                    PostalCode: moovgo.String("80301"),
+                    StateOrProvince: moovgo.String("CO"),
                 },
                 BirthDate: &shared.PatchAccountRequestProfileIndividualBirthDate{
+                    AdditionalProperties: map[string]interface{}{
+                        "modulo": "Kia",
+                    },
                     Day: 9,
                     Month: 11,
                     Year: 1989,
                 },
-                Email: moov.String("amanda@classbooker.dev"),
+                Email: moovgo.String("amanda@classbooker.dev"),
                 GovernmentID: &shared.PatchAccountRequestProfileIndividualGovernmentID{
+                    AdditionalProperties: map[string]interface{}{
+                        "Turkish": "Avon",
+                    },
                     Itin: &shared.PatchAccountRequestProfileIndividualGovernmentIDItin{
-                        Full: moov.String("123-45-6789"),
-                        LastFour: moov.String("6789"),
+                        AdditionalProperties: map[string]interface{}{
+                            "Ranch": "hack",
+                        },
+                        Full: moovgo.String("123-45-6789"),
+                        LastFour: moovgo.String("6789"),
                     },
                     Ssn: &shared.PatchAccountRequestProfileIndividualGovernmentIDSsn{
-                        Full: moov.String("123-45-6789"),
-                        LastFour: moov.String("6789"),
+                        AdditionalProperties: map[string]interface{}{
+                            "Rubber": "absolve",
+                        },
+                        Full: moovgo.String("123-45-6789"),
+                        LastFour: moovgo.String("6789"),
                     },
                 },
                 Name: &shared.PatchAccountRequestProfileIndividualName{
-                    FirstName: moov.String("Amanda"),
-                    LastName: moov.String("Yang"),
-                    MiddleName: moov.String("Amanda"),
-                    Suffix: moov.String("Jr"),
+                    AdditionalProperties: map[string]interface{}{
+                        "West": "North",
+                    },
+                    FirstName: moovgo.String("Amanda"),
+                    LastName: moovgo.String("Yang"),
+                    MiddleName: moovgo.String("Amanda"),
+                    Suffix: moovgo.String("Jr"),
                 },
                 Phone: &shared.PatchAccountRequestProfileIndividualPhone{
-                    CountryCode: moov.String("1"),
-                    Number: moov.String("8185551212"),
+                    AdditionalProperties: map[string]interface{}{
+                        "quisquam": "Pickup",
+                    },
+                    CountryCode: moovgo.String("1"),
+                    Number: moovgo.String("8185551212"),
                 },
             },
         },
         Settings: &shared.PatchAccountRequestSettings{
+            AdditionalProperties: map[string]interface{}{
+                "Ergonomic": "Money",
+            },
             AchPayment: &shared.PatchAccountRequestSettingsAchPayment{
-                CompanyName: moov.String("Whole Body Fitness"),
+                AdditionalProperties: map[string]interface{}{
+                    "male": "Account",
+                },
+                CompanyName: moovgo.String("Whole Body Fitness"),
             },
             CardPayment: &shared.PatchAccountRequestSettingsCardPayment{
-                StatementDescriptor: moov.String("Whole Body Fitness"),
+                AdditionalProperties: map[string]interface{}{
+                    "Latvian": "ew",
+                },
+                StatementDescriptor: moovgo.String("Whole Body Fitness"),
             },
         },
         TermsOfService: &shared.PatchAccountRequestTermsOfService{
-            Token: moov.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
+            AdditionalProperties: map[string]interface{}{
+                "global": "squat",
+            },
+            Token: moovgo.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
         },
     }
-    accountID := "2abd4426-9802-4d50-aa94-bb4f63c969e9"
+    var accountID string = "9aedfb53-dab3-4841-b551-ac2341550f69"
 
     ctx := context.Background()
     res, err := s.Accounts.Update(ctx, patchAccountRequest, accountID)

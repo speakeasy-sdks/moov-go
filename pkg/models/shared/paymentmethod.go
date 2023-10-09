@@ -3,11 +3,577 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
+
+// PaymentMethodApplePayApplePay - Describes an Apple Pay token on a Moov account.
+type PaymentMethodApplePayApplePay struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	// The card brand
+	Brand *CardBrand `json:"brand,omitempty"`
+	// User-friendly name of the tokenized card returned by Apple.
+	// It usually contains the brand and the last four digits of the underlying card for example, "Visa 1256".
+	// There is no standard format.
+	//
+	CardDisplayName *string `json:"cardDisplayName,omitempty"`
+	// The type of the card
+	CardType *CardType `json:"cardType,omitempty"`
+	// The last four digits of the Apple Pay token, which may differ from the tokenized card's last four digits
+	DynamicLastFour *string `json:"dynamicLastFour,omitempty"`
+	// The expiration date of the linked card or token
+	Expiration *CardExpiration `json:"expiration,omitempty"`
+	// Uniquely identifies a linked payment card or token.
+	// For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
+	// This field can be used to identify specific payment methods across multiple accounts on your platform.
+	//
+	Fingerprint *string `json:"fingerprint,omitempty"`
+}
+
+func (p PaymentMethodApplePayApplePay) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentMethodApplePayApplePay) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentMethodApplePayApplePay) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
+}
+
+func (o *PaymentMethodApplePayApplePay) GetBrand() *CardBrand {
+	if o == nil {
+		return nil
+	}
+	return o.Brand
+}
+
+func (o *PaymentMethodApplePayApplePay) GetCardDisplayName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CardDisplayName
+}
+
+func (o *PaymentMethodApplePayApplePay) GetCardType() *CardType {
+	if o == nil {
+		return nil
+	}
+	return o.CardType
+}
+
+func (o *PaymentMethodApplePayApplePay) GetDynamicLastFour() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DynamicLastFour
+}
+
+func (o *PaymentMethodApplePayApplePay) GetExpiration() *CardExpiration {
+	if o == nil {
+		return nil
+	}
+	return o.Expiration
+}
+
+func (o *PaymentMethodApplePayApplePay) GetFingerprint() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Fingerprint
+}
+
+// PaymentMethodApplePay - A method of moving money using an Apple Pay token.
+type PaymentMethodApplePay struct {
+	AdditionalProperties map[string]interface{}         `additionalProperties:"true" json:"-"`
+	ApplePay             *PaymentMethodApplePayApplePay `json:"applePay,omitempty"`
+	// UUID v4
+	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
+	// The payment method type that represents a payment rail and directionality
+	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
+}
+
+func (p PaymentMethodApplePay) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentMethodApplePay) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentMethodApplePay) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
+}
+
+func (o *PaymentMethodApplePay) GetApplePay() *PaymentMethodApplePayApplePay {
+	if o == nil {
+		return nil
+	}
+	return o.ApplePay
+}
+
+func (o *PaymentMethodApplePay) GetPaymentMethodID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentMethodID
+}
+
+func (o *PaymentMethodApplePay) GetPaymentMethodType() *PaymentMethodsType {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentMethodType
+}
+
+// PaymentMethodCardCard - Describes a card on a Moov account
+type PaymentMethodCardCard struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	BillingAddress       *Address               `json:"billingAddress,omitempty"`
+	Bin                  *string                `json:"bin,omitempty"`
+	// The card brand
+	Brand *CardBrand `json:"brand,omitempty"`
+	// The results of the most recent card update request
+	CardAccountUpdater *CardAccountUpdater `json:"cardAccountUpdater,omitempty"`
+	// UUID v4
+	CardID *string `json:"cardID,omitempty"`
+	// Indicates cardholder has authorized card to be stored for future payments
+	CardOnFile *bool `default:"false" json:"cardOnFile"`
+	// The type of the card
+	CardType *CardType `json:"cardType,omitempty"`
+	// The results of submitting cardholder data to a card network for verification
+	CardVerification *CardVerifications `json:"cardVerification,omitempty"`
+	// The expiration date of the linked card or token
+	Expiration *CardExpiration `json:"expiration,omitempty"`
+	// Uniquely identifies a linked payment card or token.
+	// For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
+	// This field can be used to identify specific payment methods across multiple accounts on your platform.
+	//
+	Fingerprint        *string `json:"fingerprint,omitempty"`
+	HolderName         *string `json:"holderName,omitempty"`
+	Issuer             *string `json:"issuer,omitempty"`
+	IssuerCountry      *string `json:"issuerCountry,omitempty"`
+	LastFourCardNumber *string `json:"lastFourCardNumber,omitempty"`
+	// Moov account ID of the merchant or entity authorized to store the card. Defaults to your platform account ID if cardOnFile is set to true and no other account is provided
+	MerchantAccountID *string `json:"merchantAccountID,omitempty"`
+}
+
+func (p PaymentMethodCardCard) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentMethodCardCard) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentMethodCardCard) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
+}
+
+func (o *PaymentMethodCardCard) GetBillingAddress() *Address {
+	if o == nil {
+		return nil
+	}
+	return o.BillingAddress
+}
+
+func (o *PaymentMethodCardCard) GetBin() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Bin
+}
+
+func (o *PaymentMethodCardCard) GetBrand() *CardBrand {
+	if o == nil {
+		return nil
+	}
+	return o.Brand
+}
+
+func (o *PaymentMethodCardCard) GetCardAccountUpdater() *CardAccountUpdater {
+	if o == nil {
+		return nil
+	}
+	return o.CardAccountUpdater
+}
+
+func (o *PaymentMethodCardCard) GetCardID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CardID
+}
+
+func (o *PaymentMethodCardCard) GetCardOnFile() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.CardOnFile
+}
+
+func (o *PaymentMethodCardCard) GetCardType() *CardType {
+	if o == nil {
+		return nil
+	}
+	return o.CardType
+}
+
+func (o *PaymentMethodCardCard) GetCardVerification() *CardVerifications {
+	if o == nil {
+		return nil
+	}
+	return o.CardVerification
+}
+
+func (o *PaymentMethodCardCard) GetExpiration() *CardExpiration {
+	if o == nil {
+		return nil
+	}
+	return o.Expiration
+}
+
+func (o *PaymentMethodCardCard) GetFingerprint() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Fingerprint
+}
+
+func (o *PaymentMethodCardCard) GetHolderName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.HolderName
+}
+
+func (o *PaymentMethodCardCard) GetIssuer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Issuer
+}
+
+func (o *PaymentMethodCardCard) GetIssuerCountry() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IssuerCountry
+}
+
+func (o *PaymentMethodCardCard) GetLastFourCardNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LastFourCardNumber
+}
+
+func (o *PaymentMethodCardCard) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
+// PaymentMethodCard - A method of moving money that is a credit or debit card
+type PaymentMethodCard struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Card                 *PaymentMethodCardCard `json:"card,omitempty"`
+	// UUID v4
+	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
+	// The payment method type that represents a payment rail and directionality
+	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
+}
+
+func (p PaymentMethodCard) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentMethodCard) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentMethodCard) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
+}
+
+func (o *PaymentMethodCard) GetCard() *PaymentMethodCardCard {
+	if o == nil {
+		return nil
+	}
+	return o.Card
+}
+
+func (o *PaymentMethodCard) GetPaymentMethodID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentMethodID
+}
+
+func (o *PaymentMethodCard) GetPaymentMethodType() *PaymentMethodsType {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentMethodType
+}
+
+// PaymentMethodBankAccountBankAccount - Describes a bank account on a Moov account.
+type PaymentMethodBankAccountBankAccount struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	// UUID v4
+	BankAccountID *string `json:"bankAccountID,omitempty"`
+	// The bank account type
+	BankAccountType *BankAccountType `json:"bankAccountType,omitempty"`
+	BankName        *string          `json:"bankName,omitempty"`
+	// Once the bank account is linked, we don't reveal the full bank account number. The fingerprint acts as a way to identify whether two linked bank accounts are the same.
+	Fingerprint *string `json:"fingerprint,omitempty"`
+	HolderName  *string `json:"holderName,omitempty"`
+	// The type of holder on a funding source
+	HolderType            *HolderType `json:"holderType,omitempty"`
+	LastFourAccountNumber *string     `json:"lastFourAccountNumber,omitempty"`
+	RoutingNumber         *string     `json:"routingNumber,omitempty"`
+	// The bank account status
+	Status *BankAccountStatus `json:"status,omitempty"`
+}
+
+func (p PaymentMethodBankAccountBankAccount) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentMethodBankAccountBankAccount) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentMethodBankAccountBankAccount) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
+}
+
+func (o *PaymentMethodBankAccountBankAccount) GetBankAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BankAccountID
+}
+
+func (o *PaymentMethodBankAccountBankAccount) GetBankAccountType() *BankAccountType {
+	if o == nil {
+		return nil
+	}
+	return o.BankAccountType
+}
+
+func (o *PaymentMethodBankAccountBankAccount) GetBankName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BankName
+}
+
+func (o *PaymentMethodBankAccountBankAccount) GetFingerprint() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Fingerprint
+}
+
+func (o *PaymentMethodBankAccountBankAccount) GetHolderName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.HolderName
+}
+
+func (o *PaymentMethodBankAccountBankAccount) GetHolderType() *HolderType {
+	if o == nil {
+		return nil
+	}
+	return o.HolderType
+}
+
+func (o *PaymentMethodBankAccountBankAccount) GetLastFourAccountNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LastFourAccountNumber
+}
+
+func (o *PaymentMethodBankAccountBankAccount) GetRoutingNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RoutingNumber
+}
+
+func (o *PaymentMethodBankAccountBankAccount) GetStatus() *BankAccountStatus {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+// PaymentMethodBankAccount - A method of moving money that is a bank account
+type PaymentMethodBankAccount struct {
+	AdditionalProperties map[string]interface{}               `additionalProperties:"true" json:"-"`
+	BankAccount          *PaymentMethodBankAccountBankAccount `json:"bankAccount,omitempty"`
+	// UUID v4
+	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
+	// The payment method type that represents a payment rail and directionality
+	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
+}
+
+func (p PaymentMethodBankAccount) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentMethodBankAccount) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentMethodBankAccount) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
+}
+
+func (o *PaymentMethodBankAccount) GetBankAccount() *PaymentMethodBankAccountBankAccount {
+	if o == nil {
+		return nil
+	}
+	return o.BankAccount
+}
+
+func (o *PaymentMethodBankAccount) GetPaymentMethodID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentMethodID
+}
+
+func (o *PaymentMethodBankAccount) GetPaymentMethodType() *PaymentMethodsType {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentMethodType
+}
+
+// PaymentMethodWalletWallet - A Moov wallet to store funds for transfers.
+type PaymentMethodWalletWallet struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	// UUID v4
+	WalletID *string `json:"walletID,omitempty"`
+}
+
+func (p PaymentMethodWalletWallet) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentMethodWalletWallet) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentMethodWalletWallet) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
+}
+
+func (o *PaymentMethodWalletWallet) GetWalletID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.WalletID
+}
+
+// PaymentMethodWallet - A method of moving money that is a Moov wallet
+type PaymentMethodWallet struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	// UUID v4
+	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
+	// The payment method type that represents a payment rail and directionality
+	PaymentMethodType *PaymentMethodsType        `json:"paymentMethodType,omitempty"`
+	Wallet            *PaymentMethodWalletWallet `json:"wallet,omitempty"`
+}
+
+func (p PaymentMethodWallet) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentMethodWallet) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentMethodWallet) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
+}
+
+func (o *PaymentMethodWallet) GetPaymentMethodID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentMethodID
+}
+
+func (o *PaymentMethodWallet) GetPaymentMethodType() *PaymentMethodsType {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentMethodType
+}
+
+func (o *PaymentMethodWallet) GetWallet() *PaymentMethodWalletWallet {
+	if o == nil {
+		return nil
+	}
+	return o.Wallet
+}
 
 type PaymentMethodType string
 
@@ -120,7 +686,6 @@ func CreatePaymentMethodRtpCredit(rtpCredit PaymentMethodBankAccount) PaymentMet
 }
 
 func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	type discriminator struct {
 		PaymentMethodType string
@@ -133,9 +698,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 
 	switch dis.PaymentMethodType {
 	case "ach-credit-same-day":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := d.Decode(&paymentMethodBankAccount); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -143,9 +707,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeAchCreditSameDay
 		return nil
 	case "ach-credit-standard":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := d.Decode(&paymentMethodBankAccount); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -153,9 +716,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeAchCreditStandard
 		return nil
 	case "ach-debit-collect":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := d.Decode(&paymentMethodBankAccount); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -163,9 +725,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeAchDebitCollect
 		return nil
 	case "ach-debit-fund":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := d.Decode(&paymentMethodBankAccount); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -173,9 +734,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeAchDebitFund
 		return nil
 	case "apple-pay":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodApplePay := new(PaymentMethodApplePay)
-		if err := d.Decode(&paymentMethodApplePay); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodApplePay, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -183,9 +743,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeApplePay
 		return nil
 	case "card-payment":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodCard := new(PaymentMethodCard)
-		if err := d.Decode(&paymentMethodCard); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodCard, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -193,9 +752,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeCardPayment
 		return nil
 	case "moov-wallet":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodWallet := new(PaymentMethodWallet)
-		if err := d.Decode(&paymentMethodWallet); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodWallet, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -203,9 +761,8 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 		u.Type = PaymentMethodTypeMoovWallet
 		return nil
 	case "rtp-credit":
-		d = json.NewDecoder(bytes.NewReader(data))
 		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := d.Decode(&paymentMethodBankAccount); err != nil {
+		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -219,20 +776,20 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 
 func (u PaymentMethod) MarshalJSON() ([]byte, error) {
 	if u.PaymentMethodWallet != nil {
-		return json.Marshal(u.PaymentMethodWallet)
+		return utils.MarshalJSON(u.PaymentMethodWallet, "", true)
 	}
 
 	if u.PaymentMethodBankAccount != nil {
-		return json.Marshal(u.PaymentMethodBankAccount)
+		return utils.MarshalJSON(u.PaymentMethodBankAccount, "", true)
 	}
 
 	if u.PaymentMethodCard != nil {
-		return json.Marshal(u.PaymentMethodCard)
+		return utils.MarshalJSON(u.PaymentMethodCard, "", true)
 	}
 
 	if u.PaymentMethodApplePay != nil {
-		return json.Marshal(u.PaymentMethodApplePay)
+		return utils.MarshalJSON(u.PaymentMethodApplePay, "", true)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
 }

@@ -2,10 +2,33 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // EnrichedIndustryCodes - Describes industry specific identifiers
 type EnrichedIndustryCodes struct {
-	Naics *string `json:"naics,omitempty"`
-	Sic   *string `json:"sic,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Naics                *string                `json:"naics,omitempty"`
+	Sic                  *string                `json:"sic,omitempty"`
+}
+
+func (e EnrichedIndustryCodes) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EnrichedIndustryCodes) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *EnrichedIndustryCodes) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *EnrichedIndustryCodes) GetNaics() *string {

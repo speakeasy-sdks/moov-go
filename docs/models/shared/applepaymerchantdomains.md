@@ -1,7 +1,5 @@
 # ApplePayMerchantDomains
 
-Domains registered with Apple Pay
-
 
 ## Fields
 
@@ -10,5 +8,5 @@ Domains registered with Apple Pay
 | `AccountID`                                                                               | **string*                                                                                 | :heavy_minus_sign:                                                                        | ID of Account                                                                             |                                                                                           |
 | `CreatedOn`                                                                               | [*time.Time](https://pkg.go.dev/time#Time)                                                | :heavy_minus_sign:                                                                        | N/A                                                                                       |                                                                                           |
 | `DisplayName`                                                                             | **string*                                                                                 | :heavy_minus_sign:                                                                        | A string of 64 or fewer UTF-8 characters. Displayed in the Buy button.<br/>               | Example Merchant                                                                          |
-| `Domains`                                                                                 | []*string*                                                                                | :heavy_minus_sign:                                                                        | A list of fully qualified top-level or sub-domain names where you will accept Apple Pay.<br/> |                                                                                           |
+| `Domains`                                                                                 | []*string*                                                                                | :heavy_minus_sign:                                                                        | A list of fully qualified top-level or sub-domain names where you will accept Apple Pay.<br/> | checkout.classbooker.dev                                                                  |
 | `UpdatedOn`                                                                               | [*time.Time](https://pkg.go.dev/time#Time)                                                | :heavy_minus_sign:                                                                        | N/A                                                                                       |                                                                                           |

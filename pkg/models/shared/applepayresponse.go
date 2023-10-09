@@ -2,8 +2,13 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // ApplePayResponse - Describes an Apple Pay token on a Moov account.
 type ApplePayResponse struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The card brand
 	Brand *CardBrand `json:"brand,omitempty"`
 	// User-friendly name of the tokenized card returned by Apple.
@@ -22,6 +27,24 @@ type ApplePayResponse struct {
 	// This field can be used to identify specific payment methods across multiple accounts on your platform.
 	//
 	Fingerprint *string `json:"fingerprint,omitempty"`
+}
+
+func (a ApplePayResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *ApplePayResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ApplePayResponse) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *ApplePayResponse) GetBrand() *CardBrand {

@@ -3,16 +3,36 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
 
 type RepresentativeAddress struct {
-	AddressLine1    *string `json:"addressLine1,omitempty"`
-	AddressLine2    *string `json:"addressLine2,omitempty"`
-	City            *string `json:"city,omitempty"`
-	Country         *string `json:"country,omitempty"`
-	PostalCode      *string `json:"postalCode,omitempty"`
-	StateOrProvince *string `json:"stateOrProvince,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	AddressLine1         *string                `json:"addressLine1,omitempty"`
+	AddressLine2         *string                `json:"addressLine2,omitempty"`
+	City                 *string                `json:"city,omitempty"`
+	Country              *string                `json:"country,omitempty"`
+	PostalCode           *string                `json:"postalCode,omitempty"`
+	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
+}
+
+func (r RepresentativeAddress) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RepresentativeAddress) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *RepresentativeAddress) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *RepresentativeAddress) GetAddressLine1() *string {
@@ -58,8 +78,27 @@ func (o *RepresentativeAddress) GetStateOrProvince() *string {
 }
 
 type RepresentativePhone struct {
-	CountryCode *string `json:"countryCode,omitempty"`
-	Number      *string `json:"number,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	CountryCode          *string                `json:"countryCode,omitempty"`
+	Number               *string                `json:"number,omitempty"`
+}
+
+func (r RepresentativePhone) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RepresentativePhone) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *RepresentativePhone) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *RepresentativePhone) GetCountryCode() *string {
@@ -78,25 +117,44 @@ func (o *RepresentativePhone) GetNumber() *string {
 
 // RepresentativeResponsibilities - Describes the job responsibilities of an individual
 type RepresentativeResponsibilities struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// Indicates whether this individual has significant management responsibilities within the business
-	IsController bool `json:"isController"`
+	IsController *bool `default:"false" json:"isController"`
 	// If `true`, this field indicates that this individual has an ownership stake of at least 25% in the business. If the representative does not own at least 25% of the business, this field should be `false`.
-	IsOwner  bool   `json:"isOwner"`
+	IsOwner  *bool  `default:"false" json:"isOwner"`
 	JobTitle string `json:"jobTitle"`
 	// The percentage of ownership this individual has in the business (required if `isOwner` is `true`)
 	OwnershipPercentage int64 `json:"ownershipPercentage"`
 }
 
-func (o *RepresentativeResponsibilities) GetIsController() bool {
+func (r RepresentativeResponsibilities) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RepresentativeResponsibilities) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *RepresentativeResponsibilities) GetAdditionalProperties() map[string]interface{} {
 	if o == nil {
-		return false
+		return nil
+	}
+	return o.AdditionalProperties
+}
+
+func (o *RepresentativeResponsibilities) GetIsController() *bool {
+	if o == nil {
+		return nil
 	}
 	return o.IsController
 }
 
-func (o *RepresentativeResponsibilities) GetIsOwner() bool {
+func (o *RepresentativeResponsibilities) GetIsOwner() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.IsOwner
 }
@@ -117,15 +175,16 @@ func (o *RepresentativeResponsibilities) GetOwnershipPercentage() int64 {
 
 // Representative - Describes a business representative
 type Representative struct {
-	Address *RepresentativeAddress `json:"address,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Address              *RepresentativeAddress `json:"address,omitempty"`
 	// Indicates whether this Representative's birth date has been provided
-	BirthDateProvided bool       `json:"birthDateProvided"`
+	BirthDateProvided *bool      `default:"false" json:"birthDateProvided"`
 	CreatedOn         time.Time  `json:"createdOn"`
 	DisabledOn        *time.Time `json:"disabledOn,omitempty"`
 	// Email Address
 	Email *string `json:"email,omitempty"`
 	// Indicates whether a government ID (SSN, ITIN, etc.) has been provided for this Representative
-	GovernmentIDProvided bool `json:"governmentIDProvided"`
+	GovernmentIDProvided *bool `default:"false" json:"governmentIDProvided"`
 	// Name for an individual
 	Name  Name                 `json:"name"`
 	Phone *RepresentativePhone `json:"phone,omitempty"`
@@ -135,6 +194,24 @@ type Representative struct {
 	UpdatedOn        time.Time                       `json:"updatedOn"`
 }
 
+func (r Representative) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *Representative) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Representative) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
+}
+
 func (o *Representative) GetAddress() *RepresentativeAddress {
 	if o == nil {
 		return nil
@@ -142,9 +219,9 @@ func (o *Representative) GetAddress() *RepresentativeAddress {
 	return o.Address
 }
 
-func (o *Representative) GetBirthDateProvided() bool {
+func (o *Representative) GetBirthDateProvided() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.BirthDateProvided
 }
@@ -170,9 +247,9 @@ func (o *Representative) GetEmail() *string {
 	return o.Email
 }
 
-func (o *Representative) GetGovernmentIDProvided() bool {
+func (o *Representative) GetGovernmentIDProvided() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.GovernmentIDProvided
 }

@@ -2,10 +2,33 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // EnrichmentProfile - Describes an enriched business profile
 type EnrichmentProfile struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// Describes a company
 	Business *EnrichedBusiness `json:"business,omitempty"`
+}
+
+func (e EnrichmentProfile) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EnrichmentProfile) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *EnrichmentProfile) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *EnrichmentProfile) GetBusiness() *EnrichedBusiness {

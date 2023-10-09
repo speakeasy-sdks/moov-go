@@ -2,12 +2,35 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 type AchLocation struct {
-	Address             *string `json:"address,omitempty"`
-	City                *string `json:"city,omitempty"`
-	PostalCode          *string `json:"postalCode,omitempty"`
-	PostalCodeExtension *string `json:"postalCodeExtension,omitempty"`
-	State               *string `json:"state,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Address              *string                `json:"address,omitempty"`
+	City                 *string                `json:"city,omitempty"`
+	PostalCode           *string                `json:"postalCode,omitempty"`
+	PostalCodeExtension  *string                `json:"postalCodeExtension,omitempty"`
+	State                *string                `json:"state,omitempty"`
+}
+
+func (a AchLocation) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AchLocation) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *AchLocation) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *AchLocation) GetAddress() *string {

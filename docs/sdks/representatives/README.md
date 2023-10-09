@@ -1,4 +1,5 @@
 # Representatives
+(*Representatives*)
 
 ## Overview
 
@@ -24,60 +25,86 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     createRepresentative := shared.CreateRepresentative{
+        AdditionalProperties: map[string]interface{}{
+            "online": "Configuration",
+        },
         Address: &shared.CreateRepresentativeAddress{
-            AddressLine1: moov.String("123 Main Street"),
-            AddressLine2: moov.String("Apt 302"),
-            City: moov.String("Boulder"),
-            Country: moov.String("US"),
-            PostalCode: moov.String("80301"),
-            StateOrProvince: moov.String("CO"),
+            AdditionalProperties: map[string]interface{}{
+                "Money": "blue",
+            },
+            AddressLine1: moovgo.String("123 Main Street"),
+            AddressLine2: moovgo.String("Apt 302"),
+            City: moovgo.String("Boulder"),
+            Country: moovgo.String("US"),
+            PostalCode: moovgo.String("80301"),
+            StateOrProvince: moovgo.String("CO"),
         },
         BirthDate: &shared.CreateRepresentativeBirthDate{
+            AdditionalProperties: map[string]interface{}{
+                "shred": "abnormally",
+            },
             Day: 9,
             Month: 11,
             Year: 1989,
         },
-        Email: moov.String("amanda@classbooker.dev"),
+        Email: moovgo.String("amanda@classbooker.dev"),
         GovernmentID: &shared.CreateRepresentativeGovernmentID{
+            AdditionalProperties: map[string]interface{}{
+                "deposit": "evolve",
+            },
             Itin: &shared.CreateRepresentativeGovernmentIDItin{
-                Full: moov.String("123-45-6789"),
-                LastFour: moov.String("6789"),
+                AdditionalProperties: map[string]interface{}{
+                    "male": "SUV",
+                },
+                Full: moovgo.String("123-45-6789"),
+                LastFour: moovgo.String("6789"),
             },
             Ssn: &shared.CreateRepresentativeGovernmentIDSsn{
-                Full: moov.String("123-45-6789"),
-                LastFour: moov.String("6789"),
+                AdditionalProperties: map[string]interface{}{
+                    "quantify": "Polestar",
+                },
+                Full: moovgo.String("123-45-6789"),
+                LastFour: moovgo.String("6789"),
             },
         },
         Name: &shared.CreateRepresentativeName{
+            AdditionalProperties: map[string]interface{}{
+                "mobile": "National",
+            },
             FirstName: "Amanda",
             LastName: "Yang",
-            MiddleName: moov.String("Amanda"),
-            Suffix: moov.String("Jr"),
+            MiddleName: moovgo.String("Amanda"),
+            Suffix: moovgo.String("Jr"),
         },
         Phone: &shared.CreateRepresentativePhone{
-            CountryCode: moov.String("1"),
-            Number: moov.String("8185551212"),
+            AdditionalProperties: map[string]interface{}{
+                "Durham": "after",
+            },
+            CountryCode: moovgo.String("1"),
+            Number: moovgo.String("8185551212"),
         },
         Responsibilities: &shared.CreateRepresentativeResponsibilities{
-            IsController: false,
-            IsOwner: true,
+            AdditionalProperties: map[string]interface{}{
+                "overriding": "Bike",
+            },
+            IsController: moovgo.Bool(false),
+            IsOwner: moovgo.Bool(true),
             JobTitle: "CEO",
             OwnershipPercentage: 38,
         },
     }
-    accountID := "312fde04-7717-478f-b61d-017476360a15"
+    var accountID string = "b1d5e261-915a-425d-8d9e-a1320e8504aa"
 
     ctx := context.Background()
     res, err := s.Representatives.Create(ctx, createRepresentative, accountID)
@@ -117,19 +144,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "db6a6606-59a1-4ade-aab5-851d6c645b08"
-    representativeID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    var accountID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
+    var representativeID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
     res, err := s.Representatives.Delete(ctx, accountID, representativeID)
@@ -169,19 +195,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "b61891ba-a0fe-41ad-a008-e6f8c5f350d8"
-    representativeID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+    var representativeID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
     res, err := s.Representatives.Get(ctx, accountID, representativeID)
@@ -221,18 +246,17 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
-    accountID := "cdb5a341-8143-4010-8218-13d5208ece7e"
+    var accountID string = "c184a429-302e-4aca-80db-f1718b882a50"
 
     ctx := context.Background()
     res, err := s.Representatives.List(ctx, accountID)
@@ -283,61 +307,87 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
     patchRepresentativeRequest := shared.PatchRepresentativeRequest{
+        AdditionalProperties: map[string]interface{}{
+            "Van": "East",
+        },
         Address: &shared.PatchRepresentativeRequestAddress{
-            AddressLine1: moov.String("123 Main Street"),
-            AddressLine2: moov.String("Apt 302"),
-            City: moov.String("Boulder"),
-            Country: moov.String("US"),
-            PostalCode: moov.String("80301"),
-            StateOrProvince: moov.String("CO"),
+            AdditionalProperties: map[string]interface{}{
+                "male": "Metal",
+            },
+            AddressLine1: moovgo.String("123 Main Street"),
+            AddressLine2: moovgo.String("Apt 302"),
+            City: moovgo.String("Boulder"),
+            Country: moovgo.String("US"),
+            PostalCode: moovgo.String("80301"),
+            StateOrProvince: moovgo.String("CO"),
         },
         BirthDate: &shared.PatchRepresentativeRequestBirthDate{
+            AdditionalProperties: map[string]interface{}{
+                "cheater": "Islands",
+            },
             Day: 9,
             Month: 11,
             Year: 1989,
         },
-        Email: moov.String("amanda@classbooker.dev"),
+        Email: moovgo.String("amanda@classbooker.dev"),
         GovernmentID: &shared.PatchRepresentativeRequestGovernmentID{
+            AdditionalProperties: map[string]interface{}{
+                "online": "dynamic",
+            },
             Itin: &shared.PatchRepresentativeRequestGovernmentIDItin{
-                Full: moov.String("123-45-6789"),
-                LastFour: moov.String("6789"),
+                AdditionalProperties: map[string]interface{}{
+                    "white": "bifurcated",
+                },
+                Full: moovgo.String("123-45-6789"),
+                LastFour: moovgo.String("6789"),
             },
             Ssn: &shared.PatchRepresentativeRequestGovernmentIDSsn{
-                Full: moov.String("123-45-6789"),
-                LastFour: moov.String("6789"),
+                AdditionalProperties: map[string]interface{}{
+                    "Forward": "syndicate",
+                },
+                Full: moovgo.String("123-45-6789"),
+                LastFour: moovgo.String("6789"),
             },
         },
         Name: &shared.PatchRepresentativeRequestName{
-            FirstName: moov.String("Amanda"),
-            LastName: moov.String("Yang"),
-            MiddleName: moov.String("Amanda"),
-            Suffix: moov.String("Jr"),
+            AdditionalProperties: map[string]interface{}{
+                "East": "Baht",
+            },
+            FirstName: moovgo.String("Amanda"),
+            LastName: moovgo.String("Yang"),
+            MiddleName: moovgo.String("Amanda"),
+            Suffix: moovgo.String("Jr"),
         },
         Phone: &shared.PatchRepresentativeRequestPhone{
-            CountryCode: moov.String("1"),
-            Number: moov.String("8185551212"),
+            AdditionalProperties: map[string]interface{}{
+                "Quality": "guestbook",
+            },
+            CountryCode: moovgo.String("1"),
+            Number: moovgo.String("8185551212"),
         },
         Responsibilities: &shared.PatchRepresentativeRequestResponsibilities{
-            IsController: moov.Bool(false),
-            IsOwner: moov.Bool(true),
-            JobTitle: moov.String("CEO"),
-            OwnershipPercentage: moov.Int64(38),
+            AdditionalProperties: map[string]interface{}{
+                "driver": "users",
+            },
+            IsController: moovgo.Bool(false),
+            IsOwner: moovgo.Bool(true),
+            JobTitle: moovgo.String("CEO"),
+            OwnershipPercentage: moovgo.Int64(38),
         },
     }
-    accountID := "253b6684-51c6-4c6e-a05e-16deab3fec95"
-    representativeID := "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+    var accountID string = "5ca71871-4355-4ad7-94e1-b584578f9d86"
+    var representativeID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
     res, err := s.Representatives.Update(ctx, patchRepresentativeRequest, accountID, representativeID)

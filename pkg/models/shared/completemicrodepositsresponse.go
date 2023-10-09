@@ -2,10 +2,32 @@
 
 package shared
 
-// CompleteMicroDepositsResponse - Micro-Deposits Successfully verified
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 type CompleteMicroDepositsResponse struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The micro-deposit status
 	Status *MicroDepositStatus `json:"status,omitempty"`
+}
+
+func (c CompleteMicroDepositsResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CompleteMicroDepositsResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CompleteMicroDepositsResponse) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *CompleteMicroDepositsResponse) GetStatus() *MicroDepositStatus {

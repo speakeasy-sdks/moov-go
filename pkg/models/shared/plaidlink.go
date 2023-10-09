@@ -2,10 +2,33 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // PlaidLink - This is used by Moov.js with a Plaid reseller relationship. Describes the account to link to the Moov account using a Plaid using a Plaid Public Token.
 type PlaidLink struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// This is used by Moov.js with a Plaid reseller relationship. The details of a Plaid link integration for a linked funding source. <br><br> `sandbox` - (requires Plaid Reseller setup with Moov) When linking a bank account to a `sandbox` account using a Plaid public token it will utilize Plaid's sandbox environment. The Plaid public token provided must be generated from Plaid's sandbox environment. Please see <a href="https://plaid.com/docs/api/sandbox/#sandboxpublic_tokencreate" target="_blank">Plaid's sandbox documentation</a> for more details.
 	PlaidLink *PlaidLinkIntegration `json:"plaidLink,omitempty"`
+}
+
+func (p PlaidLink) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PlaidLink) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PlaidLink) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *PlaidLink) GetPlaidLink() *PlaidLinkIntegration {

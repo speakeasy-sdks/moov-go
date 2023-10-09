@@ -1,4 +1,5 @@
 # AccessToken
+(*AccessToken*)
 
 ## Overview
 
@@ -24,24 +25,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
     res, err := s.AccessToken.Create(ctx, shared.ClientCredentialsGrantToAccessTokenRequest{
-        ClientID: moov.String("5clTR_MdVrrkgxw2"),
-        ClientSecret: moov.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
-        GrantType: shared.ClientCredentialsGrantToAccessTokenRequestGrantTypeRefreshToken,
-        RefreshToken: moov.String("i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6..."),
-        Scope: moov.String("/accounts.write"),
+        ClientID: moovgo.String("5clTR_MdVrrkgxw2"),
+        ClientSecret: moovgo.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
+        GrantType: shared.ClientCredentialsGrantToAccessTokenRequestGrantTypeClientCredentials,
+        RefreshToken: moovgo.String("i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6..."),
+        Scope: moovgo.String("/accounts.write"),
     })
     if err != nil {
         log.Fatal(err)
@@ -78,23 +79,25 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/moov-go"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
-    s := moov.New(
-        moov.WithSecurity(shared.Security{
-            AccessToken: moov.String(""),
+    s := moovgo.New(
+        moovgo.WithSecurity(shared.Security{
+            AccessToken: moovgo.String(""),
         }),
     )
 
     ctx := context.Background()
-    res, err := s.AccessToken.Revoke(ctx, shared.RevokeTokenRequest1{
-        ClientID: moov.String("5clTR_MdVrrkgxw2"),
-        ClientSecret: moov.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
+    res, err := s.AccessToken.Revoke(ctx, shared.RevokeTokenRequest{
+        AdditionalProperties: map[string]interface{}{
+            "severe": "Carson",
+        },
+        ClientID: moovgo.String("5clTR_MdVrrkgxw2"),
+        ClientSecret: moovgo.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
         Token: "i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6...",
-        TokenTypeHint: shared.RevokeTokenRequestTokenTypeHintAccessToken.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)
@@ -108,10 +111,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `request`                                                                | [shared.RevokeTokenRequest1](../../models/shared/revoketokenrequest1.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |
+| `request`                                                              | [shared.RevokeTokenRequest](../../models/shared/revoketokenrequest.md) | :heavy_check_mark:                                                     | The request object to use for the request.                             |
 
 
 ### Response

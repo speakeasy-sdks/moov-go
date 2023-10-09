@@ -2,11 +2,34 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // CardVerifications - The results of submitting cardholder data to a card network for verification
 type CardVerifications struct {
-	AddressLine1 *CardVerificationResult `json:"addressLine1,omitempty"`
-	Cvv          *CardVerificationResult `json:"cvv,omitempty"`
-	PostalCode   *CardVerificationResult `json:"postalCode,omitempty"`
+	AdditionalProperties map[string]interface{}  `additionalProperties:"true" json:"-"`
+	AddressLine1         *CardVerificationResult `json:"addressLine1,omitempty"`
+	Cvv                  *CardVerificationResult `json:"cvv,omitempty"`
+	PostalCode           *CardVerificationResult `json:"postalCode,omitempty"`
+}
+
+func (c CardVerifications) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CardVerifications) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CardVerifications) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *CardVerifications) GetAddressLine1() *CardVerificationResult {

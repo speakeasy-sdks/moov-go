@@ -2,8 +2,13 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 // GetTransferFullSourceDestinationApplePay - Describes an Apple Pay token on a Moov account.
 type GetTransferFullSourceDestinationApplePay struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The card brand
 	Brand *CardBrand `json:"brand,omitempty"`
 	// User-friendly name of the tokenized card returned by Apple.
@@ -22,6 +27,24 @@ type GetTransferFullSourceDestinationApplePay struct {
 	// This field can be used to identify specific payment methods across multiple accounts on your platform.
 	//
 	Fingerprint *string `json:"fingerprint,omitempty"`
+}
+
+func (g GetTransferFullSourceDestinationApplePay) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetTransferFullSourceDestinationApplePay) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GetTransferFullSourceDestinationApplePay) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *GetTransferFullSourceDestinationApplePay) GetBrand() *CardBrand {
@@ -68,6 +91,7 @@ func (o *GetTransferFullSourceDestinationApplePay) GetFingerprint() *string {
 
 // GetTransferFullSourceDestinationBankAccount - Describes a bank account on a Moov account.
 type GetTransferFullSourceDestinationBankAccount struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	BankAccountID *string `json:"bankAccountID,omitempty"`
 	// The bank account type
@@ -82,6 +106,24 @@ type GetTransferFullSourceDestinationBankAccount struct {
 	RoutingNumber         *string     `json:"routingNumber,omitempty"`
 	// The bank account status
 	Status *BankAccountStatus `json:"status,omitempty"`
+}
+
+func (g GetTransferFullSourceDestinationBankAccount) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetTransferFullSourceDestinationBankAccount) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GetTransferFullSourceDestinationBankAccount) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *GetTransferFullSourceDestinationBankAccount) GetBankAccountID() *string {
@@ -149,8 +191,9 @@ func (o *GetTransferFullSourceDestinationBankAccount) GetStatus() *BankAccountSt
 
 // GetTransferFullSourceDestinationCard - Describes a card on a Moov account
 type GetTransferFullSourceDestinationCard struct {
-	BillingAddress *Address `json:"billingAddress,omitempty"`
-	Bin            *string  `json:"bin,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	BillingAddress       *Address               `json:"billingAddress,omitempty"`
+	Bin                  *string                `json:"bin,omitempty"`
 	// The card brand
 	Brand *CardBrand `json:"brand,omitempty"`
 	// The results of the most recent card update request
@@ -158,7 +201,7 @@ type GetTransferFullSourceDestinationCard struct {
 	// UUID v4
 	CardID *string `json:"cardID,omitempty"`
 	// Indicates cardholder has authorized card to be stored for future payments
-	CardOnFile *bool `json:"cardOnFile,omitempty"`
+	CardOnFile *bool `default:"false" json:"cardOnFile"`
 	// The type of the card
 	CardType *CardType `json:"cardType,omitempty"`
 	// The results of submitting cardholder data to a card network for verification
@@ -176,6 +219,24 @@ type GetTransferFullSourceDestinationCard struct {
 	LastFourCardNumber *string `json:"lastFourCardNumber,omitempty"`
 	// Moov account ID of the merchant or entity authorized to store the card. Defaults to your platform account ID if cardOnFile is set to true and no other account is provided
 	MerchantAccountID *string `json:"merchantAccountID,omitempty"`
+}
+
+func (g GetTransferFullSourceDestinationCard) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetTransferFullSourceDestinationCard) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GetTransferFullSourceDestinationCard) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *GetTransferFullSourceDestinationCard) GetBillingAddress() *Address {
@@ -285,8 +346,27 @@ func (o *GetTransferFullSourceDestinationCard) GetMerchantAccountID() *string {
 
 // GetTransferFullSourceDestinationWallet - A Moov wallet to store funds for transfers.
 type GetTransferFullSourceDestinationWallet struct {
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	WalletID *string `json:"walletID,omitempty"`
+}
+
+func (g GetTransferFullSourceDestinationWallet) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetTransferFullSourceDestinationWallet) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GetTransferFullSourceDestinationWallet) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *GetTransferFullSourceDestinationWallet) GetWalletID() *string {

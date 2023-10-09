@@ -2,13 +2,36 @@
 
 package shared
 
+import (
+	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+)
+
 type ProfileBusinessAddress struct {
-	AddressLine1    *string `json:"addressLine1,omitempty"`
-	AddressLine2    *string `json:"addressLine2,omitempty"`
-	City            *string `json:"city,omitempty"`
-	Country         *string `json:"country,omitempty"`
-	PostalCode      *string `json:"postalCode,omitempty"`
-	StateOrProvince *string `json:"stateOrProvince,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	AddressLine1         *string                `json:"addressLine1,omitempty"`
+	AddressLine2         *string                `json:"addressLine2,omitempty"`
+	City                 *string                `json:"city,omitempty"`
+	Country              *string                `json:"country,omitempty"`
+	PostalCode           *string                `json:"postalCode,omitempty"`
+	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
+}
+
+func (p ProfileBusinessAddress) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *ProfileBusinessAddress) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ProfileBusinessAddress) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *ProfileBusinessAddress) GetAddressLine1() *string {
@@ -55,9 +78,28 @@ func (o *ProfileBusinessAddress) GetStateOrProvince() *string {
 
 // ProfileBusinessIndustryCodes - Describes industry specific identifiers
 type ProfileBusinessIndustryCodes struct {
-	Mcc   *string `json:"mcc,omitempty"`
-	Naics *string `json:"naics,omitempty"`
-	Sic   *string `json:"sic,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Mcc                  *string                `json:"mcc,omitempty"`
+	Naics                *string                `json:"naics,omitempty"`
+	Sic                  *string                `json:"sic,omitempty"`
+}
+
+func (p ProfileBusinessIndustryCodes) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *ProfileBusinessIndustryCodes) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ProfileBusinessIndustryCodes) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *ProfileBusinessIndustryCodes) GetMcc() *string {
@@ -82,8 +124,27 @@ func (o *ProfileBusinessIndustryCodes) GetSic() *string {
 }
 
 type ProfileBusinessPhone struct {
-	CountryCode *string `json:"countryCode,omitempty"`
-	Number      *string `json:"number,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	CountryCode          *string                `json:"countryCode,omitempty"`
+	Number               *string                `json:"number,omitempty"`
+}
+
+func (p ProfileBusinessPhone) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *ProfileBusinessPhone) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ProfileBusinessPhone) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *ProfileBusinessPhone) GetCountryCode() *string {
@@ -102,7 +163,8 @@ func (o *ProfileBusinessPhone) GetNumber() *string {
 
 // ProfileBusiness - Describes a business
 type ProfileBusiness struct {
-	Address *ProfileBusinessAddress `json:"address,omitempty"`
+	AdditionalProperties map[string]interface{}  `additionalProperties:"true" json:"-"`
+	Address              *ProfileBusinessAddress `json:"address,omitempty"`
 	// The type of entity represented by this Business
 	BusinessType    BusinessType `json:"businessType"`
 	Description     *string      `json:"description,omitempty"`
@@ -115,8 +177,26 @@ type ProfileBusiness struct {
 	Phone             *ProfileBusinessPhone         `json:"phone,omitempty"`
 	Representatives   []Representative              `json:"representatives,omitempty"`
 	// Indicates whether a tax ID has been provided for this Business
-	TaxIDProvided bool    `json:"taxIDProvided"`
+	TaxIDProvided *bool   `default:"false" json:"taxIDProvided"`
 	Website       *string `json:"website,omitempty"`
+}
+
+func (p ProfileBusiness) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *ProfileBusiness) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ProfileBusiness) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *ProfileBusiness) GetAddress() *ProfileBusinessAddress {
@@ -189,9 +269,9 @@ func (o *ProfileBusiness) GetRepresentatives() []Representative {
 	return o.Representatives
 }
 
-func (o *ProfileBusiness) GetTaxIDProvided() bool {
+func (o *ProfileBusiness) GetTaxIDProvided() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.TaxIDProvided
 }
@@ -204,12 +284,31 @@ func (o *ProfileBusiness) GetWebsite() *string {
 }
 
 type ProfileIndividualAddress struct {
-	AddressLine1    *string `json:"addressLine1,omitempty"`
-	AddressLine2    *string `json:"addressLine2,omitempty"`
-	City            *string `json:"city,omitempty"`
-	Country         *string `json:"country,omitempty"`
-	PostalCode      *string `json:"postalCode,omitempty"`
-	StateOrProvince *string `json:"stateOrProvince,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	AddressLine1         *string                `json:"addressLine1,omitempty"`
+	AddressLine2         *string                `json:"addressLine2,omitempty"`
+	City                 *string                `json:"city,omitempty"`
+	Country              *string                `json:"country,omitempty"`
+	PostalCode           *string                `json:"postalCode,omitempty"`
+	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
+}
+
+func (p ProfileIndividualAddress) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *ProfileIndividualAddress) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ProfileIndividualAddress) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *ProfileIndividualAddress) GetAddressLine1() *string {
@@ -255,8 +354,27 @@ func (o *ProfileIndividualAddress) GetStateOrProvince() *string {
 }
 
 type ProfileIndividualPhone struct {
-	CountryCode *string `json:"countryCode,omitempty"`
-	Number      *string `json:"number,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	CountryCode          *string                `json:"countryCode,omitempty"`
+	Number               *string                `json:"number,omitempty"`
+}
+
+func (p ProfileIndividualPhone) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *ProfileIndividualPhone) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ProfileIndividualPhone) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *ProfileIndividualPhone) GetCountryCode() *string {
@@ -275,16 +393,35 @@ func (o *ProfileIndividualPhone) GetNumber() *string {
 
 // ProfileIndividual - Describes an individual
 type ProfileIndividual struct {
-	Address *ProfileIndividualAddress `json:"address,omitempty"`
+	AdditionalProperties map[string]interface{}    `additionalProperties:"true" json:"-"`
+	Address              *ProfileIndividualAddress `json:"address,omitempty"`
 	// Indicates whether this Individual's birth date has been provided
-	BirthDateProvided bool `json:"birthDateProvided"`
+	BirthDateProvided *bool `default:"false" json:"birthDateProvided"`
 	// Email Address
 	Email *string `json:"email,omitempty"`
 	// Indicates whether a government ID (SSN, ITIN, etc.) has been provided for this Individual
-	GovernmentIDProvided bool `json:"governmentIDProvided"`
+	GovernmentIDProvided *bool `default:"false" json:"governmentIDProvided"`
 	// Name for an individual
 	Name  Name                    `json:"name"`
 	Phone *ProfileIndividualPhone `json:"phone,omitempty"`
+}
+
+func (p ProfileIndividual) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *ProfileIndividual) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ProfileIndividual) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *ProfileIndividual) GetAddress() *ProfileIndividualAddress {
@@ -294,9 +431,9 @@ func (o *ProfileIndividual) GetAddress() *ProfileIndividualAddress {
 	return o.Address
 }
 
-func (o *ProfileIndividual) GetBirthDateProvided() bool {
+func (o *ProfileIndividual) GetBirthDateProvided() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.BirthDateProvided
 }
@@ -308,9 +445,9 @@ func (o *ProfileIndividual) GetEmail() *string {
 	return o.Email
 }
 
-func (o *ProfileIndividual) GetGovernmentIDProvided() bool {
+func (o *ProfileIndividual) GetGovernmentIDProvided() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.GovernmentIDProvided
 }
@@ -331,8 +468,27 @@ func (o *ProfileIndividual) GetPhone() *ProfileIndividualPhone {
 
 // Profile - Describes a Moov Account Profile
 type Profile struct {
-	Business   *ProfileBusiness   `json:"business,omitempty"`
-	Individual *ProfileIndividual `json:"individual,omitempty"`
+	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+	Business             *ProfileBusiness       `json:"business,omitempty"`
+	Individual           *ProfileIndividual     `json:"individual,omitempty"`
+}
+
+func (p Profile) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *Profile) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Profile) GetAdditionalProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 func (o *Profile) GetBusiness() *ProfileBusiness {
