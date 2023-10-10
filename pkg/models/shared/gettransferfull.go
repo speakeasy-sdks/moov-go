@@ -9,29 +9,10 @@ import (
 
 // GetTransferFullDisputedAmount - A representation of money containing an integer value and it's currency.
 type GetTransferFullDisputedAmount struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// A 3-letter ISO 4217 currency code
 	Currency string `json:"currency"`
 	// Quantity in the smallest unit of the specified currency. In USD this is cents, so $12.04 is 1204 and $0.99 would be 99.
 	Value int64 `json:"value"`
-}
-
-func (g GetTransferFullDisputedAmount) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(g, "", false)
-}
-
-func (g *GetTransferFullDisputedAmount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *GetTransferFullDisputedAmount) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *GetTransferFullDisputedAmount) GetCurrency() string {
@@ -50,29 +31,10 @@ func (o *GetTransferFullDisputedAmount) GetValue() int64 {
 
 // GetTransferFullRefundedAmount - A representation of money containing an integer value and it's currency.
 type GetTransferFullRefundedAmount struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// A 3-letter ISO 4217 currency code
 	Currency string `json:"currency"`
 	// Quantity in the smallest unit of the specified currency. In USD this is cents, so $12.04 is 1204 and $0.99 would be 99.
 	Value int64 `json:"value"`
-}
-
-func (g GetTransferFullRefundedAmount) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(g, "", false)
-}
-
-func (g *GetTransferFullRefundedAmount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *GetTransferFullRefundedAmount) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *GetTransferFullRefundedAmount) GetCurrency() string {

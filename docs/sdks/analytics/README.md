@@ -37,11 +37,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Analytics.CountAccountsCreated(ctx, shared.TimeRange{
-        AdditionalProperties: map[string]interface{}{
-            "Buckinghamshire": "Pasadena",
-        },
-    })
+    res, err := s.Analytics.CountAccountsCreated(ctx, shared.TimeRange{})
     if err != nil {
         log.Fatal(err)
     }
@@ -89,11 +85,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Analytics.CountTransferStatuses(ctx, shared.TimeRange{
-        AdditionalProperties: map[string]interface{}{
-            "Health": "elf",
-        },
-    })
+    res, err := s.Analytics.CountTransferStatuses(ctx, shared.TimeRange{})
     if err != nil {
         log.Fatal(err)
     }
@@ -141,11 +133,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Analytics.LargestTransfer(ctx, shared.LimitedTimeRange{
-        AdditionalProperties: map[string]interface{}{
-            "Corporate": "Account",
-        },
-    })
+    res, err := s.Analytics.LargestTransfer(ctx, shared.LimitedTimeRange{})
     if err != nil {
         log.Fatal(err)
     }
@@ -193,11 +181,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Analytics.SmallestTransfer(ctx, shared.LimitedTimeRange{
-        AdditionalProperties: map[string]interface{}{
-            "North": "vastly",
-        },
-    })
+    res, err := s.Analytics.SmallestTransfer(ctx, shared.LimitedTimeRange{})
     if err != nil {
         log.Fatal(err)
     }
@@ -245,11 +229,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Analytics.SumTransfers(ctx, shared.TimeRange{
-        AdditionalProperties: map[string]interface{}{
-            "even": "maximize",
-        },
-    })
+    res, err := s.Analytics.SumTransfers(ctx, shared.TimeRange{})
     if err != nil {
         log.Fatal(err)
     }

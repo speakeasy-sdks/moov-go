@@ -2,34 +2,11 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // BirthDate - Birthdate for an individual
 type BirthDate struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Day                  int64                  `json:"day"`
-	Month                int64                  `json:"month"`
-	Year                 int64                  `json:"year"`
-}
-
-func (b BirthDate) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(b, "", false)
-}
-
-func (b *BirthDate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *BirthDate) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Day   int64 `json:"day"`
+	Month int64 `json:"month"`
+	Year  int64 `json:"year"`
 }
 
 func (o *BirthDate) GetDay() int64 {

@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 0311889a7ed4b464557a7a4f2b1e2c2e
   docVersion: 1.0.0
-  speakeasyVersion: 1.96.1
-  generationVersion: 2.150.0
+  speakeasyVersion: 1.97.0
+  generationVersion: 2.151.2
 generation:
   comments:
     disableComments: false
@@ -15,7 +15,6 @@ generation:
   telemetryEnabled: false
 features:
   go:
-    additionalProperties: 0.1.0
     constsAndDefaults: 0.1.1
     core: 2.91.4
     deprecations: 2.81.1
@@ -29,7 +28,7 @@ features:
     nameOverrides: 2.81.1
     unions: 2.83.1
 go:
-  version: 0.2.0
+  version: 0.2.1
   flattenGlobalSecurity: true
   maxMethodParams: 4
   packageName: github.com/speakeasy-sdks/moov-go

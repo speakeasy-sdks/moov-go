@@ -2,14 +2,9 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // EnrichedBusiness - Describes a company
 type EnrichedBusiness struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Address              *Address               `json:"address,omitempty"`
+	Address *Address `json:"address,omitempty"`
 	// Email Address
 	Email *string `json:"email,omitempty"`
 	// Describes industry specific identifiers
@@ -17,24 +12,6 @@ type EnrichedBusiness struct {
 	LegalBusinessName *string                `json:"legalBusinessName,omitempty"`
 	Phone             *Phone                 `json:"phone,omitempty"`
 	Website           *string                `json:"website,omitempty"`
-}
-
-func (e EnrichedBusiness) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(e, "", false)
-}
-
-func (e *EnrichedBusiness) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *EnrichedBusiness) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *EnrichedBusiness) GetAddress() *Address {

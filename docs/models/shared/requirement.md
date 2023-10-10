@@ -7,6 +7,5 @@ Represents individual and business data necessary to facilitate the enabling of 
 
 | Field                                                         | Type                                                          | Required                                                      | Description                                                   |
 | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| `AdditionalProperties`                                        | map[string]*interface{}*                                      | :heavy_minus_sign:                                            | N/A                                                           |
 | `CurrentlyDue`                                                | [][RequirementID](../../models/shared/requirementid.md)       | :heavy_minus_sign:                                            | N/A                                                           |
 | `Errors`                                                      | [][RequirementError](../../models/shared/requirementerror.md) | :heavy_minus_sign:                                            | N/A                                                           |

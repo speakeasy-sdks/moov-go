@@ -2,33 +2,10 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // Requirement - Represents individual and business data necessary to facilitate the enabling of a capability for an account
 type Requirement struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	CurrentlyDue         []RequirementID        `json:"currentlyDue,omitempty"`
-	Errors               []RequirementError     `json:"errors,omitempty"`
-}
-
-func (r Requirement) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(r, "", false)
-}
-
-func (r *Requirement) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *Requirement) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	CurrentlyDue []RequirementID    `json:"currentlyDue,omitempty"`
+	Errors       []RequirementError `json:"errors,omitempty"`
 }
 
 func (o *Requirement) GetCurrentlyDue() []RequirementID {

@@ -8,7 +8,6 @@ import (
 
 // CardUpdateRequest - Describes properties of a card to update
 type CardUpdateRequest struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// Provide address fields as necessary to patch the currently saved address.
 	// Omit any fields that should not be changed.
 	//
@@ -34,13 +33,6 @@ func (c *CardUpdateRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *CardUpdateRequest) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CardUpdateRequest) GetBillingAddress() *UpdateAddress {

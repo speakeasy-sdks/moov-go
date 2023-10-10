@@ -7,7 +7,6 @@ Specify a time range between two timestamps and then the interval duration for e
 
 | Field                                      | Type                                       | Required                                   | Description                                |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| `AdditionalProperties`                     | map[string]*interface{}*                   | :heavy_minus_sign:                         | N/A                                        |
 | `Every`                                    | [*time.Time](https://pkg.go.dev/time#Time) | :heavy_minus_sign:                         | N/A                                        |
 | `From`                                     | [*time.Time](https://pkg.go.dev/time#Time) | :heavy_minus_sign:                         | N/A                                        |
 | `To`                                       | [*time.Time](https://pkg.go.dev/time#Time) | :heavy_minus_sign:                         | N/A                                        |

@@ -8,10 +8,9 @@ import (
 
 // CardRequest - Describes the card to link to the Moov account
 type CardRequest struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	BillingAddress       *Address               `json:"billingAddress,omitempty"`
-	CardCvv              *string                `json:"cardCvv,omitempty"`
-	CardNumber           *string                `json:"cardNumber,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	CardCvv        *string  `json:"cardCvv,omitempty"`
+	CardNumber     *string  `json:"cardNumber,omitempty"`
 	// Indicates cardholder has authorized card to be stored for future payments
 	CardOnFile *bool `default:"false" json:"cardOnFile"`
 	// The expiration date of the linked card or token
@@ -30,13 +29,6 @@ func (c *CardRequest) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *CardRequest) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CardRequest) GetBillingAddress() *Address {

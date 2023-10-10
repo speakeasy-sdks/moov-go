@@ -9,7 +9,6 @@ import (
 
 // Capability - Describes an action or set of actions that an account is permitted to perform
 type Capability struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// ID of Account
 	AccountID *string `json:"accountID,omitempty"`
 	// ID of Capability
@@ -34,13 +33,6 @@ func (c *Capability) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *Capability) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *Capability) GetAccountID() *string {

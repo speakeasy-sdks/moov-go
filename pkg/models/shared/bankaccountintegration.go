@@ -2,38 +2,15 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // BankAccountIntegration - Describes the account to link to the Moov account
 type BankAccountIntegration struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	AccountNumber        string                 `json:"accountNumber"`
+	AccountNumber string `json:"accountNumber"`
 	// The bank account type
 	BankAccountType BankAccountType `json:"bankAccountType"`
 	HolderName      string          `json:"holderName"`
 	// The type of holder on a funding source
 	HolderType    HolderType `json:"holderType"`
 	RoutingNumber string     `json:"routingNumber"`
-}
-
-func (b BankAccountIntegration) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(b, "", false)
-}
-
-func (b *BankAccountIntegration) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *BankAccountIntegration) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *BankAccountIntegration) GetAccountNumber() string {

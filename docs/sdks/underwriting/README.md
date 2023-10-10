@@ -33,6 +33,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
     ctx := context.Background()
@@ -82,15 +84,15 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     underwritingRequest := shared.UnderwritingRequest{
-        AdditionalProperties: map[string]interface{}{
-            "Van": "East",
-        },
         AverageMonthlyTransactionVolume: moovgo.Int64(250000),
         AverageTransactionSize: moovgo.Int64(10000),
         MaxTransactionSize: moovgo.Int64(50000),
     }
-    var accountID string = "bf4aa77f-204e-4775-8c35-2acfe54077ca"
+
+    var accountID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
 
     ctx := context.Background()
     res, err := s.Underwriting.Update(ctx, underwritingRequest, accountID)
