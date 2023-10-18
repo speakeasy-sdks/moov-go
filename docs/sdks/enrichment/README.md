@@ -36,7 +36,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAddress(ctx, operations.GetAddressRequest{
-        Search: "Home Rock Southeast",
+        Search: "Vanadium",
     })
     if err != nil {
         log.Fatal(err)
