@@ -137,7 +137,7 @@ func main() {
         },
         ForeignID: moovgo.String("4528aba-b9a1-11eb-8529-0242ac13003"),
         Metadata: map[string]string{
-            "bluetooth": "Extended",
+            "key": "string",
         },
         Mode: shared.ModeProduction.ToPointer(),
         Profile: shared.CreateProfile{
@@ -504,7 +504,7 @@ func main() {
         },
         ForeignID: moovgo.String("4528aba-b9a1-11eb-8529-0242ac13003"),
         Metadata: map[string]string{
-            "Van": "East",
+            "key": "string",
         },
         Profile: &shared.PatchAccountRequestProfile{
             Business: &shared.PatchAccountRequestProfileBusiness{
@@ -587,7 +587,7 @@ func main() {
         },
     }
 
-    var accountID string = "bf4aa77f-204e-4775-8c35-2acfe54077ca"
+    var accountID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
 
     ctx := context.Background()
     res, err := s.Accounts.Update(ctx, patchAccountRequest, accountID)

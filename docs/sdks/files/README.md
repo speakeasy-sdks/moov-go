@@ -143,12 +143,12 @@ func main() {
     fileUploadRequest := shared.FileUploadRequest{
         File: shared.FileUploadRequestFile{
             Content: []byte("F?SRSKG@^n"),
-            File: "incubate",
+            File: "string",
         },
         FilePurpose: shared.FilePurposeBusinessVerification,
     }
 
-    var accountID string = "34572951-70ea-472d-bc94-89aba3b26010"
+    var accountID string = "95345729-5170-4ea7-adbc-9489aba3b260"
 
     ctx := context.Background()
     res, err := s.Files.Upload(ctx, fileUploadRequest, accountID)

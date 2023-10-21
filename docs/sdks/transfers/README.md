@@ -114,7 +114,7 @@ func main() {
         },
         FacilitatorFee: &shared.CreateFacilitatorFee{},
         Metadata: map[string]string{
-            "online": "Configuration",
+            "key": "string",
         },
         Source: &shared.CreateTransferSource{
             AchDetails: &shared.CreateAchDetailsSource{
@@ -469,13 +469,13 @@ func main() {
 
     patchTransfer := shared.PatchTransfer{
         Metadata: map[string]string{
-            "Van": "East",
+            "key": "string",
         },
     }
 
-    var transferID string = "bf4aa77f-204e-4775-8c35-2acfe54077ca"
+    var transferID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
 
-    var accountID *string = "bf6805c5-ca71-4871-8355-ad7d4e1b5845"
+    var accountID *string = "077cabf6-805c-45ca-b187-14355ad7d4e1"
 
     ctx := context.Background()
     res, err := s.Transfers.Update(ctx, patchTransfer, transferID, accountID)
