@@ -30,9 +30,9 @@ func CreateAccessTokenErrorResponseClientCredentialsGrantToAccessTokenErrorRespo
 
 func (u *AccessTokenErrorResponse) UnmarshalJSON(data []byte) error {
 
-	clientCredentialsGrantToAccessTokenErrorResponse := new(ClientCredentialsGrantToAccessTokenErrorResponse)
+	clientCredentialsGrantToAccessTokenErrorResponse := ClientCredentialsGrantToAccessTokenErrorResponse{}
 	if err := utils.UnmarshalJSON(data, &clientCredentialsGrantToAccessTokenErrorResponse, "", true, true); err == nil {
-		u.ClientCredentialsGrantToAccessTokenErrorResponse = clientCredentialsGrantToAccessTokenErrorResponse
+		u.ClientCredentialsGrantToAccessTokenErrorResponse = &clientCredentialsGrantToAccessTokenErrorResponse
 		u.Type = AccessTokenErrorResponseTypeClientCredentialsGrantToAccessTokenErrorResponse
 		return nil
 	}

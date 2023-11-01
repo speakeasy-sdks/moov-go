@@ -241,16 +241,16 @@ func CreateTransferPostResponseTransferPostResponseSynchronousTransferResponse(t
 
 func (u *TransferPostResponse) UnmarshalJSON(data []byte) error {
 
-	createdTransfer := new(CreatedTransfer)
+	createdTransfer := CreatedTransfer{}
 	if err := utils.UnmarshalJSON(data, &createdTransfer, "", true, true); err == nil {
-		u.CreatedTransfer = createdTransfer
+		u.CreatedTransfer = &createdTransfer
 		u.Type = TransferPostResponseTypeCreatedTransfer
 		return nil
 	}
 
-	transferPostResponseSynchronousTransferResponse := new(TransferPostResponseSynchronousTransferResponse)
+	transferPostResponseSynchronousTransferResponse := TransferPostResponseSynchronousTransferResponse{}
 	if err := utils.UnmarshalJSON(data, &transferPostResponseSynchronousTransferResponse, "", true, true); err == nil {
-		u.TransferPostResponseSynchronousTransferResponse = transferPostResponseSynchronousTransferResponse
+		u.TransferPostResponseSynchronousTransferResponse = &transferPostResponseSynchronousTransferResponse
 		u.Type = TransferPostResponseTypeTransferPostResponseSynchronousTransferResponse
 		return nil
 	}
