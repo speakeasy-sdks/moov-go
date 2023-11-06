@@ -41,7 +41,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "f991ae31-67b4-4f05-b976-44ffd0cfd682"
+
     var bankAccountID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -92,16 +95,17 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     completeMicroDepositsRequest := shared.CompleteMicroDepositsRequest{
-        AdditionalProperties: map[string]interface{}{
-            "these": "female",
-        },
         Amounts: []int64{
             18,
             21,
         },
     }
-    var accountID string = "fec32575-3fd9-4928-90db-ca09c27d1db9"
+
+    var accountID string = "edb3fec3-2575-43fd-9928-10dbca09c27d"
+
     var bankAccountID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -153,7 +157,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
+
     var bankAccountID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -204,7 +211,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
     var bankAccountID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -255,15 +265,15 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var bankAccountPayload shared.BankAccountPayload = shared.CreateBankAccountPayloadPlaid(
             shared.Plaid{
-                AdditionalProperties: map[string]interface{}{
-                    "back": "near",
-                },
                 Plaid: &shared.PlaidIntegration{},
             },
     )
-    var accountID string = "f9c18235-96ae-4951-b938-7e7ad1d80a82"
+
+    var accountID string = "800f9f9c-1823-4596-ae95-1f9387e7ad1d"
 
     ctx := context.Background()
     res, err := s.BankAccounts.Link(ctx, bankAccountPayload, accountID)
@@ -313,6 +323,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "c184a429-302e-4aca-80db-f1718b882a50"
 
     ctx := context.Background()

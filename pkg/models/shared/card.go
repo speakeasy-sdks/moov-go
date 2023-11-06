@@ -8,9 +8,8 @@ import (
 
 // Card - Describes a card on a Moov account
 type Card struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	BillingAddress       *Address               `json:"billingAddress,omitempty"`
-	Bin                  *string                `json:"bin,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	Bin            *string  `json:"bin,omitempty"`
 	// The card brand
 	Brand *CardBrand `json:"brand,omitempty"`
 	// The results of the most recent card update request
@@ -47,13 +46,6 @@ func (c *Card) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *Card) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *Card) GetBillingAddress() *Address {

@@ -8,31 +8,12 @@ import (
 )
 
 type RepresentativeAddress struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	AddressLine1         *string                `json:"addressLine1,omitempty"`
-	AddressLine2         *string                `json:"addressLine2,omitempty"`
-	City                 *string                `json:"city,omitempty"`
-	Country              *string                `json:"country,omitempty"`
-	PostalCode           *string                `json:"postalCode,omitempty"`
-	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
-}
-
-func (r RepresentativeAddress) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(r, "", false)
-}
-
-func (r *RepresentativeAddress) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *RepresentativeAddress) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	AddressLine1    *string `json:"addressLine1,omitempty"`
+	AddressLine2    *string `json:"addressLine2,omitempty"`
+	City            *string `json:"city,omitempty"`
+	Country         *string `json:"country,omitempty"`
+	PostalCode      *string `json:"postalCode,omitempty"`
+	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
 func (o *RepresentativeAddress) GetAddressLine1() *string {
@@ -78,27 +59,8 @@ func (o *RepresentativeAddress) GetStateOrProvince() *string {
 }
 
 type RepresentativePhone struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	CountryCode          *string                `json:"countryCode,omitempty"`
-	Number               *string                `json:"number,omitempty"`
-}
-
-func (r RepresentativePhone) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(r, "", false)
-}
-
-func (r *RepresentativePhone) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *RepresentativePhone) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	CountryCode *string `json:"countryCode,omitempty"`
+	Number      *string `json:"number,omitempty"`
 }
 
 func (o *RepresentativePhone) GetCountryCode() *string {
@@ -117,7 +79,6 @@ func (o *RepresentativePhone) GetNumber() *string {
 
 // RepresentativeResponsibilities - Describes the job responsibilities of an individual
 type RepresentativeResponsibilities struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// Indicates whether this individual has significant management responsibilities within the business
 	IsController *bool `default:"false" json:"isController"`
 	// If `true`, this field indicates that this individual has an ownership stake of at least 25% in the business. If the representative does not own at least 25% of the business, this field should be `false`.
@@ -136,13 +97,6 @@ func (r *RepresentativeResponsibilities) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *RepresentativeResponsibilities) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *RepresentativeResponsibilities) GetIsController() *bool {
@@ -175,8 +129,7 @@ func (o *RepresentativeResponsibilities) GetOwnershipPercentage() int64 {
 
 // Representative - Describes a business representative
 type Representative struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Address              *RepresentativeAddress `json:"address,omitempty"`
+	Address *RepresentativeAddress `json:"address,omitempty"`
 	// Indicates whether this Representative's birth date has been provided
 	BirthDateProvided *bool      `default:"false" json:"birthDateProvided"`
 	CreatedOn         time.Time  `json:"createdOn"`
@@ -203,13 +156,6 @@ func (r *Representative) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *Representative) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *Representative) GetAddress() *RepresentativeAddress {

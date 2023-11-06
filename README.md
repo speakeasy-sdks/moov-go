@@ -20,54 +20,52 @@ go get github.com/speakeasy-sdks/moov-go
 ```go
 package main
 
-import(
+import (
 	"context"
-	"log"
 	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"log"
 )
 
 func main() {
-    s := moovgo.New(
-        moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
-        }),
-    )
-    cardRequest := shared.CardRequest{
-        AdditionalProperties: map[string]interface{}{
-            "transmit": "sultan",
-        },
-        BillingAddress: &shared.Address{
-            AdditionalProperties: map[string]interface{}{
-                "female": "McAllen",
-            },
-            AddressLine1: moovgo.String("123 Main Street"),
-            AddressLine2: moovgo.String("Apt 302"),
-            City: moovgo.String("Boulder"),
-            Country: moovgo.String("US"),
-            PostalCode: moovgo.String("80301"),
-            StateOrProvince: moovgo.String("CO"),
-        },
-        CardCvv: moovgo.String("0123"),
-        Expiration: &shared.CardExpiration{
-            Month: moovgo.String("01"),
-            Year: moovgo.String("21"),
-        },
-        HolderName: moovgo.String("Jules Jackson"),
-    }
-    var accountID string = "cf1dc7b4-8ba0-4e01-bb33-b1b7a8af1bc7"
-    var xWaitFor *shared.SchemasWaitFor = shared.SchemasWaitForPaymentMethod
+	s := moovgo.New(
+		moovgo.WithSecurity(shared.Security{
+			AccessToken: moovgo.String(""),
+		}),
+	)
 
-    ctx := context.Background()
-    res, err := s.Cards.LinkCard(ctx, cardRequest, accountID, xWaitFor)
-    if err != nil {
-        log.Fatal(err)
-    }
+	cardRequest := shared.CardRequest{
+		BillingAddress: &shared.Address{
+			AddressLine1:    moovgo.String("123 Main Street"),
+			AddressLine2:    moovgo.String("Apt 302"),
+			City:            moovgo.String("Boulder"),
+			Country:         moovgo.String("US"),
+			PostalCode:      moovgo.String("80301"),
+			StateOrProvince: moovgo.String("CO"),
+		},
+		CardCvv: moovgo.String("0123"),
+		Expiration: &shared.CardExpiration{
+			Month: moovgo.String("01"),
+			Year:  moovgo.String("21"),
+		},
+		HolderName: moovgo.String("Jules Jackson"),
+	}
 
-    if res.Card != nil {
-        // handle response
-    }
+	var accountID string = "8cfd9cf0-8cf1-4dc7-b48b-a0e013b33b1b"
+
+	var xWaitFor *shared.SchemasWaitFor = shared.SchemasWaitForPaymentMethod
+
+	ctx := context.Background()
+	res, err := s.Cards.LinkCard(ctx, cardRequest, accountID, xWaitFor)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.Card != nil {
+		// handle response
+	}
 }
+
 ```
 <!-- End SDK Example Usage -->
 
@@ -202,8 +200,6 @@ func main() {
 
 <!-- Start Dev Containers -->
 
-
-
 <!-- End Dev Containers -->
 
 
@@ -225,6 +221,200 @@ Here's an example of one such pagination call:
 <!-- Start Go Types -->
 
 <!-- End Go Types -->
+
+
+
+<!-- Start Error Handling -->
+# Error Handling
+
+Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+
+
+<!-- End Error Handling -->
+
+
+
+<!-- Start Server Selection -->
+# Server Selection
+
+## Select Server by Index
+
+You can override the default server globally using the `WithServerIndex` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+
+| # | Server | Variables |
+| - | ------ | --------- |
+| 0 | `https://api.moov.io` | None |
+
+For example:
+
+
+```go
+package main
+
+import (
+	"context"
+	moovgo "github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := moovgo.New(
+		moovgo.WithSecurity(shared.Security{
+			AccessToken: moovgo.String(""),
+		}),
+		moovgo.WithServerIndex(0),
+	)
+
+	ctx := context.Background()
+	res, err := s.AccessToken.Create(ctx, shared.ClientCredentialsGrantToAccessTokenRequest{
+		ClientID:     moovgo.String("5clTR_MdVrrkgxw2"),
+		ClientSecret: moovgo.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
+		GrantType:    shared.ClientCredentialsGrantToAccessTokenRequestGrantTypeClientCredentials,
+		RefreshToken: moovgo.String("i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6..."),
+		Scope:        moovgo.String("/accounts.write"),
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.AccessTokenResponse != nil {
+		// handle response
+	}
+}
+
+```
+
+
+## Override Server URL Per-Client
+
+The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
+
+
+```go
+package main
+
+import (
+	"context"
+	moovgo "github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := moovgo.New(
+		moovgo.WithSecurity(shared.Security{
+			AccessToken: moovgo.String(""),
+		}),
+		moovgo.WithServerURL("https://api.moov.io"),
+	)
+
+	ctx := context.Background()
+	res, err := s.AccessToken.Create(ctx, shared.ClientCredentialsGrantToAccessTokenRequest{
+		ClientID:     moovgo.String("5clTR_MdVrrkgxw2"),
+		ClientSecret: moovgo.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
+		GrantType:    shared.ClientCredentialsGrantToAccessTokenRequestGrantTypeClientCredentials,
+		RefreshToken: moovgo.String("i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6..."),
+		Scope:        moovgo.String("/accounts.write"),
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.AccessTokenResponse != nil {
+		// handle response
+	}
+}
+
+```
+
+## Override Server URL Per-Operation
+
+The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
+
+
+```go
+package main
+
+import (
+	"context"
+	moovgo "github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := moovgo.New(
+		moovgo.WithSecurity(shared.Security{
+			AccessToken: moovgo.String(""),
+		}),
+	)
+
+	cardRequest := shared.CardRequest{
+		BillingAddress: &shared.Address{
+			AddressLine1:    moovgo.String("123 Main Street"),
+			AddressLine2:    moovgo.String("Apt 302"),
+			City:            moovgo.String("Boulder"),
+			Country:         moovgo.String("US"),
+			PostalCode:      moovgo.String("80301"),
+			StateOrProvince: moovgo.String("CO"),
+		},
+		CardCvv: moovgo.String("0123"),
+		Expiration: &shared.CardExpiration{
+			Month: moovgo.String("01"),
+			Year:  moovgo.String("21"),
+		},
+		HolderName: moovgo.String("Jules Jackson"),
+	}
+
+	var accountID string = "8cfd9cf0-8cf1-4dc7-b48b-a0e013b33b1b"
+
+	var xWaitFor *shared.SchemasWaitFor = shared.SchemasWaitForPaymentMethod
+
+	ctx := context.Background()
+	res, err := s.Cards.LinkCard(ctx, operations.WithServerURL("https://cards.moov.io/api"), cardRequest, accountID, xWaitFor)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.Card != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Server Selection -->
+
+
+
+<!-- Start Custom HTTP Client -->
+# Custom HTTP Client
+
+The Go SDK makes API calls that wrap an internal HTTP client. The requirements for the HTTP client are very simple. It must match this interface:
+
+```go
+type HTTPClient interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+```
+
+The built-in `net/http` client satisfies this interface and a default client based on the built-in is provided by default. To replace this default with a client of your own, you can implement this interface yourself or provide your own client configured as desired. Here's a simple example, which adds a client with a 30 second timeout.
+
+```go
+import (
+	"net/http"
+	"time"
+	"github.com/myorg/your-go-sdk"
+)
+
+var (
+	httpClient = &http.Client{Timeout: 30 * time.Second}
+	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+)
+```
+
+This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
+<!-- End Custom HTTP Client -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

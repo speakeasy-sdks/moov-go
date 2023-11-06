@@ -36,7 +36,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAddress(ctx, operations.GetAddressRequest{
-        Search: "Home Rock Southeast",
+        Search: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -85,7 +85,9 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
-    var uniqueID string = "silver"
+
+
+    var uniqueID string = "string"
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAvatar(ctx, uniqueID)
@@ -185,7 +187,9 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
-    var email string = "Southwest"
+
+
+    var email string = "string"
 
     ctx := context.Background()
     res, err := s.Enrichment.GetProfile(ctx, email)

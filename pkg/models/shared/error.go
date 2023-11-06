@@ -2,32 +2,9 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // Error response for http requests that failed
 type Error struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Error                *string                `json:"error,omitempty"`
-}
-
-func (e Error) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(e, "", false)
-}
-
-func (e *Error) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *Error) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Error *string `json:"error,omitempty"`
 }
 
 func (o *Error) GetError() *string {

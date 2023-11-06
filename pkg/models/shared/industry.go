@@ -2,13 +2,8 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // Industry - Describes an industry and its related codes
 type Industry struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// Merchant Category Code
 	Mcc *string `json:"mcc,omitempty"`
 	// North American Industry Classification System
@@ -16,24 +11,6 @@ type Industry struct {
 	// Standard Industrial Classification
 	Sic   *string `json:"sic,omitempty"`
 	Title *string `json:"title,omitempty"`
-}
-
-func (i Industry) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(i, "", false)
-}
-
-func (i *Industry) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &i, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *Industry) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *Industry) GetMcc() *string {

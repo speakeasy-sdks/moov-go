@@ -92,9 +92,6 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccessToken.Revoke(ctx, shared.RevokeTokenRequest{
-        AdditionalProperties: map[string]interface{}{
-            "severe": "Carson",
-        },
         ClientID: moovgo.String("5clTR_MdVrrkgxw2"),
         ClientSecret: moovgo.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
         Token: "i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6...",

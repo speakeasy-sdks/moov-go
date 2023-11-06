@@ -38,8 +38,12 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var xIdempotencyKey string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+
     var transferID string = "03fa7112-315a-4072-a9f2-43f3f1ec962e"
+
     createReversal := &shared.CreateReversal{
         Amount: moovgo.Int64(1000),
     }
@@ -93,11 +97,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     createTransfer := shared.CreateTransfer{
         Amount: &shared.Amount{
-            AdditionalProperties: map[string]interface{}{
-                "online": "Configuration",
-            },
             Currency: "USD",
             Value: 1204,
         },
@@ -111,7 +114,7 @@ func main() {
         },
         FacilitatorFee: &shared.CreateFacilitatorFee{},
         Metadata: map[string]string{
-            "Money": "blue",
+            "key": "string",
         },
         Source: &shared.CreateTransferSource{
             AchDetails: &shared.CreateAchDetailsSource{
@@ -126,7 +129,9 @@ func main() {
             TransferID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
     }
+
     var xIdempotencyKey string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+
     var xWaitFor *shared.WaitFor = shared.WaitForRailResponse
 
     ctx := context.Background()
@@ -182,9 +187,6 @@ func main() {
     ctx := context.Background()
     res, err := s.Transfers.GenerateOptions(ctx, shared.CreateTransferOptions{
         Amount: shared.Amount{
-            AdditionalProperties: map[string]interface{}{
-                "Human": "Incredible",
-            },
             Currency: "USD",
             Value: 1204,
         },
@@ -242,7 +244,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var transferID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
     var accountID *string = "58ccc65b-c928-4154-952e-30c048b8c2b5"
 
     ctx := context.Background()
@@ -293,7 +298,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var refundID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+
     var transferID string = "dcb7cb00-9cc1-4b92-8e6f-29c9d50583d5"
 
     ctx := context.Background()
@@ -344,6 +352,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var transferID string = "7fdf7d4f-a689-4415-8f2e-71877eebee60"
 
     ctx := context.Background()
@@ -393,11 +403,16 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var xIdempotencyKey string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+
     var transferID string = "94e35bc6-be02-470f-a21a-a226b055b594"
+
     createRefund := &shared.CreateRefund{
         Amount: moovgo.Int64(1000),
     }
+
     var xWaitFor *shared.WaitFor = shared.WaitForRailResponse
 
     ctx := context.Background()
@@ -450,13 +465,17 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     patchTransfer := shared.PatchTransfer{
         Metadata: map[string]string{
-            "Van": "East",
+            "key": "string",
         },
     }
-    var transferID string = "bf4aa77f-204e-4775-8c35-2acfe54077ca"
-    var accountID *string = "bf6805c5-ca71-4871-8355-ad7d4e1b5845"
+
+    var transferID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
+
+    var accountID *string = "077cabf6-805c-45ca-b187-14355ad7d4e1"
 
     ctx := context.Background()
     res, err := s.Transfers.Update(ctx, patchTransfer, transferID, accountID)

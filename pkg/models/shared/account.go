@@ -8,31 +8,12 @@ import (
 )
 
 type AccountCustomerSupportAddress struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	AddressLine1         *string                `json:"addressLine1,omitempty"`
-	AddressLine2         *string                `json:"addressLine2,omitempty"`
-	City                 *string                `json:"city,omitempty"`
-	Country              *string                `json:"country,omitempty"`
-	PostalCode           *string                `json:"postalCode,omitempty"`
-	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
-}
-
-func (a AccountCustomerSupportAddress) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *AccountCustomerSupportAddress) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *AccountCustomerSupportAddress) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	AddressLine1    *string `json:"addressLine1,omitempty"`
+	AddressLine2    *string `json:"addressLine2,omitempty"`
+	City            *string `json:"city,omitempty"`
+	Country         *string `json:"country,omitempty"`
+	PostalCode      *string `json:"postalCode,omitempty"`
+	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
 func (o *AccountCustomerSupportAddress) GetAddressLine1() *string {
@@ -78,27 +59,8 @@ func (o *AccountCustomerSupportAddress) GetStateOrProvince() *string {
 }
 
 type AccountCustomerSupportPhone struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	CountryCode          *string                `json:"countryCode,omitempty"`
-	Number               *string                `json:"number,omitempty"`
-}
-
-func (a AccountCustomerSupportPhone) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *AccountCustomerSupportPhone) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *AccountCustomerSupportPhone) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	CountryCode *string `json:"countryCode,omitempty"`
+	Number      *string `json:"number,omitempty"`
 }
 
 func (o *AccountCustomerSupportPhone) GetCountryCode() *string {
@@ -117,30 +79,11 @@ func (o *AccountCustomerSupportPhone) GetNumber() *string {
 
 // AccountCustomerSupport - User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account
 type AccountCustomerSupport struct {
-	AdditionalProperties map[string]interface{}         `additionalProperties:"true" json:"-"`
-	Address              *AccountCustomerSupportAddress `json:"address,omitempty"`
+	Address *AccountCustomerSupportAddress `json:"address,omitempty"`
 	// Email Address
 	Email   *string                      `json:"email,omitempty"`
 	Phone   *AccountCustomerSupportPhone `json:"phone,omitempty"`
 	Website *string                      `json:"website,omitempty"`
-}
-
-func (a AccountCustomerSupport) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *AccountCustomerSupport) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *AccountCustomerSupport) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *AccountCustomerSupport) GetAddress() *AccountCustomerSupportAddress {
@@ -173,27 +116,8 @@ func (o *AccountCustomerSupport) GetWebsite() *string {
 
 // AccountSettingsAchPayment - User provided settings to manage ACH payments
 type AccountSettingsAchPayment struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The description that shows up on ACH transactions. This will default to the account's display name on account creation.
 	CompanyName *string `json:"companyName,omitempty"`
-}
-
-func (a AccountSettingsAchPayment) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *AccountSettingsAchPayment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *AccountSettingsAchPayment) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *AccountSettingsAchPayment) GetCompanyName() *string {
@@ -205,27 +129,8 @@ func (o *AccountSettingsAchPayment) GetCompanyName() *string {
 
 // AccountSettingsCardPayment - User provided settings to manage card payments. This data is only allowed on a business account
 type AccountSettingsCardPayment struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
 	StatementDescriptor *string `json:"statementDescriptor,omitempty"`
-}
-
-func (a AccountSettingsCardPayment) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *AccountSettingsCardPayment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *AccountSettingsCardPayment) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *AccountSettingsCardPayment) GetStatementDescriptor() *string {
@@ -237,27 +142,8 @@ func (o *AccountSettingsCardPayment) GetStatementDescriptor() *string {
 
 // AccountSettings - User provided settings to manage an account
 type AccountSettings struct {
-	AdditionalProperties map[string]interface{}      `additionalProperties:"true" json:"-"`
-	AchPayment           *AccountSettingsAchPayment  `json:"achPayment,omitempty"`
-	CardPayment          *AccountSettingsCardPayment `json:"cardPayment,omitempty"`
-}
-
-func (a AccountSettings) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *AccountSettings) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *AccountSettings) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	AchPayment  *AccountSettingsAchPayment  `json:"achPayment,omitempty"`
+	CardPayment *AccountSettingsCardPayment `json:"cardPayment,omitempty"`
 }
 
 func (o *AccountSettings) GetAchPayment() *AccountSettingsAchPayment {
@@ -276,9 +162,8 @@ func (o *AccountSettings) GetCardPayment() *AccountSettingsCardPayment {
 
 // AccountTermsOfService - Describes the acceptance of the Terms of Service
 type AccountTermsOfService struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	AcceptedDate         time.Time              `json:"acceptedDate"`
-	AcceptedIP           string                 `json:"acceptedIP"`
+	AcceptedDate time.Time `json:"acceptedDate"`
+	AcceptedIP   string    `json:"acceptedIP"`
 }
 
 func (a AccountTermsOfService) MarshalJSON() ([]byte, error) {
@@ -290,13 +175,6 @@ func (a *AccountTermsOfService) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *AccountTermsOfService) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *AccountTermsOfService) GetAcceptedDate() time.Time {
@@ -315,7 +193,6 @@ func (o *AccountTermsOfService) GetAcceptedIP() string {
 
 // Account - Describes a Moov account
 type Account struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	AccountID string `json:"accountID"`
 	// The type of entity represented by this Account
@@ -348,13 +225,6 @@ func (a *Account) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *Account) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *Account) GetAccountID() string {

@@ -11,7 +11,6 @@ import (
 
 // PaymentMethodApplePayApplePay - Describes an Apple Pay token on a Moov account.
 type PaymentMethodApplePayApplePay struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The card brand
 	Brand *CardBrand `json:"brand,omitempty"`
 	// User-friendly name of the tokenized card returned by Apple.
@@ -30,24 +29,6 @@ type PaymentMethodApplePayApplePay struct {
 	// This field can be used to identify specific payment methods across multiple accounts on your platform.
 	//
 	Fingerprint *string `json:"fingerprint,omitempty"`
-}
-
-func (p PaymentMethodApplePayApplePay) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PaymentMethodApplePayApplePay) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PaymentMethodApplePayApplePay) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *PaymentMethodApplePayApplePay) GetBrand() *CardBrand {
@@ -94,30 +75,11 @@ func (o *PaymentMethodApplePayApplePay) GetFingerprint() *string {
 
 // PaymentMethodApplePay - A method of moving money using an Apple Pay token.
 type PaymentMethodApplePay struct {
-	AdditionalProperties map[string]interface{}         `additionalProperties:"true" json:"-"`
-	ApplePay             *PaymentMethodApplePayApplePay `json:"applePay,omitempty"`
+	ApplePay *PaymentMethodApplePayApplePay `json:"applePay,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
-}
-
-func (p PaymentMethodApplePay) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PaymentMethodApplePay) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PaymentMethodApplePay) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *PaymentMethodApplePay) GetApplePay() *PaymentMethodApplePayApplePay {
@@ -143,9 +105,8 @@ func (o *PaymentMethodApplePay) GetPaymentMethodType() *PaymentMethodsType {
 
 // PaymentMethodCardCard - Describes a card on a Moov account
 type PaymentMethodCardCard struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	BillingAddress       *Address               `json:"billingAddress,omitempty"`
-	Bin                  *string                `json:"bin,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	Bin            *string  `json:"bin,omitempty"`
 	// The card brand
 	Brand *CardBrand `json:"brand,omitempty"`
 	// The results of the most recent card update request
@@ -182,13 +143,6 @@ func (p *PaymentMethodCardCard) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *PaymentMethodCardCard) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *PaymentMethodCardCard) GetBillingAddress() *Address {
@@ -298,30 +252,11 @@ func (o *PaymentMethodCardCard) GetMerchantAccountID() *string {
 
 // PaymentMethodCard - A method of moving money that is a credit or debit card
 type PaymentMethodCard struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Card                 *PaymentMethodCardCard `json:"card,omitempty"`
+	Card *PaymentMethodCardCard `json:"card,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
-}
-
-func (p PaymentMethodCard) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PaymentMethodCard) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PaymentMethodCard) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *PaymentMethodCard) GetCard() *PaymentMethodCardCard {
@@ -347,7 +282,6 @@ func (o *PaymentMethodCard) GetPaymentMethodType() *PaymentMethodsType {
 
 // PaymentMethodBankAccountBankAccount - Describes a bank account on a Moov account.
 type PaymentMethodBankAccountBankAccount struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	BankAccountID *string `json:"bankAccountID,omitempty"`
 	// The bank account type
@@ -362,24 +296,6 @@ type PaymentMethodBankAccountBankAccount struct {
 	RoutingNumber         *string     `json:"routingNumber,omitempty"`
 	// The bank account status
 	Status *BankAccountStatus `json:"status,omitempty"`
-}
-
-func (p PaymentMethodBankAccountBankAccount) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PaymentMethodBankAccountBankAccount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PaymentMethodBankAccountBankAccount) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *PaymentMethodBankAccountBankAccount) GetBankAccountID() *string {
@@ -447,30 +363,11 @@ func (o *PaymentMethodBankAccountBankAccount) GetStatus() *BankAccountStatus {
 
 // PaymentMethodBankAccount - A method of moving money that is a bank account
 type PaymentMethodBankAccount struct {
-	AdditionalProperties map[string]interface{}               `additionalProperties:"true" json:"-"`
-	BankAccount          *PaymentMethodBankAccountBankAccount `json:"bankAccount,omitempty"`
+	BankAccount *PaymentMethodBankAccountBankAccount `json:"bankAccount,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
-}
-
-func (p PaymentMethodBankAccount) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PaymentMethodBankAccount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PaymentMethodBankAccount) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *PaymentMethodBankAccount) GetBankAccount() *PaymentMethodBankAccountBankAccount {
@@ -496,27 +393,8 @@ func (o *PaymentMethodBankAccount) GetPaymentMethodType() *PaymentMethodsType {
 
 // PaymentMethodWalletWallet - A Moov wallet to store funds for transfers.
 type PaymentMethodWalletWallet struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	WalletID *string `json:"walletID,omitempty"`
-}
-
-func (p PaymentMethodWalletWallet) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PaymentMethodWalletWallet) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PaymentMethodWalletWallet) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *PaymentMethodWalletWallet) GetWalletID() *string {
@@ -528,30 +406,11 @@ func (o *PaymentMethodWalletWallet) GetWalletID() *string {
 
 // PaymentMethodWallet - A method of moving money that is a Moov wallet
 type PaymentMethodWallet struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType        `json:"paymentMethodType,omitempty"`
 	Wallet            *PaymentMethodWalletWallet `json:"wallet,omitempty"`
-}
-
-func (p PaymentMethodWallet) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PaymentMethodWallet) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PaymentMethodWallet) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *PaymentMethodWallet) GetPaymentMethodID() *string {

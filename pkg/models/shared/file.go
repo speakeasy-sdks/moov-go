@@ -9,7 +9,6 @@ import (
 
 // File - Describes a file linked to a Moov account
 type File struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	AccountID *string    `json:"accountID,omitempty"`
 	CreatedOn *time.Time `json:"createdOn,omitempty"`
@@ -33,13 +32,6 @@ func (f *File) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *File) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *File) GetAccountID() *string {

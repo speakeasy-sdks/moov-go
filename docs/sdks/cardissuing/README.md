@@ -40,6 +40,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     requestCard := shared.RequestCard{
         AuthorizationControls: &shared.AuthorizationControls{
             SpendLimits: []shared.AuthorizationSpendLimitControl{
@@ -50,9 +52,6 @@ func main() {
         },
         AuthorizedUser: &shared.CreateAuthorizedUser{
             BirthDate: &shared.BirthDate{
-                AdditionalProperties: map[string]interface{}{
-                    "Massachusetts": "Northeast",
-                },
                 Day: 9,
                 Month: 11,
                 Year: 1989,
@@ -61,7 +60,8 @@ func main() {
             LastName: moovgo.String("Doe"),
         },
     }
-    var accountID string = "76780ec1-0c4b-42e8-a352-0f192b1ff2a2"
+
+    var accountID string = "c6261876-780e-4c10-84b2-e8a3520f192b"
 
     ctx := context.Background()
     res, err := s.CardIssuing.RequestCard(ctx, requestCard, accountID)
@@ -113,7 +113,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "2614fd0a-d685-42ae-8d5c-198b8e58f04c"
+
     var issuedCardID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -166,7 +169,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "9dab2fa4-7710-412f-86a8-8f88e10db45e"
+
     var issuedCardID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -220,9 +226,14 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "59888d1e-1919-498b-96e3-fc470952bb6c"
+
     var count *int64 = 632256
+
     var skip *int64 = 174785
+
     var states *shared.IssuedCardState = shared.IssuedCardStatePendingVerification
 
     ctx := context.Background()
@@ -277,6 +288,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     updateIssuedCard := shared.UpdateIssuedCard{
         AuthorizationControls: &shared.AuthorizationControls{
             SpendLimits: []shared.AuthorizationSpendLimitControl{
@@ -287,9 +300,6 @@ func main() {
         },
         AuthorizedUser: &shared.CreateAuthorizedUser{
             BirthDate: &shared.BirthDate{
-                AdditionalProperties: map[string]interface{}{
-                    "Directives": "magni",
-                },
                 Day: 9,
                 Month: 11,
                 Year: 1989,
@@ -298,7 +308,9 @@ func main() {
             LastName: moovgo.String("Doe"),
         },
     }
-    var accountID string = "610d0364-1fd8-4f8b-865d-1912e9898b55"
+
+    var accountID string = "a292610d-0364-41fd-8f8b-865d1912e989"
+
     var issuedCardID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()

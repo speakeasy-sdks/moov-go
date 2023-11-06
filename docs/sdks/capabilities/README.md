@@ -34,7 +34,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
+
     var capabilityID shared.CapabilityID = shared.CapabilityIDCardIssuing
 
     ctx := context.Background()
@@ -85,7 +88,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
     var capabilityID shared.CapabilityID = shared.CapabilityIDSendFunds
 
     ctx := context.Background()
@@ -136,6 +142,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "c184a429-302e-4aca-80db-f1718b882a50"
 
     ctx := context.Background()
@@ -185,15 +193,15 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     addCapabilityRequest := shared.AddCapabilityRequest{
-        AdditionalProperties: map[string]interface{}{
-            "Movies": "Johns",
-        },
         Capabilities: []shared.CapabilityID{
             shared.CapabilityIDTransfers,
         },
     }
-    var accountID string = "356d1f09-dae6-4235-a496-ce7636725e5c"
+
+    var accountID string = "12e6e103-56d1-4f09-9ae6-2352496ce763"
 
     ctx := context.Background()
     res, err := s.Capabilities.Request(ctx, addCapabilityRequest, accountID)

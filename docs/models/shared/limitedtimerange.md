@@ -7,7 +7,6 @@ Return `count` number of results within time range between two timestamps and th
 
 | Field                                      | Type                                       | Required                                   | Description                                |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| `AdditionalProperties`                     | map[string]*interface{}*                   | :heavy_minus_sign:                         | N/A                                        |
 | `Count`                                    | **int64*                                   | :heavy_minus_sign:                         | N/A                                        |
 | `Every`                                    | **string*                                  | :heavy_minus_sign:                         | N/A                                        |
 | `From`                                     | [*time.Time](https://pkg.go.dev/time#Time) | :heavy_minus_sign:                         | N/A                                        |

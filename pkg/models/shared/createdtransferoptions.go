@@ -11,7 +11,6 @@ import (
 
 // CreatedTransferOptionsDestinationOptionsApplePayApplePay - Describes an Apple Pay token on a Moov account.
 type CreatedTransferOptionsDestinationOptionsApplePayApplePay struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The card brand
 	Brand *CardBrand `json:"brand,omitempty"`
 	// User-friendly name of the tokenized card returned by Apple.
@@ -30,24 +29,6 @@ type CreatedTransferOptionsDestinationOptionsApplePayApplePay struct {
 	// This field can be used to identify specific payment methods across multiple accounts on your platform.
 	//
 	Fingerprint *string `json:"fingerprint,omitempty"`
-}
-
-func (c CreatedTransferOptionsDestinationOptionsApplePayApplePay) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsDestinationOptionsApplePayApplePay) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsDestinationOptionsApplePayApplePay) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsDestinationOptionsApplePayApplePay) GetBrand() *CardBrand {
@@ -94,30 +75,11 @@ func (o *CreatedTransferOptionsDestinationOptionsApplePayApplePay) GetFingerprin
 
 // CreatedTransferOptionsDestinationOptionsApplePay - A method of moving money using an Apple Pay token.
 type CreatedTransferOptionsDestinationOptionsApplePay struct {
-	AdditionalProperties map[string]interface{}                                    `additionalProperties:"true" json:"-"`
-	ApplePay             *CreatedTransferOptionsDestinationOptionsApplePayApplePay `json:"applePay,omitempty"`
+	ApplePay *CreatedTransferOptionsDestinationOptionsApplePayApplePay `json:"applePay,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
-}
-
-func (c CreatedTransferOptionsDestinationOptionsApplePay) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsDestinationOptionsApplePay) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsDestinationOptionsApplePay) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsDestinationOptionsApplePay) GetApplePay() *CreatedTransferOptionsDestinationOptionsApplePayApplePay {
@@ -143,9 +105,8 @@ func (o *CreatedTransferOptionsDestinationOptionsApplePay) GetPaymentMethodType(
 
 // CreatedTransferOptionsDestinationOptionsCardCard - Describes a card on a Moov account
 type CreatedTransferOptionsDestinationOptionsCardCard struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	BillingAddress       *Address               `json:"billingAddress,omitempty"`
-	Bin                  *string                `json:"bin,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	Bin            *string  `json:"bin,omitempty"`
 	// The card brand
 	Brand *CardBrand `json:"brand,omitempty"`
 	// The results of the most recent card update request
@@ -182,13 +143,6 @@ func (c *CreatedTransferOptionsDestinationOptionsCardCard) UnmarshalJSON(data []
 		return err
 	}
 	return nil
-}
-
-func (o *CreatedTransferOptionsDestinationOptionsCardCard) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsDestinationOptionsCardCard) GetBillingAddress() *Address {
@@ -298,30 +252,11 @@ func (o *CreatedTransferOptionsDestinationOptionsCardCard) GetMerchantAccountID(
 
 // CreatedTransferOptionsDestinationOptionsCard - A method of moving money that is a credit or debit card
 type CreatedTransferOptionsDestinationOptionsCard struct {
-	AdditionalProperties map[string]interface{}                            `additionalProperties:"true" json:"-"`
-	Card                 *CreatedTransferOptionsDestinationOptionsCardCard `json:"card,omitempty"`
+	Card *CreatedTransferOptionsDestinationOptionsCardCard `json:"card,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
-}
-
-func (c CreatedTransferOptionsDestinationOptionsCard) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsDestinationOptionsCard) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsDestinationOptionsCard) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsDestinationOptionsCard) GetCard() *CreatedTransferOptionsDestinationOptionsCardCard {
@@ -347,7 +282,6 @@ func (o *CreatedTransferOptionsDestinationOptionsCard) GetPaymentMethodType() *P
 
 // CreatedTransferOptionsDestinationOptionsBankAccountBankAccount - Describes a bank account on a Moov account.
 type CreatedTransferOptionsDestinationOptionsBankAccountBankAccount struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	BankAccountID *string `json:"bankAccountID,omitempty"`
 	// The bank account type
@@ -362,24 +296,6 @@ type CreatedTransferOptionsDestinationOptionsBankAccountBankAccount struct {
 	RoutingNumber         *string     `json:"routingNumber,omitempty"`
 	// The bank account status
 	Status *BankAccountStatus `json:"status,omitempty"`
-}
-
-func (c CreatedTransferOptionsDestinationOptionsBankAccountBankAccount) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsDestinationOptionsBankAccountBankAccount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsDestinationOptionsBankAccountBankAccount) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsDestinationOptionsBankAccountBankAccount) GetBankAccountID() *string {
@@ -447,30 +363,11 @@ func (o *CreatedTransferOptionsDestinationOptionsBankAccountBankAccount) GetStat
 
 // CreatedTransferOptionsDestinationOptionsBankAccount - A method of moving money that is a bank account
 type CreatedTransferOptionsDestinationOptionsBankAccount struct {
-	AdditionalProperties map[string]interface{}                                          `additionalProperties:"true" json:"-"`
-	BankAccount          *CreatedTransferOptionsDestinationOptionsBankAccountBankAccount `json:"bankAccount,omitempty"`
+	BankAccount *CreatedTransferOptionsDestinationOptionsBankAccountBankAccount `json:"bankAccount,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
-}
-
-func (c CreatedTransferOptionsDestinationOptionsBankAccount) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsDestinationOptionsBankAccount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsDestinationOptionsBankAccount) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsDestinationOptionsBankAccount) GetBankAccount() *CreatedTransferOptionsDestinationOptionsBankAccountBankAccount {
@@ -496,27 +393,8 @@ func (o *CreatedTransferOptionsDestinationOptionsBankAccount) GetPaymentMethodTy
 
 // CreatedTransferOptionsDestinationOptionsWalletWallet - A Moov wallet to store funds for transfers.
 type CreatedTransferOptionsDestinationOptionsWalletWallet struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	WalletID *string `json:"walletID,omitempty"`
-}
-
-func (c CreatedTransferOptionsDestinationOptionsWalletWallet) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsDestinationOptionsWalletWallet) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsDestinationOptionsWalletWallet) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsDestinationOptionsWalletWallet) GetWalletID() *string {
@@ -528,30 +406,11 @@ func (o *CreatedTransferOptionsDestinationOptionsWalletWallet) GetWalletID() *st
 
 // CreatedTransferOptionsDestinationOptionsWallet - A method of moving money that is a Moov wallet
 type CreatedTransferOptionsDestinationOptionsWallet struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType                                   `json:"paymentMethodType,omitempty"`
 	Wallet            *CreatedTransferOptionsDestinationOptionsWalletWallet `json:"wallet,omitempty"`
-}
-
-func (c CreatedTransferOptionsDestinationOptionsWallet) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsDestinationOptionsWallet) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsDestinationOptionsWallet) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsDestinationOptionsWallet) GetPaymentMethodID() *string {
@@ -796,7 +655,6 @@ func (u CreatedTransferOptionsDestinationOptions) MarshalJSON() ([]byte, error) 
 
 // CreatedTransferOptionsSourceOptionsApplePayApplePay - Describes an Apple Pay token on a Moov account.
 type CreatedTransferOptionsSourceOptionsApplePayApplePay struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The card brand
 	Brand *CardBrand `json:"brand,omitempty"`
 	// User-friendly name of the tokenized card returned by Apple.
@@ -815,24 +673,6 @@ type CreatedTransferOptionsSourceOptionsApplePayApplePay struct {
 	// This field can be used to identify specific payment methods across multiple accounts on your platform.
 	//
 	Fingerprint *string `json:"fingerprint,omitempty"`
-}
-
-func (c CreatedTransferOptionsSourceOptionsApplePayApplePay) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsSourceOptionsApplePayApplePay) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsSourceOptionsApplePayApplePay) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsSourceOptionsApplePayApplePay) GetBrand() *CardBrand {
@@ -879,30 +719,11 @@ func (o *CreatedTransferOptionsSourceOptionsApplePayApplePay) GetFingerprint() *
 
 // CreatedTransferOptionsSourceOptionsApplePay - A method of moving money using an Apple Pay token.
 type CreatedTransferOptionsSourceOptionsApplePay struct {
-	AdditionalProperties map[string]interface{}                               `additionalProperties:"true" json:"-"`
-	ApplePay             *CreatedTransferOptionsSourceOptionsApplePayApplePay `json:"applePay,omitempty"`
+	ApplePay *CreatedTransferOptionsSourceOptionsApplePayApplePay `json:"applePay,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
-}
-
-func (c CreatedTransferOptionsSourceOptionsApplePay) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsSourceOptionsApplePay) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsSourceOptionsApplePay) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsSourceOptionsApplePay) GetApplePay() *CreatedTransferOptionsSourceOptionsApplePayApplePay {
@@ -928,9 +749,8 @@ func (o *CreatedTransferOptionsSourceOptionsApplePay) GetPaymentMethodType() *Pa
 
 // CreatedTransferOptionsSourceOptionsCardCard - Describes a card on a Moov account
 type CreatedTransferOptionsSourceOptionsCardCard struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	BillingAddress       *Address               `json:"billingAddress,omitempty"`
-	Bin                  *string                `json:"bin,omitempty"`
+	BillingAddress *Address `json:"billingAddress,omitempty"`
+	Bin            *string  `json:"bin,omitempty"`
 	// The card brand
 	Brand *CardBrand `json:"brand,omitempty"`
 	// The results of the most recent card update request
@@ -967,13 +787,6 @@ func (c *CreatedTransferOptionsSourceOptionsCardCard) UnmarshalJSON(data []byte)
 		return err
 	}
 	return nil
-}
-
-func (o *CreatedTransferOptionsSourceOptionsCardCard) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsSourceOptionsCardCard) GetBillingAddress() *Address {
@@ -1083,30 +896,11 @@ func (o *CreatedTransferOptionsSourceOptionsCardCard) GetMerchantAccountID() *st
 
 // CreatedTransferOptionsSourceOptionsCard - A method of moving money that is a credit or debit card
 type CreatedTransferOptionsSourceOptionsCard struct {
-	AdditionalProperties map[string]interface{}                       `additionalProperties:"true" json:"-"`
-	Card                 *CreatedTransferOptionsSourceOptionsCardCard `json:"card,omitempty"`
+	Card *CreatedTransferOptionsSourceOptionsCardCard `json:"card,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
-}
-
-func (c CreatedTransferOptionsSourceOptionsCard) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsSourceOptionsCard) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsSourceOptionsCard) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsSourceOptionsCard) GetCard() *CreatedTransferOptionsSourceOptionsCardCard {
@@ -1132,7 +926,6 @@ func (o *CreatedTransferOptionsSourceOptionsCard) GetPaymentMethodType() *Paymen
 
 // CreatedTransferOptionsSourceOptionsBankAccountBankAccount - Describes a bank account on a Moov account.
 type CreatedTransferOptionsSourceOptionsBankAccountBankAccount struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	BankAccountID *string `json:"bankAccountID,omitempty"`
 	// The bank account type
@@ -1147,24 +940,6 @@ type CreatedTransferOptionsSourceOptionsBankAccountBankAccount struct {
 	RoutingNumber         *string     `json:"routingNumber,omitempty"`
 	// The bank account status
 	Status *BankAccountStatus `json:"status,omitempty"`
-}
-
-func (c CreatedTransferOptionsSourceOptionsBankAccountBankAccount) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsSourceOptionsBankAccountBankAccount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsSourceOptionsBankAccountBankAccount) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsSourceOptionsBankAccountBankAccount) GetBankAccountID() *string {
@@ -1232,30 +1007,11 @@ func (o *CreatedTransferOptionsSourceOptionsBankAccountBankAccount) GetStatus() 
 
 // CreatedTransferOptionsSourceOptionsBankAccount - A method of moving money that is a bank account
 type CreatedTransferOptionsSourceOptionsBankAccount struct {
-	AdditionalProperties map[string]interface{}                                     `additionalProperties:"true" json:"-"`
-	BankAccount          *CreatedTransferOptionsSourceOptionsBankAccountBankAccount `json:"bankAccount,omitempty"`
+	BankAccount *CreatedTransferOptionsSourceOptionsBankAccountBankAccount `json:"bankAccount,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
-}
-
-func (c CreatedTransferOptionsSourceOptionsBankAccount) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsSourceOptionsBankAccount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsSourceOptionsBankAccount) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsSourceOptionsBankAccount) GetBankAccount() *CreatedTransferOptionsSourceOptionsBankAccountBankAccount {
@@ -1281,27 +1037,8 @@ func (o *CreatedTransferOptionsSourceOptionsBankAccount) GetPaymentMethodType() 
 
 // CreatedTransferOptionsSourceOptionsWalletWallet - A Moov wallet to store funds for transfers.
 type CreatedTransferOptionsSourceOptionsWalletWallet struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	WalletID *string `json:"walletID,omitempty"`
-}
-
-func (c CreatedTransferOptionsSourceOptionsWalletWallet) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsSourceOptionsWalletWallet) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsSourceOptionsWalletWallet) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsSourceOptionsWalletWallet) GetWalletID() *string {
@@ -1313,30 +1050,11 @@ func (o *CreatedTransferOptionsSourceOptionsWalletWallet) GetWalletID() *string 
 
 // CreatedTransferOptionsSourceOptionsWallet - A method of moving money that is a Moov wallet
 type CreatedTransferOptionsSourceOptionsWallet struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType                              `json:"paymentMethodType,omitempty"`
 	Wallet            *CreatedTransferOptionsSourceOptionsWalletWallet `json:"wallet,omitempty"`
-}
-
-func (c CreatedTransferOptionsSourceOptionsWallet) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatedTransferOptionsSourceOptionsWallet) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatedTransferOptionsSourceOptionsWallet) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreatedTransferOptionsSourceOptionsWallet) GetPaymentMethodID() *string {

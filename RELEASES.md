@@ -75,3 +75,13 @@ Based on:
 - [go v0.2.0] .
 ### Releases
 - [Go v0.2.0] https://github.com/speakeasy-sdks/moov-go/releases/tag/v0.2.0 - .
+
+## 2023-11-06 01:10:29
+### Changes
+Based on:
+- OpenAPI Doc 1.0.0 
+- Speakeasy CLI 1.112.1 (2.173.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.3.0] .
+### Releases
+- [Go v0.3.0] https://github.com/speakeasy-sdks/moov-go/releases/tag/v0.3.0 - .

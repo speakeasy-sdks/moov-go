@@ -8,31 +8,12 @@ import (
 
 // PatchRepresentativeRequestAddress - Residential address for an individual. Business addresses not accepted.
 type PatchRepresentativeRequestAddress struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	AddressLine1         *string                `json:"addressLine1,omitempty"`
-	AddressLine2         *string                `json:"addressLine2,omitempty"`
-	City                 *string                `json:"city,omitempty"`
-	Country              *string                `json:"country,omitempty"`
-	PostalCode           *string                `json:"postalCode,omitempty"`
-	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
-}
-
-func (p PatchRepresentativeRequestAddress) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PatchRepresentativeRequestAddress) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PatchRepresentativeRequestAddress) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	AddressLine1    *string `json:"addressLine1,omitempty"`
+	AddressLine2    *string `json:"addressLine2,omitempty"`
+	City            *string `json:"city,omitempty"`
+	Country         *string `json:"country,omitempty"`
+	PostalCode      *string `json:"postalCode,omitempty"`
+	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
 func (o *PatchRepresentativeRequestAddress) GetAddressLine1() *string {
@@ -79,28 +60,9 @@ func (o *PatchRepresentativeRequestAddress) GetStateOrProvince() *string {
 
 // PatchRepresentativeRequestBirthDate - Birthdate for an individual
 type PatchRepresentativeRequestBirthDate struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Day                  int64                  `json:"day"`
-	Month                int64                  `json:"month"`
-	Year                 int64                  `json:"year"`
-}
-
-func (p PatchRepresentativeRequestBirthDate) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PatchRepresentativeRequestBirthDate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PatchRepresentativeRequestBirthDate) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Day   int64 `json:"day"`
+	Month int64 `json:"month"`
+	Year  int64 `json:"year"`
 }
 
 func (o *PatchRepresentativeRequestBirthDate) GetDay() int64 {
@@ -125,27 +87,8 @@ func (o *PatchRepresentativeRequestBirthDate) GetYear() int64 {
 }
 
 type PatchRepresentativeRequestGovernmentIDItin struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Full                 *string                `json:"full,omitempty"`
-	LastFour             *string                `json:"lastFour,omitempty"`
-}
-
-func (p PatchRepresentativeRequestGovernmentIDItin) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PatchRepresentativeRequestGovernmentIDItin) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PatchRepresentativeRequestGovernmentIDItin) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Full     *string `json:"full,omitempty"`
+	LastFour *string `json:"lastFour,omitempty"`
 }
 
 func (o *PatchRepresentativeRequestGovernmentIDItin) GetFull() *string {
@@ -163,27 +106,8 @@ func (o *PatchRepresentativeRequestGovernmentIDItin) GetLastFour() *string {
 }
 
 type PatchRepresentativeRequestGovernmentIDSsn struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Full                 *string                `json:"full,omitempty"`
-	LastFour             *string                `json:"lastFour,omitempty"`
-}
-
-func (p PatchRepresentativeRequestGovernmentIDSsn) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PatchRepresentativeRequestGovernmentIDSsn) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PatchRepresentativeRequestGovernmentIDSsn) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Full     *string `json:"full,omitempty"`
+	LastFour *string `json:"lastFour,omitempty"`
 }
 
 func (o *PatchRepresentativeRequestGovernmentIDSsn) GetFull() *string {
@@ -201,27 +125,8 @@ func (o *PatchRepresentativeRequestGovernmentIDSsn) GetLastFour() *string {
 }
 
 type PatchRepresentativeRequestGovernmentID struct {
-	AdditionalProperties map[string]interface{}                      `additionalProperties:"true" json:"-"`
-	Itin                 *PatchRepresentativeRequestGovernmentIDItin `json:"itin,omitempty"`
-	Ssn                  *PatchRepresentativeRequestGovernmentIDSsn  `json:"ssn,omitempty"`
-}
-
-func (p PatchRepresentativeRequestGovernmentID) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PatchRepresentativeRequestGovernmentID) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PatchRepresentativeRequestGovernmentID) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Itin *PatchRepresentativeRequestGovernmentIDItin `json:"itin,omitempty"`
+	Ssn  *PatchRepresentativeRequestGovernmentIDSsn  `json:"ssn,omitempty"`
 }
 
 func (o *PatchRepresentativeRequestGovernmentID) GetItin() *PatchRepresentativeRequestGovernmentIDItin {
@@ -240,29 +145,10 @@ func (o *PatchRepresentativeRequestGovernmentID) GetSsn() *PatchRepresentativeRe
 
 // PatchRepresentativeRequestName - Name for an individual
 type PatchRepresentativeRequestName struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	FirstName            *string                `json:"firstName,omitempty"`
-	LastName             *string                `json:"lastName,omitempty"`
-	MiddleName           *string                `json:"middleName,omitempty"`
-	Suffix               *string                `json:"suffix,omitempty"`
-}
-
-func (p PatchRepresentativeRequestName) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PatchRepresentativeRequestName) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PatchRepresentativeRequestName) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	FirstName  *string `json:"firstName,omitempty"`
+	LastName   *string `json:"lastName,omitempty"`
+	MiddleName *string `json:"middleName,omitempty"`
+	Suffix     *string `json:"suffix,omitempty"`
 }
 
 func (o *PatchRepresentativeRequestName) GetFirstName() *string {
@@ -294,27 +180,8 @@ func (o *PatchRepresentativeRequestName) GetSuffix() *string {
 }
 
 type PatchRepresentativeRequestPhone struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	CountryCode          *string                `json:"countryCode,omitempty"`
-	Number               *string                `json:"number,omitempty"`
-}
-
-func (p PatchRepresentativeRequestPhone) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PatchRepresentativeRequestPhone) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PatchRepresentativeRequestPhone) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	CountryCode *string `json:"countryCode,omitempty"`
+	Number      *string `json:"number,omitempty"`
 }
 
 func (o *PatchRepresentativeRequestPhone) GetCountryCode() *string {
@@ -333,7 +200,6 @@ func (o *PatchRepresentativeRequestPhone) GetNumber() *string {
 
 // PatchRepresentativeRequestResponsibilities - Describes the job responsibilities of an individual
 type PatchRepresentativeRequestResponsibilities struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// Indicates whether this individual has significant management responsibilities within the business
 	IsController *bool `default:"false" json:"isController"`
 	// If `true`, this field indicates that this individual has an ownership stake of at least 25% in the business. If the representative does not own at least 25% of the business, this field should be `false`.
@@ -352,13 +218,6 @@ func (p *PatchRepresentativeRequestResponsibilities) UnmarshalJSON(data []byte) 
 		return err
 	}
 	return nil
-}
-
-func (o *PatchRepresentativeRequestResponsibilities) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *PatchRepresentativeRequestResponsibilities) GetIsController() *bool {
@@ -391,32 +250,13 @@ func (o *PatchRepresentativeRequestResponsibilities) GetOwnershipPercentage() *i
 
 // PatchRepresentativeRequest - Describes the fields available when patching a representative
 type PatchRepresentativeRequest struct {
-	AdditionalProperties map[string]interface{}                      `additionalProperties:"true" json:"-"`
-	Address              *PatchRepresentativeRequestAddress          `json:"address,omitempty"`
-	BirthDate            *PatchRepresentativeRequestBirthDate        `json:"birthDate,omitempty"`
-	Email                *string                                     `json:"email,omitempty"`
-	GovernmentID         *PatchRepresentativeRequestGovernmentID     `json:"governmentID,omitempty"`
-	Name                 *PatchRepresentativeRequestName             `json:"name,omitempty"`
-	Phone                *PatchRepresentativeRequestPhone            `json:"phone,omitempty"`
-	Responsibilities     *PatchRepresentativeRequestResponsibilities `json:"responsibilities,omitempty"`
-}
-
-func (p PatchRepresentativeRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PatchRepresentativeRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *PatchRepresentativeRequest) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Address          *PatchRepresentativeRequestAddress          `json:"address,omitempty"`
+	BirthDate        *PatchRepresentativeRequestBirthDate        `json:"birthDate,omitempty"`
+	Email            *string                                     `json:"email,omitempty"`
+	GovernmentID     *PatchRepresentativeRequestGovernmentID     `json:"governmentID,omitempty"`
+	Name             *PatchRepresentativeRequestName             `json:"name,omitempty"`
+	Phone            *PatchRepresentativeRequestPhone            `json:"phone,omitempty"`
+	Responsibilities *PatchRepresentativeRequestResponsibilities `json:"responsibilities,omitempty"`
 }
 
 func (o *PatchRepresentativeRequest) GetAddress() *PatchRepresentativeRequestAddress {

@@ -33,7 +33,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
     var fileID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -84,6 +87,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "c184a429-302e-4aca-80db-f1718b882a50"
 
     ctx := context.Background()
@@ -133,17 +138,17 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     fileUploadRequest := shared.FileUploadRequest{
-        AdditionalProperties: map[string]interface{}{
-            "Market": "hard",
-        },
         File: shared.FileUploadRequestFile{
-            Content: []byte("G@^n=VA69B"),
-            File: "New West",
+            Content: []byte("F?SRSKG@^n"),
+            File: "string",
         },
-        FilePurpose: shared.FilePurposeIdentityVerification,
+        FilePurpose: shared.FilePurposeBusinessVerification,
     }
-    var accountID string = "ea72dbc9-489a-4ba3-b260-10e1cd685ff1"
+
+    var accountID string = "95345729-5170-4ea7-adbc-9489aba3b260"
 
     ctx := context.Background()
     res, err := s.Files.Upload(ctx, fileUploadRequest, accountID)

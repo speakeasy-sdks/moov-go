@@ -2,32 +2,9 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // CapabilityRequestError - Error response for http requests that failed
 type CapabilityRequestError struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Error                *string                `json:"error,omitempty"`
-}
-
-func (c CapabilityRequestError) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CapabilityRequestError) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CapabilityRequestError) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Error *string `json:"error,omitempty"`
 }
 
 func (o *CapabilityRequestError) GetError() *string {

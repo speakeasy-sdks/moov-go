@@ -2,34 +2,11 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // RequirementError - Describes an error fulfilling a Requirement
 type RequirementError struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	ErrorCode            *RequirementErrorCode  `json:"errorCode,omitempty"`
+	ErrorCode *RequirementErrorCode `json:"errorCode,omitempty"`
 	// The unique ID of what the requirement is asking to be filled out.
 	Requirement *RequirementID `json:"requirement,omitempty"`
-}
-
-func (r RequirementError) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(r, "", false)
-}
-
-func (r *RequirementError) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *RequirementError) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *RequirementError) GetErrorCode() *RequirementErrorCode {

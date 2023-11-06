@@ -35,7 +35,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
     var paymentMethodID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -86,7 +89,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "c184a429-302e-4aca-80db-f1718b882a50"
+
     var sourceID *string = "80555741-9e79-40e2-b205-5dd402eb66ec"
 
     ctx := context.Background()

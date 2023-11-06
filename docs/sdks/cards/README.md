@@ -43,6 +43,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     linkApplePay := shared.LinkApplePay{
         Token: shared.LinkApplePayToken{
             PaymentData: shared.LinkApplePayTokenPaymentData{
@@ -63,6 +65,7 @@ func main() {
             TransactionIdentifier: "32b...4f3",
         },
     }
+
     var accountID string = "1f061848-80f9-474a-a77b-17cb1fda3296"
 
     ctx := context.Background()
@@ -115,14 +118,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     cardRequest := shared.CardRequest{
-        AdditionalProperties: map[string]interface{}{
-            "transmit": "sultan",
-        },
         BillingAddress: &shared.Address{
-            AdditionalProperties: map[string]interface{}{
-                "female": "McAllen",
-            },
             AddressLine1: moovgo.String("123 Main Street"),
             AddressLine2: moovgo.String("Apt 302"),
             City: moovgo.String("Boulder"),
@@ -137,7 +136,9 @@ func main() {
         },
         HolderName: moovgo.String("Jules Jackson"),
     }
-    var accountID string = "cf1dc7b4-8ba0-4e01-bb33-b1b7a8af1bc7"
+
+    var accountID string = "8cfd9cf0-8cf1-4dc7-b48b-a0e013b33b1b"
+
     var xWaitFor *shared.SchemasWaitFor = shared.SchemasWaitForPaymentMethod
 
     ctx := context.Background()
@@ -190,6 +191,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "3540bb23-258b-486f-9192-4d7f6c3c94e4"
 
     ctx := context.Background()
@@ -242,10 +245,13 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     createApplePaySession := shared.CreateApplePaySession{
         DisplayName: "Example Merchant",
         Domain: "checkout.classbooker.dev",
     }
+
     var accountID string = "94160d72-b710-419d-89b1-719f72571386"
 
     ctx := context.Background()
@@ -296,7 +302,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
+
     var cardID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -347,7 +356,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
     var cardID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -400,6 +412,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "4611290f-802a-4b57-a6c6-be763a3142ab"
 
     ctx := context.Background()
@@ -452,12 +466,15 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     registerApplePayMerchantDomains := shared.RegisterApplePayMerchantDomains{
         DisplayName: "Example Merchant",
         Domains: []string{
             "checkout.classbooker.dev",
         },
     }
+
     var accountID string = "a7f34d07-3cbe-4fbd-9d16-8b2a9900d9ad"
 
     ctx := context.Background()
@@ -513,14 +530,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     cardUpdateRequest := shared.CardUpdateRequest{
-        AdditionalProperties: map[string]interface{}{
-            "Van": "East",
-        },
         BillingAddress: &shared.UpdateAddress{
-            AdditionalProperties: map[string]interface{}{
-                "male": "Metal",
-            },
             AddressLine1: moovgo.String("123 Main Street"),
             AddressLine2: moovgo.String("Apt 302"),
             City: moovgo.String("Boulder"),
@@ -534,7 +547,9 @@ func main() {
             Year: moovgo.String("21"),
         },
     }
-    var accountID string = "f204e775-4c35-42ac-be54-077cabf6805c"
+
+    var accountID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
+
     var cardID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -589,6 +604,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     updateApplePayMerchantDomains := shared.UpdateApplePayMerchantDomains{
         AddDomains: []string{
             "pay.classbooker.dev",
@@ -597,6 +614,7 @@ func main() {
             "checkout.classbooker.dev",
         },
     }
+
     var accountID string = "8073d21a-7f13-415c-bf5b-aa0e8c6d7b6b"
 
     ctx := context.Background()

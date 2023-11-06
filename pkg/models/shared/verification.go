@@ -2,13 +2,8 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // Verification - Describes identity verification status and relevant identity verification documents
 type Verification struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// This field is deprecated but available for use until February 2023.
 	//
 	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -20,24 +15,6 @@ type Verification struct {
 	Status VerificationStatus `json:"status"`
 	// The status of an identity verification for a profile
 	VerificationStatus *AccountVerificationStatus `json:"verificationStatus,omitempty"`
-}
-
-func (v Verification) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(v, "", false)
-}
-
-func (v *Verification) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *Verification) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *Verification) GetDetails() *VerificationStatusDetails {
