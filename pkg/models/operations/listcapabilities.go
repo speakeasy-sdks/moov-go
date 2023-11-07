@@ -20,21 +20,14 @@ func (o *ListCapabilitiesRequest) GetAccountID() string {
 }
 
 type ListCapabilitiesResponse struct {
-	// The list of capabilities for the account
-	Capabilities []shared.Capability
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-}
-
-func (o *ListCapabilitiesResponse) GetCapabilities() []shared.Capability {
-	if o == nil {
-		return nil
-	}
-	return o.Capabilities
+	// The list of capabilities for the account
+	Classes []shared.Capability
 }
 
 func (o *ListCapabilitiesResponse) GetContentType() string {
@@ -56,4 +49,11 @@ func (o *ListCapabilitiesResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *ListCapabilitiesResponse) GetClasses() []shared.Capability {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

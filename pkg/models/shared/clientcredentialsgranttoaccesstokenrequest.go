@@ -7,18 +7,18 @@ import (
 	"fmt"
 )
 
-type ClientCredentialsGrantToAccessTokenRequestGrantType string
+type GrantType string
 
 const (
-	ClientCredentialsGrantToAccessTokenRequestGrantTypeClientCredentials ClientCredentialsGrantToAccessTokenRequestGrantType = "client_credentials"
-	ClientCredentialsGrantToAccessTokenRequestGrantTypeRefreshToken      ClientCredentialsGrantToAccessTokenRequestGrantType = "refresh_token"
+	GrantTypeClientCredentials GrantType = "client_credentials"
+	GrantTypeRefreshToken      GrantType = "refresh_token"
 )
 
-func (e ClientCredentialsGrantToAccessTokenRequestGrantType) ToPointer() *ClientCredentialsGrantToAccessTokenRequestGrantType {
+func (e GrantType) ToPointer() *GrantType {
 	return &e
 }
 
-func (e *ClientCredentialsGrantToAccessTokenRequestGrantType) UnmarshalJSON(data []byte) error {
+func (e *GrantType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -27,10 +27,10 @@ func (e *ClientCredentialsGrantToAccessTokenRequestGrantType) UnmarshalJSON(data
 	case "client_credentials":
 		fallthrough
 	case "refresh_token":
-		*e = ClientCredentialsGrantToAccessTokenRequestGrantType(v)
+		*e = GrantType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ClientCredentialsGrantToAccessTokenRequestGrantType: %v", v)
+		return fmt.Errorf("invalid value for GrantType: %v", v)
 	}
 }
 
@@ -39,8 +39,8 @@ type ClientCredentialsGrantToAccessTokenRequest struct {
 	// If not specified in `Authorization: Basic` it can be specified here
 	ClientID *string `json:"client_id,omitempty" form:"name=client_id"`
 	// If not specified in `Authorization: Basic` it can be specified here
-	ClientSecret *string                                             `json:"client_secret,omitempty" form:"name=client_secret"`
-	GrantType    ClientCredentialsGrantToAccessTokenRequestGrantType `json:"grant_type" form:"name=grant_type"`
+	ClientSecret *string   `json:"client_secret,omitempty" form:"name=client_secret"`
+	GrantType    GrantType `json:"grant_type" form:"name=grant_type"`
 	// String passed to the authorization server to gain access to the system
 	RefreshToken *string `json:"refresh_token,omitempty" form:"name=refresh_token"`
 	// A space-delimited list of [scopes](https://docs.moov.io/guides/developer-tools/api-keys/scopes/) that are allowed
@@ -61,9 +61,9 @@ func (o *ClientCredentialsGrantToAccessTokenRequest) GetClientSecret() *string {
 	return o.ClientSecret
 }
 
-func (o *ClientCredentialsGrantToAccessTokenRequest) GetGrantType() ClientCredentialsGrantToAccessTokenRequestGrantType {
+func (o *ClientCredentialsGrantToAccessTokenRequest) GetGrantType() GrantType {
 	if o == nil {
-		return ClientCredentialsGrantToAccessTokenRequestGrantType("")
+		return GrantType("")
 	}
 	return o.GrantType
 }

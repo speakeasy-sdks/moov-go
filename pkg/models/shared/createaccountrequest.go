@@ -2,7 +2,7 @@
 
 package shared
 
-type CreateAccountRequestCustomerSupportAddress struct {
+type CreateAccountRequestAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`
 	City            *string `json:"city,omitempty"`
@@ -11,61 +11,61 @@ type CreateAccountRequestCustomerSupportAddress struct {
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
-func (o *CreateAccountRequestCustomerSupportAddress) GetAddressLine1() *string {
+func (o *CreateAccountRequestAddress) GetAddressLine1() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine1
 }
 
-func (o *CreateAccountRequestCustomerSupportAddress) GetAddressLine2() *string {
+func (o *CreateAccountRequestAddress) GetAddressLine2() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine2
 }
 
-func (o *CreateAccountRequestCustomerSupportAddress) GetCity() *string {
+func (o *CreateAccountRequestAddress) GetCity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.City
 }
 
-func (o *CreateAccountRequestCustomerSupportAddress) GetCountry() *string {
+func (o *CreateAccountRequestAddress) GetCountry() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Country
 }
 
-func (o *CreateAccountRequestCustomerSupportAddress) GetPostalCode() *string {
+func (o *CreateAccountRequestAddress) GetPostalCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PostalCode
 }
 
-func (o *CreateAccountRequestCustomerSupportAddress) GetStateOrProvince() *string {
+func (o *CreateAccountRequestAddress) GetStateOrProvince() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StateOrProvince
 }
 
-type CreateAccountRequestCustomerSupportPhone struct {
+type CreateAccountRequestPhone struct {
 	CountryCode *string `json:"countryCode,omitempty"`
 	Number      *string `json:"number,omitempty"`
 }
 
-func (o *CreateAccountRequestCustomerSupportPhone) GetCountryCode() *string {
+func (o *CreateAccountRequestPhone) GetCountryCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CountryCode
 }
 
-func (o *CreateAccountRequestCustomerSupportPhone) GetNumber() *string {
+func (o *CreateAccountRequestPhone) GetNumber() *string {
 	if o == nil {
 		return nil
 	}
@@ -74,14 +74,14 @@ func (o *CreateAccountRequestCustomerSupportPhone) GetNumber() *string {
 
 // CreateAccountRequestCustomerSupport - User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account
 type CreateAccountRequestCustomerSupport struct {
-	Address *CreateAccountRequestCustomerSupportAddress `json:"address,omitempty"`
+	Address *CreateAccountRequestAddress `json:"address,omitempty"`
 	// Email Address
-	Email   *string                                   `json:"email,omitempty"`
-	Phone   *CreateAccountRequestCustomerSupportPhone `json:"phone,omitempty"`
-	Website *string                                   `json:"website,omitempty"`
+	Email   *string                    `json:"email,omitempty"`
+	Phone   *CreateAccountRequestPhone `json:"phone,omitempty"`
+	Website *string                    `json:"website,omitempty"`
 }
 
-func (o *CreateAccountRequestCustomerSupport) GetAddress() *CreateAccountRequestCustomerSupportAddress {
+func (o *CreateAccountRequestCustomerSupport) GetAddress() *CreateAccountRequestAddress {
 	if o == nil {
 		return nil
 	}
@@ -95,7 +95,7 @@ func (o *CreateAccountRequestCustomerSupport) GetEmail() *string {
 	return o.Email
 }
 
-func (o *CreateAccountRequestCustomerSupport) GetPhone() *CreateAccountRequestCustomerSupportPhone {
+func (o *CreateAccountRequestCustomerSupport) GetPhone() *CreateAccountRequestPhone {
 	if o == nil {
 		return nil
 	}
@@ -109,26 +109,26 @@ func (o *CreateAccountRequestCustomerSupport) GetWebsite() *string {
 	return o.Website
 }
 
-// CreateAccountRequestSettingsAchPayment - User provided settings to manage ACH payments
-type CreateAccountRequestSettingsAchPayment struct {
+// CreateAccountRequestAchPayment - User provided settings to manage ACH payments
+type CreateAccountRequestAchPayment struct {
 	// The description that shows up on ACH transactions. This will default to the account's display name on account creation.
 	CompanyName *string `json:"companyName,omitempty"`
 }
 
-func (o *CreateAccountRequestSettingsAchPayment) GetCompanyName() *string {
+func (o *CreateAccountRequestAchPayment) GetCompanyName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CompanyName
 }
 
-// CreateAccountRequestSettingsCardPayment - User provided settings to manage card payments. This data is only allowed on a business account
-type CreateAccountRequestSettingsCardPayment struct {
+// CreateAccountRequestCardPayment - User provided settings to manage card payments. This data is only allowed on a business account
+type CreateAccountRequestCardPayment struct {
 	// The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
 	StatementDescriptor *string `json:"statementDescriptor,omitempty"`
 }
 
-func (o *CreateAccountRequestSettingsCardPayment) GetStatementDescriptor() *string {
+func (o *CreateAccountRequestCardPayment) GetStatementDescriptor() *string {
 	if o == nil {
 		return nil
 	}
@@ -137,18 +137,18 @@ func (o *CreateAccountRequestSettingsCardPayment) GetStatementDescriptor() *stri
 
 // CreateAccountRequestSettings - User provided settings to manage an account
 type CreateAccountRequestSettings struct {
-	AchPayment  *CreateAccountRequestSettingsAchPayment  `json:"achPayment,omitempty"`
-	CardPayment *CreateAccountRequestSettingsCardPayment `json:"cardPayment,omitempty"`
+	AchPayment  *CreateAccountRequestAchPayment  `json:"achPayment,omitempty"`
+	CardPayment *CreateAccountRequestCardPayment `json:"cardPayment,omitempty"`
 }
 
-func (o *CreateAccountRequestSettings) GetAchPayment() *CreateAccountRequestSettingsAchPayment {
+func (o *CreateAccountRequestSettings) GetAchPayment() *CreateAccountRequestAchPayment {
 	if o == nil {
 		return nil
 	}
 	return o.AchPayment
 }
 
-func (o *CreateAccountRequestSettings) GetCardPayment() *CreateAccountRequestSettingsCardPayment {
+func (o *CreateAccountRequestSettings) GetCardPayment() *CreateAccountRequestCardPayment {
 	if o == nil {
 		return nil
 	}

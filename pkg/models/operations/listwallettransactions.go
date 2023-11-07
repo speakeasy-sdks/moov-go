@@ -138,7 +138,7 @@ type ListWalletTransactionsResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Transactions associated with the wallet
-	WalletTransactions []shared.WalletTransaction
+	Classes []shared.WalletTransaction
 }
 
 func (o *ListWalletTransactionsResponse) GetContentType() string {
@@ -162,9 +162,9 @@ func (o *ListWalletTransactionsResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *ListWalletTransactionsResponse) GetWalletTransactions() []shared.WalletTransaction {
+func (o *ListWalletTransactionsResponse) GetClasses() []shared.WalletTransaction {
 	if o == nil {
 		return nil
 	}
-	return o.WalletTransactions
+	return o.Classes
 }

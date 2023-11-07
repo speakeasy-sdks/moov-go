@@ -1,5 +1,5 @@
 # Enrichment
-(*Enrichment*)
+(*.Enrichment*)
 
 ### Available Operations
 
@@ -42,7 +42,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.EnrichmentAddresses != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -95,7 +95,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.GetAvatar200ImageWildcardBinaryString != nil {
+    if res.Stream != nil {
         // handle response
     }
 }

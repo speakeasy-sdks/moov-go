@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-type AccountCustomerSupportAddress struct {
+type AccountAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`
 	City            *string `json:"city,omitempty"`
@@ -16,175 +16,175 @@ type AccountCustomerSupportAddress struct {
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
-func (o *AccountCustomerSupportAddress) GetAddressLine1() *string {
+func (o *AccountAddress) GetAddressLine1() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine1
 }
 
-func (o *AccountCustomerSupportAddress) GetAddressLine2() *string {
+func (o *AccountAddress) GetAddressLine2() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine2
 }
 
-func (o *AccountCustomerSupportAddress) GetCity() *string {
+func (o *AccountAddress) GetCity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.City
 }
 
-func (o *AccountCustomerSupportAddress) GetCountry() *string {
+func (o *AccountAddress) GetCountry() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Country
 }
 
-func (o *AccountCustomerSupportAddress) GetPostalCode() *string {
+func (o *AccountAddress) GetPostalCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PostalCode
 }
 
-func (o *AccountCustomerSupportAddress) GetStateOrProvince() *string {
+func (o *AccountAddress) GetStateOrProvince() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StateOrProvince
 }
 
-type AccountCustomerSupportPhone struct {
+type AccountPhone struct {
 	CountryCode *string `json:"countryCode,omitempty"`
 	Number      *string `json:"number,omitempty"`
 }
 
-func (o *AccountCustomerSupportPhone) GetCountryCode() *string {
+func (o *AccountPhone) GetCountryCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CountryCode
 }
 
-func (o *AccountCustomerSupportPhone) GetNumber() *string {
+func (o *AccountPhone) GetNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Number
 }
 
-// AccountCustomerSupport - User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account
-type AccountCustomerSupport struct {
-	Address *AccountCustomerSupportAddress `json:"address,omitempty"`
+// CustomerSupport - User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account
+type CustomerSupport struct {
+	Address *AccountAddress `json:"address,omitempty"`
 	// Email Address
-	Email   *string                      `json:"email,omitempty"`
-	Phone   *AccountCustomerSupportPhone `json:"phone,omitempty"`
-	Website *string                      `json:"website,omitempty"`
+	Email   *string       `json:"email,omitempty"`
+	Phone   *AccountPhone `json:"phone,omitempty"`
+	Website *string       `json:"website,omitempty"`
 }
 
-func (o *AccountCustomerSupport) GetAddress() *AccountCustomerSupportAddress {
+func (o *CustomerSupport) GetAddress() *AccountAddress {
 	if o == nil {
 		return nil
 	}
 	return o.Address
 }
 
-func (o *AccountCustomerSupport) GetEmail() *string {
+func (o *CustomerSupport) GetEmail() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Email
 }
 
-func (o *AccountCustomerSupport) GetPhone() *AccountCustomerSupportPhone {
+func (o *CustomerSupport) GetPhone() *AccountPhone {
 	if o == nil {
 		return nil
 	}
 	return o.Phone
 }
 
-func (o *AccountCustomerSupport) GetWebsite() *string {
+func (o *CustomerSupport) GetWebsite() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Website
 }
 
-// AccountSettingsAchPayment - User provided settings to manage ACH payments
-type AccountSettingsAchPayment struct {
+// AchPayment - User provided settings to manage ACH payments
+type AchPayment struct {
 	// The description that shows up on ACH transactions. This will default to the account's display name on account creation.
 	CompanyName *string `json:"companyName,omitempty"`
 }
 
-func (o *AccountSettingsAchPayment) GetCompanyName() *string {
+func (o *AchPayment) GetCompanyName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CompanyName
 }
 
-// AccountSettingsCardPayment - User provided settings to manage card payments. This data is only allowed on a business account
-type AccountSettingsCardPayment struct {
+// CardPayment - User provided settings to manage card payments. This data is only allowed on a business account
+type CardPayment struct {
 	// The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
 	StatementDescriptor *string `json:"statementDescriptor,omitempty"`
 }
 
-func (o *AccountSettingsCardPayment) GetStatementDescriptor() *string {
+func (o *CardPayment) GetStatementDescriptor() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StatementDescriptor
 }
 
-// AccountSettings - User provided settings to manage an account
-type AccountSettings struct {
-	AchPayment  *AccountSettingsAchPayment  `json:"achPayment,omitempty"`
-	CardPayment *AccountSettingsCardPayment `json:"cardPayment,omitempty"`
+// Settings - User provided settings to manage an account
+type Settings struct {
+	AchPayment  *AchPayment  `json:"achPayment,omitempty"`
+	CardPayment *CardPayment `json:"cardPayment,omitempty"`
 }
 
-func (o *AccountSettings) GetAchPayment() *AccountSettingsAchPayment {
+func (o *Settings) GetAchPayment() *AchPayment {
 	if o == nil {
 		return nil
 	}
 	return o.AchPayment
 }
 
-func (o *AccountSettings) GetCardPayment() *AccountSettingsCardPayment {
+func (o *Settings) GetCardPayment() *CardPayment {
 	if o == nil {
 		return nil
 	}
 	return o.CardPayment
 }
 
-// AccountTermsOfService - Describes the acceptance of the Terms of Service
-type AccountTermsOfService struct {
+// TermsOfService - Describes the acceptance of the Terms of Service
+type TermsOfService struct {
 	AcceptedDate time.Time `json:"acceptedDate"`
 	AcceptedIP   string    `json:"acceptedIP"`
 }
 
-func (a AccountTermsOfService) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
+func (t TermsOfService) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (a *AccountTermsOfService) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+func (t *TermsOfService) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *AccountTermsOfService) GetAcceptedDate() time.Time {
+func (o *TermsOfService) GetAcceptedDate() time.Time {
 	if o == nil {
 		return time.Time{}
 	}
 	return o.AcceptedDate
 }
 
-func (o *AccountTermsOfService) GetAcceptedIP() string {
+func (o *TermsOfService) GetAcceptedIP() string {
 	if o == nil {
 		return ""
 	}
@@ -196,11 +196,11 @@ type Account struct {
 	// UUID v4
 	AccountID string `json:"accountID"`
 	// The type of entity represented by this Account
-	AccountType     AccountType             `json:"accountType"`
-	CreatedOn       time.Time               `json:"createdOn"`
-	CustomerSupport *AccountCustomerSupport `json:"customerSupport,omitempty"`
-	DisconnectedOn  *time.Time              `json:"disconnectedOn,omitempty"`
-	DisplayName     *string                 `json:"displayName,omitempty"`
+	AccountType     AccountType      `json:"accountType"`
+	CreatedOn       time.Time        `json:"createdOn"`
+	CustomerSupport *CustomerSupport `json:"customerSupport,omitempty"`
+	DisconnectedOn  *time.Time       `json:"disconnectedOn,omitempty"`
+	DisplayName     *string          `json:"displayName,omitempty"`
 	// Serves as an optional alias from a foreign/external system which can be used to reference this resource
 	ForeignID *string `json:"foreignID,omitempty"`
 	// Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
@@ -208,10 +208,10 @@ type Account struct {
 	// The mode this account is allowed to be used within.
 	Mode *Mode `json:"mode,omitempty"`
 	// Describes a Moov Account Profile
-	Profile        Profile                `json:"profile"`
-	Settings       *AccountSettings       `json:"settings,omitempty"`
-	TermsOfService *AccountTermsOfService `json:"termsOfService,omitempty"`
-	UpdatedOn      time.Time              `json:"updatedOn"`
+	Profile        Profile         `json:"profile"`
+	Settings       *Settings       `json:"settings,omitempty"`
+	TermsOfService *TermsOfService `json:"termsOfService,omitempty"`
+	UpdatedOn      time.Time       `json:"updatedOn"`
 	// Describes identity verification status and relevant identity verification documents
 	Verification *Verification `json:"verification,omitempty"`
 }
@@ -248,7 +248,7 @@ func (o *Account) GetCreatedOn() time.Time {
 	return o.CreatedOn
 }
 
-func (o *Account) GetCustomerSupport() *AccountCustomerSupport {
+func (o *Account) GetCustomerSupport() *CustomerSupport {
 	if o == nil {
 		return nil
 	}
@@ -297,14 +297,14 @@ func (o *Account) GetProfile() Profile {
 	return o.Profile
 }
 
-func (o *Account) GetSettings() *AccountSettings {
+func (o *Account) GetSettings() *Settings {
 	if o == nil {
 		return nil
 	}
 	return o.Settings
 }
 
-func (o *Account) GetTermsOfService() *AccountTermsOfService {
+func (o *Account) GetTermsOfService() *TermsOfService {
 	if o == nil {
 		return nil
 	}

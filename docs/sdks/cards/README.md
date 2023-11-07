@@ -1,5 +1,5 @@
 # Cards
-(*Cards*)
+(*.Cards*)
 
 ## Overview
 
@@ -46,10 +46,10 @@ func main() {
 
 
     linkApplePay := shared.LinkApplePay{
-        Token: shared.LinkApplePayToken{
-            PaymentData: shared.LinkApplePayTokenPaymentData{
+        Token: shared.Token{
+            PaymentData: shared.PaymentData{
                 Data: "3+f4oOTwPa6f1UZ6tG...CE=",
-                Header: shared.LinkApplePayTokenPaymentDataHeader{
+                Header: shared.Header{
                     EphemeralPublicKey: "MFkwEK...Md==",
                     PublicKeyHash: "l0CnXdMv...D1I=",
                     TransactionID: "32b...4f3",
@@ -57,7 +57,7 @@ func main() {
                 Signature: "MIAGCSqGSIb3DQ.AAAA==",
                 Version: "EC_v1",
             },
-            PaymentMethod: shared.LinkApplePayTokenPaymentMethod{
+            PaymentMethod: shared.LinkApplePayPaymentMethod{
                 DisplayName: "Visa 1234",
                 Network: "Visa",
                 Type: "debit",

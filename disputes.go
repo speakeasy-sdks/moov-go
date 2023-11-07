@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// disputes - A [dispute](https://docs.moov.io/guides/money-movement/cards/disputes/) is a situation where a cardholder formally questions a transaction on their account with their card issuer. This could be for a number of reasons ranging from billing errors to fraudulent activity or dissatisfactory goods/services. If the dispute is recognized as legitimate, the issuer will reverse the payment (otherwise known as a chargeback).
-type disputes struct {
+// Disputes - A [dispute](https://docs.moov.io/guides/money-movement/cards/disputes/) is a situation where a cardholder formally questions a transaction on their account with their card issuer. This could be for a number of reasons ranging from billing errors to fraudulent activity or dissatisfactory goods/services. If the dispute is recognized as legitimate, the issuer will reverse the payment (otherwise known as a chargeback).
+type Disputes struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newDisputes(sdkConfig sdkConfiguration) *disputes {
-	return &disputes{
+func newDisputes(sdkConfig sdkConfiguration) *Disputes {
+	return &Disputes{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Get Dispute by ID
 // Returns a user's dispute by ID. <br><br> To use this endpoint, you need to specify the `/accounts/{your-account-id}/transfers.read` scope.
-func (s *disputes) Get(ctx context.Context, disputeID string) (*operations.GetDisputeResponse, error) {
+func (s *Disputes) Get(ctx context.Context, disputeID string) (*operations.GetDisputeResponse, error) {
 	request := operations.GetDisputeRequest{
 		DisputeID: disputeID,
 	}
@@ -85,6 +85,10 @@ func (s *disputes) Get(ctx context.Context, disputeID string) (*operations.GetDi
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -93,7 +97,7 @@ func (s *disputes) Get(ctx context.Context, disputeID string) (*operations.GetDi
 
 // List of all disputes
 // Returns the list of disputes. <br><br> To use this endpoint, you need to specify the `/accounts/{your-account-id}/transfers.read` scope.
-func (s *disputes) List(ctx context.Context, request operations.ListDisputesRequest) (*operations.ListDisputesResponse, error) {
+func (s *Disputes) List(ctx context.Context, request operations.ListDisputesRequest) (*operations.ListDisputesResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/disputes"
 
@@ -141,12 +145,16 @@ func (s *disputes) List(ctx context.Context, request operations.ListDisputesRequ
 				return nil, err
 			}
 
-			res.Disputes = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 

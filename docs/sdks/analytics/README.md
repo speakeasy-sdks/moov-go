@@ -1,5 +1,5 @@
 # Analytics
-(*Analytics*)
+(*.Analytics*)
 
 ## Overview
 

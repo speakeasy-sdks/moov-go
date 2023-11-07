@@ -15,24 +15,24 @@ import (
 	"strings"
 )
 
-// accounts - [Accounts](https://docs.moov.io/guides/accounts/) represent a legal entity (either a business or an individual) in Moov. You can create an account for yourself or set up accounts for others, requesting different [capabilities](https://docs.moov.io/guides/accounts/capabilities/) depending on what you need to be able to do with that account. You can retrieve an account to get details on the business or individual account holder, such as an email address or employer identification number (EIN).
+// Accounts - [Accounts](https://docs.moov.io/guides/accounts/) represent a legal entity (either a business or an individual) in Moov. You can create an account for yourself or set up accounts for others, requesting different [capabilities](https://docs.moov.io/guides/accounts/capabilities/) depending on what you need to be able to do with that account. You can retrieve an account to get details on the business or individual account holder, such as an email address or employer identification number (EIN).
 //
 // Based on the type of account and its requested capabilities, we have certain [verification requirements](https://docs.moov.io/guides/accounts/identity-verification/). To see what capabilities that account has, you can use the [GET capability endpoint](https://docs.moov.io/api/#operation/getCapability).
 //
 // When you sign up for the Moov Dashboard, you will have a **facilitator account** which can be used to facilitate money movement between other accounts. A facilitator account will not show up in your list of accounts and cannot be created via API. To update your facilitator account information, use the settings page of the Moov Dashboard.
-type accounts struct {
+type Accounts struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newAccounts(sdkConfig sdkConfiguration) *accounts {
-	return &accounts{
+func newAccounts(sdkConfig sdkConfiguration) *Accounts {
+	return &Accounts{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // AssignCountry - Assign Account Countries
 // Assign the countries of operation for an account. This endpoint will always overwrite the previously assigned values. <br><br> To update the account countries, you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-func (s *accounts) AssignCountry(ctx context.Context, countries shared.Countries, accountID string) (*operations.PutAccountCountriesResponse, error) {
+func (s *Accounts) AssignCountry(ctx context.Context, countries shared.Countries, accountID string) (*operations.PutAccountCountriesResponse, error) {
 	request := operations.PutAccountCountriesRequest{
 		Countries: countries,
 		AccountID: accountID,
@@ -102,6 +102,10 @@ func (s *accounts) AssignCountry(ctx context.Context, countries shared.Countries
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -110,7 +114,7 @@ func (s *accounts) AssignCountry(ctx context.Context, countries shared.Countries
 
 // Create account
 // You can create accounts for your users by passing the required information to Moov. <br><br> Note that `mode` field is only required when creating a facilitator account. All non-facilitator account creation requests will ignore the mode field provided and be set to the calling facilitator's mode. <br><br> If you are creating an account with the business type "llc", "partnership", or "privateCorporation", you will need to also provide [business representatives](https://docs.moov.io/api/#tag/Representatives) after creating the account for verification purposes. Once you've added your business owners as representatives, you'll then need to [patch your Moov account](https://docs.moov.io/api/#operation/patchAccount) to indicate that ownership information is complete. Read more on our [business verification requirements here](https://docs.moov.io/guides/accounts/business-verification/). <br><br> When creating an account, you will need to specify the `/accounts.write` scope.
-func (s *accounts) Create(ctx context.Context, request shared.CreateAccountRequest) (*operations.CreateAccountResponse, error) {
+func (s *Accounts) Create(ctx context.Context, request shared.CreateAccountRequest) (*operations.CreateAccountResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/accounts"
 
@@ -174,6 +178,10 @@ func (s *accounts) Create(ctx context.Context, request shared.CreateAccountReque
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -182,7 +190,7 @@ func (s *accounts) Create(ctx context.Context, request shared.CreateAccountReque
 
 // Get account
 // Retrieves details for the account with the specified ID. <br><br> To get an account, you will need to specify the `/accounts/{accountID}/profile.read` scope.
-func (s *accounts) Get(ctx context.Context, accountID string) (*operations.GetAccountResponse, error) {
+func (s *Accounts) Get(ctx context.Context, accountID string) (*operations.GetAccountResponse, error) {
 	request := operations.GetAccountRequest{
 		AccountID: accountID,
 	}
@@ -241,6 +249,10 @@ func (s *accounts) Get(ctx context.Context, accountID string) (*operations.GetAc
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -249,7 +261,7 @@ func (s *accounts) Get(ctx context.Context, accountID string) (*operations.GetAc
 
 // GetTosToken - Get terms of service token
 // Generates a non-expiring token that can then be used to accept Moov's terms of service. This token can only be generated via API. Any Moov account requesting the `collect-funds`, `send-funds`, `wallet`, or `card-issuing` capabilities must accept Moov's terms of service, then have the generated terms of service token patched to the account. Read more on our [quick start guide](https://docs.moov.io/guides/quick-start/#request-capabilities).
-func (s *accounts) GetTosToken(ctx context.Context) (*operations.GetTermsOfServiceTokenResponse, error) {
+func (s *Accounts) GetTosToken(ctx context.Context) (*operations.GetTermsOfServiceTokenResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/tos-token"
 
@@ -298,6 +310,11 @@ func (s *accounts) GetTosToken(ctx context.Context) (*operations.GetTermsOfServi
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 422:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -310,7 +327,7 @@ func (s *accounts) GetTosToken(ctx context.Context) (*operations.GetTermsOfServi
 // supported via the `skip` and `count` query parameters.<br><br>
 // Searching by name and email will overlap and return results based on relevance.
 // <br><br> To list connected accounts, you must specify the `/accounts.read` scope when retrieving the authentication token.
-func (s *accounts) List(ctx context.Context, request operations.ListAccountsRequest) (*operations.ListAccountsResponse, error) {
+func (s *Accounts) List(ctx context.Context, request operations.ListAccountsRequest) (*operations.ListAccountsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/accounts"
 
@@ -358,7 +375,7 @@ func (s *accounts) List(ctx context.Context, request operations.ListAccountsRequ
 				return nil, err
 			}
 
-			res.Accounts = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -366,6 +383,10 @@ func (s *accounts) List(ctx context.Context, request operations.ListAccountsRequ
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -374,7 +395,7 @@ func (s *accounts) List(ctx context.Context, request operations.ListAccountsRequ
 
 // ListCountries - Get Account Countries
 // Retrieve the specified countries of operation for an account. <br><br> To get the list of countries, you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-func (s *accounts) ListCountries(ctx context.Context, accountID string) (*operations.GetAccountCountriesResponse, error) {
+func (s *Accounts) ListCountries(ctx context.Context, accountID string) (*operations.GetAccountCountriesResponse, error) {
 	request := operations.GetAccountCountriesRequest{
 		AccountID: accountID,
 	}
@@ -431,6 +452,10 @@ func (s *accounts) ListCountries(ctx context.Context, accountID string) (*operat
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -453,7 +478,7 @@ func (s *accounts) ListCountries(ctx context.Context, accountID string) (*operat
 //   - Verified accounts cannot change any existing profile data.
 //
 // If you need to update information in a locked state, please contact Moov support.
-func (s *accounts) Update(ctx context.Context, patchAccountRequest shared.PatchAccountRequest, accountID string) (*operations.PatchAccountResponse, error) {
+func (s *Accounts) Update(ctx context.Context, patchAccountRequest shared.PatchAccountRequest, accountID string) (*operations.PatchAccountResponse, error) {
 	request := operations.PatchAccountRequest{
 		PatchAccountRequest: patchAccountRequest,
 		AccountID:           accountID,
@@ -529,6 +554,10 @@ func (s *accounts) Update(ctx context.Context, patchAccountRequest shared.PatchA
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 

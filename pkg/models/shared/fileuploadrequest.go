@@ -3,8 +3,8 @@
 package shared
 
 type FileUploadRequestFile struct {
-	Content []byte `multipartForm:"content"`
-	File    string `multipartForm:"name=file"`
+	Content  []byte `multipartForm:"content"`
+	FileName string `multipartForm:"name=file"`
 }
 
 func (o *FileUploadRequestFile) GetContent() []byte {
@@ -14,11 +14,11 @@ func (o *FileUploadRequestFile) GetContent() []byte {
 	return o.Content
 }
 
-func (o *FileUploadRequestFile) GetFile() string {
+func (o *FileUploadRequestFile) GetFileName() string {
 	if o == nil {
 		return ""
 	}
-	return o.File
+	return o.FileName
 }
 
 // FileUploadRequest - Request to attach a file to an account.

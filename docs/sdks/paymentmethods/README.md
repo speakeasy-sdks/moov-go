@@ -1,5 +1,5 @@
 # PaymentMethods
-(*PaymentMethods*)
+(*.PaymentMethods*)
 
 ## Overview
 

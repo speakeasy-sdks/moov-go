@@ -1,5 +1,5 @@
 # Accounts
-(*Accounts*)
+(*.Accounts*)
 
 ## Overview
 
@@ -120,7 +120,7 @@ func main() {
             shared.CapabilityIDCollectFunds,
         },
         CustomerSupport: &shared.CreateAccountRequestCustomerSupport{
-            Address: &shared.CreateAccountRequestCustomerSupportAddress{
+            Address: &shared.CreateAccountRequestAddress{
                 AddressLine1: moovgo.String("123 Main Street"),
                 AddressLine2: moovgo.String("Apt 302"),
                 City: moovgo.String("Boulder"),
@@ -129,7 +129,7 @@ func main() {
                 StateOrProvince: moovgo.String("CO"),
             },
             Email: moovgo.String("amanda@classbooker.dev"),
-            Phone: &shared.CreateAccountRequestCustomerSupportPhone{
+            Phone: &shared.CreateAccountRequestPhone{
                 CountryCode: moovgo.String("1"),
                 Number: moovgo.String("8185551212"),
             },
@@ -141,8 +141,8 @@ func main() {
         },
         Mode: shared.ModeProduction.ToPointer(),
         Profile: shared.CreateProfile{
-            Business: &shared.CreateProfileBusiness{
-                Address: &shared.CreateProfileBusinessAddress{
+            Business: &shared.Business{
+                Address: &shared.CreateProfileAddress{
                     AddressLine1: moovgo.String("123 Main Street"),
                     AddressLine2: moovgo.String("Apt 302"),
                     City: moovgo.String("Boulder"),
@@ -154,25 +154,25 @@ func main() {
                 Description: moovgo.String("Local fitness center paying out instructors"),
                 DoingBusinessAs: moovgo.String("Whole Body Fitness"),
                 Email: moovgo.String("amanda@classbooker.dev"),
-                IndustryCodes: &shared.CreateProfileBusinessIndustryCodes{
+                IndustryCodes: &shared.IndustryCodes{
                     Mcc: moovgo.String("7997"),
                     Naics: moovgo.String("713940"),
                     Sic: moovgo.String("7991"),
                 },
                 LegalBusinessName: "Whole Body Fitness LLC",
-                Phone: &shared.CreateProfileBusinessPhone{
+                Phone: &shared.CreateProfilePhone{
                     CountryCode: moovgo.String("1"),
                     Number: moovgo.String("8185551212"),
                 },
-                TaxID: &shared.CreateProfileBusinessTaxID{
+                TaxID: &shared.TaxID{
                     Ein: &shared.Ein{
                         Number: moovgo.String("123-45-6789"),
                     },
                 },
                 Website: moovgo.String("www.wholebodyfitnessgym.com"),
             },
-            Individual: &shared.CreateProfileIndividual{
-                Address: &shared.CreateProfileIndividualAddress{
+            Individual: &shared.Individual{
+                Address: &shared.CreateProfileSchemasAddress{
                     AddressLine1: moovgo.String("123 Main Street"),
                     AddressLine2: moovgo.String("Apt 302"),
                     City: moovgo.String("Boulder"),
@@ -180,18 +180,18 @@ func main() {
                     PostalCode: moovgo.String("80301"),
                     StateOrProvince: moovgo.String("CO"),
                 },
-                BirthDate: &shared.CreateProfileIndividualBirthDate{
+                BirthDate: &shared.CreateProfileBirthDate{
                     Day: 9,
                     Month: 11,
                     Year: 1989,
                 },
                 Email: moovgo.String("amanda@classbooker.dev"),
-                GovernmentID: &shared.CreateProfileIndividualGovernmentID{
-                    Itin: &shared.CreateProfileIndividualGovernmentIDItin{
+                GovernmentID: &shared.CreateProfileGovernmentID{
+                    Itin: &shared.CreateProfileItin{
                         Full: moovgo.String("123-45-6789"),
                         LastFour: moovgo.String("6789"),
                     },
-                    Ssn: &shared.CreateProfileIndividualGovernmentIDSsn{
+                    Ssn: &shared.CreateProfileSsn{
                         Full: moovgo.String("123-45-6789"),
                         LastFour: moovgo.String("6789"),
                     },
@@ -202,17 +202,17 @@ func main() {
                     MiddleName: moovgo.String("Amanda"),
                     Suffix: moovgo.String("Jr"),
                 },
-                Phone: &shared.CreateProfileIndividualPhone{
+                Phone: &shared.CreateProfileSchemasPhone{
                     CountryCode: moovgo.String("1"),
                     Number: moovgo.String("8185551212"),
                 },
             },
         },
         Settings: &shared.CreateAccountRequestSettings{
-            AchPayment: &shared.CreateAccountRequestSettingsAchPayment{
+            AchPayment: &shared.CreateAccountRequestAchPayment{
                 CompanyName: moovgo.String("Whole Body Fitness"),
             },
-            CardPayment: &shared.CreateAccountRequestSettingsCardPayment{
+            CardPayment: &shared.CreateAccountRequestCardPayment{
                 StatementDescriptor: moovgo.String("Whole Body Fitness"),
             },
         },
@@ -380,7 +380,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Accounts != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -487,7 +487,7 @@ func main() {
 
     patchAccountRequest := shared.PatchAccountRequest{
         CustomerSupport: &shared.PatchAccountRequestCustomerSupport{
-            Address: &shared.PatchAccountRequestCustomerSupportAddress{
+            Address: &shared.PatchAccountRequestAddress{
                 AddressLine1: moovgo.String("123 Main Street"),
                 AddressLine2: moovgo.String("Apt 302"),
                 City: moovgo.String("Boulder"),
@@ -496,7 +496,7 @@ func main() {
                 StateOrProvince: moovgo.String("CO"),
             },
             Email: moovgo.String("amanda@classbooker.dev"),
-            Phone: &shared.PatchAccountRequestCustomerSupportPhone{
+            Phone: &shared.PatchAccountRequestPhone{
                 CountryCode: moovgo.String("1"),
                 Number: moovgo.String("8185551212"),
             },
@@ -507,8 +507,8 @@ func main() {
             "key": "string",
         },
         Profile: &shared.PatchAccountRequestProfile{
-            Business: &shared.PatchAccountRequestProfileBusiness{
-                Address: &shared.PatchAccountRequestProfileBusinessAddress{
+            Business: &shared.PatchAccountRequestBusiness{
+                Address: &shared.PatchAccountRequestSchemasAddress{
                     AddressLine1: moovgo.String("123 Main Street"),
                     AddressLine2: moovgo.String("Apt 302"),
                     City: moovgo.String("Boulder"),
@@ -516,29 +516,29 @@ func main() {
                     PostalCode: moovgo.String("80301"),
                     StateOrProvince: moovgo.String("CO"),
                 },
-                BusinessType: shared.PatchAccountRequestProfileBusinessBusinessTypeLlc.ToPointer(),
+                BusinessType: shared.PatchAccountRequestBusinessTypeLlc.ToPointer(),
                 Description: moovgo.String("Local fitness center paying out instructors"),
                 DoingBusinessAs: moovgo.String("Whole Body Fitness"),
                 Email: moovgo.String("amanda@classbooker.dev"),
-                IndustryCodes: &shared.PatchAccountRequestProfileBusinessIndustryCodes{
+                IndustryCodes: &shared.PatchAccountRequestIndustryCodes{
                     Mcc: moovgo.String("7997"),
                     Naics: moovgo.String("713940"),
                     Sic: moovgo.String("7991"),
                 },
                 LegalBusinessName: moovgo.String("Whole Body Fitness LLC"),
-                Phone: &shared.PatchAccountRequestProfileBusinessPhone{
+                Phone: &shared.PatchAccountRequestSchemasPhone{
                     CountryCode: moovgo.String("1"),
                     Number: moovgo.String("8185551212"),
                 },
-                TaxID: &shared.PatchAccountRequestProfileBusinessTaxID{
+                TaxID: &shared.PatchAccountRequestTaxID{
                     Ein: &shared.Ein{
                         Number: moovgo.String("123-45-6789"),
                     },
                 },
                 Website: moovgo.String("www.wholebodyfitnessgym.com"),
             },
-            Individual: &shared.PatchAccountRequestProfileIndividual{
-                Address: &shared.PatchAccountRequestProfileIndividualAddress{
+            Individual: &shared.PatchAccountRequestIndividual{
+                Address: &shared.PatchAccountRequestSchemasProfileAddress{
                     AddressLine1: moovgo.String("123 Main Street"),
                     AddressLine2: moovgo.String("Apt 302"),
                     City: moovgo.String("Boulder"),
@@ -546,39 +546,39 @@ func main() {
                     PostalCode: moovgo.String("80301"),
                     StateOrProvince: moovgo.String("CO"),
                 },
-                BirthDate: &shared.PatchAccountRequestProfileIndividualBirthDate{
+                BirthDate: &shared.PatchAccountRequestBirthDate{
                     Day: 9,
                     Month: 11,
                     Year: 1989,
                 },
                 Email: moovgo.String("amanda@classbooker.dev"),
-                GovernmentID: &shared.PatchAccountRequestProfileIndividualGovernmentID{
-                    Itin: &shared.PatchAccountRequestProfileIndividualGovernmentIDItin{
+                GovernmentID: &shared.PatchAccountRequestGovernmentID{
+                    Itin: &shared.PatchAccountRequestItin{
                         Full: moovgo.String("123-45-6789"),
                         LastFour: moovgo.String("6789"),
                     },
-                    Ssn: &shared.PatchAccountRequestProfileIndividualGovernmentIDSsn{
+                    Ssn: &shared.PatchAccountRequestSsn{
                         Full: moovgo.String("123-45-6789"),
                         LastFour: moovgo.String("6789"),
                     },
                 },
-                Name: &shared.PatchAccountRequestProfileIndividualName{
+                Name: &shared.PatchAccountRequestName{
                     FirstName: moovgo.String("Amanda"),
                     LastName: moovgo.String("Yang"),
                     MiddleName: moovgo.String("Amanda"),
                     Suffix: moovgo.String("Jr"),
                 },
-                Phone: &shared.PatchAccountRequestProfileIndividualPhone{
+                Phone: &shared.PatchAccountRequestSchemasProfilePhone{
                     CountryCode: moovgo.String("1"),
                     Number: moovgo.String("8185551212"),
                 },
             },
         },
         Settings: &shared.PatchAccountRequestSettings{
-            AchPayment: &shared.PatchAccountRequestSettingsAchPayment{
+            AchPayment: &shared.PatchAccountRequestAchPayment{
                 CompanyName: moovgo.String("Whole Body Fitness"),
             },
-            CardPayment: &shared.PatchAccountRequestSettingsCardPayment{
+            CardPayment: &shared.PatchAccountRequestCardPayment{
                 StatementDescriptor: moovgo.String("Whole Body Fitness"),
             },
         },

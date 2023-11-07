@@ -1,5 +1,5 @@
 # Institutions
-(*Institutions*)
+(*.Institutions*)
 
 ## Overview
 

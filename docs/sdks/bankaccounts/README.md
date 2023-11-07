@@ -1,5 +1,5 @@
 # BankAccounts
-(*BankAccounts*)
+(*.BankAccounts*)
 
 ## Overview
 

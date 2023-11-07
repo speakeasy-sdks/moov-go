@@ -14,20 +14,20 @@ import (
 	"net/http"
 )
 
-// institutions - Lookup ACH and wire participating financial institutions. We recommend using this endpoint when an end-user enters a routing number to confirm their bank or credit union.
-type institutions struct {
+// Institutions - Lookup ACH and wire participating financial institutions. We recommend using this endpoint when an end-user enters a routing number to confirm their bank or credit union.
+type Institutions struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newInstitutions(sdkConfig sdkConfiguration) *institutions {
-	return &institutions{
+func newInstitutions(sdkConfig sdkConfiguration) *Institutions {
+	return &Institutions{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Search institutions
 // Search for institutions by their routing number or name. <br><br> To use this endpoint, you need to specify the `/fed.read` scope.
-func (s *institutions) Search(ctx context.Context, request operations.SearchInstitutionRequest) (*operations.SearchInstitutionResponse, error) {
+func (s *Institutions) Search(ctx context.Context, request operations.SearchInstitutionRequest) (*operations.SearchInstitutionResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/institutions/{rail}/search", request, nil)
 	if err != nil {
@@ -86,7 +86,12 @@ func (s *institutions) Search(ctx context.Context, request operations.SearchInst
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
 	case httpRes.StatusCode == 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

@@ -14,20 +14,20 @@ import (
 	"net/http"
 )
 
-// underwriting - [Underwriting](https://docs.moov.io/guides/accounts/underwriting) is a tool Moov uses to understand a business’s profile before allowing them to collect funds on our platform. This profile includes information like a description of the company or the merchant’s business model, the industry they operate in, and transaction volume. Through underwriting, we can understand and prevent unnecessary financial risk for Moov and those transacting on our platform. Note that underwriting can be instant, but in some cases make take around 2 business days before approval.
-type underwriting struct {
+// Underwriting - [Underwriting](https://docs.moov.io/guides/accounts/underwriting) is a tool Moov uses to understand a business’s profile before allowing them to collect funds on our platform. This profile includes information like a description of the company or the merchant’s business model, the industry they operate in, and transaction volume. Through underwriting, we can understand and prevent unnecessary financial risk for Moov and those transacting on our platform. Note that underwriting can be instant, but in some cases make take around 2 business days before approval.
+type Underwriting struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newUnderwriting(sdkConfig sdkConfiguration) *underwriting {
-	return &underwriting{
+func newUnderwriting(sdkConfig sdkConfiguration) *Underwriting {
+	return &Underwriting{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Get - Retrieve underwriting details
 // Retrieve underwriting associated with a given Moov account. <br><br> To get an account's underwriting details, you'll need to specify the `/accounts/{accountID}/underwriting.read` scope.
-func (s *underwriting) Get(ctx context.Context, accountID string) (*operations.GetUnderwritingResponse, error) {
+func (s *Underwriting) Get(ctx context.Context, accountID string) (*operations.GetUnderwritingResponse, error) {
 	request := operations.GetUnderwritingRequest{
 		AccountID: accountID,
 	}
@@ -84,6 +84,10 @@ func (s *underwriting) Get(ctx context.Context, accountID string) (*operations.G
 		}
 	case httpRes.StatusCode == 404:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -92,7 +96,7 @@ func (s *underwriting) Get(ctx context.Context, accountID string) (*operations.G
 
 // Update underwriting details
 // Update the account's underwriting by passing new values for one or more of the fields. <br><br> To update an account's underwriting details, you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-func (s *underwriting) Update(ctx context.Context, underwritingRequest shared.UnderwritingRequest, accountID string) (*operations.UpdateUnderwritingResponse, error) {
+func (s *Underwriting) Update(ctx context.Context, underwritingRequest shared.UnderwritingRequest, accountID string) (*operations.UpdateUnderwritingResponse, error) {
 	request := operations.UpdateUnderwritingRequest{
 		UnderwritingRequest: underwritingRequest,
 		AccountID:           accountID,
@@ -162,6 +166,10 @@ func (s *underwriting) Update(ctx context.Context, underwritingRequest shared.Un
 		fallthrough
 	case httpRes.StatusCode == 409:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 

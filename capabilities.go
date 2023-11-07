@@ -14,20 +14,20 @@ import (
 	"net/http"
 )
 
-// capabilities - Capabilities determine what a Moov account can do. Each capability has specific [verification requirements](https://docs.moov.io/guides/accounts/identity-verification/), depending on risk and compliance standards associated with different account activities. For example, there are more information requirements for a business that wants to charge other accounts than for an individual who simply wants to receive funds. When you request a capability, we list the information requirements for that capability. Once you submit the required information, we need to verify the data. Because of this, a requested capability may not immediately become active. For more detailed information on capabilities and capability IDs, read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/).
-type capabilities struct {
+// Capabilities determine what a Moov account can do. Each capability has specific [verification requirements](https://docs.moov.io/guides/accounts/identity-verification/), depending on risk and compliance standards associated with different account activities. For example, there are more information requirements for a business that wants to charge other accounts than for an individual who simply wants to receive funds. When you request a capability, we list the information requirements for that capability. Once you submit the required information, we need to verify the data. Because of this, a requested capability may not immediately become active. For more detailed information on capabilities and capability IDs, read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/).
+type Capabilities struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newCapabilities(sdkConfig sdkConfiguration) *capabilities {
-	return &capabilities{
+func newCapabilities(sdkConfig sdkConfiguration) *Capabilities {
+	return &Capabilities{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Delete - Disable a capability for an account
 // Disable a specific capability that an account has requested. <br><br> To use this endpoint, you must specify the `/accounts/{accountID}/capabilities.write` scope.
-func (s *capabilities) Delete(ctx context.Context, accountID string, capabilityID shared.CapabilityID) (*operations.DeleteCapabilityResponse, error) {
+func (s *Capabilities) Delete(ctx context.Context, accountID string, capabilityID shared.CapabilityID) (*operations.DeleteCapabilityResponse, error) {
 	request := operations.DeleteCapabilityRequest{
 		AccountID:    accountID,
 		CapabilityID: capabilityID,
@@ -71,11 +71,15 @@ func (s *capabilities) Delete(ctx context.Context, accountID string, capabilityI
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
-	case httpRes.StatusCode == 204:
-		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 204:
 		fallthrough
 	default:
 	}
@@ -85,7 +89,7 @@ func (s *capabilities) Delete(ctx context.Context, accountID string, capabilityI
 
 // Get capability for account
 // Retrieve a specific capability that an account has requested. <br><br> To use this endpoint, you must specify the `/accounts/{accountID}/capabilities.read` scope.
-func (s *capabilities) Get(ctx context.Context, accountID string, capabilityID shared.CapabilityID) (*operations.GetCapabilityResponse, error) {
+func (s *Capabilities) Get(ctx context.Context, accountID string, capabilityID shared.CapabilityID) (*operations.GetCapabilityResponse, error) {
 	request := operations.GetCapabilityRequest{
 		AccountID:    accountID,
 		CapabilityID: capabilityID,
@@ -145,6 +149,10 @@ func (s *capabilities) Get(ctx context.Context, accountID string, capabilityID s
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -153,7 +161,7 @@ func (s *capabilities) Get(ctx context.Context, accountID string, capabilityID s
 
 // List capabilities for account
 // Retrieve all the capabilities an account has requested. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/capabilities.read` scope.
-func (s *capabilities) List(ctx context.Context, accountID string) (*operations.ListCapabilitiesResponse, error) {
+func (s *Capabilities) List(ctx context.Context, accountID string) (*operations.ListCapabilitiesResponse, error) {
 	request := operations.ListCapabilitiesRequest{
 		AccountID: accountID,
 	}
@@ -204,12 +212,16 @@ func (s *capabilities) List(ctx context.Context, accountID string) (*operations.
 				return nil, err
 			}
 
-			res.Capabilities = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -218,7 +230,7 @@ func (s *capabilities) List(ctx context.Context, accountID string) (*operations.
 
 // Request capabilities
 // Request capabilities for a specific account. <br><br> To use this endpoint, you must specify the `/accounts/{accountID}/capabilities.write` scope.
-func (s *capabilities) Request(ctx context.Context, addCapabilityRequest shared.AddCapabilityRequest, accountID string) (*operations.PostCapabilityResponse, error) {
+func (s *Capabilities) Request(ctx context.Context, addCapabilityRequest shared.AddCapabilityRequest, accountID string) (*operations.PostCapabilityResponse, error) {
 	request := operations.PostCapabilityRequest{
 		AddCapabilityRequest: addCapabilityRequest,
 		AccountID:            accountID,
@@ -280,19 +292,7 @@ func (s *capabilities) Request(ctx context.Context, addCapabilityRequest shared.
 				return nil, err
 			}
 
-			res.Capabilities = out
-		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 409:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.CapabilityRequestError
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.CapabilityRequestError = &out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -302,6 +302,21 @@ func (s *capabilities) Request(ctx context.Context, addCapabilityRequest shared.
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 409:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out sdkerrors.CapabilityRequestError
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+			return nil, &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	default:
 	}
 

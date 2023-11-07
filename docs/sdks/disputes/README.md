@@ -1,5 +1,5 @@
 # Disputes
-(*Disputes*)
+(*.Disputes*)
 
 ## Overview
 
@@ -93,7 +93,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Disputes != nil {
+    if res.Classes != nil {
         // handle response
     }
 }

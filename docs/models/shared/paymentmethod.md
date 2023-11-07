@@ -3,51 +3,51 @@
 
 ## Supported Types
 
-### PaymentMethodBankAccount
+### SchemasPaymentMethodBankAccountBankAccount
 
 ```go
-paymentMethod := shared.CreatePaymentMethodAchCreditSameDay(shared.PaymentMethodBankAccount{/* values here */})
+paymentMethod := shared.CreatePaymentMethodAchCreditSameDay(shared.SchemasPaymentMethodBankAccountBankAccount{/* values here */})
 ```
 
-### PaymentMethodBankAccount
+### SchemasPaymentMethodBankAccountBankAccount
 
 ```go
-paymentMethod := shared.CreatePaymentMethodAchCreditStandard(shared.PaymentMethodBankAccount{/* values here */})
+paymentMethod := shared.CreatePaymentMethodAchCreditStandard(shared.SchemasPaymentMethodBankAccountBankAccount{/* values here */})
 ```
 
-### PaymentMethodBankAccount
+### SchemasPaymentMethodBankAccountBankAccount
 
 ```go
-paymentMethod := shared.CreatePaymentMethodAchDebitCollect(shared.PaymentMethodBankAccount{/* values here */})
+paymentMethod := shared.CreatePaymentMethodAchDebitCollect(shared.SchemasPaymentMethodBankAccountBankAccount{/* values here */})
 ```
 
-### PaymentMethodBankAccount
+### SchemasPaymentMethodBankAccountBankAccount
 
 ```go
-paymentMethod := shared.CreatePaymentMethodAchDebitFund(shared.PaymentMethodBankAccount{/* values here */})
+paymentMethod := shared.CreatePaymentMethodAchDebitFund(shared.SchemasPaymentMethodBankAccountBankAccount{/* values here */})
 ```
 
-### PaymentMethodApplePay
+### ApplePay
 
 ```go
-paymentMethod := shared.CreatePaymentMethodApplePay(shared.PaymentMethodApplePay{/* values here */})
+paymentMethod := shared.CreatePaymentMethodApplePay(shared.ApplePay{/* values here */})
 ```
 
-### PaymentMethodCard
+### SchemasPaymentMethodCardCard
 
 ```go
-paymentMethod := shared.CreatePaymentMethodCardPayment(shared.PaymentMethodCard{/* values here */})
+paymentMethod := shared.CreatePaymentMethodCardPayment(shared.SchemasPaymentMethodCardCard{/* values here */})
 ```
 
-### PaymentMethodWallet
+### SchemasPaymentMethodWalletWallet
 
 ```go
-paymentMethod := shared.CreatePaymentMethodMoovWallet(shared.PaymentMethodWallet{/* values here */})
+paymentMethod := shared.CreatePaymentMethodMoovWallet(shared.SchemasPaymentMethodWalletWallet{/* values here */})
 ```
 
-### PaymentMethodBankAccount
+### SchemasPaymentMethodBankAccountBankAccount
 
 ```go
-paymentMethod := shared.CreatePaymentMethodRtpCredit(shared.PaymentMethodBankAccount{/* values here */})
+paymentMethod := shared.CreatePaymentMethodRtpCredit(shared.SchemasPaymentMethodBankAccountBankAccount{/* values here */})
 ```
 

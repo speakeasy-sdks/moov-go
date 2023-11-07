@@ -28,7 +28,7 @@ type GetAvatarResponse struct {
 	RawResponse *http.Response
 	// The avatar image
 	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
-	GetAvatar200ImageWildcardBinaryString io.ReadCloser
+	Stream io.ReadCloser
 }
 
 func (o *GetAvatarResponse) GetContentType() string {
@@ -52,9 +52,9 @@ func (o *GetAvatarResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *GetAvatarResponse) GetGetAvatar200ImageWildcardBinaryString() io.ReadCloser {
+func (o *GetAvatarResponse) GetStream() io.ReadCloser {
 	if o == nil {
 		return nil
 	}
-	return o.GetAvatar200ImageWildcardBinaryString
+	return o.Stream
 }

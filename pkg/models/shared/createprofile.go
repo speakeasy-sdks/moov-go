@@ -2,7 +2,7 @@
 
 package shared
 
-type CreateProfileBusinessAddress struct {
+type CreateProfileAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`
 	City            *string `json:"city,omitempty"`
@@ -11,194 +11,194 @@ type CreateProfileBusinessAddress struct {
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
-func (o *CreateProfileBusinessAddress) GetAddressLine1() *string {
+func (o *CreateProfileAddress) GetAddressLine1() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine1
 }
 
-func (o *CreateProfileBusinessAddress) GetAddressLine2() *string {
+func (o *CreateProfileAddress) GetAddressLine2() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine2
 }
 
-func (o *CreateProfileBusinessAddress) GetCity() *string {
+func (o *CreateProfileAddress) GetCity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.City
 }
 
-func (o *CreateProfileBusinessAddress) GetCountry() *string {
+func (o *CreateProfileAddress) GetCountry() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Country
 }
 
-func (o *CreateProfileBusinessAddress) GetPostalCode() *string {
+func (o *CreateProfileAddress) GetPostalCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PostalCode
 }
 
-func (o *CreateProfileBusinessAddress) GetStateOrProvince() *string {
+func (o *CreateProfileAddress) GetStateOrProvince() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StateOrProvince
 }
 
-// CreateProfileBusinessIndustryCodes - Describes industry specific identifiers
-type CreateProfileBusinessIndustryCodes struct {
+// IndustryCodes - Describes industry specific identifiers
+type IndustryCodes struct {
 	Mcc   *string `json:"mcc,omitempty"`
 	Naics *string `json:"naics,omitempty"`
 	Sic   *string `json:"sic,omitempty"`
 }
 
-func (o *CreateProfileBusinessIndustryCodes) GetMcc() *string {
+func (o *IndustryCodes) GetMcc() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Mcc
 }
 
-func (o *CreateProfileBusinessIndustryCodes) GetNaics() *string {
+func (o *IndustryCodes) GetNaics() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Naics
 }
 
-func (o *CreateProfileBusinessIndustryCodes) GetSic() *string {
+func (o *IndustryCodes) GetSic() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Sic
 }
 
-type CreateProfileBusinessPhone struct {
+type CreateProfilePhone struct {
 	CountryCode *string `json:"countryCode,omitempty"`
 	Number      *string `json:"number,omitempty"`
 }
 
-func (o *CreateProfileBusinessPhone) GetCountryCode() *string {
+func (o *CreateProfilePhone) GetCountryCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CountryCode
 }
 
-func (o *CreateProfileBusinessPhone) GetNumber() *string {
+func (o *CreateProfilePhone) GetNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Number
 }
 
-// CreateProfileBusinessTaxID - An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
-type CreateProfileBusinessTaxID struct {
+// TaxID - An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+type TaxID struct {
 	Ein *Ein `json:"ein,omitempty"`
 }
 
-func (o *CreateProfileBusinessTaxID) GetEin() *Ein {
+func (o *TaxID) GetEin() *Ein {
 	if o == nil {
 		return nil
 	}
 	return o.Ein
 }
 
-// CreateProfileBusiness - Describes the fields available when creating a business
-type CreateProfileBusiness struct {
-	Address *CreateProfileBusinessAddress `json:"address,omitempty"`
+// Business - Describes the fields available when creating a business
+type Business struct {
+	Address *CreateProfileAddress `json:"address,omitempty"`
 	// The type of entity represented by this Business
 	BusinessType    BusinessType `json:"businessType"`
 	Description     *string      `json:"description,omitempty"`
 	DoingBusinessAs *string      `json:"doingBusinessAs,omitempty"`
 	// Email Address
-	Email             *string                             `json:"email,omitempty"`
-	IndustryCodes     *CreateProfileBusinessIndustryCodes `json:"industryCodes,omitempty"`
-	LegalBusinessName string                              `json:"legalBusinessName"`
-	Phone             *CreateProfileBusinessPhone         `json:"phone,omitempty"`
-	TaxID             *CreateProfileBusinessTaxID         `json:"taxID,omitempty"`
-	Website           *string                             `json:"website,omitempty"`
+	Email             *string             `json:"email,omitempty"`
+	IndustryCodes     *IndustryCodes      `json:"industryCodes,omitempty"`
+	LegalBusinessName string              `json:"legalBusinessName"`
+	Phone             *CreateProfilePhone `json:"phone,omitempty"`
+	TaxID             *TaxID              `json:"taxID,omitempty"`
+	Website           *string             `json:"website,omitempty"`
 }
 
-func (o *CreateProfileBusiness) GetAddress() *CreateProfileBusinessAddress {
+func (o *Business) GetAddress() *CreateProfileAddress {
 	if o == nil {
 		return nil
 	}
 	return o.Address
 }
 
-func (o *CreateProfileBusiness) GetBusinessType() BusinessType {
+func (o *Business) GetBusinessType() BusinessType {
 	if o == nil {
 		return BusinessType("")
 	}
 	return o.BusinessType
 }
 
-func (o *CreateProfileBusiness) GetDescription() *string {
+func (o *Business) GetDescription() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Description
 }
 
-func (o *CreateProfileBusiness) GetDoingBusinessAs() *string {
+func (o *Business) GetDoingBusinessAs() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DoingBusinessAs
 }
 
-func (o *CreateProfileBusiness) GetEmail() *string {
+func (o *Business) GetEmail() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Email
 }
 
-func (o *CreateProfileBusiness) GetIndustryCodes() *CreateProfileBusinessIndustryCodes {
+func (o *Business) GetIndustryCodes() *IndustryCodes {
 	if o == nil {
 		return nil
 	}
 	return o.IndustryCodes
 }
 
-func (o *CreateProfileBusiness) GetLegalBusinessName() string {
+func (o *Business) GetLegalBusinessName() string {
 	if o == nil {
 		return ""
 	}
 	return o.LegalBusinessName
 }
 
-func (o *CreateProfileBusiness) GetPhone() *CreateProfileBusinessPhone {
+func (o *Business) GetPhone() *CreateProfilePhone {
 	if o == nil {
 		return nil
 	}
 	return o.Phone
 }
 
-func (o *CreateProfileBusiness) GetTaxID() *CreateProfileBusinessTaxID {
+func (o *Business) GetTaxID() *TaxID {
 	if o == nil {
 		return nil
 	}
 	return o.TaxID
 }
 
-func (o *CreateProfileBusiness) GetWebsite() *string {
+func (o *Business) GetWebsite() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Website
 }
 
-type CreateProfileIndividualAddress struct {
+type CreateProfileSchemasAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`
 	City            *string `json:"city,omitempty"`
@@ -207,200 +207,200 @@ type CreateProfileIndividualAddress struct {
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
-func (o *CreateProfileIndividualAddress) GetAddressLine1() *string {
+func (o *CreateProfileSchemasAddress) GetAddressLine1() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine1
 }
 
-func (o *CreateProfileIndividualAddress) GetAddressLine2() *string {
+func (o *CreateProfileSchemasAddress) GetAddressLine2() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine2
 }
 
-func (o *CreateProfileIndividualAddress) GetCity() *string {
+func (o *CreateProfileSchemasAddress) GetCity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.City
 }
 
-func (o *CreateProfileIndividualAddress) GetCountry() *string {
+func (o *CreateProfileSchemasAddress) GetCountry() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Country
 }
 
-func (o *CreateProfileIndividualAddress) GetPostalCode() *string {
+func (o *CreateProfileSchemasAddress) GetPostalCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PostalCode
 }
 
-func (o *CreateProfileIndividualAddress) GetStateOrProvince() *string {
+func (o *CreateProfileSchemasAddress) GetStateOrProvince() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StateOrProvince
 }
 
-// CreateProfileIndividualBirthDate - Birthdate for an individual
-type CreateProfileIndividualBirthDate struct {
+// CreateProfileBirthDate - Birthdate for an individual
+type CreateProfileBirthDate struct {
 	Day   int64 `json:"day"`
 	Month int64 `json:"month"`
 	Year  int64 `json:"year"`
 }
 
-func (o *CreateProfileIndividualBirthDate) GetDay() int64 {
+func (o *CreateProfileBirthDate) GetDay() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.Day
 }
 
-func (o *CreateProfileIndividualBirthDate) GetMonth() int64 {
+func (o *CreateProfileBirthDate) GetMonth() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.Month
 }
 
-func (o *CreateProfileIndividualBirthDate) GetYear() int64 {
+func (o *CreateProfileBirthDate) GetYear() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.Year
 }
 
-type CreateProfileIndividualGovernmentIDItin struct {
+type CreateProfileItin struct {
 	Full     *string `json:"full,omitempty"`
 	LastFour *string `json:"lastFour,omitempty"`
 }
 
-func (o *CreateProfileIndividualGovernmentIDItin) GetFull() *string {
+func (o *CreateProfileItin) GetFull() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Full
 }
 
-func (o *CreateProfileIndividualGovernmentIDItin) GetLastFour() *string {
+func (o *CreateProfileItin) GetLastFour() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastFour
 }
 
-type CreateProfileIndividualGovernmentIDSsn struct {
+type CreateProfileSsn struct {
 	Full     *string `json:"full,omitempty"`
 	LastFour *string `json:"lastFour,omitempty"`
 }
 
-func (o *CreateProfileIndividualGovernmentIDSsn) GetFull() *string {
+func (o *CreateProfileSsn) GetFull() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Full
 }
 
-func (o *CreateProfileIndividualGovernmentIDSsn) GetLastFour() *string {
+func (o *CreateProfileSsn) GetLastFour() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastFour
 }
 
-type CreateProfileIndividualGovernmentID struct {
-	Itin *CreateProfileIndividualGovernmentIDItin `json:"itin,omitempty"`
-	Ssn  *CreateProfileIndividualGovernmentIDSsn  `json:"ssn,omitempty"`
+type CreateProfileGovernmentID struct {
+	Itin *CreateProfileItin `json:"itin,omitempty"`
+	Ssn  *CreateProfileSsn  `json:"ssn,omitempty"`
 }
 
-func (o *CreateProfileIndividualGovernmentID) GetItin() *CreateProfileIndividualGovernmentIDItin {
+func (o *CreateProfileGovernmentID) GetItin() *CreateProfileItin {
 	if o == nil {
 		return nil
 	}
 	return o.Itin
 }
 
-func (o *CreateProfileIndividualGovernmentID) GetSsn() *CreateProfileIndividualGovernmentIDSsn {
+func (o *CreateProfileGovernmentID) GetSsn() *CreateProfileSsn {
 	if o == nil {
 		return nil
 	}
 	return o.Ssn
 }
 
-type CreateProfileIndividualPhone struct {
+type CreateProfileSchemasPhone struct {
 	CountryCode *string `json:"countryCode,omitempty"`
 	Number      *string `json:"number,omitempty"`
 }
 
-func (o *CreateProfileIndividualPhone) GetCountryCode() *string {
+func (o *CreateProfileSchemasPhone) GetCountryCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CountryCode
 }
 
-func (o *CreateProfileIndividualPhone) GetNumber() *string {
+func (o *CreateProfileSchemasPhone) GetNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Number
 }
 
-// CreateProfileIndividual - Describes the fields available when creating an individual
-type CreateProfileIndividual struct {
-	Address   *CreateProfileIndividualAddress   `json:"address,omitempty"`
-	BirthDate *CreateProfileIndividualBirthDate `json:"birthDate,omitempty"`
+// Individual - Describes the fields available when creating an individual
+type Individual struct {
+	Address   *CreateProfileSchemasAddress `json:"address,omitempty"`
+	BirthDate *CreateProfileBirthDate      `json:"birthDate,omitempty"`
 	// Email Address
-	Email        *string                              `json:"email,omitempty"`
-	GovernmentID *CreateProfileIndividualGovernmentID `json:"governmentID,omitempty"`
+	Email        *string                    `json:"email,omitempty"`
+	GovernmentID *CreateProfileGovernmentID `json:"governmentID,omitempty"`
 	// Name for an individual
-	Name  Name                          `json:"name"`
-	Phone *CreateProfileIndividualPhone `json:"phone,omitempty"`
+	Name  Name                       `json:"name"`
+	Phone *CreateProfileSchemasPhone `json:"phone,omitempty"`
 }
 
-func (o *CreateProfileIndividual) GetAddress() *CreateProfileIndividualAddress {
+func (o *Individual) GetAddress() *CreateProfileSchemasAddress {
 	if o == nil {
 		return nil
 	}
 	return o.Address
 }
 
-func (o *CreateProfileIndividual) GetBirthDate() *CreateProfileIndividualBirthDate {
+func (o *Individual) GetBirthDate() *CreateProfileBirthDate {
 	if o == nil {
 		return nil
 	}
 	return o.BirthDate
 }
 
-func (o *CreateProfileIndividual) GetEmail() *string {
+func (o *Individual) GetEmail() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Email
 }
 
-func (o *CreateProfileIndividual) GetGovernmentID() *CreateProfileIndividualGovernmentID {
+func (o *Individual) GetGovernmentID() *CreateProfileGovernmentID {
 	if o == nil {
 		return nil
 	}
 	return o.GovernmentID
 }
 
-func (o *CreateProfileIndividual) GetName() Name {
+func (o *Individual) GetName() Name {
 	if o == nil {
 		return Name{}
 	}
 	return o.Name
 }
 
-func (o *CreateProfileIndividual) GetPhone() *CreateProfileIndividualPhone {
+func (o *Individual) GetPhone() *CreateProfileSchemasPhone {
 	if o == nil {
 		return nil
 	}
@@ -410,18 +410,18 @@ func (o *CreateProfileIndividual) GetPhone() *CreateProfileIndividualPhone {
 // CreateProfile - Describes the fields available when creating a profile.
 // If `accountType` is set to `individual`, the `individual` object should be completed. All others should populate `business`.
 type CreateProfile struct {
-	Business   *CreateProfileBusiness   `json:"business,omitempty"`
-	Individual *CreateProfileIndividual `json:"individual,omitempty"`
+	Business   *Business   `json:"business,omitempty"`
+	Individual *Individual `json:"individual,omitempty"`
 }
 
-func (o *CreateProfile) GetBusiness() *CreateProfileBusiness {
+func (o *CreateProfile) GetBusiness() *Business {
 	if o == nil {
 		return nil
 	}
 	return o.Business
 }
 
-func (o *CreateProfile) GetIndividual() *CreateProfileIndividual {
+func (o *CreateProfile) GetIndividual() *Individual {
 	if o == nil {
 		return nil
 	}

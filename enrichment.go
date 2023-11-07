@@ -15,12 +15,12 @@ import (
 	"strings"
 )
 
-type enrichment struct {
+type Enrichment struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newEnrichment(sdkConfig sdkConfiguration) *enrichment {
-	return &enrichment{
+func newEnrichment(sdkConfig sdkConfiguration) *Enrichment {
+	return &Enrichment{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -28,7 +28,7 @@ func newEnrichment(sdkConfig sdkConfiguration) *enrichment {
 // GetAddress - Get address suggestions
 // Fetch enriched address suggestions. Requires a partial address.
 // <br><br> You must specify the `/profile-enrichment.read` scope.
-func (s *enrichment) GetAddress(ctx context.Context, request operations.GetAddressRequest) (*operations.GetAddressResponse, error) {
+func (s *Enrichment) GetAddress(ctx context.Context, request operations.GetAddressRequest) (*operations.GetAddressResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/enrichment/address"
 
@@ -76,12 +76,16 @@ func (s *enrichment) GetAddress(ctx context.Context, request operations.GetAddre
 				return nil, err
 			}
 
-			res.EnrichmentAddresses = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -91,7 +95,7 @@ func (s *enrichment) GetAddress(ctx context.Context, request operations.GetAddre
 // GetAvatar - Get avatar
 // Get avatar image for an account using a unique ID.
 // <br><br> To get an avatar, you must specify the `/profile-enrichment.read` scope.
-func (s *enrichment) GetAvatar(ctx context.Context, uniqueID string) (*operations.GetAvatarResponse, error) {
+func (s *Enrichment) GetAvatar(ctx context.Context, uniqueID string) (*operations.GetAvatarResponse, error) {
 	request := operations.GetAvatarRequest{
 		UniqueID: uniqueID,
 	}
@@ -128,7 +132,7 @@ func (s *enrichment) GetAvatar(ctx context.Context, uniqueID string) (*operation
 	}
 
 	if (httpRes.StatusCode == 200) && utils.MatchContentType(contentType, `image/*`) {
-		res.GetAvatar200ImageWildcardBinaryString = httpRes.Body
+		res.Stream = httpRes.Body
 
 		return res, nil
 	}
@@ -149,6 +153,10 @@ func (s *enrichment) GetAvatar(ctx context.Context, uniqueID string) (*operation
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -158,7 +166,7 @@ func (s *enrichment) GetAvatar(ctx context.Context, uniqueID string) (*operation
 // GetIndustries - List all industries
 // Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.
 // <br><br> To list industries, you must specify the `/profile-enrichment.read` scope.
-func (s *enrichment) GetIndustries(ctx context.Context) (*operations.GetIndustriesResponse, error) {
+func (s *Enrichment) GetIndustries(ctx context.Context) (*operations.GetIndustriesResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/industries"
 
@@ -206,6 +214,10 @@ func (s *enrichment) GetIndustries(ctx context.Context) (*operations.GetIndustri
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -214,7 +226,7 @@ func (s *enrichment) GetIndustries(ctx context.Context) (*operations.GetIndustri
 // GetProfile - Get enriched profile
 // Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit.
 // <br><br> To get enriched profile information, you must specify the `/profile-enrichment.read` scope.
-func (s *enrichment) GetProfile(ctx context.Context, email string) (*operations.GetEnrichmentProfileResponse, error) {
+func (s *Enrichment) GetProfile(ctx context.Context, email string) (*operations.GetEnrichmentProfileResponse, error) {
 	request := operations.GetEnrichmentProfileRequest{
 		Email: email,
 	}
@@ -276,8 +288,12 @@ func (s *enrichment) GetProfile(ctx context.Context, email string) (*operations.
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
 	case httpRes.StatusCode == 503:
 		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 

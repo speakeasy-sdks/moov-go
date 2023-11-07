@@ -9,8 +9,8 @@ import (
 	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
-// PaymentMethodApplePayApplePay - Describes an Apple Pay token on a Moov account.
-type PaymentMethodApplePayApplePay struct {
+// SchemasApplePay - Describes an Apple Pay token on a Moov account.
+type SchemasApplePay struct {
 	// The card brand
 	Brand *CardBrand `json:"brand,omitempty"`
 	// User-friendly name of the tokenized card returned by Apple.
@@ -31,80 +31,80 @@ type PaymentMethodApplePayApplePay struct {
 	Fingerprint *string `json:"fingerprint,omitempty"`
 }
 
-func (o *PaymentMethodApplePayApplePay) GetBrand() *CardBrand {
+func (o *SchemasApplePay) GetBrand() *CardBrand {
 	if o == nil {
 		return nil
 	}
 	return o.Brand
 }
 
-func (o *PaymentMethodApplePayApplePay) GetCardDisplayName() *string {
+func (o *SchemasApplePay) GetCardDisplayName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CardDisplayName
 }
 
-func (o *PaymentMethodApplePayApplePay) GetCardType() *CardType {
+func (o *SchemasApplePay) GetCardType() *CardType {
 	if o == nil {
 		return nil
 	}
 	return o.CardType
 }
 
-func (o *PaymentMethodApplePayApplePay) GetDynamicLastFour() *string {
+func (o *SchemasApplePay) GetDynamicLastFour() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DynamicLastFour
 }
 
-func (o *PaymentMethodApplePayApplePay) GetExpiration() *CardExpiration {
+func (o *SchemasApplePay) GetExpiration() *CardExpiration {
 	if o == nil {
 		return nil
 	}
 	return o.Expiration
 }
 
-func (o *PaymentMethodApplePayApplePay) GetFingerprint() *string {
+func (o *SchemasApplePay) GetFingerprint() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Fingerprint
 }
 
-// PaymentMethodApplePay - A method of moving money using an Apple Pay token.
-type PaymentMethodApplePay struct {
-	ApplePay *PaymentMethodApplePayApplePay `json:"applePay,omitempty"`
+// ApplePay - A method of moving money using an Apple Pay token.
+type ApplePay struct {
+	ApplePay *SchemasApplePay `json:"applePay,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
 }
 
-func (o *PaymentMethodApplePay) GetApplePay() *PaymentMethodApplePayApplePay {
+func (o *ApplePay) GetApplePay() *SchemasApplePay {
 	if o == nil {
 		return nil
 	}
 	return o.ApplePay
 }
 
-func (o *PaymentMethodApplePay) GetPaymentMethodID() *string {
+func (o *ApplePay) GetPaymentMethodID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentMethodID
 }
 
-func (o *PaymentMethodApplePay) GetPaymentMethodType() *PaymentMethodsType {
+func (o *ApplePay) GetPaymentMethodType() *PaymentMethodsType {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentMethodType
 }
 
-// PaymentMethodCardCard - Describes a card on a Moov account
-type PaymentMethodCardCard struct {
+// SchemasCard - Describes a card on a Moov account
+type SchemasCard struct {
 	BillingAddress *Address `json:"billingAddress,omitempty"`
 	Bin            *string  `json:"bin,omitempty"`
 	// The card brand
@@ -134,154 +134,154 @@ type PaymentMethodCardCard struct {
 	MerchantAccountID *string `json:"merchantAccountID,omitempty"`
 }
 
-func (p PaymentMethodCardCard) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
+func (s SchemasCard) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
 }
 
-func (p *PaymentMethodCardCard) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+func (s *SchemasCard) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *PaymentMethodCardCard) GetBillingAddress() *Address {
+func (o *SchemasCard) GetBillingAddress() *Address {
 	if o == nil {
 		return nil
 	}
 	return o.BillingAddress
 }
 
-func (o *PaymentMethodCardCard) GetBin() *string {
+func (o *SchemasCard) GetBin() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Bin
 }
 
-func (o *PaymentMethodCardCard) GetBrand() *CardBrand {
+func (o *SchemasCard) GetBrand() *CardBrand {
 	if o == nil {
 		return nil
 	}
 	return o.Brand
 }
 
-func (o *PaymentMethodCardCard) GetCardAccountUpdater() *CardAccountUpdater {
+func (o *SchemasCard) GetCardAccountUpdater() *CardAccountUpdater {
 	if o == nil {
 		return nil
 	}
 	return o.CardAccountUpdater
 }
 
-func (o *PaymentMethodCardCard) GetCardID() *string {
+func (o *SchemasCard) GetCardID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CardID
 }
 
-func (o *PaymentMethodCardCard) GetCardOnFile() *bool {
+func (o *SchemasCard) GetCardOnFile() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.CardOnFile
 }
 
-func (o *PaymentMethodCardCard) GetCardType() *CardType {
+func (o *SchemasCard) GetCardType() *CardType {
 	if o == nil {
 		return nil
 	}
 	return o.CardType
 }
 
-func (o *PaymentMethodCardCard) GetCardVerification() *CardVerifications {
+func (o *SchemasCard) GetCardVerification() *CardVerifications {
 	if o == nil {
 		return nil
 	}
 	return o.CardVerification
 }
 
-func (o *PaymentMethodCardCard) GetExpiration() *CardExpiration {
+func (o *SchemasCard) GetExpiration() *CardExpiration {
 	if o == nil {
 		return nil
 	}
 	return o.Expiration
 }
 
-func (o *PaymentMethodCardCard) GetFingerprint() *string {
+func (o *SchemasCard) GetFingerprint() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Fingerprint
 }
 
-func (o *PaymentMethodCardCard) GetHolderName() *string {
+func (o *SchemasCard) GetHolderName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.HolderName
 }
 
-func (o *PaymentMethodCardCard) GetIssuer() *string {
+func (o *SchemasCard) GetIssuer() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Issuer
 }
 
-func (o *PaymentMethodCardCard) GetIssuerCountry() *string {
+func (o *SchemasCard) GetIssuerCountry() *string {
 	if o == nil {
 		return nil
 	}
 	return o.IssuerCountry
 }
 
-func (o *PaymentMethodCardCard) GetLastFourCardNumber() *string {
+func (o *SchemasCard) GetLastFourCardNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastFourCardNumber
 }
 
-func (o *PaymentMethodCardCard) GetMerchantAccountID() *string {
+func (o *SchemasCard) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.MerchantAccountID
 }
 
-// PaymentMethodCard - A method of moving money that is a credit or debit card
-type PaymentMethodCard struct {
-	Card *PaymentMethodCardCard `json:"card,omitempty"`
+// SchemasPaymentMethodCardCard - A method of moving money that is a credit or debit card
+type SchemasPaymentMethodCardCard struct {
+	Card *SchemasCard `json:"card,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
 }
 
-func (o *PaymentMethodCard) GetCard() *PaymentMethodCardCard {
+func (o *SchemasPaymentMethodCardCard) GetCard() *SchemasCard {
 	if o == nil {
 		return nil
 	}
 	return o.Card
 }
 
-func (o *PaymentMethodCard) GetPaymentMethodID() *string {
+func (o *SchemasPaymentMethodCardCard) GetPaymentMethodID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentMethodID
 }
 
-func (o *PaymentMethodCard) GetPaymentMethodType() *PaymentMethodsType {
+func (o *SchemasPaymentMethodCardCard) GetPaymentMethodType() *PaymentMethodsType {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentMethodType
 }
 
-// PaymentMethodBankAccountBankAccount - Describes a bank account on a Moov account.
-type PaymentMethodBankAccountBankAccount struct {
+// SchemasBankAccount - Describes a bank account on a Moov account.
+type SchemasBankAccount struct {
 	// UUID v4
 	BankAccountID *string `json:"bankAccountID,omitempty"`
 	// The bank account type
@@ -298,136 +298,136 @@ type PaymentMethodBankAccountBankAccount struct {
 	Status *BankAccountStatus `json:"status,omitempty"`
 }
 
-func (o *PaymentMethodBankAccountBankAccount) GetBankAccountID() *string {
+func (o *SchemasBankAccount) GetBankAccountID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.BankAccountID
 }
 
-func (o *PaymentMethodBankAccountBankAccount) GetBankAccountType() *BankAccountType {
+func (o *SchemasBankAccount) GetBankAccountType() *BankAccountType {
 	if o == nil {
 		return nil
 	}
 	return o.BankAccountType
 }
 
-func (o *PaymentMethodBankAccountBankAccount) GetBankName() *string {
+func (o *SchemasBankAccount) GetBankName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.BankName
 }
 
-func (o *PaymentMethodBankAccountBankAccount) GetFingerprint() *string {
+func (o *SchemasBankAccount) GetFingerprint() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Fingerprint
 }
 
-func (o *PaymentMethodBankAccountBankAccount) GetHolderName() *string {
+func (o *SchemasBankAccount) GetHolderName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.HolderName
 }
 
-func (o *PaymentMethodBankAccountBankAccount) GetHolderType() *HolderType {
+func (o *SchemasBankAccount) GetHolderType() *HolderType {
 	if o == nil {
 		return nil
 	}
 	return o.HolderType
 }
 
-func (o *PaymentMethodBankAccountBankAccount) GetLastFourAccountNumber() *string {
+func (o *SchemasBankAccount) GetLastFourAccountNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastFourAccountNumber
 }
 
-func (o *PaymentMethodBankAccountBankAccount) GetRoutingNumber() *string {
+func (o *SchemasBankAccount) GetRoutingNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.RoutingNumber
 }
 
-func (o *PaymentMethodBankAccountBankAccount) GetStatus() *BankAccountStatus {
+func (o *SchemasBankAccount) GetStatus() *BankAccountStatus {
 	if o == nil {
 		return nil
 	}
 	return o.Status
 }
 
-// PaymentMethodBankAccount - A method of moving money that is a bank account
-type PaymentMethodBankAccount struct {
-	BankAccount *PaymentMethodBankAccountBankAccount `json:"bankAccount,omitempty"`
+// SchemasPaymentMethodBankAccountBankAccount - A method of moving money that is a bank account
+type SchemasPaymentMethodBankAccountBankAccount struct {
+	BankAccount *SchemasBankAccount `json:"bankAccount,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
 	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
 }
 
-func (o *PaymentMethodBankAccount) GetBankAccount() *PaymentMethodBankAccountBankAccount {
+func (o *SchemasPaymentMethodBankAccountBankAccount) GetBankAccount() *SchemasBankAccount {
 	if o == nil {
 		return nil
 	}
 	return o.BankAccount
 }
 
-func (o *PaymentMethodBankAccount) GetPaymentMethodID() *string {
+func (o *SchemasPaymentMethodBankAccountBankAccount) GetPaymentMethodID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentMethodID
 }
 
-func (o *PaymentMethodBankAccount) GetPaymentMethodType() *PaymentMethodsType {
+func (o *SchemasPaymentMethodBankAccountBankAccount) GetPaymentMethodType() *PaymentMethodsType {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentMethodType
 }
 
-// PaymentMethodWalletWallet - A Moov wallet to store funds for transfers.
-type PaymentMethodWalletWallet struct {
+// SchemasWallet - A Moov wallet to store funds for transfers.
+type SchemasWallet struct {
 	// UUID v4
 	WalletID *string `json:"walletID,omitempty"`
 }
 
-func (o *PaymentMethodWalletWallet) GetWalletID() *string {
+func (o *SchemasWallet) GetWalletID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.WalletID
 }
 
-// PaymentMethodWallet - A method of moving money that is a Moov wallet
-type PaymentMethodWallet struct {
+// SchemasPaymentMethodWalletWallet - A method of moving money that is a Moov wallet
+type SchemasPaymentMethodWalletWallet struct {
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 	// The payment method type that represents a payment rail and directionality
-	PaymentMethodType *PaymentMethodsType        `json:"paymentMethodType,omitempty"`
-	Wallet            *PaymentMethodWalletWallet `json:"wallet,omitempty"`
+	PaymentMethodType *PaymentMethodsType `json:"paymentMethodType,omitempty"`
+	Wallet            *SchemasWallet      `json:"wallet,omitempty"`
 }
 
-func (o *PaymentMethodWallet) GetPaymentMethodID() *string {
+func (o *SchemasPaymentMethodWalletWallet) GetPaymentMethodID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentMethodID
 }
 
-func (o *PaymentMethodWallet) GetPaymentMethodType() *PaymentMethodsType {
+func (o *SchemasPaymentMethodWalletWallet) GetPaymentMethodType() *PaymentMethodsType {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentMethodType
 }
 
-func (o *PaymentMethodWallet) GetWallet() *PaymentMethodWalletWallet {
+func (o *SchemasPaymentMethodWalletWallet) GetWallet() *SchemasWallet {
 	if o == nil {
 		return nil
 	}
@@ -448,99 +448,99 @@ const (
 )
 
 type PaymentMethod struct {
-	PaymentMethodWallet      *PaymentMethodWallet
-	PaymentMethodBankAccount *PaymentMethodBankAccount
-	PaymentMethodCard        *PaymentMethodCard
-	PaymentMethodApplePay    *PaymentMethodApplePay
+	SchemasPaymentMethodWalletWallet           *SchemasPaymentMethodWalletWallet
+	SchemasPaymentMethodBankAccountBankAccount *SchemasPaymentMethodBankAccountBankAccount
+	SchemasPaymentMethodCardCard               *SchemasPaymentMethodCardCard
+	ApplePay                                   *ApplePay
 
 	Type PaymentMethodType
 }
 
-func CreatePaymentMethodAchCreditSameDay(achCreditSameDay PaymentMethodBankAccount) PaymentMethod {
+func CreatePaymentMethodAchCreditSameDay(achCreditSameDay SchemasPaymentMethodBankAccountBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchCreditSameDay
 	typStr := PaymentMethodsType(typ)
 	achCreditSameDay.PaymentMethodType = &typStr
 
 	return PaymentMethod{
-		PaymentMethodBankAccount: &achCreditSameDay,
-		Type:                     typ,
+		SchemasPaymentMethodBankAccountBankAccount: &achCreditSameDay,
+		Type: typ,
 	}
 }
 
-func CreatePaymentMethodAchCreditStandard(achCreditStandard PaymentMethodBankAccount) PaymentMethod {
+func CreatePaymentMethodAchCreditStandard(achCreditStandard SchemasPaymentMethodBankAccountBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchCreditStandard
 	typStr := PaymentMethodsType(typ)
 	achCreditStandard.PaymentMethodType = &typStr
 
 	return PaymentMethod{
-		PaymentMethodBankAccount: &achCreditStandard,
-		Type:                     typ,
+		SchemasPaymentMethodBankAccountBankAccount: &achCreditStandard,
+		Type: typ,
 	}
 }
 
-func CreatePaymentMethodAchDebitCollect(achDebitCollect PaymentMethodBankAccount) PaymentMethod {
+func CreatePaymentMethodAchDebitCollect(achDebitCollect SchemasPaymentMethodBankAccountBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchDebitCollect
 	typStr := PaymentMethodsType(typ)
 	achDebitCollect.PaymentMethodType = &typStr
 
 	return PaymentMethod{
-		PaymentMethodBankAccount: &achDebitCollect,
-		Type:                     typ,
+		SchemasPaymentMethodBankAccountBankAccount: &achDebitCollect,
+		Type: typ,
 	}
 }
 
-func CreatePaymentMethodAchDebitFund(achDebitFund PaymentMethodBankAccount) PaymentMethod {
+func CreatePaymentMethodAchDebitFund(achDebitFund SchemasPaymentMethodBankAccountBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchDebitFund
 	typStr := PaymentMethodsType(typ)
 	achDebitFund.PaymentMethodType = &typStr
 
 	return PaymentMethod{
-		PaymentMethodBankAccount: &achDebitFund,
-		Type:                     typ,
+		SchemasPaymentMethodBankAccountBankAccount: &achDebitFund,
+		Type: typ,
 	}
 }
 
-func CreatePaymentMethodApplePay(applePay PaymentMethodApplePay) PaymentMethod {
+func CreatePaymentMethodApplePay(applePay ApplePay) PaymentMethod {
 	typ := PaymentMethodTypeApplePay
 	typStr := PaymentMethodsType(typ)
 	applePay.PaymentMethodType = &typStr
 
 	return PaymentMethod{
-		PaymentMethodApplePay: &applePay,
-		Type:                  typ,
+		ApplePay: &applePay,
+		Type:     typ,
 	}
 }
 
-func CreatePaymentMethodCardPayment(cardPayment PaymentMethodCard) PaymentMethod {
+func CreatePaymentMethodCardPayment(cardPayment SchemasPaymentMethodCardCard) PaymentMethod {
 	typ := PaymentMethodTypeCardPayment
 	typStr := PaymentMethodsType(typ)
 	cardPayment.PaymentMethodType = &typStr
 
 	return PaymentMethod{
-		PaymentMethodCard: &cardPayment,
-		Type:              typ,
+		SchemasPaymentMethodCardCard: &cardPayment,
+		Type:                         typ,
 	}
 }
 
-func CreatePaymentMethodMoovWallet(moovWallet PaymentMethodWallet) PaymentMethod {
+func CreatePaymentMethodMoovWallet(moovWallet SchemasPaymentMethodWalletWallet) PaymentMethod {
 	typ := PaymentMethodTypeMoovWallet
 	typStr := PaymentMethodsType(typ)
 	moovWallet.PaymentMethodType = &typStr
 
 	return PaymentMethod{
-		PaymentMethodWallet: &moovWallet,
-		Type:                typ,
+		SchemasPaymentMethodWalletWallet: &moovWallet,
+		Type:                             typ,
 	}
 }
 
-func CreatePaymentMethodRtpCredit(rtpCredit PaymentMethodBankAccount) PaymentMethod {
+func CreatePaymentMethodRtpCredit(rtpCredit SchemasPaymentMethodBankAccountBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeRtpCredit
 	typStr := PaymentMethodsType(typ)
 	rtpCredit.PaymentMethodType = &typStr
 
 	return PaymentMethod{
-		PaymentMethodBankAccount: &rtpCredit,
-		Type:                     typ,
+		SchemasPaymentMethodBankAccountBankAccount: &rtpCredit,
+		Type: typ,
 	}
 }
 
@@ -557,75 +557,75 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 
 	switch dis.PaymentMethodType {
 	case "ach-credit-same-day":
-		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.PaymentMethodBankAccount = paymentMethodBankAccount
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
 		u.Type = PaymentMethodTypeAchCreditSameDay
 		return nil
 	case "ach-credit-standard":
-		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.PaymentMethodBankAccount = paymentMethodBankAccount
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
 		u.Type = PaymentMethodTypeAchCreditStandard
 		return nil
 	case "ach-debit-collect":
-		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.PaymentMethodBankAccount = paymentMethodBankAccount
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
 		u.Type = PaymentMethodTypeAchDebitCollect
 		return nil
 	case "ach-debit-fund":
-		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.PaymentMethodBankAccount = paymentMethodBankAccount
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
 		u.Type = PaymentMethodTypeAchDebitFund
 		return nil
 	case "apple-pay":
-		paymentMethodApplePay := new(PaymentMethodApplePay)
-		if err := utils.UnmarshalJSON(data, &paymentMethodApplePay, "", true, true); err != nil {
+		applePay := new(ApplePay)
+		if err := utils.UnmarshalJSON(data, &applePay, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.PaymentMethodApplePay = paymentMethodApplePay
+		u.ApplePay = applePay
 		u.Type = PaymentMethodTypeApplePay
 		return nil
 	case "card-payment":
-		paymentMethodCard := new(PaymentMethodCard)
-		if err := utils.UnmarshalJSON(data, &paymentMethodCard, "", true, true); err != nil {
+		schemasPaymentMethodCardCard := new(SchemasPaymentMethodCardCard)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodCardCard, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.PaymentMethodCard = paymentMethodCard
+		u.SchemasPaymentMethodCardCard = schemasPaymentMethodCardCard
 		u.Type = PaymentMethodTypeCardPayment
 		return nil
 	case "moov-wallet":
-		paymentMethodWallet := new(PaymentMethodWallet)
-		if err := utils.UnmarshalJSON(data, &paymentMethodWallet, "", true, true); err != nil {
+		schemasPaymentMethodWalletWallet := new(SchemasPaymentMethodWalletWallet)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodWalletWallet, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.PaymentMethodWallet = paymentMethodWallet
+		u.SchemasPaymentMethodWalletWallet = schemasPaymentMethodWalletWallet
 		u.Type = PaymentMethodTypeMoovWallet
 		return nil
 	case "rtp-credit":
-		paymentMethodBankAccount := new(PaymentMethodBankAccount)
-		if err := utils.UnmarshalJSON(data, &paymentMethodBankAccount, "", true, true); err != nil {
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.PaymentMethodBankAccount = paymentMethodBankAccount
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
 		u.Type = PaymentMethodTypeRtpCredit
 		return nil
 	}
@@ -634,20 +634,20 @@ func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 }
 
 func (u PaymentMethod) MarshalJSON() ([]byte, error) {
-	if u.PaymentMethodWallet != nil {
-		return utils.MarshalJSON(u.PaymentMethodWallet, "", true)
+	if u.SchemasPaymentMethodWalletWallet != nil {
+		return utils.MarshalJSON(u.SchemasPaymentMethodWalletWallet, "", true)
 	}
 
-	if u.PaymentMethodBankAccount != nil {
-		return utils.MarshalJSON(u.PaymentMethodBankAccount, "", true)
+	if u.SchemasPaymentMethodBankAccountBankAccount != nil {
+		return utils.MarshalJSON(u.SchemasPaymentMethodBankAccountBankAccount, "", true)
 	}
 
-	if u.PaymentMethodCard != nil {
-		return utils.MarshalJSON(u.PaymentMethodCard, "", true)
+	if u.SchemasPaymentMethodCardCard != nil {
+		return utils.MarshalJSON(u.SchemasPaymentMethodCardCard, "", true)
 	}
 
-	if u.PaymentMethodApplePay != nil {
-		return utils.MarshalJSON(u.PaymentMethodApplePay, "", true)
+	if u.ApplePay != nil {
+		return utils.MarshalJSON(u.ApplePay, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")

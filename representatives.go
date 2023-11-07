@@ -14,20 +14,20 @@ import (
 	"net/http"
 )
 
-// representatives - We think of a representative as an individual who can take major actions on behalf of a business. A representative can be the business owner, or anyone who owns 25% or more of the business. Some examples of representatives are the CEO, CFO, COO, or president. We require all business accounts to have valid information for at least one representative. Moov accounts must have verified business representatives before a business account can send funds, collect money from other accounts, or store funds in a wallet. To learn more, read our guide on [business representatives](https://docs.moov.io/guides/accounts/business-representatives/).
-type representatives struct {
+// Representatives - We think of a representative as an individual who can take major actions on behalf of a business. A representative can be the business owner, or anyone who owns 25% or more of the business. Some examples of representatives are the CEO, CFO, COO, or president. We require all business accounts to have valid information for at least one representative. Moov accounts must have verified business representatives before a business account can send funds, collect money from other accounts, or store funds in a wallet. To learn more, read our guide on [business representatives](https://docs.moov.io/guides/accounts/business-representatives/).
+type Representatives struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newRepresentatives(sdkConfig sdkConfiguration) *representatives {
-	return &representatives{
+func newRepresentatives(sdkConfig sdkConfiguration) *Representatives {
+	return &Representatives{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Create representative
 // Moov accounts associated with businesses require information regarding individuals who represent the business. You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives.<br><br> To create a representative, you must specify the `/accounts/{accountID}/representatives.write` scope.
-func (s *representatives) Create(ctx context.Context, createRepresentative shared.CreateRepresentative, accountID string) (*operations.CreateRepresentativeResponse, error) {
+func (s *Representatives) Create(ctx context.Context, createRepresentative shared.CreateRepresentative, accountID string) (*operations.CreateRepresentativeResponse, error) {
 	request := operations.CreateRepresentativeRequest{
 		CreateRepresentative: createRepresentative,
 		AccountID:            accountID,
@@ -99,6 +99,10 @@ func (s *representatives) Create(ctx context.Context, createRepresentative share
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -107,7 +111,7 @@ func (s *representatives) Create(ctx context.Context, createRepresentative share
 
 // Delete a representative
 // Deletes a business representative associated with a Moov account. <br><br> To use this endpoint, you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
-func (s *representatives) Delete(ctx context.Context, accountID string, representativeID string) (*operations.DeleteRepresentativeResponse, error) {
+func (s *Representatives) Delete(ctx context.Context, accountID string, representativeID string) (*operations.DeleteRepresentativeResponse, error) {
 	request := operations.DeleteRepresentativeRequest{
 		AccountID:        accountID,
 		RepresentativeID: representativeID,
@@ -151,11 +155,15 @@ func (s *representatives) Delete(ctx context.Context, accountID string, represen
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
-	case httpRes.StatusCode == 204:
-		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 204:
 		fallthrough
 	default:
 	}
@@ -165,7 +173,7 @@ func (s *representatives) Delete(ctx context.Context, accountID string, represen
 
 // Get representative
 // Retrieve a specific representative associated with a given Moov account. <br><br> To get a representative, you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
-func (s *representatives) Get(ctx context.Context, accountID string, representativeID string) (*operations.GetRepresentativeResponse, error) {
+func (s *Representatives) Get(ctx context.Context, accountID string, representativeID string) (*operations.GetRepresentativeResponse, error) {
 	request := operations.GetRepresentativeRequest{
 		AccountID:        accountID,
 		RepresentativeID: representativeID,
@@ -225,6 +233,10 @@ func (s *representatives) Get(ctx context.Context, accountID string, representat
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -233,7 +245,7 @@ func (s *representatives) Get(ctx context.Context, accountID string, representat
 
 // List representatives
 // A Moov account may have multiple representatives depending on the associated business's ownership and management structure. You can use this method to list all the representatives for a given Moov account. Note that Moov accounts associated with an individual do not have representatives. <br><br> To list representatives, you need to specify the `/accounts/{accountID}/representatives.read` scope.
-func (s *representatives) List(ctx context.Context, accountID string) (*operations.ListRepresentativesResponse, error) {
+func (s *Representatives) List(ctx context.Context, accountID string) (*operations.ListRepresentativesResponse, error) {
 	request := operations.ListRepresentativesRequest{
 		AccountID: accountID,
 	}
@@ -284,12 +296,16 @@ func (s *representatives) List(ctx context.Context, accountID string) (*operatio
 				return nil, err
 			}
 
-			res.Representatives = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -313,7 +329,7 @@ func (s *representatives) List(ctx context.Context, accountID string) (*operatio
 //   - Verified representatives cannot change any existing profile data.
 //
 // If you need to update information in a locked state, please contact Moov support.
-func (s *representatives) Update(ctx context.Context, patchRepresentativeRequest shared.PatchRepresentativeRequest, accountID string, representativeID string) (*operations.PatchRepresentativeResponse, error) {
+func (s *Representatives) Update(ctx context.Context, patchRepresentativeRequest shared.PatchRepresentativeRequest, accountID string, representativeID string) (*operations.PatchRepresentativeResponse, error) {
 	request := operations.PatchRepresentativeRequest{
 		PatchRepresentativeRequest: patchRepresentativeRequest,
 		AccountID:                  accountID,
@@ -388,6 +404,10 @@ func (s *representatives) Update(ctx context.Context, patchRepresentativeRequest
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 

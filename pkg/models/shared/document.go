@@ -9,20 +9,20 @@ import (
 	"time"
 )
 
-type DocumentType string
+type Type string
 
 const (
-	DocumentTypeDriversLicense DocumentType = "DriversLicense"
-	DocumentTypePassport       DocumentType = "Passport"
-	DocumentTypeUtilityBill    DocumentType = "UtilityBill"
-	DocumentTypeBankStatement  DocumentType = "BankStatement"
+	TypeDriversLicense Type = "DriversLicense"
+	TypePassport       Type = "Passport"
+	TypeUtilityBill    Type = "UtilityBill"
+	TypeBankStatement  Type = "BankStatement"
 )
 
-func (e DocumentType) ToPointer() *DocumentType {
+func (e Type) ToPointer() *Type {
 	return &e
 }
 
-func (e *DocumentType) UnmarshalJSON(data []byte) error {
+func (e *Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -35,10 +35,10 @@ func (e *DocumentType) UnmarshalJSON(data []byte) error {
 	case "UtilityBill":
 		fallthrough
 	case "BankStatement":
-		*e = DocumentType(v)
+		*e = Type(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DocumentType: %v", v)
+		return fmt.Errorf("invalid value for Type: %v", v)
 	}
 }
 
@@ -48,9 +48,9 @@ type Document struct {
 	// A unique identifier for this document
 	DocumentID string `json:"documentID"`
 	// Optional array of errors encountered dring automated parsing.
-	ParseErrors []string     `json:"parseErrors,omitempty"`
-	Type        DocumentType `json:"type"`
-	UploadedAt  time.Time    `json:"uploadedAt"`
+	ParseErrors []string  `json:"parseErrors,omitempty"`
+	Type        Type      `json:"type"`
+	UploadedAt  time.Time `json:"uploadedAt"`
 }
 
 func (d Document) MarshalJSON() ([]byte, error) {
@@ -85,9 +85,9 @@ func (o *Document) GetParseErrors() []string {
 	return o.ParseErrors
 }
 
-func (o *Document) GetType() DocumentType {
+func (o *Document) GetType() Type {
 	if o == nil {
-		return DocumentType("")
+		return Type("")
 	}
 	return o.Type
 }

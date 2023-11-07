@@ -28,30 +28,14 @@ func (o *PostCapabilityRequest) GetAccountID() string {
 }
 
 type PostCapabilityResponse struct {
-	// The list of capabilities for the account
-	Capabilities []shared.Capability
-	// The request could not be processed due to a state conflict with the target resource
-	CapabilityRequestError *shared.CapabilityRequestError
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-}
-
-func (o *PostCapabilityResponse) GetCapabilities() []shared.Capability {
-	if o == nil {
-		return nil
-	}
-	return o.Capabilities
-}
-
-func (o *PostCapabilityResponse) GetCapabilityRequestError() *shared.CapabilityRequestError {
-	if o == nil {
-		return nil
-	}
-	return o.CapabilityRequestError
+	// The list of capabilities for the account
+	Classes []shared.Capability
 }
 
 func (o *PostCapabilityResponse) GetContentType() string {
@@ -73,4 +57,11 @@ func (o *PostCapabilityResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *PostCapabilityResponse) GetClasses() []shared.Capability {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

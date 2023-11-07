@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-type PatchAccountRequestCustomerSupportAddress struct {
+type PatchAccountRequestAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`
 	City            *string `json:"city,omitempty"`
@@ -16,61 +16,61 @@ type PatchAccountRequestCustomerSupportAddress struct {
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
-func (o *PatchAccountRequestCustomerSupportAddress) GetAddressLine1() *string {
+func (o *PatchAccountRequestAddress) GetAddressLine1() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine1
 }
 
-func (o *PatchAccountRequestCustomerSupportAddress) GetAddressLine2() *string {
+func (o *PatchAccountRequestAddress) GetAddressLine2() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine2
 }
 
-func (o *PatchAccountRequestCustomerSupportAddress) GetCity() *string {
+func (o *PatchAccountRequestAddress) GetCity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.City
 }
 
-func (o *PatchAccountRequestCustomerSupportAddress) GetCountry() *string {
+func (o *PatchAccountRequestAddress) GetCountry() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Country
 }
 
-func (o *PatchAccountRequestCustomerSupportAddress) GetPostalCode() *string {
+func (o *PatchAccountRequestAddress) GetPostalCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PostalCode
 }
 
-func (o *PatchAccountRequestCustomerSupportAddress) GetStateOrProvince() *string {
+func (o *PatchAccountRequestAddress) GetStateOrProvince() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StateOrProvince
 }
 
-type PatchAccountRequestCustomerSupportPhone struct {
+type PatchAccountRequestPhone struct {
 	CountryCode *string `json:"countryCode,omitempty"`
 	Number      *string `json:"number,omitempty"`
 }
 
-func (o *PatchAccountRequestCustomerSupportPhone) GetCountryCode() *string {
+func (o *PatchAccountRequestPhone) GetCountryCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CountryCode
 }
 
-func (o *PatchAccountRequestCustomerSupportPhone) GetNumber() *string {
+func (o *PatchAccountRequestPhone) GetNumber() *string {
 	if o == nil {
 		return nil
 	}
@@ -79,14 +79,14 @@ func (o *PatchAccountRequestCustomerSupportPhone) GetNumber() *string {
 
 // PatchAccountRequestCustomerSupport - User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account
 type PatchAccountRequestCustomerSupport struct {
-	Address *PatchAccountRequestCustomerSupportAddress `json:"address,omitempty"`
+	Address *PatchAccountRequestAddress `json:"address,omitempty"`
 	// Email Address
-	Email   *string                                  `json:"email,omitempty"`
-	Phone   *PatchAccountRequestCustomerSupportPhone `json:"phone,omitempty"`
-	Website *string                                  `json:"website,omitempty"`
+	Email   *string                   `json:"email,omitempty"`
+	Phone   *PatchAccountRequestPhone `json:"phone,omitempty"`
+	Website *string                   `json:"website,omitempty"`
 }
 
-func (o *PatchAccountRequestCustomerSupport) GetAddress() *PatchAccountRequestCustomerSupportAddress {
+func (o *PatchAccountRequestCustomerSupport) GetAddress() *PatchAccountRequestAddress {
 	if o == nil {
 		return nil
 	}
@@ -100,7 +100,7 @@ func (o *PatchAccountRequestCustomerSupport) GetEmail() *string {
 	return o.Email
 }
 
-func (o *PatchAccountRequestCustomerSupport) GetPhone() *PatchAccountRequestCustomerSupportPhone {
+func (o *PatchAccountRequestCustomerSupport) GetPhone() *PatchAccountRequestPhone {
 	if o == nil {
 		return nil
 	}
@@ -114,7 +114,7 @@ func (o *PatchAccountRequestCustomerSupport) GetWebsite() *string {
 	return o.Website
 }
 
-type PatchAccountRequestProfileBusinessAddress struct {
+type PatchAccountRequestSchemasAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`
 	City            *string `json:"city,omitempty"`
@@ -123,68 +123,68 @@ type PatchAccountRequestProfileBusinessAddress struct {
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileBusinessAddress) GetAddressLine1() *string {
+func (o *PatchAccountRequestSchemasAddress) GetAddressLine1() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine1
 }
 
-func (o *PatchAccountRequestProfileBusinessAddress) GetAddressLine2() *string {
+func (o *PatchAccountRequestSchemasAddress) GetAddressLine2() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine2
 }
 
-func (o *PatchAccountRequestProfileBusinessAddress) GetCity() *string {
+func (o *PatchAccountRequestSchemasAddress) GetCity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.City
 }
 
-func (o *PatchAccountRequestProfileBusinessAddress) GetCountry() *string {
+func (o *PatchAccountRequestSchemasAddress) GetCountry() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Country
 }
 
-func (o *PatchAccountRequestProfileBusinessAddress) GetPostalCode() *string {
+func (o *PatchAccountRequestSchemasAddress) GetPostalCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PostalCode
 }
 
-func (o *PatchAccountRequestProfileBusinessAddress) GetStateOrProvince() *string {
+func (o *PatchAccountRequestSchemasAddress) GetStateOrProvince() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StateOrProvince
 }
 
-// PatchAccountRequestProfileBusinessBusinessType - The type of entity represented by this Business
-type PatchAccountRequestProfileBusinessBusinessType string
+// PatchAccountRequestBusinessType - The type of entity represented by this Business
+type PatchAccountRequestBusinessType string
 
 const (
-	PatchAccountRequestProfileBusinessBusinessTypeSoleProprietorship        PatchAccountRequestProfileBusinessBusinessType = "soleProprietorship"
-	PatchAccountRequestProfileBusinessBusinessTypeUnincorporatedAssociation PatchAccountRequestProfileBusinessBusinessType = "unincorporatedAssociation"
-	PatchAccountRequestProfileBusinessBusinessTypeTrust                     PatchAccountRequestProfileBusinessBusinessType = "trust"
-	PatchAccountRequestProfileBusinessBusinessTypePublicCorporation         PatchAccountRequestProfileBusinessBusinessType = "publicCorporation"
-	PatchAccountRequestProfileBusinessBusinessTypePrivateCorporation        PatchAccountRequestProfileBusinessBusinessType = "privateCorporation"
-	PatchAccountRequestProfileBusinessBusinessTypeLlc                       PatchAccountRequestProfileBusinessBusinessType = "llc"
-	PatchAccountRequestProfileBusinessBusinessTypePartnership               PatchAccountRequestProfileBusinessBusinessType = "partnership"
-	PatchAccountRequestProfileBusinessBusinessTypeUnincorporatedNonProfit   PatchAccountRequestProfileBusinessBusinessType = "unincorporatedNonProfit"
-	PatchAccountRequestProfileBusinessBusinessTypeIncorporatedNonProfit     PatchAccountRequestProfileBusinessBusinessType = "incorporatedNonProfit"
+	PatchAccountRequestBusinessTypeSoleProprietorship        PatchAccountRequestBusinessType = "soleProprietorship"
+	PatchAccountRequestBusinessTypeUnincorporatedAssociation PatchAccountRequestBusinessType = "unincorporatedAssociation"
+	PatchAccountRequestBusinessTypeTrust                     PatchAccountRequestBusinessType = "trust"
+	PatchAccountRequestBusinessTypePublicCorporation         PatchAccountRequestBusinessType = "publicCorporation"
+	PatchAccountRequestBusinessTypePrivateCorporation        PatchAccountRequestBusinessType = "privateCorporation"
+	PatchAccountRequestBusinessTypeLlc                       PatchAccountRequestBusinessType = "llc"
+	PatchAccountRequestBusinessTypePartnership               PatchAccountRequestBusinessType = "partnership"
+	PatchAccountRequestBusinessTypeUnincorporatedNonProfit   PatchAccountRequestBusinessType = "unincorporatedNonProfit"
+	PatchAccountRequestBusinessTypeIncorporatedNonProfit     PatchAccountRequestBusinessType = "incorporatedNonProfit"
 )
 
-func (e PatchAccountRequestProfileBusinessBusinessType) ToPointer() *PatchAccountRequestProfileBusinessBusinessType {
+func (e PatchAccountRequestBusinessType) ToPointer() *PatchAccountRequestBusinessType {
 	return &e
 }
 
-func (e *PatchAccountRequestProfileBusinessBusinessType) UnmarshalJSON(data []byte) error {
+func (e *PatchAccountRequestBusinessType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -207,165 +207,165 @@ func (e *PatchAccountRequestProfileBusinessBusinessType) UnmarshalJSON(data []by
 	case "unincorporatedNonProfit":
 		fallthrough
 	case "incorporatedNonProfit":
-		*e = PatchAccountRequestProfileBusinessBusinessType(v)
+		*e = PatchAccountRequestBusinessType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for PatchAccountRequestProfileBusinessBusinessType: %v", v)
+		return fmt.Errorf("invalid value for PatchAccountRequestBusinessType: %v", v)
 	}
 }
 
-// PatchAccountRequestProfileBusinessIndustryCodes - Describes industry specific identifiers
-type PatchAccountRequestProfileBusinessIndustryCodes struct {
+// PatchAccountRequestIndustryCodes - Describes industry specific identifiers
+type PatchAccountRequestIndustryCodes struct {
 	Mcc   *string `json:"mcc,omitempty"`
 	Naics *string `json:"naics,omitempty"`
 	Sic   *string `json:"sic,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileBusinessIndustryCodes) GetMcc() *string {
+func (o *PatchAccountRequestIndustryCodes) GetMcc() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Mcc
 }
 
-func (o *PatchAccountRequestProfileBusinessIndustryCodes) GetNaics() *string {
+func (o *PatchAccountRequestIndustryCodes) GetNaics() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Naics
 }
 
-func (o *PatchAccountRequestProfileBusinessIndustryCodes) GetSic() *string {
+func (o *PatchAccountRequestIndustryCodes) GetSic() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Sic
 }
 
-type PatchAccountRequestProfileBusinessPhone struct {
+type PatchAccountRequestSchemasPhone struct {
 	CountryCode *string `json:"countryCode,omitempty"`
 	Number      *string `json:"number,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileBusinessPhone) GetCountryCode() *string {
+func (o *PatchAccountRequestSchemasPhone) GetCountryCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CountryCode
 }
 
-func (o *PatchAccountRequestProfileBusinessPhone) GetNumber() *string {
+func (o *PatchAccountRequestSchemasPhone) GetNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Number
 }
 
-// PatchAccountRequestProfileBusinessTaxID - An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
-type PatchAccountRequestProfileBusinessTaxID struct {
+// PatchAccountRequestTaxID - An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN.
+type PatchAccountRequestTaxID struct {
 	Ein *Ein `json:"ein,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileBusinessTaxID) GetEin() *Ein {
+func (o *PatchAccountRequestTaxID) GetEin() *Ein {
 	if o == nil {
 		return nil
 	}
 	return o.Ein
 }
 
-// PatchAccountRequestProfileBusiness - Describes the fields available when patching a business
-type PatchAccountRequestProfileBusiness struct {
-	Address           *PatchAccountRequestProfileBusinessAddress       `json:"address,omitempty"`
-	BusinessType      *PatchAccountRequestProfileBusinessBusinessType  `json:"businessType,omitempty"`
-	Description       *string                                          `json:"description,omitempty"`
-	DoingBusinessAs   *string                                          `json:"doingBusinessAs,omitempty"`
-	Email             *string                                          `json:"email,omitempty"`
-	IndustryCodes     *PatchAccountRequestProfileBusinessIndustryCodes `json:"industryCodes,omitempty"`
-	LegalBusinessName *string                                          `json:"legalBusinessName,omitempty"`
-	OwnersProvided    *bool                                            `json:"ownersProvided,omitempty"`
-	Phone             *PatchAccountRequestProfileBusinessPhone         `json:"phone,omitempty"`
-	TaxID             *PatchAccountRequestProfileBusinessTaxID         `json:"taxID,omitempty"`
-	Website           *string                                          `json:"website,omitempty"`
+// PatchAccountRequestBusiness - Describes the fields available when patching a business
+type PatchAccountRequestBusiness struct {
+	Address           *PatchAccountRequestSchemasAddress `json:"address,omitempty"`
+	BusinessType      *PatchAccountRequestBusinessType   `json:"businessType,omitempty"`
+	Description       *string                            `json:"description,omitempty"`
+	DoingBusinessAs   *string                            `json:"doingBusinessAs,omitempty"`
+	Email             *string                            `json:"email,omitempty"`
+	IndustryCodes     *PatchAccountRequestIndustryCodes  `json:"industryCodes,omitempty"`
+	LegalBusinessName *string                            `json:"legalBusinessName,omitempty"`
+	OwnersProvided    *bool                              `json:"ownersProvided,omitempty"`
+	Phone             *PatchAccountRequestSchemasPhone   `json:"phone,omitempty"`
+	TaxID             *PatchAccountRequestTaxID          `json:"taxID,omitempty"`
+	Website           *string                            `json:"website,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileBusiness) GetAddress() *PatchAccountRequestProfileBusinessAddress {
+func (o *PatchAccountRequestBusiness) GetAddress() *PatchAccountRequestSchemasAddress {
 	if o == nil {
 		return nil
 	}
 	return o.Address
 }
 
-func (o *PatchAccountRequestProfileBusiness) GetBusinessType() *PatchAccountRequestProfileBusinessBusinessType {
+func (o *PatchAccountRequestBusiness) GetBusinessType() *PatchAccountRequestBusinessType {
 	if o == nil {
 		return nil
 	}
 	return o.BusinessType
 }
 
-func (o *PatchAccountRequestProfileBusiness) GetDescription() *string {
+func (o *PatchAccountRequestBusiness) GetDescription() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Description
 }
 
-func (o *PatchAccountRequestProfileBusiness) GetDoingBusinessAs() *string {
+func (o *PatchAccountRequestBusiness) GetDoingBusinessAs() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DoingBusinessAs
 }
 
-func (o *PatchAccountRequestProfileBusiness) GetEmail() *string {
+func (o *PatchAccountRequestBusiness) GetEmail() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Email
 }
 
-func (o *PatchAccountRequestProfileBusiness) GetIndustryCodes() *PatchAccountRequestProfileBusinessIndustryCodes {
+func (o *PatchAccountRequestBusiness) GetIndustryCodes() *PatchAccountRequestIndustryCodes {
 	if o == nil {
 		return nil
 	}
 	return o.IndustryCodes
 }
 
-func (o *PatchAccountRequestProfileBusiness) GetLegalBusinessName() *string {
+func (o *PatchAccountRequestBusiness) GetLegalBusinessName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LegalBusinessName
 }
 
-func (o *PatchAccountRequestProfileBusiness) GetOwnersProvided() *bool {
+func (o *PatchAccountRequestBusiness) GetOwnersProvided() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.OwnersProvided
 }
 
-func (o *PatchAccountRequestProfileBusiness) GetPhone() *PatchAccountRequestProfileBusinessPhone {
+func (o *PatchAccountRequestBusiness) GetPhone() *PatchAccountRequestSchemasPhone {
 	if o == nil {
 		return nil
 	}
 	return o.Phone
 }
 
-func (o *PatchAccountRequestProfileBusiness) GetTaxID() *PatchAccountRequestProfileBusinessTaxID {
+func (o *PatchAccountRequestBusiness) GetTaxID() *PatchAccountRequestTaxID {
 	if o == nil {
 		return nil
 	}
 	return o.TaxID
 }
 
-func (o *PatchAccountRequestProfileBusiness) GetWebsite() *string {
+func (o *PatchAccountRequestBusiness) GetWebsite() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Website
 }
 
-type PatchAccountRequestProfileIndividualAddress struct {
+type PatchAccountRequestSchemasProfileAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`
 	City            *string `json:"city,omitempty"`
@@ -374,135 +374,135 @@ type PatchAccountRequestProfileIndividualAddress struct {
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileIndividualAddress) GetAddressLine1() *string {
+func (o *PatchAccountRequestSchemasProfileAddress) GetAddressLine1() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine1
 }
 
-func (o *PatchAccountRequestProfileIndividualAddress) GetAddressLine2() *string {
+func (o *PatchAccountRequestSchemasProfileAddress) GetAddressLine2() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine2
 }
 
-func (o *PatchAccountRequestProfileIndividualAddress) GetCity() *string {
+func (o *PatchAccountRequestSchemasProfileAddress) GetCity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.City
 }
 
-func (o *PatchAccountRequestProfileIndividualAddress) GetCountry() *string {
+func (o *PatchAccountRequestSchemasProfileAddress) GetCountry() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Country
 }
 
-func (o *PatchAccountRequestProfileIndividualAddress) GetPostalCode() *string {
+func (o *PatchAccountRequestSchemasProfileAddress) GetPostalCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PostalCode
 }
 
-func (o *PatchAccountRequestProfileIndividualAddress) GetStateOrProvince() *string {
+func (o *PatchAccountRequestSchemasProfileAddress) GetStateOrProvince() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StateOrProvince
 }
 
-// PatchAccountRequestProfileIndividualBirthDate - Birthdate for an individual
-type PatchAccountRequestProfileIndividualBirthDate struct {
+// PatchAccountRequestBirthDate - Birthdate for an individual
+type PatchAccountRequestBirthDate struct {
 	Day   int64 `json:"day"`
 	Month int64 `json:"month"`
 	Year  int64 `json:"year"`
 }
 
-func (o *PatchAccountRequestProfileIndividualBirthDate) GetDay() int64 {
+func (o *PatchAccountRequestBirthDate) GetDay() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.Day
 }
 
-func (o *PatchAccountRequestProfileIndividualBirthDate) GetMonth() int64 {
+func (o *PatchAccountRequestBirthDate) GetMonth() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.Month
 }
 
-func (o *PatchAccountRequestProfileIndividualBirthDate) GetYear() int64 {
+func (o *PatchAccountRequestBirthDate) GetYear() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.Year
 }
 
-type PatchAccountRequestProfileIndividualGovernmentIDItin struct {
+type PatchAccountRequestItin struct {
 	Full     *string `json:"full,omitempty"`
 	LastFour *string `json:"lastFour,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileIndividualGovernmentIDItin) GetFull() *string {
+func (o *PatchAccountRequestItin) GetFull() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Full
 }
 
-func (o *PatchAccountRequestProfileIndividualGovernmentIDItin) GetLastFour() *string {
+func (o *PatchAccountRequestItin) GetLastFour() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastFour
 }
 
-type PatchAccountRequestProfileIndividualGovernmentIDSsn struct {
+type PatchAccountRequestSsn struct {
 	Full     *string `json:"full,omitempty"`
 	LastFour *string `json:"lastFour,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileIndividualGovernmentIDSsn) GetFull() *string {
+func (o *PatchAccountRequestSsn) GetFull() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Full
 }
 
-func (o *PatchAccountRequestProfileIndividualGovernmentIDSsn) GetLastFour() *string {
+func (o *PatchAccountRequestSsn) GetLastFour() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastFour
 }
 
-type PatchAccountRequestProfileIndividualGovernmentID struct {
-	Itin *PatchAccountRequestProfileIndividualGovernmentIDItin `json:"itin,omitempty"`
-	Ssn  *PatchAccountRequestProfileIndividualGovernmentIDSsn  `json:"ssn,omitempty"`
+type PatchAccountRequestGovernmentID struct {
+	Itin *PatchAccountRequestItin `json:"itin,omitempty"`
+	Ssn  *PatchAccountRequestSsn  `json:"ssn,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileIndividualGovernmentID) GetItin() *PatchAccountRequestProfileIndividualGovernmentIDItin {
+func (o *PatchAccountRequestGovernmentID) GetItin() *PatchAccountRequestItin {
 	if o == nil {
 		return nil
 	}
 	return o.Itin
 }
 
-func (o *PatchAccountRequestProfileIndividualGovernmentID) GetSsn() *PatchAccountRequestProfileIndividualGovernmentIDSsn {
+func (o *PatchAccountRequestGovernmentID) GetSsn() *PatchAccountRequestSsn {
 	if o == nil {
 		return nil
 	}
 	return o.Ssn
 }
 
-// PatchAccountRequestProfileIndividualName - Name for an individual
-type PatchAccountRequestProfileIndividualName struct {
+// PatchAccountRequestName - Name for an individual
+type PatchAccountRequestName struct {
 	// Name this person was given. This is usually the the same as first name.
 	FirstName *string `json:"firstName,omitempty"`
 	// Family name of this person. This is usually the the same as last name.
@@ -513,99 +513,99 @@ type PatchAccountRequestProfileIndividualName struct {
 	Suffix *string `json:"suffix,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileIndividualName) GetFirstName() *string {
+func (o *PatchAccountRequestName) GetFirstName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.FirstName
 }
 
-func (o *PatchAccountRequestProfileIndividualName) GetLastName() *string {
+func (o *PatchAccountRequestName) GetLastName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastName
 }
 
-func (o *PatchAccountRequestProfileIndividualName) GetMiddleName() *string {
+func (o *PatchAccountRequestName) GetMiddleName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.MiddleName
 }
 
-func (o *PatchAccountRequestProfileIndividualName) GetSuffix() *string {
+func (o *PatchAccountRequestName) GetSuffix() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Suffix
 }
 
-type PatchAccountRequestProfileIndividualPhone struct {
+type PatchAccountRequestSchemasProfilePhone struct {
 	CountryCode *string `json:"countryCode,omitempty"`
 	Number      *string `json:"number,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileIndividualPhone) GetCountryCode() *string {
+func (o *PatchAccountRequestSchemasProfilePhone) GetCountryCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CountryCode
 }
 
-func (o *PatchAccountRequestProfileIndividualPhone) GetNumber() *string {
+func (o *PatchAccountRequestSchemasProfilePhone) GetNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Number
 }
 
-// PatchAccountRequestProfileIndividual - Describes the fields available when patching an individual
-type PatchAccountRequestProfileIndividual struct {
-	Address      *PatchAccountRequestProfileIndividualAddress      `json:"address,omitempty"`
-	BirthDate    *PatchAccountRequestProfileIndividualBirthDate    `json:"birthDate,omitempty"`
-	Email        *string                                           `json:"email,omitempty"`
-	GovernmentID *PatchAccountRequestProfileIndividualGovernmentID `json:"governmentID,omitempty"`
-	Name         *PatchAccountRequestProfileIndividualName         `json:"name,omitempty"`
-	Phone        *PatchAccountRequestProfileIndividualPhone        `json:"phone,omitempty"`
+// PatchAccountRequestIndividual - Describes the fields available when patching an individual
+type PatchAccountRequestIndividual struct {
+	Address      *PatchAccountRequestSchemasProfileAddress `json:"address,omitempty"`
+	BirthDate    *PatchAccountRequestBirthDate             `json:"birthDate,omitempty"`
+	Email        *string                                   `json:"email,omitempty"`
+	GovernmentID *PatchAccountRequestGovernmentID          `json:"governmentID,omitempty"`
+	Name         *PatchAccountRequestName                  `json:"name,omitempty"`
+	Phone        *PatchAccountRequestSchemasProfilePhone   `json:"phone,omitempty"`
 }
 
-func (o *PatchAccountRequestProfileIndividual) GetAddress() *PatchAccountRequestProfileIndividualAddress {
+func (o *PatchAccountRequestIndividual) GetAddress() *PatchAccountRequestSchemasProfileAddress {
 	if o == nil {
 		return nil
 	}
 	return o.Address
 }
 
-func (o *PatchAccountRequestProfileIndividual) GetBirthDate() *PatchAccountRequestProfileIndividualBirthDate {
+func (o *PatchAccountRequestIndividual) GetBirthDate() *PatchAccountRequestBirthDate {
 	if o == nil {
 		return nil
 	}
 	return o.BirthDate
 }
 
-func (o *PatchAccountRequestProfileIndividual) GetEmail() *string {
+func (o *PatchAccountRequestIndividual) GetEmail() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Email
 }
 
-func (o *PatchAccountRequestProfileIndividual) GetGovernmentID() *PatchAccountRequestProfileIndividualGovernmentID {
+func (o *PatchAccountRequestIndividual) GetGovernmentID() *PatchAccountRequestGovernmentID {
 	if o == nil {
 		return nil
 	}
 	return o.GovernmentID
 }
 
-func (o *PatchAccountRequestProfileIndividual) GetName() *PatchAccountRequestProfileIndividualName {
+func (o *PatchAccountRequestIndividual) GetName() *PatchAccountRequestName {
 	if o == nil {
 		return nil
 	}
 	return o.Name
 }
 
-func (o *PatchAccountRequestProfileIndividual) GetPhone() *PatchAccountRequestProfileIndividualPhone {
+func (o *PatchAccountRequestIndividual) GetPhone() *PatchAccountRequestSchemasProfilePhone {
 	if o == nil {
 		return nil
 	}
@@ -615,44 +615,44 @@ func (o *PatchAccountRequestProfileIndividual) GetPhone() *PatchAccountRequestPr
 // PatchAccountRequestProfile - Describes the fields available when patching a profile.
 // Each object can be patched independent of patching the other fields.
 type PatchAccountRequestProfile struct {
-	Business   *PatchAccountRequestProfileBusiness   `json:"business,omitempty"`
-	Individual *PatchAccountRequestProfileIndividual `json:"individual,omitempty"`
+	Business   *PatchAccountRequestBusiness   `json:"business,omitempty"`
+	Individual *PatchAccountRequestIndividual `json:"individual,omitempty"`
 }
 
-func (o *PatchAccountRequestProfile) GetBusiness() *PatchAccountRequestProfileBusiness {
+func (o *PatchAccountRequestProfile) GetBusiness() *PatchAccountRequestBusiness {
 	if o == nil {
 		return nil
 	}
 	return o.Business
 }
 
-func (o *PatchAccountRequestProfile) GetIndividual() *PatchAccountRequestProfileIndividual {
+func (o *PatchAccountRequestProfile) GetIndividual() *PatchAccountRequestIndividual {
 	if o == nil {
 		return nil
 	}
 	return o.Individual
 }
 
-// PatchAccountRequestSettingsAchPayment - User provided settings to manage ACH payments
-type PatchAccountRequestSettingsAchPayment struct {
+// PatchAccountRequestAchPayment - User provided settings to manage ACH payments
+type PatchAccountRequestAchPayment struct {
 	// The description that shows up on ACH transactions. This will default to the account's display name on account creation.
 	CompanyName *string `json:"companyName,omitempty"`
 }
 
-func (o *PatchAccountRequestSettingsAchPayment) GetCompanyName() *string {
+func (o *PatchAccountRequestAchPayment) GetCompanyName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CompanyName
 }
 
-// PatchAccountRequestSettingsCardPayment - User provided settings to manage card payments. This data is only allowed on a business account
-type PatchAccountRequestSettingsCardPayment struct {
+// PatchAccountRequestCardPayment - User provided settings to manage card payments. This data is only allowed on a business account
+type PatchAccountRequestCardPayment struct {
 	// The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
 	StatementDescriptor *string `json:"statementDescriptor,omitempty"`
 }
 
-func (o *PatchAccountRequestSettingsCardPayment) GetStatementDescriptor() *string {
+func (o *PatchAccountRequestCardPayment) GetStatementDescriptor() *string {
 	if o == nil {
 		return nil
 	}
@@ -661,18 +661,18 @@ func (o *PatchAccountRequestSettingsCardPayment) GetStatementDescriptor() *strin
 
 // PatchAccountRequestSettings - User provided settings to manage an account
 type PatchAccountRequestSettings struct {
-	AchPayment  *PatchAccountRequestSettingsAchPayment  `json:"achPayment,omitempty"`
-	CardPayment *PatchAccountRequestSettingsCardPayment `json:"cardPayment,omitempty"`
+	AchPayment  *PatchAccountRequestAchPayment  `json:"achPayment,omitempty"`
+	CardPayment *PatchAccountRequestCardPayment `json:"cardPayment,omitempty"`
 }
 
-func (o *PatchAccountRequestSettings) GetAchPayment() *PatchAccountRequestSettingsAchPayment {
+func (o *PatchAccountRequestSettings) GetAchPayment() *PatchAccountRequestAchPayment {
 	if o == nil {
 		return nil
 	}
 	return o.AchPayment
 }
 
-func (o *PatchAccountRequestSettings) GetCardPayment() *PatchAccountRequestSettingsCardPayment {
+func (o *PatchAccountRequestSettings) GetCardPayment() *PatchAccountRequestCardPayment {
 	if o == nil {
 		return nil
 	}

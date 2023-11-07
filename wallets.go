@@ -14,24 +14,24 @@ import (
 	"net/http"
 )
 
-// wallets - A [Moov wallet](https://docs.moov.io/guides/wallet/) can serve as a funding source as you accumulate funds. You can also use the Moov wallet to:
+// Wallets - A [Moov wallet](https://docs.moov.io/guides/wallet/) can serve as a funding source as you accumulate funds. You can also use the Moov wallet to:
 // - Pre-fund transfers for faster payouts
 // - Transfer funds between Moov wallets for instantly available funds
 //
 // <em> If you've requested the `send-funds` or `collect-funds` capability, the `wallet` capability will be automatically requested as well. Read more on the [data requirements for wallets here](https://docs.moov.io/guides/accounts/capabilities/#wallet).</em>
-type wallets struct {
+type Wallets struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newWallets(sdkConfig sdkConfiguration) *wallets {
-	return &wallets{
+func newWallets(sdkConfig sdkConfiguration) *Wallets {
+	return &Wallets{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Get wallet
 // Get information on a specific wallet (e.g., the available balance). <br><br> To get wallet information, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-func (s *wallets) Get(ctx context.Context, accountID string, walletID string) (*operations.GetWalletForAccountResponse, error) {
+func (s *Wallets) Get(ctx context.Context, accountID string, walletID string) (*operations.GetWalletForAccountResponse, error) {
 	request := operations.GetWalletForAccountRequest{
 		AccountID: accountID,
 		WalletID:  walletID,
@@ -91,6 +91,10 @@ func (s *wallets) Get(ctx context.Context, accountID string, walletID string) (*
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -99,7 +103,7 @@ func (s *wallets) Get(ctx context.Context, accountID string, walletID string) (*
 
 // GetTransaction - Get wallet transaction
 // Get details on a specific wallet transaction. <br><br> To access this endpoint, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-func (s *wallets) GetTransaction(ctx context.Context, accountID string, transactionID string, walletID string) (*operations.GetWalletTransactionResponse, error) {
+func (s *Wallets) GetTransaction(ctx context.Context, accountID string, transactionID string, walletID string) (*operations.GetWalletTransactionResponse, error) {
 	request := operations.GetWalletTransactionRequest{
 		AccountID:     accountID,
 		TransactionID: transactionID,
@@ -160,6 +164,10 @@ func (s *wallets) GetTransaction(ctx context.Context, accountID string, transact
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -168,7 +176,7 @@ func (s *wallets) GetTransaction(ctx context.Context, accountID string, transact
 
 // List wallets
 // List the wallets associated with a Moov account. <br><br> To list wallets, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-func (s *wallets) List(ctx context.Context, accountID string) (*operations.ListWalletsForAccountResponse, error) {
+func (s *Wallets) List(ctx context.Context, accountID string) (*operations.ListWalletsForAccountResponse, error) {
 	request := operations.ListWalletsForAccountRequest{
 		AccountID: accountID,
 	}
@@ -219,12 +227,16 @@ func (s *wallets) List(ctx context.Context, accountID string) (*operations.ListW
 				return nil, err
 			}
 
-			res.Wallets = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -233,7 +245,7 @@ func (s *wallets) List(ctx context.Context, accountID string) (*operations.ListW
 
 // ListTransactions - List wallet transactions
 // List all the transactions associated with a particular Moov wallet. <br><br> To access this endpoint, you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
-func (s *wallets) ListTransactions(ctx context.Context, request operations.ListWalletTransactionsRequest) (*operations.ListWalletTransactionsResponse, error) {
+func (s *Wallets) ListTransactions(ctx context.Context, request operations.ListWalletTransactionsRequest) (*operations.ListWalletTransactionsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/accounts/{accountID}/wallets/{walletID}/transactions", request, nil)
 	if err != nil {
@@ -284,7 +296,7 @@ func (s *wallets) ListTransactions(ctx context.Context, request operations.ListW
 				return nil, err
 			}
 
-			res.WalletTransactions = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -292,6 +304,10 @@ func (s *wallets) ListTransactions(ctx context.Context, request operations.ListW
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 

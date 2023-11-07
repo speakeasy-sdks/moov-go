@@ -1,5 +1,5 @@
 # CardIssuing
-(*CardIssuing*)
+(*.CardIssuing*)
 
 ## Overview
 

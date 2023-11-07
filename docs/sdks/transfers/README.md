@@ -1,5 +1,5 @@
 # Transfers
-(*Transfers*)
+(*.Transfers*)
 
 ## Overview
 
@@ -105,7 +105,7 @@ func main() {
             Value: 1204,
         },
         Description: moovgo.String("Pay Instructor for May 15 Class"),
-        Destination: &shared.CreateTransferDestination{
+        Destination: &shared.Destination{
             AchDetails: &shared.CreateACHDetailsBase{
                 CompanyEntryDescription: moovgo.String("Gym Dues"),
                 OriginatingCompanyName: moovgo.String("Whole Body Fit"),
@@ -116,7 +116,7 @@ func main() {
         Metadata: map[string]string{
             "key": "string",
         },
-        Source: &shared.CreateTransferSource{
+        Source: &shared.Source{
             AchDetails: &shared.CreateAchDetailsSource{
                 CompanyEntryDescription: moovgo.String("Gym Dues"),
                 DebitHoldPeriod: shared.CreateAchDetailsSourceDebitHoldPeriodTwoDays.ToPointer(),

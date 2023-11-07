@@ -86,38 +86,38 @@ func (o *PatchRepresentativeRequestBirthDate) GetYear() int64 {
 	return o.Year
 }
 
-type PatchRepresentativeRequestGovernmentIDItin struct {
+type PatchRepresentativeRequestItin struct {
 	Full     *string `json:"full,omitempty"`
 	LastFour *string `json:"lastFour,omitempty"`
 }
 
-func (o *PatchRepresentativeRequestGovernmentIDItin) GetFull() *string {
+func (o *PatchRepresentativeRequestItin) GetFull() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Full
 }
 
-func (o *PatchRepresentativeRequestGovernmentIDItin) GetLastFour() *string {
+func (o *PatchRepresentativeRequestItin) GetLastFour() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastFour
 }
 
-type PatchRepresentativeRequestGovernmentIDSsn struct {
+type PatchRepresentativeRequestSsn struct {
 	Full     *string `json:"full,omitempty"`
 	LastFour *string `json:"lastFour,omitempty"`
 }
 
-func (o *PatchRepresentativeRequestGovernmentIDSsn) GetFull() *string {
+func (o *PatchRepresentativeRequestSsn) GetFull() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Full
 }
 
-func (o *PatchRepresentativeRequestGovernmentIDSsn) GetLastFour() *string {
+func (o *PatchRepresentativeRequestSsn) GetLastFour() *string {
 	if o == nil {
 		return nil
 	}
@@ -125,18 +125,18 @@ func (o *PatchRepresentativeRequestGovernmentIDSsn) GetLastFour() *string {
 }
 
 type PatchRepresentativeRequestGovernmentID struct {
-	Itin *PatchRepresentativeRequestGovernmentIDItin `json:"itin,omitempty"`
-	Ssn  *PatchRepresentativeRequestGovernmentIDSsn  `json:"ssn,omitempty"`
+	Itin *PatchRepresentativeRequestItin `json:"itin,omitempty"`
+	Ssn  *PatchRepresentativeRequestSsn  `json:"ssn,omitempty"`
 }
 
-func (o *PatchRepresentativeRequestGovernmentID) GetItin() *PatchRepresentativeRequestGovernmentIDItin {
+func (o *PatchRepresentativeRequestGovernmentID) GetItin() *PatchRepresentativeRequestItin {
 	if o == nil {
 		return nil
 	}
 	return o.Itin
 }
 
-func (o *PatchRepresentativeRequestGovernmentID) GetSsn() *PatchRepresentativeRequestGovernmentIDSsn {
+func (o *PatchRepresentativeRequestGovernmentID) GetSsn() *PatchRepresentativeRequestSsn {
 	if o == nil {
 		return nil
 	}

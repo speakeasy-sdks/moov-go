@@ -1,5 +1,5 @@
 # Capabilities
-(*Capabilities*)
+(*.Capabilities*)
 
 ## Overview
 
@@ -152,7 +152,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Capabilities != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -209,7 +209,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Capabilities != nil {
+    if res.Classes != nil {
         // handle response
     }
 }

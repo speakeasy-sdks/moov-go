@@ -73,12 +73,7 @@ func main() {
 ## Available Resources and Operations
 
 
-### [AccessToken](docs/sdks/accesstoken/README.md)
-
-* [Create](docs/sdks/accesstoken/README.md#create) - Create access token
-* [Revoke](docs/sdks/accesstoken/README.md#revoke) - Revoke access token
-
-### [Accounts](docs/sdks/accounts/README.md)
+### [.Accounts](docs/sdks/accounts/README.md)
 
 * [AssignCountry](docs/sdks/accounts/README.md#assigncountry) - Assign Account Countries
 * [Create](docs/sdks/accounts/README.md#create) - Create account
@@ -88,39 +83,7 @@ func main() {
 * [ListCountries](docs/sdks/accounts/README.md#listcountries) - Get Account Countries
 * [Update](docs/sdks/accounts/README.md#update) - Patch account
 
-### [Analytics](docs/sdks/analytics/README.md)
-
-* [CountAccountsCreated](docs/sdks/analytics/README.md#countaccountscreated) - Count the number of profiles created by an individual or business
-* [CountTransferStatuses](docs/sdks/analytics/README.md#counttransferstatuses) - Count the transfer statuses
-* [LargestTransfer](docs/sdks/analytics/README.md#largesttransfer) - Return the largest number of transfers
-* [SmallestTransfer](docs/sdks/analytics/README.md#smallesttransfer) - Return the smallest number of transfers
-* [SumTransfers](docs/sdks/analytics/README.md#sumtransfers) - Sum all transfers across intervals
-
-### [BankAccounts](docs/sdks/bankaccounts/README.md)
-
-* [InitiateMicroDeposits](docs/sdks/bankaccounts/README.md#initiatemicrodeposits) - Initiate micro-deposits
-* [CompleteMicroDeposits](docs/sdks/bankaccounts/README.md#completemicrodeposits) - Complete micro-deposits
-* [Delete](docs/sdks/bankaccounts/README.md#delete) - Delete bank account
-* [Get](docs/sdks/bankaccounts/README.md#get) - Get bank account
-* [Link](docs/sdks/bankaccounts/README.md#link) - Bank account
-* [List](docs/sdks/bankaccounts/README.md#list) - List bank accounts
-
-### [Capabilities](docs/sdks/capabilities/README.md)
-
-* [Delete](docs/sdks/capabilities/README.md#delete) - Disable a capability for an account
-* [Get](docs/sdks/capabilities/README.md#get) - Get capability for account
-* [List](docs/sdks/capabilities/README.md#list) - List capabilities for account
-* [Request](docs/sdks/capabilities/README.md#request) - Request capabilities
-
-### [CardIssuing](docs/sdks/cardissuing/README.md)
-
-* [RequestCard](docs/sdks/cardissuing/README.md#requestcard) - Request card
-* [GetCard](docs/sdks/cardissuing/README.md#getcard) - Get issued card
-* [GetCardFullDetails](docs/sdks/cardissuing/README.md#getcardfulldetails) - Get full card details
-* [ListCards](docs/sdks/cardissuing/README.md#listcards) - List issued cards
-* [UpdateCard](docs/sdks/cardissuing/README.md#updatecard) - Update issued card
-
-### [Cards](docs/sdks/cards/README.md)
+### [.Cards](docs/sdks/cards/README.md)
 
 * [LinkApplePayToken](docs/sdks/cards/README.md#linkapplepaytoken) - Link Apple Pay token
 * [LinkCard](docs/sdks/cards/README.md#linkcard) - Link card
@@ -133,34 +96,34 @@ func main() {
 * [Update](docs/sdks/cards/README.md#update) - Update card
 * [UpdateApplePayDomains](docs/sdks/cards/README.md#updateapplepaydomains) - Update Apple Pay domains
 
-### [Disputes](docs/sdks/disputes/README.md)
+### [.BankAccounts](docs/sdks/bankaccounts/README.md)
 
-* [Get](docs/sdks/disputes/README.md#get) - Get Dispute by ID
-* [List](docs/sdks/disputes/README.md#list) - List of all disputes
+* [InitiateMicroDeposits](docs/sdks/bankaccounts/README.md#initiatemicrodeposits) - Initiate micro-deposits
+* [CompleteMicroDeposits](docs/sdks/bankaccounts/README.md#completemicrodeposits) - Complete micro-deposits
+* [Delete](docs/sdks/bankaccounts/README.md#delete) - Delete bank account
+* [Get](docs/sdks/bankaccounts/README.md#get) - Get bank account
+* [Link](docs/sdks/bankaccounts/README.md#link) - Bank account
+* [List](docs/sdks/bankaccounts/README.md#list) - List bank accounts
 
-### [Enrichment](docs/sdks/enrichment/README.md)
+### [.Capabilities](docs/sdks/capabilities/README.md)
 
-* [GetAddress](docs/sdks/enrichment/README.md#getaddress) - Get address suggestions
-* [GetAvatar](docs/sdks/enrichment/README.md#getavatar) - Get avatar
-* [GetIndustries](docs/sdks/enrichment/README.md#getindustries) - List all industries
-* [GetProfile](docs/sdks/enrichment/README.md#getprofile) - Get enriched profile
+* [Delete](docs/sdks/capabilities/README.md#delete) - Disable a capability for an account
+* [Get](docs/sdks/capabilities/README.md#get) - Get capability for account
+* [List](docs/sdks/capabilities/README.md#list) - List capabilities for account
+* [Request](docs/sdks/capabilities/README.md#request) - Request capabilities
 
-### [Files](docs/sdks/files/README.md)
+### [.Files](docs/sdks/files/README.md)
 
 * [Get](docs/sdks/files/README.md#get) - Get File Details
 * [List](docs/sdks/files/README.md#list) - List files
 * [Upload](docs/sdks/files/README.md#upload) - Upload File
 
-### [Institutions](docs/sdks/institutions/README.md)
-
-* [Search](docs/sdks/institutions/README.md#search) - Search institutions
-
-### [PaymentMethods](docs/sdks/paymentmethods/README.md)
+### [.PaymentMethods](docs/sdks/paymentmethods/README.md)
 
 * [Get](docs/sdks/paymentmethods/README.md#get) - Get payment method
 * [List](docs/sdks/paymentmethods/README.md#list) - List payment methods
 
-### [Representatives](docs/sdks/representatives/README.md)
+### [.Representatives](docs/sdks/representatives/README.md)
 
 * [Create](docs/sdks/representatives/README.md#create) - Create representative
 * [Delete](docs/sdks/representatives/README.md#delete) - Delete a representative
@@ -168,11 +131,60 @@ func main() {
 * [List](docs/sdks/representatives/README.md#list) - List representatives
 * [Update](docs/sdks/representatives/README.md#update) - Patch representative
 
-### [Transactions](docs/sdks/transactions/README.md)
+### [.Underwriting](docs/sdks/underwriting/README.md)
+
+* [Get](docs/sdks/underwriting/README.md#get) - Retrieve underwriting details
+* [Update](docs/sdks/underwriting/README.md#update) - Update underwriting details
+
+### [.Wallets](docs/sdks/wallets/README.md)
+
+* [Get](docs/sdks/wallets/README.md#get) - Get wallet
+* [GetTransaction](docs/sdks/wallets/README.md#gettransaction) - Get wallet transaction
+* [List](docs/sdks/wallets/README.md#list) - List wallets
+* [ListTransactions](docs/sdks/wallets/README.md#listtransactions) - List wallet transactions
+
+### [.Analytics](docs/sdks/analytics/README.md)
+
+* [CountAccountsCreated](docs/sdks/analytics/README.md#countaccountscreated) - Count the number of profiles created by an individual or business
+* [CountTransferStatuses](docs/sdks/analytics/README.md#counttransferstatuses) - Count the transfer statuses
+* [LargestTransfer](docs/sdks/analytics/README.md#largesttransfer) - Return the largest number of transfers
+* [SmallestTransfer](docs/sdks/analytics/README.md#smallesttransfer) - Return the smallest number of transfers
+* [SumTransfers](docs/sdks/analytics/README.md#sumtransfers) - Sum all transfers across intervals
+
+### [.Enrichment](docs/sdks/enrichment/README.md)
+
+* [GetAddress](docs/sdks/enrichment/README.md#getaddress) - Get address suggestions
+* [GetAvatar](docs/sdks/enrichment/README.md#getavatar) - Get avatar
+* [GetIndustries](docs/sdks/enrichment/README.md#getindustries) - List all industries
+* [GetProfile](docs/sdks/enrichment/README.md#getprofile) - Get enriched profile
+
+### [.Disputes](docs/sdks/disputes/README.md)
+
+* [Get](docs/sdks/disputes/README.md#get) - Get Dispute by ID
+* [List](docs/sdks/disputes/README.md#list) - List of all disputes
+
+### [.Institutions](docs/sdks/institutions/README.md)
+
+* [Search](docs/sdks/institutions/README.md#search) - Search institutions
+
+### [.CardIssuing](docs/sdks/cardissuing/README.md)
+
+* [RequestCard](docs/sdks/cardissuing/README.md#requestcard) - Request card
+* [GetCard](docs/sdks/cardissuing/README.md#getcard) - Get issued card
+* [GetCardFullDetails](docs/sdks/cardissuing/README.md#getcardfulldetails) - Get full card details
+* [ListCards](docs/sdks/cardissuing/README.md#listcards) - List issued cards
+* [UpdateCard](docs/sdks/cardissuing/README.md#updatecard) - Update issued card
+
+### [.Transactions](docs/sdks/transactions/README.md)
 
 * [List](docs/sdks/transactions/README.md#list) - Get account transactions
 
-### [Transfers](docs/sdks/transfers/README.md)
+### [.AccessToken](docs/sdks/accesstoken/README.md)
+
+* [Create](docs/sdks/accesstoken/README.md#create) - Create access token
+* [Revoke](docs/sdks/accesstoken/README.md#revoke) - Revoke access token
+
+### [.Transfers](docs/sdks/transfers/README.md)
 
 * [Cancel](docs/sdks/transfers/README.md#cancel) - Cancel or refund a card transfer
 * [Create](docs/sdks/transfers/README.md#create) - Create a transfer
@@ -182,18 +194,6 @@ func main() {
 * [ListRefunds](docs/sdks/transfers/README.md#listrefunds) - Get a list of refunds for a card transfer
 * [Refund](docs/sdks/transfers/README.md#refund) - Refund a transfer
 * [Update](docs/sdks/transfers/README.md#update) - Patch transfer metadata
-
-### [Underwriting](docs/sdks/underwriting/README.md)
-
-* [Get](docs/sdks/underwriting/README.md#get) - Retrieve underwriting details
-* [Update](docs/sdks/underwriting/README.md#update) - Update underwriting details
-
-### [Wallets](docs/sdks/wallets/README.md)
-
-* [Get](docs/sdks/wallets/README.md#get) - Get wallet
-* [GetTransaction](docs/sdks/wallets/README.md#gettransaction) - Get wallet transaction
-* [List](docs/sdks/wallets/README.md#list) - List wallets
-* [ListTransactions](docs/sdks/wallets/README.md#listtransactions) - List wallet transactions
 <!-- End SDK Available Operations -->
 
 
@@ -230,6 +230,47 @@ Here's an example of one such pagination call:
 Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
 
 
+## Example
+
+```go
+package main
+
+import (
+	"context"
+	moovgo "github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := moovgo.New(
+		moovgo.WithSecurity(shared.Security{
+			AccessToken: moovgo.String(""),
+		}),
+	)
+
+	addCapabilityRequest := shared.AddCapabilityRequest{
+		Capabilities: []shared.CapabilityID{
+			shared.CapabilityIDTransfers,
+		},
+	}
+
+	var accountID string = "12e6e103-56d1-4f09-9ae6-2352496ce763"
+
+	ctx := context.Background()
+	res, err := s.Capabilities.Request(ctx, addCapabilityRequest, accountID)
+	if err != nil {
+
+		var e *sdkerrors.CapabilityRequestError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+	}
+}
+
+```
 <!-- End Error Handling -->
 
 
@@ -247,7 +288,6 @@ You can override the default server globally using the `WithServerIndex` option 
 
 For example:
 
-
 ```go
 package main
 
@@ -260,25 +300,39 @@ import (
 
 func main() {
 	s := moovgo.New(
+		moovgo.WithServerIndex(0),
 		moovgo.WithSecurity(shared.Security{
 			AccessToken: moovgo.String(""),
 		}),
-		moovgo.WithServerIndex(0),
 	)
 
+	countries := shared.Countries{
+		Countries: []string{
+			"U",
+			"n",
+			"i",
+			"t",
+			"e",
+			"d",
+			" ",
+			"S",
+			"t",
+			"a",
+			"t",
+			"e",
+			"s",
+		},
+	}
+
+	var accountID string = "f51a6841-150c-4bc7-8c84-e981f74cfa3f"
+
 	ctx := context.Background()
-	res, err := s.AccessToken.Create(ctx, shared.ClientCredentialsGrantToAccessTokenRequest{
-		ClientID:     moovgo.String("5clTR_MdVrrkgxw2"),
-		ClientSecret: moovgo.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
-		GrantType:    shared.ClientCredentialsGrantToAccessTokenRequestGrantTypeClientCredentials,
-		RefreshToken: moovgo.String("i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6..."),
-		Scope:        moovgo.String("/accounts.write"),
-	})
+	res, err := s.Accounts.AssignCountry(ctx, countries, accountID)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if res.AccessTokenResponse != nil {
+	if res.Countries != nil {
 		// handle response
 	}
 }
@@ -290,7 +344,6 @@ func main() {
 
 The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
 
-
 ```go
 package main
 
@@ -303,25 +356,39 @@ import (
 
 func main() {
 	s := moovgo.New(
+		moovgo.WithServerURL("https://api.moov.io"),
 		moovgo.WithSecurity(shared.Security{
 			AccessToken: moovgo.String(""),
 		}),
-		moovgo.WithServerURL("https://api.moov.io"),
 	)
 
+	countries := shared.Countries{
+		Countries: []string{
+			"U",
+			"n",
+			"i",
+			"t",
+			"e",
+			"d",
+			" ",
+			"S",
+			"t",
+			"a",
+			"t",
+			"e",
+			"s",
+		},
+	}
+
+	var accountID string = "f51a6841-150c-4bc7-8c84-e981f74cfa3f"
+
 	ctx := context.Background()
-	res, err := s.AccessToken.Create(ctx, shared.ClientCredentialsGrantToAccessTokenRequest{
-		ClientID:     moovgo.String("5clTR_MdVrrkgxw2"),
-		ClientSecret: moovgo.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
-		GrantType:    shared.ClientCredentialsGrantToAccessTokenRequestGrantTypeClientCredentials,
-		RefreshToken: moovgo.String("i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6..."),
-		Scope:        moovgo.String("/accounts.write"),
-	})
+	res, err := s.Accounts.AssignCountry(ctx, countries, accountID)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if res.AccessTokenResponse != nil {
+	if res.Countries != nil {
 		// handle response
 	}
 }
@@ -331,7 +398,6 @@ func main() {
 ## Override Server URL Per-Operation
 
 The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
-
 
 ```go
 package main
@@ -415,6 +481,75 @@ var (
 
 This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
 <!-- End Custom HTTP Client -->
+
+
+
+<!-- Start Authentication -->
+
+# Authentication
+
+## Per-Client Security Schemes
+
+Your SDK supports the following security schemes globally:
+
+| Name                | Type                | Scheme              |
+| ------------------- | ------------------- | ------------------- |
+| `AccessToken`       | oauth2              | OAuth2 token        |
+| `GatewayAuth`       | http                | HTTP Bearer         |
+| `OAuth2Credentials` | http                | HTTP Basic          |
+
+You can set the security parameters through the `WithSecurity` option when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
+
+```go
+package main
+
+import (
+	"context"
+	moovgo "github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := moovgo.New(
+		moovgo.WithSecurity(shared.Security{
+			AccessToken: moovgo.String(""),
+		}),
+	)
+
+	countries := shared.Countries{
+		Countries: []string{
+			"U",
+			"n",
+			"i",
+			"t",
+			"e",
+			"d",
+			" ",
+			"S",
+			"t",
+			"a",
+			"t",
+			"e",
+			"s",
+		},
+	}
+
+	var accountID string = "f51a6841-150c-4bc7-8c84-e981f74cfa3f"
+
+	ctx := context.Background()
+	res, err := s.Accounts.AssignCountry(ctx, countries, accountID)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.Countries != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Authentication -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// RevokeTokenRequestTokenTypeHint - A hint about the type of the token submitted for revocation
-type RevokeTokenRequestTokenTypeHint string
+// TokenTypeHint - A hint about the type of the token submitted for revocation
+type TokenTypeHint string
 
 const (
-	RevokeTokenRequestTokenTypeHintAccessToken  RevokeTokenRequestTokenTypeHint = "access_token"
-	RevokeTokenRequestTokenTypeHintRefreshToken RevokeTokenRequestTokenTypeHint = "refresh_token"
+	TokenTypeHintAccessToken  TokenTypeHint = "access_token"
+	TokenTypeHintRefreshToken TokenTypeHint = "refresh_token"
 )
 
-func (e RevokeTokenRequestTokenTypeHint) ToPointer() *RevokeTokenRequestTokenTypeHint {
+func (e TokenTypeHint) ToPointer() *TokenTypeHint {
 	return &e
 }
 
-func (e *RevokeTokenRequestTokenTypeHint) UnmarshalJSON(data []byte) error {
+func (e *TokenTypeHint) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,10 +28,10 @@ func (e *RevokeTokenRequestTokenTypeHint) UnmarshalJSON(data []byte) error {
 	case "access_token":
 		fallthrough
 	case "refresh_token":
-		*e = RevokeTokenRequestTokenTypeHint(v)
+		*e = TokenTypeHint(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for RevokeTokenRequestTokenTypeHint: %v", v)
+		return fmt.Errorf("invalid value for TokenTypeHint: %v", v)
 	}
 }
 
@@ -44,7 +44,7 @@ type RevokeTokenRequest struct {
 	// String passed to the authorization server to gain access to the system
 	Token string `form:"name=token"`
 	// A hint about the type of the token submitted for revocation
-	TokenTypeHint *RevokeTokenRequestTokenTypeHint `form:"name=token_type_hint"`
+	TokenTypeHint *TokenTypeHint `form:"name=token_type_hint"`
 }
 
 func (o *RevokeTokenRequest) GetClientID() *string {
@@ -68,7 +68,7 @@ func (o *RevokeTokenRequest) GetToken() string {
 	return o.Token
 }
 
-func (o *RevokeTokenRequest) GetTokenTypeHint() *RevokeTokenRequestTokenTypeHint {
+func (o *RevokeTokenRequest) GetTokenTypeHint() *TokenTypeHint {
 	if o == nil {
 		return nil
 	}

@@ -1,5 +1,5 @@
 # Files
-(*Files*)
+(*.Files*)
 
 ## Overview
 
@@ -142,13 +142,13 @@ func main() {
 
     fileUploadRequest := shared.FileUploadRequest{
         File: shared.FileUploadRequestFile{
-            Content: []byte("F?SRSKG@^n"),
-            File: "string",
+            Content: []byte("0x87cbca97eC"),
+            FileName: "ullam.wav",
         },
         FilePurpose: shared.FilePurposeBusinessVerification,
     }
 
-    var accountID string = "95345729-5170-4ea7-adbc-9489aba3b260"
+    var accountID string = "57295170-ea72-4dbc-9489-aba3b26010e1"
 
     ctx := context.Background()
     res, err := s.Files.Upload(ctx, fileUploadRequest, accountID)

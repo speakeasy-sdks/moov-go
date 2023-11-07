@@ -1,5 +1,5 @@
 # Representatives
-(*Representatives*)
+(*.Representatives*)
 
 ## Overview
 
@@ -52,12 +52,12 @@ func main() {
             Year: 1989,
         },
         Email: moovgo.String("amanda@classbooker.dev"),
-        GovernmentID: &shared.CreateRepresentativeGovernmentID{
-            Itin: &shared.CreateRepresentativeGovernmentIDItin{
+        GovernmentID: &shared.GovernmentID{
+            Itin: &shared.Itin{
                 Full: moovgo.String("123-45-6789"),
                 LastFour: moovgo.String("6789"),
             },
-            Ssn: &shared.CreateRepresentativeGovernmentIDSsn{
+            Ssn: &shared.Ssn{
                 Full: moovgo.String("123-45-6789"),
                 LastFour: moovgo.String("6789"),
             },
@@ -72,7 +72,7 @@ func main() {
             CountryCode: moovgo.String("1"),
             Number: moovgo.String("8185551212"),
         },
-        Responsibilities: &shared.CreateRepresentativeResponsibilities{
+        Responsibilities: &shared.Responsibilities{
             IsController: moovgo.Bool(false),
             IsOwner: moovgo.Bool(true),
             JobTitle: "CEO",
@@ -248,7 +248,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Representatives != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -319,11 +319,11 @@ func main() {
         },
         Email: moovgo.String("amanda@classbooker.dev"),
         GovernmentID: &shared.PatchRepresentativeRequestGovernmentID{
-            Itin: &shared.PatchRepresentativeRequestGovernmentIDItin{
+            Itin: &shared.PatchRepresentativeRequestItin{
                 Full: moovgo.String("123-45-6789"),
                 LastFour: moovgo.String("6789"),
             },
-            Ssn: &shared.PatchRepresentativeRequestGovernmentIDSsn{
+            Ssn: &shared.PatchRepresentativeRequestSsn{
                 Full: moovgo.String("123-45-6789"),
                 LastFour: moovgo.String("6789"),
             },

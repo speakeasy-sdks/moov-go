@@ -9,9 +9,9 @@
 transferPostResponse := shared.CreateTransferPostResponseCreatedTransfer(shared.CreatedTransfer{/* values here */})
 ```
 
-### TransferPostResponseSynchronousTransferResponse
+### SynchronousTransferResponse
 
 ```go
-transferPostResponse := shared.CreateTransferPostResponseTransferPostResponseSynchronousTransferResponse(shared.TransferPostResponseSynchronousTransferResponse{/* values here */})
+transferPostResponse := shared.CreateTransferPostResponseSynchronousTransferResponse(shared.SynchronousTransferResponse{/* values here */})
 ```
 

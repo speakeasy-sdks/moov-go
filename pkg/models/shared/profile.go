@@ -6,7 +6,7 @@ import (
 	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
-type ProfileBusinessAddress struct {
+type ProfileAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`
 	City            *string `json:"city,omitempty"`
@@ -15,89 +15,89 @@ type ProfileBusinessAddress struct {
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
-func (o *ProfileBusinessAddress) GetAddressLine1() *string {
+func (o *ProfileAddress) GetAddressLine1() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine1
 }
 
-func (o *ProfileBusinessAddress) GetAddressLine2() *string {
+func (o *ProfileAddress) GetAddressLine2() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine2
 }
 
-func (o *ProfileBusinessAddress) GetCity() *string {
+func (o *ProfileAddress) GetCity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.City
 }
 
-func (o *ProfileBusinessAddress) GetCountry() *string {
+func (o *ProfileAddress) GetCountry() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Country
 }
 
-func (o *ProfileBusinessAddress) GetPostalCode() *string {
+func (o *ProfileAddress) GetPostalCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PostalCode
 }
 
-func (o *ProfileBusinessAddress) GetStateOrProvince() *string {
+func (o *ProfileAddress) GetStateOrProvince() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StateOrProvince
 }
 
-// ProfileBusinessIndustryCodes - Describes industry specific identifiers
-type ProfileBusinessIndustryCodes struct {
+// ProfileIndustryCodes - Describes industry specific identifiers
+type ProfileIndustryCodes struct {
 	Mcc   *string `json:"mcc,omitempty"`
 	Naics *string `json:"naics,omitempty"`
 	Sic   *string `json:"sic,omitempty"`
 }
 
-func (o *ProfileBusinessIndustryCodes) GetMcc() *string {
+func (o *ProfileIndustryCodes) GetMcc() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Mcc
 }
 
-func (o *ProfileBusinessIndustryCodes) GetNaics() *string {
+func (o *ProfileIndustryCodes) GetNaics() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Naics
 }
 
-func (o *ProfileBusinessIndustryCodes) GetSic() *string {
+func (o *ProfileIndustryCodes) GetSic() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Sic
 }
 
-type ProfileBusinessPhone struct {
+type ProfilePhone struct {
 	CountryCode *string `json:"countryCode,omitempty"`
 	Number      *string `json:"number,omitempty"`
 }
 
-func (o *ProfileBusinessPhone) GetCountryCode() *string {
+func (o *ProfilePhone) GetCountryCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CountryCode
 }
 
-func (o *ProfileBusinessPhone) GetNumber() *string {
+func (o *ProfilePhone) GetNumber() *string {
 	if o == nil {
 		return nil
 	}
@@ -106,18 +106,18 @@ func (o *ProfileBusinessPhone) GetNumber() *string {
 
 // ProfileBusiness - Describes a business
 type ProfileBusiness struct {
-	Address *ProfileBusinessAddress `json:"address,omitempty"`
+	Address *ProfileAddress `json:"address,omitempty"`
 	// The type of entity represented by this Business
 	BusinessType    BusinessType `json:"businessType"`
 	Description     *string      `json:"description,omitempty"`
 	DoingBusinessAs *string      `json:"doingBusinessAs,omitempty"`
 	// Email Address
-	Email             *string                       `json:"email,omitempty"`
-	IndustryCodes     *ProfileBusinessIndustryCodes `json:"industryCodes,omitempty"`
-	LegalBusinessName string                        `json:"legalBusinessName"`
-	OwnersProvided    bool                          `json:"ownersProvided"`
-	Phone             *ProfileBusinessPhone         `json:"phone,omitempty"`
-	Representatives   []Representative              `json:"representatives,omitempty"`
+	Email             *string               `json:"email,omitempty"`
+	IndustryCodes     *ProfileIndustryCodes `json:"industryCodes,omitempty"`
+	LegalBusinessName string                `json:"legalBusinessName"`
+	OwnersProvided    bool                  `json:"ownersProvided"`
+	Phone             *ProfilePhone         `json:"phone,omitempty"`
+	Representatives   []Representative      `json:"representatives,omitempty"`
 	// Indicates whether a tax ID has been provided for this Business
 	TaxIDProvided *bool   `default:"false" json:"taxIDProvided"`
 	Website       *string `json:"website,omitempty"`
@@ -134,7 +134,7 @@ func (p *ProfileBusiness) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ProfileBusiness) GetAddress() *ProfileBusinessAddress {
+func (o *ProfileBusiness) GetAddress() *ProfileAddress {
 	if o == nil {
 		return nil
 	}
@@ -169,7 +169,7 @@ func (o *ProfileBusiness) GetEmail() *string {
 	return o.Email
 }
 
-func (o *ProfileBusiness) GetIndustryCodes() *ProfileBusinessIndustryCodes {
+func (o *ProfileBusiness) GetIndustryCodes() *ProfileIndustryCodes {
 	if o == nil {
 		return nil
 	}
@@ -190,7 +190,7 @@ func (o *ProfileBusiness) GetOwnersProvided() bool {
 	return o.OwnersProvided
 }
 
-func (o *ProfileBusiness) GetPhone() *ProfileBusinessPhone {
+func (o *ProfileBusiness) GetPhone() *ProfilePhone {
 	if o == nil {
 		return nil
 	}
@@ -218,7 +218,7 @@ func (o *ProfileBusiness) GetWebsite() *string {
 	return o.Website
 }
 
-type ProfileIndividualAddress struct {
+type ProfileSchemasAddress struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`
 	City            *string `json:"city,omitempty"`
@@ -227,61 +227,61 @@ type ProfileIndividualAddress struct {
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
-func (o *ProfileIndividualAddress) GetAddressLine1() *string {
+func (o *ProfileSchemasAddress) GetAddressLine1() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine1
 }
 
-func (o *ProfileIndividualAddress) GetAddressLine2() *string {
+func (o *ProfileSchemasAddress) GetAddressLine2() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine2
 }
 
-func (o *ProfileIndividualAddress) GetCity() *string {
+func (o *ProfileSchemasAddress) GetCity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.City
 }
 
-func (o *ProfileIndividualAddress) GetCountry() *string {
+func (o *ProfileSchemasAddress) GetCountry() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Country
 }
 
-func (o *ProfileIndividualAddress) GetPostalCode() *string {
+func (o *ProfileSchemasAddress) GetPostalCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PostalCode
 }
 
-func (o *ProfileIndividualAddress) GetStateOrProvince() *string {
+func (o *ProfileSchemasAddress) GetStateOrProvince() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StateOrProvince
 }
 
-type ProfileIndividualPhone struct {
+type ProfileSchemasPhone struct {
 	CountryCode *string `json:"countryCode,omitempty"`
 	Number      *string `json:"number,omitempty"`
 }
 
-func (o *ProfileIndividualPhone) GetCountryCode() *string {
+func (o *ProfileSchemasPhone) GetCountryCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CountryCode
 }
 
-func (o *ProfileIndividualPhone) GetNumber() *string {
+func (o *ProfileSchemasPhone) GetNumber() *string {
 	if o == nil {
 		return nil
 	}
@@ -290,7 +290,7 @@ func (o *ProfileIndividualPhone) GetNumber() *string {
 
 // ProfileIndividual - Describes an individual
 type ProfileIndividual struct {
-	Address *ProfileIndividualAddress `json:"address,omitempty"`
+	Address *ProfileSchemasAddress `json:"address,omitempty"`
 	// Indicates whether this Individual's birth date has been provided
 	BirthDateProvided *bool `default:"false" json:"birthDateProvided"`
 	// Email Address
@@ -298,8 +298,8 @@ type ProfileIndividual struct {
 	// Indicates whether a government ID (SSN, ITIN, etc.) has been provided for this Individual
 	GovernmentIDProvided *bool `default:"false" json:"governmentIDProvided"`
 	// Name for an individual
-	Name  Name                    `json:"name"`
-	Phone *ProfileIndividualPhone `json:"phone,omitempty"`
+	Name  Name                 `json:"name"`
+	Phone *ProfileSchemasPhone `json:"phone,omitempty"`
 }
 
 func (p ProfileIndividual) MarshalJSON() ([]byte, error) {
@@ -313,7 +313,7 @@ func (p *ProfileIndividual) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ProfileIndividual) GetAddress() *ProfileIndividualAddress {
+func (o *ProfileIndividual) GetAddress() *ProfileSchemasAddress {
 	if o == nil {
 		return nil
 	}
@@ -348,7 +348,7 @@ func (o *ProfileIndividual) GetName() Name {
 	return o.Name
 }
 
-func (o *ProfileIndividual) GetPhone() *ProfileIndividualPhone {
+func (o *ProfileIndividual) GetPhone() *ProfileSchemasPhone {
 	if o == nil {
 		return nil
 	}

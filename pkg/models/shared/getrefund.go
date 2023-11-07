@@ -9,42 +9,42 @@ import (
 	"time"
 )
 
-// GetRefundFailureCode - This field is deprecated and will be removed in December 2023.
+// FailureCode - This field is deprecated and will be removed in December 2023.
 //
 // Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
-type GetRefundFailureCode string
+type FailureCode string
 
 const (
-	GetRefundFailureCodeCallIssuer              GetRefundFailureCode = "call-issuer"
-	GetRefundFailureCodeDoNotHonor              GetRefundFailureCode = "do-not-honor"
-	GetRefundFailureCodeProcessingError         GetRefundFailureCode = "processing-error"
-	GetRefundFailureCodeInvalidTransaction      GetRefundFailureCode = "invalid-transaction"
-	GetRefundFailureCodeInvalidAmount           GetRefundFailureCode = "invalid-amount"
-	GetRefundFailureCodeNoSuchIssuer            GetRefundFailureCode = "no-such-issuer"
-	GetRefundFailureCodeReenterTransaction      GetRefundFailureCode = "reenter-transaction"
-	GetRefundFailureCodeCvvMismatch             GetRefundFailureCode = "cvv-mismatch"
-	GetRefundFailureCodeLostOrStolen            GetRefundFailureCode = "lost-or-stolen"
-	GetRefundFailureCodeInsufficientFunds       GetRefundFailureCode = "insufficient-funds"
-	GetRefundFailureCodeInvalidCardNumber       GetRefundFailureCode = "invalid-card-number"
-	GetRefundFailureCodeExpiredCard             GetRefundFailureCode = "expired-card"
-	GetRefundFailureCodeIncorrectPin            GetRefundFailureCode = "incorrect-pin"
-	GetRefundFailureCodeTransactionNotAllowed   GetRefundFailureCode = "transaction-not-allowed"
-	GetRefundFailureCodeSuspectedFraud          GetRefundFailureCode = "suspected-fraud"
-	GetRefundFailureCodeAmountLimitExceeded     GetRefundFailureCode = "amount-limit-exceeded"
-	GetRefundFailureCodeVelocityLimitExceeded   GetRefundFailureCode = "velocity-limit-exceeded"
-	GetRefundFailureCodeCardNotActivated        GetRefundFailureCode = "card-not-activated"
-	GetRefundFailureCodeIssuerNotAvailable      GetRefundFailureCode = "issuer-not-available"
-	GetRefundFailureCodeCouldNotRoute           GetRefundFailureCode = "could-not-route"
-	GetRefundFailureCodeCardholderAccountClosed GetRefundFailureCode = "cardholder-account-closed"
-	GetRefundFailureCodeUnknownIssue            GetRefundFailureCode = "unknown-issue"
-	GetRefundFailureCodeDuplicateTransaction    GetRefundFailureCode = "duplicate-transaction"
+	FailureCodeCallIssuer              FailureCode = "call-issuer"
+	FailureCodeDoNotHonor              FailureCode = "do-not-honor"
+	FailureCodeProcessingError         FailureCode = "processing-error"
+	FailureCodeInvalidTransaction      FailureCode = "invalid-transaction"
+	FailureCodeInvalidAmount           FailureCode = "invalid-amount"
+	FailureCodeNoSuchIssuer            FailureCode = "no-such-issuer"
+	FailureCodeReenterTransaction      FailureCode = "reenter-transaction"
+	FailureCodeCvvMismatch             FailureCode = "cvv-mismatch"
+	FailureCodeLostOrStolen            FailureCode = "lost-or-stolen"
+	FailureCodeInsufficientFunds       FailureCode = "insufficient-funds"
+	FailureCodeInvalidCardNumber       FailureCode = "invalid-card-number"
+	FailureCodeExpiredCard             FailureCode = "expired-card"
+	FailureCodeIncorrectPin            FailureCode = "incorrect-pin"
+	FailureCodeTransactionNotAllowed   FailureCode = "transaction-not-allowed"
+	FailureCodeSuspectedFraud          FailureCode = "suspected-fraud"
+	FailureCodeAmountLimitExceeded     FailureCode = "amount-limit-exceeded"
+	FailureCodeVelocityLimitExceeded   FailureCode = "velocity-limit-exceeded"
+	FailureCodeCardNotActivated        FailureCode = "card-not-activated"
+	FailureCodeIssuerNotAvailable      FailureCode = "issuer-not-available"
+	FailureCodeCouldNotRoute           FailureCode = "could-not-route"
+	FailureCodeCardholderAccountClosed FailureCode = "cardholder-account-closed"
+	FailureCodeUnknownIssue            FailureCode = "unknown-issue"
+	FailureCodeDuplicateTransaction    FailureCode = "duplicate-transaction"
 )
 
-func (e GetRefundFailureCode) ToPointer() *GetRefundFailureCode {
+func (e FailureCode) ToPointer() *FailureCode {
 	return &e
 }
 
-func (e *GetRefundFailureCode) UnmarshalJSON(data []byte) error {
+func (e *FailureCode) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -95,10 +95,10 @@ func (e *GetRefundFailureCode) UnmarshalJSON(data []byte) error {
 	case "unknown-issue":
 		fallthrough
 	case "duplicate-transaction":
-		*e = GetRefundFailureCode(v)
+		*e = FailureCode(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for GetRefundFailureCode: %v", v)
+		return fmt.Errorf("invalid value for FailureCode: %v", v)
 	}
 }
 
@@ -111,7 +111,7 @@ type GetRefund struct {
 	// This field is deprecated and will be removed in December 2023.
 	//
 	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-	FailureCode *GetRefundFailureCode `json:"failureCode,omitempty"`
+	FailureCode *FailureCode `json:"failureCode,omitempty"`
 	// UUID v4
 	RefundID  *string       `json:"refundID,omitempty"`
 	Status    *RefundStatus `json:"status,omitempty"`
@@ -150,7 +150,7 @@ func (o *GetRefund) GetCreatedOn() *time.Time {
 	return o.CreatedOn
 }
 
-func (o *GetRefund) GetFailureCode() *GetRefundFailureCode {
+func (o *GetRefund) GetFailureCode() *FailureCode {
 	if o == nil {
 		return nil
 	}

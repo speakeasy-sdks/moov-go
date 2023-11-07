@@ -7,7 +7,7 @@ If `accountType` is set to `individual`, the `individual` object should be compl
 
 ## Fields
 
-| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `Business`                                                                 | [*CreateProfileBusiness](../../models/shared/createprofilebusiness.md)     | :heavy_minus_sign:                                                         | N/A                                                                        |
-| `Individual`                                                               | [*CreateProfileIndividual](../../models/shared/createprofileindividual.md) | :heavy_minus_sign:                                                         | N/A                                                                        |
+| Field                                                   | Type                                                    | Required                                                | Description                                             |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| `Business`                                              | [*shared.Business](../../models/shared/business.md)     | :heavy_minus_sign:                                      | N/A                                                     |
+| `Individual`                                            | [*shared.Individual](../../models/shared/individual.md) | :heavy_minus_sign:                                      | N/A                                                     |

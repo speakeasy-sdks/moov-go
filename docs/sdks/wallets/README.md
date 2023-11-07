@@ -1,5 +1,5 @@
 # Wallets
-(*Wallets*)
+(*.Wallets*)
 
 ## Overview
 
@@ -160,7 +160,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Wallets != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -212,7 +212,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.WalletTransactions != nil {
+    if res.Classes != nil {
         // handle response
     }
 }

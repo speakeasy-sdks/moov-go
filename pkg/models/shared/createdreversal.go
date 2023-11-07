@@ -9,42 +9,42 @@ import (
 	"time"
 )
 
-// CreatedReversalSynchronousRefundResponseFailureCode - This field is deprecated and will be removed in December 2023.
+// CreatedReversalFailureCode - This field is deprecated and will be removed in December 2023.
 //
 // Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
-type CreatedReversalSynchronousRefundResponseFailureCode string
+type CreatedReversalFailureCode string
 
 const (
-	CreatedReversalSynchronousRefundResponseFailureCodeCallIssuer              CreatedReversalSynchronousRefundResponseFailureCode = "call-issuer"
-	CreatedReversalSynchronousRefundResponseFailureCodeDoNotHonor              CreatedReversalSynchronousRefundResponseFailureCode = "do-not-honor"
-	CreatedReversalSynchronousRefundResponseFailureCodeProcessingError         CreatedReversalSynchronousRefundResponseFailureCode = "processing-error"
-	CreatedReversalSynchronousRefundResponseFailureCodeInvalidTransaction      CreatedReversalSynchronousRefundResponseFailureCode = "invalid-transaction"
-	CreatedReversalSynchronousRefundResponseFailureCodeInvalidAmount           CreatedReversalSynchronousRefundResponseFailureCode = "invalid-amount"
-	CreatedReversalSynchronousRefundResponseFailureCodeNoSuchIssuer            CreatedReversalSynchronousRefundResponseFailureCode = "no-such-issuer"
-	CreatedReversalSynchronousRefundResponseFailureCodeReenterTransaction      CreatedReversalSynchronousRefundResponseFailureCode = "reenter-transaction"
-	CreatedReversalSynchronousRefundResponseFailureCodeCvvMismatch             CreatedReversalSynchronousRefundResponseFailureCode = "cvv-mismatch"
-	CreatedReversalSynchronousRefundResponseFailureCodeLostOrStolen            CreatedReversalSynchronousRefundResponseFailureCode = "lost-or-stolen"
-	CreatedReversalSynchronousRefundResponseFailureCodeInsufficientFunds       CreatedReversalSynchronousRefundResponseFailureCode = "insufficient-funds"
-	CreatedReversalSynchronousRefundResponseFailureCodeInvalidCardNumber       CreatedReversalSynchronousRefundResponseFailureCode = "invalid-card-number"
-	CreatedReversalSynchronousRefundResponseFailureCodeExpiredCard             CreatedReversalSynchronousRefundResponseFailureCode = "expired-card"
-	CreatedReversalSynchronousRefundResponseFailureCodeIncorrectPin            CreatedReversalSynchronousRefundResponseFailureCode = "incorrect-pin"
-	CreatedReversalSynchronousRefundResponseFailureCodeTransactionNotAllowed   CreatedReversalSynchronousRefundResponseFailureCode = "transaction-not-allowed"
-	CreatedReversalSynchronousRefundResponseFailureCodeSuspectedFraud          CreatedReversalSynchronousRefundResponseFailureCode = "suspected-fraud"
-	CreatedReversalSynchronousRefundResponseFailureCodeAmountLimitExceeded     CreatedReversalSynchronousRefundResponseFailureCode = "amount-limit-exceeded"
-	CreatedReversalSynchronousRefundResponseFailureCodeVelocityLimitExceeded   CreatedReversalSynchronousRefundResponseFailureCode = "velocity-limit-exceeded"
-	CreatedReversalSynchronousRefundResponseFailureCodeCardNotActivated        CreatedReversalSynchronousRefundResponseFailureCode = "card-not-activated"
-	CreatedReversalSynchronousRefundResponseFailureCodeIssuerNotAvailable      CreatedReversalSynchronousRefundResponseFailureCode = "issuer-not-available"
-	CreatedReversalSynchronousRefundResponseFailureCodeCouldNotRoute           CreatedReversalSynchronousRefundResponseFailureCode = "could-not-route"
-	CreatedReversalSynchronousRefundResponseFailureCodeCardholderAccountClosed CreatedReversalSynchronousRefundResponseFailureCode = "cardholder-account-closed"
-	CreatedReversalSynchronousRefundResponseFailureCodeUnknownIssue            CreatedReversalSynchronousRefundResponseFailureCode = "unknown-issue"
-	CreatedReversalSynchronousRefundResponseFailureCodeDuplicateTransaction    CreatedReversalSynchronousRefundResponseFailureCode = "duplicate-transaction"
+	CreatedReversalFailureCodeCallIssuer              CreatedReversalFailureCode = "call-issuer"
+	CreatedReversalFailureCodeDoNotHonor              CreatedReversalFailureCode = "do-not-honor"
+	CreatedReversalFailureCodeProcessingError         CreatedReversalFailureCode = "processing-error"
+	CreatedReversalFailureCodeInvalidTransaction      CreatedReversalFailureCode = "invalid-transaction"
+	CreatedReversalFailureCodeInvalidAmount           CreatedReversalFailureCode = "invalid-amount"
+	CreatedReversalFailureCodeNoSuchIssuer            CreatedReversalFailureCode = "no-such-issuer"
+	CreatedReversalFailureCodeReenterTransaction      CreatedReversalFailureCode = "reenter-transaction"
+	CreatedReversalFailureCodeCvvMismatch             CreatedReversalFailureCode = "cvv-mismatch"
+	CreatedReversalFailureCodeLostOrStolen            CreatedReversalFailureCode = "lost-or-stolen"
+	CreatedReversalFailureCodeInsufficientFunds       CreatedReversalFailureCode = "insufficient-funds"
+	CreatedReversalFailureCodeInvalidCardNumber       CreatedReversalFailureCode = "invalid-card-number"
+	CreatedReversalFailureCodeExpiredCard             CreatedReversalFailureCode = "expired-card"
+	CreatedReversalFailureCodeIncorrectPin            CreatedReversalFailureCode = "incorrect-pin"
+	CreatedReversalFailureCodeTransactionNotAllowed   CreatedReversalFailureCode = "transaction-not-allowed"
+	CreatedReversalFailureCodeSuspectedFraud          CreatedReversalFailureCode = "suspected-fraud"
+	CreatedReversalFailureCodeAmountLimitExceeded     CreatedReversalFailureCode = "amount-limit-exceeded"
+	CreatedReversalFailureCodeVelocityLimitExceeded   CreatedReversalFailureCode = "velocity-limit-exceeded"
+	CreatedReversalFailureCodeCardNotActivated        CreatedReversalFailureCode = "card-not-activated"
+	CreatedReversalFailureCodeIssuerNotAvailable      CreatedReversalFailureCode = "issuer-not-available"
+	CreatedReversalFailureCodeCouldNotRoute           CreatedReversalFailureCode = "could-not-route"
+	CreatedReversalFailureCodeCardholderAccountClosed CreatedReversalFailureCode = "cardholder-account-closed"
+	CreatedReversalFailureCodeUnknownIssue            CreatedReversalFailureCode = "unknown-issue"
+	CreatedReversalFailureCodeDuplicateTransaction    CreatedReversalFailureCode = "duplicate-transaction"
 )
 
-func (e CreatedReversalSynchronousRefundResponseFailureCode) ToPointer() *CreatedReversalSynchronousRefundResponseFailureCode {
+func (e CreatedReversalFailureCode) ToPointer() *CreatedReversalFailureCode {
 	return &e
 }
 
-func (e *CreatedReversalSynchronousRefundResponseFailureCode) UnmarshalJSON(data []byte) error {
+func (e *CreatedReversalFailureCode) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -95,15 +95,15 @@ func (e *CreatedReversalSynchronousRefundResponseFailureCode) UnmarshalJSON(data
 	case "unknown-issue":
 		fallthrough
 	case "duplicate-transaction":
-		*e = CreatedReversalSynchronousRefundResponseFailureCode(v)
+		*e = CreatedReversalFailureCode(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CreatedReversalSynchronousRefundResponseFailureCode: %v", v)
+		return fmt.Errorf("invalid value for CreatedReversalFailureCode: %v", v)
 	}
 }
 
-// CreatedReversalSynchronousRefundResponse - Details of a card refund
-type CreatedReversalSynchronousRefundResponse struct {
+// SynchronousRefundResponse - Details of a card refund
+type SynchronousRefundResponse struct {
 	// A representation of money containing an integer value and it's currency.
 	Amount      *Amount            `json:"amount,omitempty"`
 	CardDetails *RefundCardDetails `json:"cardDetails,omitempty"`
@@ -111,67 +111,67 @@ type CreatedReversalSynchronousRefundResponse struct {
 	// This field is deprecated and will be removed in December 2023.
 	//
 	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-	FailureCode *CreatedReversalSynchronousRefundResponseFailureCode `json:"failureCode,omitempty"`
+	FailureCode *CreatedReversalFailureCode `json:"failureCode,omitempty"`
 	// UUID v4
 	RefundID  *string       `json:"refundID,omitempty"`
 	Status    *RefundStatus `json:"status,omitempty"`
 	UpdatedOn *time.Time    `json:"updatedOn,omitempty"`
 }
 
-func (c CreatedReversalSynchronousRefundResponse) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
+func (s SynchronousRefundResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
 }
 
-func (c *CreatedReversalSynchronousRefundResponse) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+func (s *SynchronousRefundResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CreatedReversalSynchronousRefundResponse) GetAmount() *Amount {
+func (o *SynchronousRefundResponse) GetAmount() *Amount {
 	if o == nil {
 		return nil
 	}
 	return o.Amount
 }
 
-func (o *CreatedReversalSynchronousRefundResponse) GetCardDetails() *RefundCardDetails {
+func (o *SynchronousRefundResponse) GetCardDetails() *RefundCardDetails {
 	if o == nil {
 		return nil
 	}
 	return o.CardDetails
 }
 
-func (o *CreatedReversalSynchronousRefundResponse) GetCreatedOn() *time.Time {
+func (o *SynchronousRefundResponse) GetCreatedOn() *time.Time {
 	if o == nil {
 		return nil
 	}
 	return o.CreatedOn
 }
 
-func (o *CreatedReversalSynchronousRefundResponse) GetFailureCode() *CreatedReversalSynchronousRefundResponseFailureCode {
+func (o *SynchronousRefundResponse) GetFailureCode() *CreatedReversalFailureCode {
 	if o == nil {
 		return nil
 	}
 	return o.FailureCode
 }
 
-func (o *CreatedReversalSynchronousRefundResponse) GetRefundID() *string {
+func (o *SynchronousRefundResponse) GetRefundID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.RefundID
 }
 
-func (o *CreatedReversalSynchronousRefundResponse) GetStatus() *RefundStatus {
+func (o *SynchronousRefundResponse) GetStatus() *RefundStatus {
 	if o == nil {
 		return nil
 	}
 	return o.Status
 }
 
-func (o *CreatedReversalSynchronousRefundResponse) GetUpdatedOn() *time.Time {
+func (o *SynchronousRefundResponse) GetUpdatedOn() *time.Time {
 	if o == nil {
 		return nil
 	}
@@ -179,8 +179,8 @@ func (o *CreatedReversalSynchronousRefundResponse) GetUpdatedOn() *time.Time {
 }
 
 type CreatedReversal struct {
-	Cancellation *CreatedCancellation                      `json:"cancellation,omitempty"`
-	Refund       *CreatedReversalSynchronousRefundResponse `json:"refund,omitempty"`
+	Cancellation *CreatedCancellation       `json:"cancellation,omitempty"`
+	Refund       *SynchronousRefundResponse `json:"refund,omitempty"`
 }
 
 func (o *CreatedReversal) GetCancellation() *CreatedCancellation {
@@ -190,7 +190,7 @@ func (o *CreatedReversal) GetCancellation() *CreatedCancellation {
 	return o.Cancellation
 }
 
-func (o *CreatedReversal) GetRefund() *CreatedReversalSynchronousRefundResponse {
+func (o *CreatedReversal) GetRefund() *SynchronousRefundResponse {
 	if o == nil {
 		return nil
 	}

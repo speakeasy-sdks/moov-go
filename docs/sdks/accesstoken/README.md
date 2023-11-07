@@ -1,5 +1,5 @@
 # AccessToken
-(*AccessToken*)
+(*.AccessToken*)
 
 ## Overview
 
@@ -40,7 +40,7 @@ func main() {
     res, err := s.AccessToken.Create(ctx, shared.ClientCredentialsGrantToAccessTokenRequest{
         ClientID: moovgo.String("5clTR_MdVrrkgxw2"),
         ClientSecret: moovgo.String("dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"),
-        GrantType: shared.ClientCredentialsGrantToAccessTokenRequestGrantTypeClientCredentials,
+        GrantType: shared.GrantTypeClientCredentials,
         RefreshToken: moovgo.String("i1qxz68gu50zp4i8ceyxqogmq7y0yienm52351c6..."),
         Scope: moovgo.String("/accounts.write"),
     })

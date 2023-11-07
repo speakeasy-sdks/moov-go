@@ -86,57 +86,57 @@ func (o *CreateRepresentativeBirthDate) GetYear() int64 {
 	return o.Year
 }
 
-type CreateRepresentativeGovernmentIDItin struct {
+type Itin struct {
 	Full     *string `json:"full,omitempty"`
 	LastFour *string `json:"lastFour,omitempty"`
 }
 
-func (o *CreateRepresentativeGovernmentIDItin) GetFull() *string {
+func (o *Itin) GetFull() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Full
 }
 
-func (o *CreateRepresentativeGovernmentIDItin) GetLastFour() *string {
+func (o *Itin) GetLastFour() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastFour
 }
 
-type CreateRepresentativeGovernmentIDSsn struct {
+type Ssn struct {
 	Full     *string `json:"full,omitempty"`
 	LastFour *string `json:"lastFour,omitempty"`
 }
 
-func (o *CreateRepresentativeGovernmentIDSsn) GetFull() *string {
+func (o *Ssn) GetFull() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Full
 }
 
-func (o *CreateRepresentativeGovernmentIDSsn) GetLastFour() *string {
+func (o *Ssn) GetLastFour() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastFour
 }
 
-type CreateRepresentativeGovernmentID struct {
-	Itin *CreateRepresentativeGovernmentIDItin `json:"itin,omitempty"`
-	Ssn  *CreateRepresentativeGovernmentIDSsn  `json:"ssn,omitempty"`
+type GovernmentID struct {
+	Itin *Itin `json:"itin,omitempty"`
+	Ssn  *Ssn  `json:"ssn,omitempty"`
 }
 
-func (o *CreateRepresentativeGovernmentID) GetItin() *CreateRepresentativeGovernmentIDItin {
+func (o *GovernmentID) GetItin() *Itin {
 	if o == nil {
 		return nil
 	}
 	return o.Itin
 }
 
-func (o *CreateRepresentativeGovernmentID) GetSsn() *CreateRepresentativeGovernmentIDSsn {
+func (o *GovernmentID) GetSsn() *Ssn {
 	if o == nil {
 		return nil
 	}
@@ -202,8 +202,8 @@ func (o *CreateRepresentativePhone) GetNumber() *string {
 	return o.Number
 }
 
-// CreateRepresentativeResponsibilities - Describes the job responsibilities of an individual
-type CreateRepresentativeResponsibilities struct {
+// Responsibilities - Describes the job responsibilities of an individual
+type Responsibilities struct {
 	// Indicates whether this individual has significant management responsibilities within the business
 	IsController *bool `default:"false" json:"isController"`
 	// If `true`, this field indicates that this individual has an ownership stake of at least 25% in the business. If the representative does not own at least 25% of the business, this field should be `false`.
@@ -213,39 +213,39 @@ type CreateRepresentativeResponsibilities struct {
 	OwnershipPercentage int64 `json:"ownershipPercentage"`
 }
 
-func (c CreateRepresentativeResponsibilities) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
+func (r Responsibilities) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
 }
 
-func (c *CreateRepresentativeResponsibilities) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+func (r *Responsibilities) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CreateRepresentativeResponsibilities) GetIsController() *bool {
+func (o *Responsibilities) GetIsController() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.IsController
 }
 
-func (o *CreateRepresentativeResponsibilities) GetIsOwner() *bool {
+func (o *Responsibilities) GetIsOwner() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.IsOwner
 }
 
-func (o *CreateRepresentativeResponsibilities) GetJobTitle() string {
+func (o *Responsibilities) GetJobTitle() string {
 	if o == nil {
 		return ""
 	}
 	return o.JobTitle
 }
 
-func (o *CreateRepresentativeResponsibilities) GetOwnershipPercentage() int64 {
+func (o *Responsibilities) GetOwnershipPercentage() int64 {
 	if o == nil {
 		return 0
 	}
@@ -258,11 +258,11 @@ type CreateRepresentative struct {
 	Address   *CreateRepresentativeAddress   `json:"address,omitempty"`
 	BirthDate *CreateRepresentativeBirthDate `json:"birthDate,omitempty"`
 	// Email Address
-	Email            *string                               `json:"email,omitempty"`
-	GovernmentID     *CreateRepresentativeGovernmentID     `json:"governmentID,omitempty"`
-	Name             *CreateRepresentativeName             `json:"name,omitempty"`
-	Phone            *CreateRepresentativePhone            `json:"phone,omitempty"`
-	Responsibilities *CreateRepresentativeResponsibilities `json:"responsibilities,omitempty"`
+	Email            *string                    `json:"email,omitempty"`
+	GovernmentID     *GovernmentID              `json:"governmentID,omitempty"`
+	Name             *CreateRepresentativeName  `json:"name,omitempty"`
+	Phone            *CreateRepresentativePhone `json:"phone,omitempty"`
+	Responsibilities *Responsibilities          `json:"responsibilities,omitempty"`
 }
 
 func (o *CreateRepresentative) GetAddress() *CreateRepresentativeAddress {
@@ -286,7 +286,7 @@ func (o *CreateRepresentative) GetEmail() *string {
 	return o.Email
 }
 
-func (o *CreateRepresentative) GetGovernmentID() *CreateRepresentativeGovernmentID {
+func (o *CreateRepresentative) GetGovernmentID() *GovernmentID {
 	if o == nil {
 		return nil
 	}
@@ -307,7 +307,7 @@ func (o *CreateRepresentative) GetPhone() *CreateRepresentativePhone {
 	return o.Phone
 }
 
-func (o *CreateRepresentative) GetResponsibilities() *CreateRepresentativeResponsibilities {
+func (o *CreateRepresentative) GetResponsibilities() *Responsibilities {
 	if o == nil {
 		return nil
 	}

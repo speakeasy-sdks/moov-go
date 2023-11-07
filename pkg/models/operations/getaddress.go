@@ -130,12 +130,12 @@ func (o *GetAddressRequest) GetSource() *string {
 type GetAddressResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
-	// Address suggestions
-	EnrichmentAddresses []shared.EnrichmentAddress
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// Address suggestions
+	Classes []shared.EnrichmentAddress
 }
 
 func (o *GetAddressResponse) GetContentType() string {
@@ -143,13 +143,6 @@ func (o *GetAddressResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *GetAddressResponse) GetEnrichmentAddresses() []shared.EnrichmentAddress {
-	if o == nil {
-		return nil
-	}
-	return o.EnrichmentAddresses
 }
 
 func (o *GetAddressResponse) GetStatusCode() int {
@@ -164,4 +157,11 @@ func (o *GetAddressResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetAddressResponse) GetClasses() []shared.EnrichmentAddress {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }
