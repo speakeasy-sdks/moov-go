@@ -1,5 +1,5 @@
 # AccessToken
-(*.AccessToken*)
+(*AccessToken*)
 
 ## Overview
 
@@ -56,16 +56,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                              | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                  | :heavy_check_mark:                                                                                                     | The context to use for the request.                                                                                    |
-| `request`                                                                                                              | [shared.ClientCredentialsGrantToAccessTokenRequest](../../models/shared/clientcredentialsgranttoaccesstokenrequest.md) | :heavy_check_mark:                                                                                                     | The request object to use for the request.                                                                             |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `request`                                                                                                                  | [shared.ClientCredentialsGrantToAccessTokenRequest](../../pkg/models/shared/clientcredentialsgranttoaccesstokenrequest.md) | :heavy_check_mark:                                                                                                         | The request object to use for the request.                                                                                 |
 
 
 ### Response
 
-**[*operations.PostOAuth2TokenResponse](../../models/operations/postoauth2tokenresponse.md), error**
-
+**[*operations.PostOAuth2TokenResponse](../../pkg/models/operations/postoauth2tokenresponse.md), error**
+| Error Object                       | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| sdkerrors.AccessTokenErrorResponse | 400                                | application/json                   |
+| sdkerrors.SDKError                 | 400-600                            | */*                                |
 
 ## Revoke
 
@@ -108,13 +111,15 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |
-| `request`                                                              | [shared.RevokeTokenRequest](../../models/shared/revoketokenrequest.md) | :heavy_check_mark:                                                     | The request object to use for the request.                             |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
+| `request`                                                                  | [shared.RevokeTokenRequest](../../pkg/models/shared/revoketokenrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
 
 
 ### Response
 
-**[*operations.RevokeOAuth2TokenResponse](../../models/operations/revokeoauth2tokenresponse.md), error**
-
+**[*operations.RevokeOAuth2TokenResponse](../../pkg/models/operations/revokeoauth2tokenresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

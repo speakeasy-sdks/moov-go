@@ -1,5 +1,5 @@
 # Cards
-(*.Cards*)
+(*Cards*)
 
 ## Overview
 
@@ -82,17 +82,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `ctx`                                                      | [context.Context](https://pkg.go.dev/context#Context)      | :heavy_check_mark:                                         | The context to use for the request.                        |
-| `linkApplePay`                                             | [shared.LinkApplePay](../../models/shared/linkapplepay.md) | :heavy_check_mark:                                         | N/A                                                        |
-| `accountID`                                                | *string*                                                   | :heavy_check_mark:                                         | ID of the account                                          |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
+| `linkApplePay`                                                    | [shared.LinkApplePay](../../../pkg/models/shared/linkapplepay.md) | :heavy_check_mark:                                                | N/A                                                               |
+| `accountID`                                                       | *string*                                                          | :heavy_check_mark:                                                | ID of the account                                                 |
 
 
 ### Response
 
-**[*operations.PostLinkApplePayTokenResponse](../../models/operations/postlinkapplepaytokenresponse.md), error**
-
+**[*operations.PostLinkApplePayTokenResponse](../../pkg/models/operations/postlinkapplepaytokenresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## LinkCard
 
@@ -158,16 +160,18 @@ func main() {
 | Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
 | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
-| `cardRequest`                                                                                        | [shared.CardRequest](../../models/shared/cardrequest.md)                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `cardRequest`                                                                                        | [shared.CardRequest](../../../pkg/models/shared/cardrequest.md)                                      | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `accountID`                                                                                          | *string*                                                                                             | :heavy_check_mark:                                                                                   | ID of the account                                                                                    |
-| `xWaitFor`                                                                                           | [*shared.SchemasWaitFor](../../models/shared/schemaswaitfor.md)                                      | :heavy_minus_sign:                                                                                   | Optional header that indicates whether to return a synchronous response or an asynchronous response. |
-| `opts`                                                                                               | [][operations.Option](../../models/operations/option.md)                                             | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+| `xWaitFor`                                                                                           | [*shared.SchemasWaitFor](../../../pkg/models/shared/schemaswaitfor.md)                               | :heavy_minus_sign:                                                                                   | Optional header that indicates whether to return a synchronous response or an asynchronous response. |
+| `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
 
 
 ### Response
 
-**[*operations.PostLinkCardResponse](../../models/operations/postlinkcardresponse.md), error**
-
+**[*operations.PostLinkCardResponse](../../pkg/models/operations/postlinkcardresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListCards
 
@@ -217,8 +221,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetListCardsResponse](../../models/operations/getlistcardsresponse.md), error**
-
+**[*operations.GetListCardsResponse](../../pkg/models/operations/getlistcardsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateApplePaySession
 
@@ -268,17 +274,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `createApplePaySession`                                                      | [shared.CreateApplePaySession](../../models/shared/createapplepaysession.md) | :heavy_check_mark:                                                           | N/A                                                                          |
-| `accountID`                                                                  | *string*                                                                     | :heavy_check_mark:                                                           | ID of the account                                                            |
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `ctx`                                                                               | [context.Context](https://pkg.go.dev/context#Context)                               | :heavy_check_mark:                                                                  | The context to use for the request.                                                 |
+| `createApplePaySession`                                                             | [shared.CreateApplePaySession](../../../pkg/models/shared/createapplepaysession.md) | :heavy_check_mark:                                                                  | N/A                                                                                 |
+| `accountID`                                                                         | *string*                                                                            | :heavy_check_mark:                                                                  | ID of the account                                                                   |
 
 
 ### Response
 
-**[*operations.PostApplePaySessionResponse](../../models/operations/postapplepaysessionresponse.md), error**
-
+**[*operations.PostApplePaySessionResponse](../../pkg/models/operations/postapplepaysessionresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Delete
 
@@ -331,8 +339,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteCardResponse](../../models/operations/deletecardresponse.md), error**
-
+**[*operations.DeleteCardResponse](../../pkg/models/operations/deletecardresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -385,8 +395,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetCardResponse](../../models/operations/getcardresponse.md), error**
-
+**[*operations.GetCardResponse](../../pkg/models/operations/getcardresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListApplePayDomains
 
@@ -438,8 +450,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetApplePayMerchantDomainsResponse](../../models/operations/getapplepaymerchantdomainsresponse.md), error**
-
+**[*operations.GetApplePayMerchantDomainsResponse](../../pkg/models/operations/getapplepaymerchantdomainsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## RegisterApplePayDomain
 
@@ -491,17 +505,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `registerApplePayMerchantDomains`                                                                | [shared.RegisterApplePayMerchantDomains](../../models/shared/registerapplepaymerchantdomains.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `accountID`                                                                                      | *string*                                                                                         | :heavy_check_mark:                                                                               | ID of the account                                                                                |
+| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                   | [context.Context](https://pkg.go.dev/context#Context)                                                   | :heavy_check_mark:                                                                                      | The context to use for the request.                                                                     |
+| `registerApplePayMerchantDomains`                                                                       | [shared.RegisterApplePayMerchantDomains](../../../pkg/models/shared/registerapplepaymerchantdomains.md) | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| `accountID`                                                                                             | *string*                                                                                                | :heavy_check_mark:                                                                                      | ID of the account                                                                                       |
 
 
 ### Response
 
-**[*operations.PostApplePayMerchantDomainsResponse](../../models/operations/postapplepaymerchantdomainsresponse.md), error**
-
+**[*operations.PostApplePayMerchantDomainsResponse](../../pkg/models/operations/postapplepaymerchantdomainsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Update
 
@@ -566,18 +582,20 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `ctx`                                                                | [context.Context](https://pkg.go.dev/context#Context)                | :heavy_check_mark:                                                   | The context to use for the request.                                  |                                                                      |
-| `cardUpdateRequest`                                                  | [shared.CardUpdateRequest](../../models/shared/cardupdaterequest.md) | :heavy_check_mark:                                                   | N/A                                                                  |                                                                      |
-| `accountID`                                                          | *string*                                                             | :heavy_check_mark:                                                   | ID of the account                                                    |                                                                      |
-| `cardID`                                                             | *string*                                                             | :heavy_check_mark:                                                   | ID of the card                                                       | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                 |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `ctx`                                                                       | [context.Context](https://pkg.go.dev/context#Context)                       | :heavy_check_mark:                                                          | The context to use for the request.                                         |                                                                             |
+| `cardUpdateRequest`                                                         | [shared.CardUpdateRequest](../../../pkg/models/shared/cardupdaterequest.md) | :heavy_check_mark:                                                          | N/A                                                                         |                                                                             |
+| `accountID`                                                                 | *string*                                                                    | :heavy_check_mark:                                                          | ID of the account                                                           |                                                                             |
+| `cardID`                                                                    | *string*                                                                    | :heavy_check_mark:                                                          | ID of the card                                                              | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                        |
 
 
 ### Response
 
-**[*operations.UpdateCardResponse](../../models/operations/updatecardresponse.md), error**
-
+**[*operations.UpdateCardResponse](../../pkg/models/operations/updatecardresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## UpdateApplePayDomains
 
@@ -631,14 +649,16 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `updateApplePayMerchantDomains`                                                              | [shared.UpdateApplePayMerchantDomains](../../models/shared/updateapplepaymerchantdomains.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
-| `accountID`                                                                                  | *string*                                                                                     | :heavy_check_mark:                                                                           | ID of the account                                                                            |
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                               | [context.Context](https://pkg.go.dev/context#Context)                                               | :heavy_check_mark:                                                                                  | The context to use for the request.                                                                 |
+| `updateApplePayMerchantDomains`                                                                     | [shared.UpdateApplePayMerchantDomains](../../../pkg/models/shared/updateapplepaymerchantdomains.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `accountID`                                                                                         | *string*                                                                                            | :heavy_check_mark:                                                                                  | ID of the account                                                                                   |
 
 
 ### Response
 
-**[*operations.UpdateApplePayMerchantDomainsResponse](../../models/operations/updateapplepaymerchantdomainsresponse.md), error**
-
+**[*operations.UpdateApplePayMerchantDomainsResponse](../../pkg/models/operations/updateapplepaymerchantdomainsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

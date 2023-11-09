@@ -1,5 +1,5 @@
 # CardIssuing
-(*.CardIssuing*)
+(*CardIssuing*)
 
 ## Overview
 
@@ -77,17 +77,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `requestCard`                                            | [shared.RequestCard](../../models/shared/requestcard.md) | :heavy_check_mark:                                       | N/A                                                      |
-| `accountID`                                              | *string*                                                 | :heavy_check_mark:                                       | ID of the account                                        |
+| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `ctx`                                                           | [context.Context](https://pkg.go.dev/context#Context)           | :heavy_check_mark:                                              | The context to use for the request.                             |
+| `requestCard`                                                   | [shared.RequestCard](../../../pkg/models/shared/requestcard.md) | :heavy_check_mark:                                              | N/A                                                             |
+| `accountID`                                                     | *string*                                                        | :heavy_check_mark:                                              | ID of the account                                               |
 
 
 ### Response
 
-**[*operations.PostRequestCardResponse](../../models/operations/postrequestcardresponse.md), error**
-
+**[*operations.PostRequestCardResponse](../../pkg/models/operations/postrequestcardresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetCard
 
@@ -142,8 +144,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetIssuedCardResponse](../../models/operations/getissuedcardresponse.md), error**
-
+**[*operations.GetIssuedCardResponse](../../pkg/models/operations/getissuedcardresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetCardFullDetails
 
@@ -198,8 +202,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetFullIssuedCardResponse](../../models/operations/getfullissuedcardresponse.md), error**
-
+**[*operations.GetFullIssuedCardResponse](../../pkg/models/operations/getfullissuedcardresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListCards
 
@@ -256,13 +262,15 @@ func main() {
 | `accountID`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | ID of the account                                                                |
 | `count`                                                                          | **int64*                                                                         | :heavy_minus_sign:                                                               | Optional parameter to limit the number of results in the query                   |
 | `skip`                                                                           | **int64*                                                                         | :heavy_minus_sign:                                                               | The number of items to offset before starting to collect the result set          |
-| `states`                                                                         | [*shared.IssuedCardState](../../models/shared/issuedcardstate.md)                | :heavy_minus_sign:                                                               | Optional, comma-separated states to filter the Moov list issued cards response.<br/> |
+| `states`                                                                         | [*shared.IssuedCardState](../../../pkg/models/shared/issuedcardstate.md)         | :heavy_minus_sign:                                                               | Optional, comma-separated states to filter the Moov list issued cards response.<br/> |
 
 
 ### Response
 
-**[*operations.ListIssuedCardsResponse](../../models/operations/listissuedcardsresponse.md), error**
-
+**[*operations.ListIssuedCardsResponse](../../pkg/models/operations/listissuedcardsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## UpdateCard
 
@@ -327,15 +335,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `ctx`                                                              | [context.Context](https://pkg.go.dev/context#Context)              | :heavy_check_mark:                                                 | The context to use for the request.                                |                                                                    |
-| `updateIssuedCard`                                                 | [shared.UpdateIssuedCard](../../models/shared/updateissuedcard.md) | :heavy_check_mark:                                                 | N/A                                                                |                                                                    |
-| `accountID`                                                        | *string*                                                           | :heavy_check_mark:                                                 | ID of the account                                                  |                                                                    |
-| `issuedCardID`                                                     | *string*                                                           | :heavy_check_mark:                                                 | ID of the issued card                                              | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                               |
+| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `ctx`                                                                     | [context.Context](https://pkg.go.dev/context#Context)                     | :heavy_check_mark:                                                        | The context to use for the request.                                       |                                                                           |
+| `updateIssuedCard`                                                        | [shared.UpdateIssuedCard](../../../pkg/models/shared/updateissuedcard.md) | :heavy_check_mark:                                                        | N/A                                                                       |                                                                           |
+| `accountID`                                                               | *string*                                                                  | :heavy_check_mark:                                                        | ID of the account                                                         |                                                                           |
+| `issuedCardID`                                                            | *string*                                                                  | :heavy_check_mark:                                                        | ID of the issued card                                                     | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                      |
 
 
 ### Response
 
-**[*operations.UpdateIssuedCardResponse](../../models/operations/updateissuedcardresponse.md), error**
-
+**[*operations.UpdateIssuedCardResponse](../../pkg/models/operations/updateissuedcardresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

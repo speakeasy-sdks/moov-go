@@ -1,5 +1,5 @@
 # Accounts
-(*.Accounts*)
+(*Accounts*)
 
 ## Overview
 
@@ -78,17 +78,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                             | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
-| `countries`                                           | [shared.Countries](../../models/shared/countries.md)  | :heavy_check_mark:                                    | N/A                                                   |
-| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `ctx`                                                       | [context.Context](https://pkg.go.dev/context#Context)       | :heavy_check_mark:                                          | The context to use for the request.                         |
+| `countries`                                                 | [shared.Countries](../../../pkg/models/shared/countries.md) | :heavy_check_mark:                                          | N/A                                                         |
+| `accountID`                                                 | *string*                                                    | :heavy_check_mark:                                          | ID of the account                                           |
 
 
 ### Response
 
-**[*operations.PutAccountCountriesResponse](../../models/operations/putaccountcountriesresponse.md), error**
-
+**[*operations.PutAccountCountriesResponse](../../pkg/models/operations/putaccountcountriesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Create
 
@@ -232,16 +234,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `request`                                                                  | [shared.CreateAccountRequest](../../models/shared/createaccountrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `request`                                                                      | [shared.CreateAccountRequest](../../pkg/models/shared/createaccountrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 
 
 ### Response
 
-**[*operations.CreateAccountResponse](../../models/operations/createaccountresponse.md), error**
-
+**[*operations.CreateAccountResponse](../../pkg/models/operations/createaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -291,8 +295,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetAccountResponse](../../models/operations/getaccountresponse.md), error**
-
+**[*operations.GetAccountResponse](../../pkg/models/operations/getaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetTosToken
 
@@ -338,8 +344,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetTermsOfServiceTokenResponse](../../models/operations/gettermsofservicetokenresponse.md), error**
-
+**[*operations.GetTermsOfServiceTokenResponse](../../pkg/models/operations/gettermsofservicetokenresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -388,16 +396,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.ListAccountsRequest](../../models/operations/listaccountsrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.ListAccountsRequest](../../pkg/models/operations/listaccountsrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 
 
 ### Response
 
-**[*operations.ListAccountsResponse](../../models/operations/listaccountsresponse.md), error**
-
+**[*operations.ListAccountsResponse](../../pkg/models/operations/listaccountsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListCountries
 
@@ -447,8 +457,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetAccountCountriesResponse](../../models/operations/getaccountcountriesresponse.md), error**
-
+**[*operations.GetAccountCountriesResponse](../../pkg/models/operations/getaccountcountriesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Update
 
@@ -603,14 +615,16 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `patchAccountRequest`                                                    | [shared.PatchAccountRequest](../../models/shared/patchaccountrequest.md) | :heavy_check_mark:                                                       | N/A                                                                      |
-| `accountID`                                                              | *string*                                                                 | :heavy_check_mark:                                                       | ID of the account                                                        |
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `ctx`                                                                           | [context.Context](https://pkg.go.dev/context#Context)                           | :heavy_check_mark:                                                              | The context to use for the request.                                             |
+| `patchAccountRequest`                                                           | [shared.PatchAccountRequest](../../../pkg/models/shared/patchaccountrequest.md) | :heavy_check_mark:                                                              | N/A                                                                             |
+| `accountID`                                                                     | *string*                                                                        | :heavy_check_mark:                                                              | ID of the account                                                               |
 
 
 ### Response
 
-**[*operations.PatchAccountResponse](../../models/operations/patchaccountresponse.md), error**
-
+**[*operations.PatchAccountResponse](../../pkg/models/operations/patchaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

@@ -1,5 +1,5 @@
 # Enrichment
-(*.Enrichment*)
+(*Enrichment*)
 
 ### Available Operations
 
@@ -50,16 +50,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [operations.GetAddressRequest](../../models/operations/getaddressrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [operations.GetAddressRequest](../../pkg/models/operations/getaddressrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[*operations.GetAddressResponse](../../models/operations/getaddressresponse.md), error**
-
+**[*operations.GetAddressResponse](../../pkg/models/operations/getaddressresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetAvatar
 
@@ -111,8 +113,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetAvatarResponse](../../models/operations/getavatarresponse.md), error**
-
+**[*operations.GetAvatarResponse](../../pkg/models/operations/getavatarresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetIndustries
 
@@ -160,8 +164,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetIndustriesResponse](../../models/operations/getindustriesresponse.md), error**
-
+**[*operations.GetIndustriesResponse](../../pkg/models/operations/getindustriesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetProfile
 
@@ -213,5 +219,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetEnrichmentProfileResponse](../../models/operations/getenrichmentprofileresponse.md), error**
-
+**[*operations.GetEnrichmentProfileResponse](../../pkg/models/operations/getenrichmentprofileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

@@ -1,5 +1,5 @@
 # Files
-(*.Files*)
+(*Files*)
 
 ## Overview
 
@@ -62,8 +62,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetFileDetailsResponse](../../models/operations/getfiledetailsresponse.md), error**
-
+**[*operations.GetFileDetailsResponse](../../pkg/models/operations/getfiledetailsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -113,8 +115,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListFilesResponse](../../models/operations/listfilesresponse.md), error**
-
+**[*operations.ListFilesResponse](../../pkg/models/operations/listfilesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Upload
 
@@ -164,14 +168,16 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `ctx`                                                                | [context.Context](https://pkg.go.dev/context#Context)                | :heavy_check_mark:                                                   | The context to use for the request.                                  |
-| `fileUploadRequest`                                                  | [shared.FileUploadRequest](../../models/shared/fileuploadrequest.md) | :heavy_check_mark:                                                   | N/A                                                                  |
-| `accountID`                                                          | *string*                                                             | :heavy_check_mark:                                                   | ID of the account                                                    |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `ctx`                                                                       | [context.Context](https://pkg.go.dev/context#Context)                       | :heavy_check_mark:                                                          | The context to use for the request.                                         |
+| `fileUploadRequest`                                                         | [shared.FileUploadRequest](../../../pkg/models/shared/fileuploadrequest.md) | :heavy_check_mark:                                                          | N/A                                                                         |
+| `accountID`                                                                 | *string*                                                                    | :heavy_check_mark:                                                          | ID of the account                                                           |
 
 
 ### Response
 
-**[*operations.UploadFileResponse](../../models/operations/uploadfileresponse.md), error**
-
+**[*operations.UploadFileResponse](../../pkg/models/operations/uploadfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

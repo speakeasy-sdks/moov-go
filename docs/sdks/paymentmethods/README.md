@@ -1,5 +1,5 @@
 # PaymentMethods
-(*.PaymentMethods*)
+(*PaymentMethods*)
 
 ## Overview
 
@@ -64,8 +64,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetPaymentMethodResponse](../../models/operations/getpaymentmethodresponse.md), error**
-
+**[*operations.GetPaymentMethodResponse](../../pkg/models/operations/getpaymentmethodresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -118,5 +120,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListPaymentMethodsResponse](../../models/operations/listpaymentmethodsresponse.md), error**
-
+**[*operations.ListPaymentMethodsResponse](../../pkg/models/operations/listpaymentmethodsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

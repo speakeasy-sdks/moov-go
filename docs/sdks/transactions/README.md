@@ -1,5 +1,5 @@
 # Transactions
-(*.Transactions*)
+(*Transactions*)
 
 ## Overview
 
@@ -55,16 +55,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `ctx`                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                     | :heavy_check_mark:                                                                        | The context to use for the request.                                                       |
-| `accountID`                                                                               | *string*                                                                                  | :heavy_check_mark:                                                                        | ID of the account                                                                         |
-| `count`                                                                                   | **int64*                                                                                  | :heavy_minus_sign:                                                                        | Optional parameter to limit the number of results in the query                            |
-| `skip`                                                                                    | **int64*                                                                                  | :heavy_minus_sign:                                                                        | The number of items to offset before starting to collect the result set                   |
-| `status`                                                                                  | [*shared.IssuedCardTransactionStatus](../../models/shared/issuedcardtransactionstatus.md) | :heavy_minus_sign:                                                                        | Optional parameters to filter results IssuedCardTransactions.                             |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `accountID`                                                                                      | *string*                                                                                         | :heavy_check_mark:                                                                               | ID of the account                                                                                |
+| `count`                                                                                          | **int64*                                                                                         | :heavy_minus_sign:                                                                               | Optional parameter to limit the number of results in the query                                   |
+| `skip`                                                                                           | **int64*                                                                                         | :heavy_minus_sign:                                                                               | The number of items to offset before starting to collect the result set                          |
+| `status`                                                                                         | [*shared.IssuedCardTransactionStatus](../../../pkg/models/shared/issuedcardtransactionstatus.md) | :heavy_minus_sign:                                                                               | Optional parameters to filter results IssuedCardTransactions.                                    |
 
 
 ### Response
 
-**[*operations.ListAccountIssuedCardTransactionsResponse](../../models/operations/listaccountissuedcardtransactionsresponse.md), error**
-
+**[*operations.ListAccountIssuedCardTransactionsResponse](../../pkg/models/operations/listaccountissuedcardtransactionsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

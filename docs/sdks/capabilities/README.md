@@ -1,5 +1,5 @@
 # Capabilities
-(*.Capabilities*)
+(*Capabilities*)
 
 ## Overview
 
@@ -54,17 +54,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `ctx`                                                      | [context.Context](https://pkg.go.dev/context#Context)      | :heavy_check_mark:                                         | The context to use for the request.                        |
-| `accountID`                                                | *string*                                                   | :heavy_check_mark:                                         | ID of the account                                          |
-| `capabilityID`                                             | [shared.CapabilityID](../../models/shared/capabilityid.md) | :heavy_check_mark:                                         | The requested capability identifier                        |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
+| `accountID`                                                       | *string*                                                          | :heavy_check_mark:                                                | ID of the account                                                 |
+| `capabilityID`                                                    | [shared.CapabilityID](../../../pkg/models/shared/capabilityid.md) | :heavy_check_mark:                                                | The requested capability identifier                               |
 
 
 ### Response
 
-**[*operations.DeleteCapabilityResponse](../../models/operations/deletecapabilityresponse.md), error**
-
+**[*operations.DeleteCapabilityResponse](../../pkg/models/operations/deletecapabilityresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -108,17 +110,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `ctx`                                                      | [context.Context](https://pkg.go.dev/context#Context)      | :heavy_check_mark:                                         | The context to use for the request.                        |
-| `accountID`                                                | *string*                                                   | :heavy_check_mark:                                         | ID of the account                                          |
-| `capabilityID`                                             | [shared.CapabilityID](../../models/shared/capabilityid.md) | :heavy_check_mark:                                         | The requested capability identifier                        |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
+| `accountID`                                                       | *string*                                                          | :heavy_check_mark:                                                | ID of the account                                                 |
+| `capabilityID`                                                    | [shared.CapabilityID](../../../pkg/models/shared/capabilityid.md) | :heavy_check_mark:                                                | The requested capability identifier                               |
 
 
 ### Response
 
-**[*operations.GetCapabilityResponse](../../models/operations/getcapabilityresponse.md), error**
-
+**[*operations.GetCapabilityResponse](../../pkg/models/operations/getcapabilityresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -168,8 +172,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListCapabilitiesResponse](../../models/operations/listcapabilitiesresponse.md), error**
-
+**[*operations.ListCapabilitiesResponse](../../pkg/models/operations/listcapabilitiesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Request
 
@@ -217,14 +223,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `addCapabilityRequest`                                                     | [shared.AddCapabilityRequest](../../models/shared/addcapabilityrequest.md) | :heavy_check_mark:                                                         | N/A                                                                        |
-| `accountID`                                                                | *string*                                                                   | :heavy_check_mark:                                                         | ID of the account                                                          |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
+| `addCapabilityRequest`                                                            | [shared.AddCapabilityRequest](../../../pkg/models/shared/addcapabilityrequest.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+| `accountID`                                                                       | *string*                                                                          | :heavy_check_mark:                                                                | ID of the account                                                                 |
 
 
 ### Response
 
-**[*operations.PostCapabilityResponse](../../models/operations/postcapabilityresponse.md), error**
-
+**[*operations.PostCapabilityResponse](../../pkg/models/operations/postcapabilityresponse.md), error**
+| Error Object                     | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| sdkerrors.CapabilityRequestError | 409                              | application/json                 |
+| sdkerrors.SDKError               | 400-600                          | */*                              |

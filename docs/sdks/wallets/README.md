@@ -1,5 +1,5 @@
 # Wallets
-(*.Wallets*)
+(*Wallets*)
 
 ## Overview
 
@@ -68,8 +68,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetWalletForAccountResponse](../../models/operations/getwalletforaccountresponse.md), error**
-
+**[*operations.GetWalletForAccountResponse](../../pkg/models/operations/getwalletforaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetTransaction
 
@@ -125,8 +127,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetWalletTransactionResponse](../../models/operations/getwallettransactionresponse.md), error**
-
+**[*operations.GetWalletTransactionResponse](../../pkg/models/operations/getwallettransactionresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -176,8 +180,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListWalletsForAccountResponse](../../models/operations/listwalletsforaccountresponse.md), error**
-
+**[*operations.ListWalletsForAccountResponse](../../pkg/models/operations/listwalletsforaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListTransactions
 
@@ -220,13 +226,15 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
-| `request`                                                                                            | [operations.ListWalletTransactionsRequest](../../models/operations/listwallettransactionsrequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [operations.ListWalletTransactionsRequest](../../pkg/models/operations/listwallettransactionsrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
 
 
 ### Response
 
-**[*operations.ListWalletTransactionsResponse](../../models/operations/listwallettransactionsresponse.md), error**
-
+**[*operations.ListWalletTransactionsResponse](../../pkg/models/operations/listwallettransactionsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

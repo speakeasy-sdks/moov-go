@@ -1,0 +1,9 @@
+# CreatedReversal
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `Cancellation`                                                                                     | [*sdkerrors.CreatedCancellation](../../../pkg/models/sdkerrors/createdcancellation.md)             | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `Refund`                                                                                           | [*sdkerrors.SynchronousRefundResponse](../../../pkg/models/sdkerrors/synchronousrefundresponse.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

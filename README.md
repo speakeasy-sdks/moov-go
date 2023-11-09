@@ -73,7 +73,7 @@ func main() {
 ## Available Resources and Operations
 
 
-### [.Accounts](docs/sdks/accounts/README.md)
+### [Accounts](docs/sdks/accounts/README.md)
 
 * [AssignCountry](docs/sdks/accounts/README.md#assigncountry) - Assign Account Countries
 * [Create](docs/sdks/accounts/README.md#create) - Create account
@@ -83,7 +83,7 @@ func main() {
 * [ListCountries](docs/sdks/accounts/README.md#listcountries) - Get Account Countries
 * [Update](docs/sdks/accounts/README.md#update) - Patch account
 
-### [.Cards](docs/sdks/cards/README.md)
+### [Cards](docs/sdks/cards/README.md)
 
 * [LinkApplePayToken](docs/sdks/cards/README.md#linkapplepaytoken) - Link Apple Pay token
 * [LinkCard](docs/sdks/cards/README.md#linkcard) - Link card
@@ -96,7 +96,7 @@ func main() {
 * [Update](docs/sdks/cards/README.md#update) - Update card
 * [UpdateApplePayDomains](docs/sdks/cards/README.md#updateapplepaydomains) - Update Apple Pay domains
 
-### [.BankAccounts](docs/sdks/bankaccounts/README.md)
+### [BankAccounts](docs/sdks/bankaccounts/README.md)
 
 * [InitiateMicroDeposits](docs/sdks/bankaccounts/README.md#initiatemicrodeposits) - Initiate micro-deposits
 * [CompleteMicroDeposits](docs/sdks/bankaccounts/README.md#completemicrodeposits) - Complete micro-deposits
@@ -105,25 +105,25 @@ func main() {
 * [Link](docs/sdks/bankaccounts/README.md#link) - Bank account
 * [List](docs/sdks/bankaccounts/README.md#list) - List bank accounts
 
-### [.Capabilities](docs/sdks/capabilities/README.md)
+### [Capabilities](docs/sdks/capabilities/README.md)
 
 * [Delete](docs/sdks/capabilities/README.md#delete) - Disable a capability for an account
 * [Get](docs/sdks/capabilities/README.md#get) - Get capability for account
 * [List](docs/sdks/capabilities/README.md#list) - List capabilities for account
 * [Request](docs/sdks/capabilities/README.md#request) - Request capabilities
 
-### [.Files](docs/sdks/files/README.md)
+### [Files](docs/sdks/files/README.md)
 
 * [Get](docs/sdks/files/README.md#get) - Get File Details
 * [List](docs/sdks/files/README.md#list) - List files
 * [Upload](docs/sdks/files/README.md#upload) - Upload File
 
-### [.PaymentMethods](docs/sdks/paymentmethods/README.md)
+### [PaymentMethods](docs/sdks/paymentmethods/README.md)
 
 * [Get](docs/sdks/paymentmethods/README.md#get) - Get payment method
 * [List](docs/sdks/paymentmethods/README.md#list) - List payment methods
 
-### [.Representatives](docs/sdks/representatives/README.md)
+### [Representatives](docs/sdks/representatives/README.md)
 
 * [Create](docs/sdks/representatives/README.md#create) - Create representative
 * [Delete](docs/sdks/representatives/README.md#delete) - Delete a representative
@@ -131,19 +131,19 @@ func main() {
 * [List](docs/sdks/representatives/README.md#list) - List representatives
 * [Update](docs/sdks/representatives/README.md#update) - Patch representative
 
-### [.Underwriting](docs/sdks/underwriting/README.md)
+### [Underwriting](docs/sdks/underwriting/README.md)
 
 * [Get](docs/sdks/underwriting/README.md#get) - Retrieve underwriting details
 * [Update](docs/sdks/underwriting/README.md#update) - Update underwriting details
 
-### [.Wallets](docs/sdks/wallets/README.md)
+### [Wallets](docs/sdks/wallets/README.md)
 
 * [Get](docs/sdks/wallets/README.md#get) - Get wallet
 * [GetTransaction](docs/sdks/wallets/README.md#gettransaction) - Get wallet transaction
 * [List](docs/sdks/wallets/README.md#list) - List wallets
 * [ListTransactions](docs/sdks/wallets/README.md#listtransactions) - List wallet transactions
 
-### [.Analytics](docs/sdks/analytics/README.md)
+### [Analytics](docs/sdks/analytics/README.md)
 
 * [CountAccountsCreated](docs/sdks/analytics/README.md#countaccountscreated) - Count the number of profiles created by an individual or business
 * [CountTransferStatuses](docs/sdks/analytics/README.md#counttransferstatuses) - Count the transfer statuses
@@ -151,23 +151,23 @@ func main() {
 * [SmallestTransfer](docs/sdks/analytics/README.md#smallesttransfer) - Return the smallest number of transfers
 * [SumTransfers](docs/sdks/analytics/README.md#sumtransfers) - Sum all transfers across intervals
 
-### [.Enrichment](docs/sdks/enrichment/README.md)
+### [Enrichment](docs/sdks/enrichment/README.md)
 
 * [GetAddress](docs/sdks/enrichment/README.md#getaddress) - Get address suggestions
 * [GetAvatar](docs/sdks/enrichment/README.md#getavatar) - Get avatar
 * [GetIndustries](docs/sdks/enrichment/README.md#getindustries) - List all industries
 * [GetProfile](docs/sdks/enrichment/README.md#getprofile) - Get enriched profile
 
-### [.Disputes](docs/sdks/disputes/README.md)
+### [Disputes](docs/sdks/disputes/README.md)
 
 * [Get](docs/sdks/disputes/README.md#get) - Get Dispute by ID
 * [List](docs/sdks/disputes/README.md#list) - List of all disputes
 
-### [.Institutions](docs/sdks/institutions/README.md)
+### [Institutions](docs/sdks/institutions/README.md)
 
 * [Search](docs/sdks/institutions/README.md#search) - Search institutions
 
-### [.CardIssuing](docs/sdks/cardissuing/README.md)
+### [CardIssuing](docs/sdks/cardissuing/README.md)
 
 * [RequestCard](docs/sdks/cardissuing/README.md#requestcard) - Request card
 * [GetCard](docs/sdks/cardissuing/README.md#getcard) - Get issued card
@@ -175,16 +175,16 @@ func main() {
 * [ListCards](docs/sdks/cardissuing/README.md#listcards) - List issued cards
 * [UpdateCard](docs/sdks/cardissuing/README.md#updatecard) - Update issued card
 
-### [.Transactions](docs/sdks/transactions/README.md)
+### [Transactions](docs/sdks/transactions/README.md)
 
 * [List](docs/sdks/transactions/README.md#list) - Get account transactions
 
-### [.AccessToken](docs/sdks/accesstoken/README.md)
+### [AccessToken](docs/sdks/accesstoken/README.md)
 
 * [Create](docs/sdks/accesstoken/README.md#create) - Create access token
 * [Revoke](docs/sdks/accesstoken/README.md#revoke) - Revoke access token
 
-### [.Transfers](docs/sdks/transfers/README.md)
+### [Transfers](docs/sdks/transfers/README.md)
 
 * [Cancel](docs/sdks/transfers/README.md#cancel) - Cancel or refund a card transfer
 * [Create](docs/sdks/transfers/README.md#create) - Create a transfer
@@ -227,7 +227,12 @@ Here's an example of one such pagination call:
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+
+| Error Object                     | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| sdkerrors.CapabilityRequestError | 409                              | application/json                 |
+| sdkerrors.SDKError               | 400-600                          | */*                              |
 
 
 ## Example
@@ -267,6 +272,11 @@ func main() {
 			log.Fatal(e.Error())
 		}
 
+		var e *sdkerrors.SDKError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
 	}
 }
 
@@ -485,12 +495,11 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports the following security schemes globally:
+This SDK supports the following security schemes globally:
 
 | Name                | Type                | Scheme              |
 | ------------------- | ------------------- | ------------------- |

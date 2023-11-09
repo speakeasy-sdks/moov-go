@@ -1,0 +1,9 @@
+# PostApplePayMerchantDomainsRequest
+
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `RegisterApplePayMerchantDomains`                                                                       | [shared.RegisterApplePayMerchantDomains](../../../pkg/models/shared/registerapplepaymerchantdomains.md) | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| `AccountID`                                                                                             | *string*                                                                                                | :heavy_check_mark:                                                                                      | ID of the account                                                                                       |

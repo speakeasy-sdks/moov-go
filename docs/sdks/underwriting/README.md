@@ -1,5 +1,5 @@
 # Underwriting
-(*.Underwriting*)
+(*Underwriting*)
 
 ## Overview
 
@@ -59,8 +59,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetUnderwritingResponse](../../models/operations/getunderwritingresponse.md), error**
-
+**[*operations.GetUnderwritingResponse](../../pkg/models/operations/getunderwritingresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Update
 
@@ -108,14 +110,16 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `underwritingRequest`                                                    | [shared.UnderwritingRequest](../../models/shared/underwritingrequest.md) | :heavy_check_mark:                                                       | N/A                                                                      |
-| `accountID`                                                              | *string*                                                                 | :heavy_check_mark:                                                       | ID of the account                                                        |
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `ctx`                                                                           | [context.Context](https://pkg.go.dev/context#Context)                           | :heavy_check_mark:                                                              | The context to use for the request.                                             |
+| `underwritingRequest`                                                           | [shared.UnderwritingRequest](../../../pkg/models/shared/underwritingrequest.md) | :heavy_check_mark:                                                              | N/A                                                                             |
+| `accountID`                                                                     | *string*                                                                        | :heavy_check_mark:                                                              | ID of the account                                                               |
 
 
 ### Response
 
-**[*operations.UpdateUnderwritingResponse](../../models/operations/updateunderwritingresponse.md), error**
-
+**[*operations.UpdateUnderwritingResponse](../../pkg/models/operations/updateunderwritingresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

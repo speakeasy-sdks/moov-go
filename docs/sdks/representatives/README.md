@@ -1,5 +1,5 @@
 # Representatives
-(*.Representatives*)
+(*Representatives*)
 
 ## Overview
 
@@ -96,17 +96,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `createRepresentative`                                                     | [shared.CreateRepresentative](../../models/shared/createrepresentative.md) | :heavy_check_mark:                                                         | N/A                                                                        |
-| `accountID`                                                                | *string*                                                                   | :heavy_check_mark:                                                         | ID of the account                                                          |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
+| `createRepresentative`                                                            | [shared.CreateRepresentative](../../../pkg/models/shared/createrepresentative.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+| `accountID`                                                                       | *string*                                                                          | :heavy_check_mark:                                                                | ID of the account                                                                 |
 
 
 ### Response
 
-**[*operations.CreateRepresentativeResponse](../../models/operations/createrepresentativeresponse.md), error**
-
+**[*operations.CreateRepresentativeResponse](../../pkg/models/operations/createrepresentativeresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Delete
 
@@ -159,8 +161,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteRepresentativeResponse](../../models/operations/deleterepresentativeresponse.md), error**
-
+**[*operations.DeleteRepresentativeResponse](../../pkg/models/operations/deleterepresentativeresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -213,8 +217,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetRepresentativeResponse](../../models/operations/getrepresentativeresponse.md), error**
-
+**[*operations.GetRepresentativeResponse](../../pkg/models/operations/getrepresentativeresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -264,8 +270,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListRepresentativesResponse](../../models/operations/listrepresentativesresponse.md), error**
-
+**[*operations.ListRepresentativesResponse](../../pkg/models/operations/listrepresentativesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Update
 
@@ -364,15 +372,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |                                                                                        |
-| `patchRepresentativeRequest`                                                           | [shared.PatchRepresentativeRequest](../../models/shared/patchrepresentativerequest.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |                                                                                        |
-| `accountID`                                                                            | *string*                                                                               | :heavy_check_mark:                                                                     | ID of the account                                                                      |                                                                                        |
-| `representativeID`                                                                     | *string*                                                                               | :heavy_check_mark:                                                                     | ID of the representative                                                               | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                   |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                         | [context.Context](https://pkg.go.dev/context#Context)                                         | :heavy_check_mark:                                                                            | The context to use for the request.                                                           |                                                                                               |
+| `patchRepresentativeRequest`                                                                  | [shared.PatchRepresentativeRequest](../../../pkg/models/shared/patchrepresentativerequest.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
+| `accountID`                                                                                   | *string*                                                                                      | :heavy_check_mark:                                                                            | ID of the account                                                                             |                                                                                               |
+| `representativeID`                                                                            | *string*                                                                                      | :heavy_check_mark:                                                                            | ID of the representative                                                                      | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                          |
 
 
 ### Response
 
-**[*operations.PatchRepresentativeResponse](../../models/operations/patchrepresentativeresponse.md), error**
-
+**[*operations.PatchRepresentativeResponse](../../pkg/models/operations/patchrepresentativeresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

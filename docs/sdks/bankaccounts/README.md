@@ -1,5 +1,5 @@
 # BankAccounts
-(*.BankAccounts*)
+(*BankAccounts*)
 
 ## Overview
 
@@ -70,8 +70,10 @@ func main() {
 
 ### Response
 
-**[*operations.PostInitiateMicroDepositsResponse](../../models/operations/postinitiatemicrodepositsresponse.md), error**
-
+**[*operations.PostInitiateMicroDepositsResponse](../../pkg/models/operations/postinitiatemicrodepositsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CompleteMicroDeposits
 
@@ -122,18 +124,20 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |                                                                                            |
-| `completeMicroDepositsRequest`                                                             | [shared.CompleteMicroDepositsRequest](../../models/shared/completemicrodepositsrequest.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |                                                                                            |
-| `accountID`                                                                                | *string*                                                                                   | :heavy_check_mark:                                                                         | ID of the account                                                                          |                                                                                            |
-| `bankAccountID`                                                                            | *string*                                                                                   | :heavy_check_mark:                                                                         | ID of the bank account                                                                     | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                       |
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       | Example                                                                                           |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                             | [context.Context](https://pkg.go.dev/context#Context)                                             | :heavy_check_mark:                                                                                | The context to use for the request.                                                               |                                                                                                   |
+| `completeMicroDepositsRequest`                                                                    | [shared.CompleteMicroDepositsRequest](../../../pkg/models/shared/completemicrodepositsrequest.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |                                                                                                   |
+| `accountID`                                                                                       | *string*                                                                                          | :heavy_check_mark:                                                                                | ID of the account                                                                                 |                                                                                                   |
+| `bankAccountID`                                                                                   | *string*                                                                                          | :heavy_check_mark:                                                                                | ID of the bank account                                                                            | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                              |
 
 
 ### Response
 
-**[*operations.PutCompleteMicroDepositsResponse](../../models/operations/putcompletemicrodepositsresponse.md), error**
-
+**[*operations.PutCompleteMicroDepositsResponse](../../pkg/models/operations/putcompletemicrodepositsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Delete
 
@@ -186,8 +190,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteBankAccountResponse](../../models/operations/deletebankaccountresponse.md), error**
-
+**[*operations.DeleteBankAccountResponse](../../pkg/models/operations/deletebankaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -240,8 +246,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetBankAccountResponse](../../models/operations/getbankaccountresponse.md), error**
-
+**[*operations.GetBankAccountResponse](../../pkg/models/operations/getbankaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Link
 
@@ -289,17 +297,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |
-| `bankAccountPayload`                                                   | [shared.BankAccountPayload](../../models/shared/bankaccountpayload.md) | :heavy_check_mark:                                                     | N/A                                                                    |
-| `accountID`                                                            | *string*                                                               | :heavy_check_mark:                                                     | ID of the account                                                      |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `ctx`                                                                         | [context.Context](https://pkg.go.dev/context#Context)                         | :heavy_check_mark:                                                            | The context to use for the request.                                           |
+| `bankAccountPayload`                                                          | [shared.BankAccountPayload](../../../pkg/models/shared/bankaccountpayload.md) | :heavy_check_mark:                                                            | N/A                                                                           |
+| `accountID`                                                                   | *string*                                                                      | :heavy_check_mark:                                                            | ID of the account                                                             |
 
 
 ### Response
 
-**[*operations.LinkBankAccountResponse](../../models/operations/linkbankaccountresponse.md), error**
-
+**[*operations.LinkBankAccountResponse](../../pkg/models/operations/linkbankaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -349,5 +359,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListBankAccountsResponse](../../models/operations/listbankaccountsresponse.md), error**
-
+**[*operations.ListBankAccountsResponse](../../pkg/models/operations/listbankaccountsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

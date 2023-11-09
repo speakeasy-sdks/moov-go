@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 0311889a7ed4b464557a7a4f2b1e2c2e
   docVersion: 1.0.0
-  speakeasyVersion: 1.114.1
-  generationVersion: 2.181.1
+  speakeasyVersion: 1.116.0
+  generationVersion: 2.185.0
 generation:
   comments: {}
   sdkClassName: Moov
@@ -11,7 +11,7 @@ generation:
 features:
   go:
     constsAndDefaults: 0.1.1
-    core: 3.1.0
+    core: 3.1.2
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     examples: 2.81.3
@@ -23,7 +23,7 @@ features:
     nameOverrides: 2.81.1
     unions: 2.85.0
 go:
-  version: 0.4.0
+  version: 0.4.1
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   imports:
@@ -34,8 +34,10 @@ go:
       operations: pkg/models/operations
       shared: pkg/models/shared
       webhooks: pkg/models/webhooks
+  inputModelSuffix: input
   installationURL: https://github.com/speakeasy-sdks/moov-go
   maxMethodParams: 4
+  outputModelSuffix: output
   packageName: github.com/speakeasy-sdks/moov-go
   published: true
   repoSubDirectory: .

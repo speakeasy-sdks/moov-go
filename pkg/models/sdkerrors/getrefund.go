@@ -177,3 +177,26 @@ func (o *GetRefund) GetUpdatedOn() *time.Time {
 	}
 	return o.UpdatedOn
 }
+
+// GetRefund1 - Details of a card refund
+type GetRefund1 struct {
+	// A representation of money containing an integer value and it's currency.
+	Amount      *Amount            `json:"amount,omitempty"`
+	CardDetails *RefundCardDetails `json:"cardDetails,omitempty"`
+	CreatedOn   *time.Time         `json:"createdOn,omitempty"`
+	// This field is deprecated and will be removed in December 2023.
+	//
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	FailureCode *FailureCode `json:"failureCode,omitempty"`
+	// UUID v4
+	RefundID  *string       `json:"refundID,omitempty"`
+	Status    *RefundStatus `json:"status,omitempty"`
+	UpdatedOn *time.Time    `json:"updatedOn,omitempty"`
+}
+
+var _ error = &GetRefund1{}
+
+func (e *GetRefund1) Error() string {
+	data, _ := json.Marshal(e)
+	return string(data)
+}

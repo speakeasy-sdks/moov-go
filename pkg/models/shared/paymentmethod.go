@@ -652,3 +652,460 @@ func (u PaymentMethod) MarshalJSON() ([]byte, error) {
 
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
+
+type DestinationOptionsType string
+
+const (
+	DestinationOptionsTypeAchCreditSameDay  DestinationOptionsType = "ach-credit-same-day"
+	DestinationOptionsTypeAchCreditStandard DestinationOptionsType = "ach-credit-standard"
+	DestinationOptionsTypeAchDebitCollect   DestinationOptionsType = "ach-debit-collect"
+	DestinationOptionsTypeAchDebitFund      DestinationOptionsType = "ach-debit-fund"
+	DestinationOptionsTypeApplePay          DestinationOptionsType = "apple-pay"
+	DestinationOptionsTypeCardPayment       DestinationOptionsType = "card-payment"
+	DestinationOptionsTypeMoovWallet        DestinationOptionsType = "moov-wallet"
+	DestinationOptionsTypeRtpCredit         DestinationOptionsType = "rtp-credit"
+)
+
+type DestinationOptions struct {
+	SchemasPaymentMethodWalletWallet           *SchemasPaymentMethodWalletWallet
+	SchemasPaymentMethodBankAccountBankAccount *SchemasPaymentMethodBankAccountBankAccount
+	SchemasPaymentMethodCardCard               *SchemasPaymentMethodCardCard
+	ApplePay                                   *ApplePay
+
+	Type DestinationOptionsType
+}
+
+func CreateDestinationOptionsAchCreditSameDay(achCreditSameDay SchemasPaymentMethodBankAccountBankAccount) DestinationOptions {
+	typ := DestinationOptionsTypeAchCreditSameDay
+	typStr := PaymentMethodsType(typ)
+	achCreditSameDay.PaymentMethodType = &typStr
+
+	return DestinationOptions{
+		SchemasPaymentMethodBankAccountBankAccount: &achCreditSameDay,
+		Type: typ,
+	}
+}
+
+func CreateDestinationOptionsAchCreditStandard(achCreditStandard SchemasPaymentMethodBankAccountBankAccount) DestinationOptions {
+	typ := DestinationOptionsTypeAchCreditStandard
+	typStr := PaymentMethodsType(typ)
+	achCreditStandard.PaymentMethodType = &typStr
+
+	return DestinationOptions{
+		SchemasPaymentMethodBankAccountBankAccount: &achCreditStandard,
+		Type: typ,
+	}
+}
+
+func CreateDestinationOptionsAchDebitCollect(achDebitCollect SchemasPaymentMethodBankAccountBankAccount) DestinationOptions {
+	typ := DestinationOptionsTypeAchDebitCollect
+	typStr := PaymentMethodsType(typ)
+	achDebitCollect.PaymentMethodType = &typStr
+
+	return DestinationOptions{
+		SchemasPaymentMethodBankAccountBankAccount: &achDebitCollect,
+		Type: typ,
+	}
+}
+
+func CreateDestinationOptionsAchDebitFund(achDebitFund SchemasPaymentMethodBankAccountBankAccount) DestinationOptions {
+	typ := DestinationOptionsTypeAchDebitFund
+	typStr := PaymentMethodsType(typ)
+	achDebitFund.PaymentMethodType = &typStr
+
+	return DestinationOptions{
+		SchemasPaymentMethodBankAccountBankAccount: &achDebitFund,
+		Type: typ,
+	}
+}
+
+func CreateDestinationOptionsApplePay(applePay ApplePay) DestinationOptions {
+	typ := DestinationOptionsTypeApplePay
+	typStr := PaymentMethodsType(typ)
+	applePay.PaymentMethodType = &typStr
+
+	return DestinationOptions{
+		ApplePay: &applePay,
+		Type:     typ,
+	}
+}
+
+func CreateDestinationOptionsCardPayment(cardPayment SchemasPaymentMethodCardCard) DestinationOptions {
+	typ := DestinationOptionsTypeCardPayment
+	typStr := PaymentMethodsType(typ)
+	cardPayment.PaymentMethodType = &typStr
+
+	return DestinationOptions{
+		SchemasPaymentMethodCardCard: &cardPayment,
+		Type:                         typ,
+	}
+}
+
+func CreateDestinationOptionsMoovWallet(moovWallet SchemasPaymentMethodWalletWallet) DestinationOptions {
+	typ := DestinationOptionsTypeMoovWallet
+	typStr := PaymentMethodsType(typ)
+	moovWallet.PaymentMethodType = &typStr
+
+	return DestinationOptions{
+		SchemasPaymentMethodWalletWallet: &moovWallet,
+		Type:                             typ,
+	}
+}
+
+func CreateDestinationOptionsRtpCredit(rtpCredit SchemasPaymentMethodBankAccountBankAccount) DestinationOptions {
+	typ := DestinationOptionsTypeRtpCredit
+	typStr := PaymentMethodsType(typ)
+	rtpCredit.PaymentMethodType = &typStr
+
+	return DestinationOptions{
+		SchemasPaymentMethodBankAccountBankAccount: &rtpCredit,
+		Type: typ,
+	}
+}
+
+func (u *DestinationOptions) UnmarshalJSON(data []byte) error {
+
+	type discriminator struct {
+		PaymentMethodType string
+	}
+
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
+	}
+
+	switch dis.PaymentMethodType {
+	case "ach-credit-same-day":
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
+		u.Type = DestinationOptionsTypeAchCreditSameDay
+		return nil
+	case "ach-credit-standard":
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
+		u.Type = DestinationOptionsTypeAchCreditStandard
+		return nil
+	case "ach-debit-collect":
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
+		u.Type = DestinationOptionsTypeAchDebitCollect
+		return nil
+	case "ach-debit-fund":
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
+		u.Type = DestinationOptionsTypeAchDebitFund
+		return nil
+	case "apple-pay":
+		applePay := new(ApplePay)
+		if err := utils.UnmarshalJSON(data, &applePay, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.ApplePay = applePay
+		u.Type = DestinationOptionsTypeApplePay
+		return nil
+	case "card-payment":
+		schemasPaymentMethodCardCard := new(SchemasPaymentMethodCardCard)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodCardCard, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodCardCard = schemasPaymentMethodCardCard
+		u.Type = DestinationOptionsTypeCardPayment
+		return nil
+	case "moov-wallet":
+		schemasPaymentMethodWalletWallet := new(SchemasPaymentMethodWalletWallet)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodWalletWallet, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodWalletWallet = schemasPaymentMethodWalletWallet
+		u.Type = DestinationOptionsTypeMoovWallet
+		return nil
+	case "rtp-credit":
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
+		u.Type = DestinationOptionsTypeRtpCredit
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u DestinationOptions) MarshalJSON() ([]byte, error) {
+	if u.SchemasPaymentMethodWalletWallet != nil {
+		return utils.MarshalJSON(u.SchemasPaymentMethodWalletWallet, "", true)
+	}
+
+	if u.SchemasPaymentMethodBankAccountBankAccount != nil {
+		return utils.MarshalJSON(u.SchemasPaymentMethodBankAccountBankAccount, "", true)
+	}
+
+	if u.SchemasPaymentMethodCardCard != nil {
+		return utils.MarshalJSON(u.SchemasPaymentMethodCardCard, "", true)
+	}
+
+	if u.ApplePay != nil {
+		return utils.MarshalJSON(u.ApplePay, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+type SourceOptionsType string
+
+const (
+	SourceOptionsTypeAchCreditSameDay  SourceOptionsType = "ach-credit-same-day"
+	SourceOptionsTypeAchCreditStandard SourceOptionsType = "ach-credit-standard"
+	SourceOptionsTypeAchDebitCollect   SourceOptionsType = "ach-debit-collect"
+	SourceOptionsTypeAchDebitFund      SourceOptionsType = "ach-debit-fund"
+	SourceOptionsTypeApplePay          SourceOptionsType = "apple-pay"
+	SourceOptionsTypeCardPayment       SourceOptionsType = "card-payment"
+	SourceOptionsTypeMoovWallet        SourceOptionsType = "moov-wallet"
+	SourceOptionsTypeRtpCredit         SourceOptionsType = "rtp-credit"
+)
+
+type SourceOptions struct {
+	SchemasPaymentMethodWalletWallet           *SchemasPaymentMethodWalletWallet
+	SchemasPaymentMethodBankAccountBankAccount *SchemasPaymentMethodBankAccountBankAccount
+	SchemasPaymentMethodCardCard               *SchemasPaymentMethodCardCard
+	ApplePay                                   *ApplePay
+
+	Type SourceOptionsType
+}
+
+func CreateSourceOptionsAchCreditSameDay(achCreditSameDay SchemasPaymentMethodBankAccountBankAccount) SourceOptions {
+	typ := SourceOptionsTypeAchCreditSameDay
+	typStr := PaymentMethodsType(typ)
+	achCreditSameDay.PaymentMethodType = &typStr
+
+	return SourceOptions{
+		SchemasPaymentMethodBankAccountBankAccount: &achCreditSameDay,
+		Type: typ,
+	}
+}
+
+func CreateSourceOptionsAchCreditStandard(achCreditStandard SchemasPaymentMethodBankAccountBankAccount) SourceOptions {
+	typ := SourceOptionsTypeAchCreditStandard
+	typStr := PaymentMethodsType(typ)
+	achCreditStandard.PaymentMethodType = &typStr
+
+	return SourceOptions{
+		SchemasPaymentMethodBankAccountBankAccount: &achCreditStandard,
+		Type: typ,
+	}
+}
+
+func CreateSourceOptionsAchDebitCollect(achDebitCollect SchemasPaymentMethodBankAccountBankAccount) SourceOptions {
+	typ := SourceOptionsTypeAchDebitCollect
+	typStr := PaymentMethodsType(typ)
+	achDebitCollect.PaymentMethodType = &typStr
+
+	return SourceOptions{
+		SchemasPaymentMethodBankAccountBankAccount: &achDebitCollect,
+		Type: typ,
+	}
+}
+
+func CreateSourceOptionsAchDebitFund(achDebitFund SchemasPaymentMethodBankAccountBankAccount) SourceOptions {
+	typ := SourceOptionsTypeAchDebitFund
+	typStr := PaymentMethodsType(typ)
+	achDebitFund.PaymentMethodType = &typStr
+
+	return SourceOptions{
+		SchemasPaymentMethodBankAccountBankAccount: &achDebitFund,
+		Type: typ,
+	}
+}
+
+func CreateSourceOptionsApplePay(applePay ApplePay) SourceOptions {
+	typ := SourceOptionsTypeApplePay
+	typStr := PaymentMethodsType(typ)
+	applePay.PaymentMethodType = &typStr
+
+	return SourceOptions{
+		ApplePay: &applePay,
+		Type:     typ,
+	}
+}
+
+func CreateSourceOptionsCardPayment(cardPayment SchemasPaymentMethodCardCard) SourceOptions {
+	typ := SourceOptionsTypeCardPayment
+	typStr := PaymentMethodsType(typ)
+	cardPayment.PaymentMethodType = &typStr
+
+	return SourceOptions{
+		SchemasPaymentMethodCardCard: &cardPayment,
+		Type:                         typ,
+	}
+}
+
+func CreateSourceOptionsMoovWallet(moovWallet SchemasPaymentMethodWalletWallet) SourceOptions {
+	typ := SourceOptionsTypeMoovWallet
+	typStr := PaymentMethodsType(typ)
+	moovWallet.PaymentMethodType = &typStr
+
+	return SourceOptions{
+		SchemasPaymentMethodWalletWallet: &moovWallet,
+		Type:                             typ,
+	}
+}
+
+func CreateSourceOptionsRtpCredit(rtpCredit SchemasPaymentMethodBankAccountBankAccount) SourceOptions {
+	typ := SourceOptionsTypeRtpCredit
+	typStr := PaymentMethodsType(typ)
+	rtpCredit.PaymentMethodType = &typStr
+
+	return SourceOptions{
+		SchemasPaymentMethodBankAccountBankAccount: &rtpCredit,
+		Type: typ,
+	}
+}
+
+func (u *SourceOptions) UnmarshalJSON(data []byte) error {
+
+	type discriminator struct {
+		PaymentMethodType string
+	}
+
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		return fmt.Errorf("could not unmarshal discriminator: %w", err)
+	}
+
+	switch dis.PaymentMethodType {
+	case "ach-credit-same-day":
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
+		u.Type = SourceOptionsTypeAchCreditSameDay
+		return nil
+	case "ach-credit-standard":
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
+		u.Type = SourceOptionsTypeAchCreditStandard
+		return nil
+	case "ach-debit-collect":
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
+		u.Type = SourceOptionsTypeAchDebitCollect
+		return nil
+	case "ach-debit-fund":
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
+		u.Type = SourceOptionsTypeAchDebitFund
+		return nil
+	case "apple-pay":
+		applePay := new(ApplePay)
+		if err := utils.UnmarshalJSON(data, &applePay, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.ApplePay = applePay
+		u.Type = SourceOptionsTypeApplePay
+		return nil
+	case "card-payment":
+		schemasPaymentMethodCardCard := new(SchemasPaymentMethodCardCard)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodCardCard, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodCardCard = schemasPaymentMethodCardCard
+		u.Type = SourceOptionsTypeCardPayment
+		return nil
+	case "moov-wallet":
+		schemasPaymentMethodWalletWallet := new(SchemasPaymentMethodWalletWallet)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodWalletWallet, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodWalletWallet = schemasPaymentMethodWalletWallet
+		u.Type = SourceOptionsTypeMoovWallet
+		return nil
+	case "rtp-credit":
+		schemasPaymentMethodBankAccountBankAccount := new(SchemasPaymentMethodBankAccountBankAccount)
+		if err := utils.UnmarshalJSON(data, &schemasPaymentMethodBankAccountBankAccount, "", true, true); err != nil {
+			return fmt.Errorf("could not unmarshal expected type: %w", err)
+		}
+
+		u.SchemasPaymentMethodBankAccountBankAccount = schemasPaymentMethodBankAccountBankAccount
+		u.Type = SourceOptionsTypeRtpCredit
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u SourceOptions) MarshalJSON() ([]byte, error) {
+	if u.SchemasPaymentMethodWalletWallet != nil {
+		return utils.MarshalJSON(u.SchemasPaymentMethodWalletWallet, "", true)
+	}
+
+	if u.SchemasPaymentMethodBankAccountBankAccount != nil {
+		return utils.MarshalJSON(u.SchemasPaymentMethodBankAccountBankAccount, "", true)
+	}
+
+	if u.SchemasPaymentMethodCardCard != nil {
+		return utils.MarshalJSON(u.SchemasPaymentMethodCardCard, "", true)
+	}
+
+	if u.ApplePay != nil {
+		return utils.MarshalJSON(u.ApplePay, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
+type CreatedTransferOptions struct {
+	DestinationOptions []DestinationOptions `json:"destinationOptions,omitempty"`
+	SourceOptions      []SourceOptions      `json:"sourceOptions,omitempty"`
+}
+
+func (o *CreatedTransferOptions) GetDestinationOptions() []DestinationOptions {
+	if o == nil {
+		return nil
+	}
+	return o.DestinationOptions
+}
+
+func (o *CreatedTransferOptions) GetSourceOptions() []SourceOptions {
+	if o == nil {
+		return nil
+	}
+	return o.SourceOptions
+}

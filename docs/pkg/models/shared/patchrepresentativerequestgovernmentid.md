@@ -1,0 +1,9 @@
+# PatchRepresentativeRequestGovernmentID
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `Itin`                                                                                                 | [*shared.PatchRepresentativeRequestItin](../../../pkg/models/shared/patchrepresentativerequestitin.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `Ssn`                                                                                                  | [*shared.PatchRepresentativeRequestSsn](../../../pkg/models/shared/patchrepresentativerequestssn.md)   | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
