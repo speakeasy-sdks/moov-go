@@ -42,10 +42,9 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     countries := shared.Countries{
-        AdditionalProperties: map[string]interface{}{
-            "by": "Northwest",
-        },
         Countries: []string{
             "U",
             "n",
@@ -62,7 +61,8 @@ func main() {
             "s",
         },
     }
-    var accountID string = "6841150c-bc74-4c84-a981-f74cfa3faf43"
+
+    var accountID string = "f51a6841-150c-4bc7-8c84-e981f74cfa3f"
 
     ctx := context.Background()
     res, err := s.Accounts.AssignCountry(ctx, countries, accountID)
@@ -78,17 +78,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                             | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
-| `countries`                                           | [shared.Countries](../../models/shared/countries.md)  | :heavy_check_mark:                                    | N/A                                                   |
-| `accountID`                                           | *string*                                              | :heavy_check_mark:                                    | ID of the account                                     |
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `ctx`                                                       | [context.Context](https://pkg.go.dev/context#Context)       | :heavy_check_mark:                                          | The context to use for the request.                         |
+| `countries`                                                 | [shared.Countries](../../../pkg/models/shared/countries.md) | :heavy_check_mark:                                          | N/A                                                         |
+| `accountID`                                                 | *string*                                                    | :heavy_check_mark:                                          | ID of the account                                           |
 
 
 ### Response
 
-**[*operations.PutAccountCountriesResponse](../../models/operations/putaccountcountriesresponse.md), error**
-
+**[*operations.PutAccountCountriesResponse](../../pkg/models/operations/putaccountcountriesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Create
 
@@ -115,21 +117,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Accounts.Create(ctx, shared.CreateAccountRequest{
-        AdditionalProperties: map[string]interface{}{
-            "online": "Configuration",
-        },
         AccountType: shared.AccountTypeBusiness,
         Capabilities: []shared.CapabilityID{
             shared.CapabilityIDCollectFunds,
         },
         CustomerSupport: &shared.CreateAccountRequestCustomerSupport{
-            AdditionalProperties: map[string]interface{}{
-                "innovative": "blue",
-            },
-            Address: &shared.CreateAccountRequestCustomerSupportAddress{
-                AdditionalProperties: map[string]interface{}{
-                    "shred": "abnormally",
-                },
+            Address: &shared.CreateAccountRequestAddress{
                 AddressLine1: moovgo.String("123 Main Street"),
                 AddressLine2: moovgo.String("Apt 302"),
                 City: moovgo.String("Boulder"),
@@ -138,10 +131,7 @@ func main() {
                 StateOrProvince: moovgo.String("CO"),
             },
             Email: moovgo.String("amanda@classbooker.dev"),
-            Phone: &shared.CreateAccountRequestCustomerSupportPhone{
-                AdditionalProperties: map[string]interface{}{
-                    "deposit": "evolve",
-                },
+            Phone: &shared.CreateAccountRequestPhone{
                 CountryCode: moovgo.String("1"),
                 Number: moovgo.String("8185551212"),
             },
@@ -149,21 +139,12 @@ func main() {
         },
         ForeignID: moovgo.String("4528aba-b9a1-11eb-8529-0242ac13003"),
         Metadata: map[string]string{
-            "male": "SUV",
+            "key": "string",
         },
         Mode: shared.ModeProduction.ToPointer(),
         Profile: shared.CreateProfile{
-            AdditionalProperties: map[string]interface{}{
-                "quantify": "Polestar",
-            },
-            Business: &shared.CreateProfileBusiness{
-                AdditionalProperties: map[string]interface{}{
-                    "mobile": "National",
-                },
-                Address: &shared.CreateProfileBusinessAddress{
-                    AdditionalProperties: map[string]interface{}{
-                        "Durham": "after",
-                    },
+            Business: &shared.Business{
+                Address: &shared.CreateProfileAddress{
                     AddressLine1: moovgo.String("123 Main Street"),
                     AddressLine2: moovgo.String("Apt 302"),
                     City: moovgo.String("Boulder"),
@@ -175,43 +156,25 @@ func main() {
                 Description: moovgo.String("Local fitness center paying out instructors"),
                 DoingBusinessAs: moovgo.String("Whole Body Fitness"),
                 Email: moovgo.String("amanda@classbooker.dev"),
-                IndustryCodes: &shared.CreateProfileBusinessIndustryCodes{
-                    AdditionalProperties: map[string]interface{}{
-                        "overriding": "Bike",
-                    },
+                IndustryCodes: &shared.IndustryCodes{
                     Mcc: moovgo.String("7997"),
                     Naics: moovgo.String("713940"),
                     Sic: moovgo.String("7991"),
                 },
                 LegalBusinessName: "Whole Body Fitness LLC",
-                Phone: &shared.CreateProfileBusinessPhone{
-                    AdditionalProperties: map[string]interface{}{
-                        "female": "Fiat",
-                    },
+                Phone: &shared.CreateProfilePhone{
                     CountryCode: moovgo.String("1"),
                     Number: moovgo.String("8185551212"),
                 },
-                TaxID: &shared.CreateProfileBusinessTaxID{
-                    AdditionalProperties: map[string]interface{}{
-                        "easily": "Account",
-                    },
+                TaxID: &shared.TaxID{
                     Ein: &shared.Ein{
-                        AdditionalProperties: map[string]interface{}{
-                            "Northwest": "Direct",
-                        },
                         Number: moovgo.String("123-45-6789"),
                     },
                 },
                 Website: moovgo.String("www.wholebodyfitnessgym.com"),
             },
-            Individual: &shared.CreateProfileIndividual{
-                AdditionalProperties: map[string]interface{}{
-                    "metrics": "Southfield",
-                },
-                Address: &shared.CreateProfileIndividualAddress{
-                    AdditionalProperties: map[string]interface{}{
-                        "Interactions": "Senior",
-                    },
+            Individual: &shared.Individual{
+                Address: &shared.CreateProfileSchemasAddress{
                     AddressLine1: moovgo.String("123 Main Street"),
                     AddressLine2: moovgo.String("Apt 302"),
                     City: moovgo.String("Boulder"),
@@ -219,73 +182,43 @@ func main() {
                     PostalCode: moovgo.String("80301"),
                     StateOrProvince: moovgo.String("CO"),
                 },
-                BirthDate: &shared.CreateProfileIndividualBirthDate{
-                    AdditionalProperties: map[string]interface{}{
-                        "Mouse": "West",
-                    },
+                BirthDate: &shared.CreateProfileBirthDate{
                     Day: 9,
                     Month: 11,
                     Year: 1989,
                 },
                 Email: moovgo.String("amanda@classbooker.dev"),
-                GovernmentID: &shared.CreateProfileIndividualGovernmentID{
-                    AdditionalProperties: map[string]interface{}{
-                        "array": "Edinburg",
-                    },
-                    Itin: &shared.CreateProfileIndividualGovernmentIDItin{
-                        AdditionalProperties: map[string]interface{}{
-                            "Investor": "transmit",
-                        },
+                GovernmentID: &shared.CreateProfileGovernmentID{
+                    Itin: &shared.CreateProfileItin{
                         Full: moovgo.String("123-45-6789"),
                         LastFour: moovgo.String("6789"),
                     },
-                    Ssn: &shared.CreateProfileIndividualGovernmentIDSsn{
-                        AdditionalProperties: map[string]interface{}{
-                            "likewise": "payment",
-                        },
+                    Ssn: &shared.CreateProfileSsn{
                         Full: moovgo.String("123-45-6789"),
                         LastFour: moovgo.String("6789"),
                     },
                 },
                 Name: shared.Name{
-                    AdditionalProperties: map[string]interface{}{
-                        "1080p": "Rubber",
-                    },
                     FirstName: moovgo.String("Amanda"),
                     LastName: moovgo.String("Yang"),
                     MiddleName: moovgo.String("Amanda"),
                     Suffix: moovgo.String("Jr"),
                 },
-                Phone: &shared.CreateProfileIndividualPhone{
-                    AdditionalProperties: map[string]interface{}{
-                        "silver": "Indiana",
-                    },
+                Phone: &shared.CreateProfileSchemasPhone{
                     CountryCode: moovgo.String("1"),
                     Number: moovgo.String("8185551212"),
                 },
             },
         },
         Settings: &shared.CreateAccountRequestSettings{
-            AdditionalProperties: map[string]interface{}{
-                "male": "mmm",
-            },
-            AchPayment: &shared.CreateAccountRequestSettingsAchPayment{
-                AdditionalProperties: map[string]interface{}{
-                    "lavender": "City",
-                },
+            AchPayment: &shared.CreateAccountRequestAchPayment{
                 CompanyName: moovgo.String("Whole Body Fitness"),
             },
-            CardPayment: &shared.CreateAccountRequestSettingsCardPayment{
-                AdditionalProperties: map[string]interface{}{
-                    "meanwhile": "incompatible",
-                },
+            CardPayment: &shared.CreateAccountRequestCardPayment{
                 StatementDescriptor: moovgo.String("Whole Body Fitness"),
             },
         },
         TermsOfService: &shared.CreateAccountRequestTermsOfService{
-            AdditionalProperties: map[string]interface{}{
-                "overhang": "Electronic",
-            },
             Token: moovgo.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
         },
     })
@@ -301,16 +234,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `request`                                                                  | [shared.CreateAccountRequest](../../models/shared/createaccountrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `request`                                                                      | [shared.CreateAccountRequest](../../pkg/models/shared/createaccountrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 
 
 ### Response
 
-**[*operations.CreateAccountResponse](../../models/operations/createaccountresponse.md), error**
-
+**[*operations.CreateAccountResponse](../../pkg/models/operations/createaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -334,6 +269,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
     ctx := context.Background()
@@ -358,8 +295,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetAccountResponse](../../models/operations/getaccountresponse.md), error**
-
+**[*operations.GetAccountResponse](../../pkg/models/operations/getaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetTosToken
 
@@ -405,8 +344,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetTermsOfServiceTokenResponse](../../models/operations/gettermsofservicetokenresponse.md), error**
-
+**[*operations.GetTermsOfServiceTokenResponse](../../pkg/models/operations/gettermsofservicetokenresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -447,7 +388,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Accounts != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -455,16 +396,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.ListAccountsRequest](../../models/operations/listaccountsrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.ListAccountsRequest](../../pkg/models/operations/listaccountsrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 
 
 ### Response
 
-**[*operations.ListAccountsResponse](../../models/operations/listaccountsresponse.md), error**
-
+**[*operations.ListAccountsResponse](../../pkg/models/operations/listaccountsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListCountries
 
@@ -488,6 +431,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "5694ddc2-a16c-425b-bd39-0a53b9fefa9b"
 
     ctx := context.Background()
@@ -512,8 +457,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetAccountCountriesResponse](../../models/operations/getaccountcountriesresponse.md), error**
-
+**[*operations.GetAccountCountriesResponse](../../pkg/models/operations/getaccountcountriesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Update
 
@@ -548,18 +495,11 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     patchAccountRequest := shared.PatchAccountRequest{
-        AdditionalProperties: map[string]interface{}{
-            "Van": "East",
-        },
         CustomerSupport: &shared.PatchAccountRequestCustomerSupport{
-            AdditionalProperties: map[string]interface{}{
-                "male": "Metal",
-            },
-            Address: &shared.PatchAccountRequestCustomerSupportAddress{
-                AdditionalProperties: map[string]interface{}{
-                    "cheater": "Islands",
-                },
+            Address: &shared.PatchAccountRequestAddress{
                 AddressLine1: moovgo.String("123 Main Street"),
                 AddressLine2: moovgo.String("Apt 302"),
                 City: moovgo.String("Boulder"),
@@ -568,10 +508,7 @@ func main() {
                 StateOrProvince: moovgo.String("CO"),
             },
             Email: moovgo.String("amanda@classbooker.dev"),
-            Phone: &shared.PatchAccountRequestCustomerSupportPhone{
-                AdditionalProperties: map[string]interface{}{
-                    "online": "dynamic",
-                },
+            Phone: &shared.PatchAccountRequestPhone{
                 CountryCode: moovgo.String("1"),
                 Number: moovgo.String("8185551212"),
             },
@@ -579,20 +516,11 @@ func main() {
         },
         ForeignID: moovgo.String("4528aba-b9a1-11eb-8529-0242ac13003"),
         Metadata: map[string]string{
-            "white": "bifurcated",
+            "key": "string",
         },
         Profile: &shared.PatchAccountRequestProfile{
-            AdditionalProperties: map[string]interface{}{
-                "Forward": "syndicate",
-            },
-            Business: &shared.PatchAccountRequestProfileBusiness{
-                AdditionalProperties: map[string]interface{}{
-                    "East": "Baht",
-                },
-                Address: &shared.PatchAccountRequestProfileBusinessAddress{
-                    AdditionalProperties: map[string]interface{}{
-                        "Quality": "guestbook",
-                    },
+            Business: &shared.PatchAccountRequestBusiness{
+                Address: &shared.PatchAccountRequestSchemasAddress{
                     AddressLine1: moovgo.String("123 Main Street"),
                     AddressLine2: moovgo.String("Apt 302"),
                     City: moovgo.String("Boulder"),
@@ -600,47 +528,29 @@ func main() {
                     PostalCode: moovgo.String("80301"),
                     StateOrProvince: moovgo.String("CO"),
                 },
-                BusinessType: shared.PatchAccountRequestProfileBusinessBusinessTypeLlc.ToPointer(),
+                BusinessType: shared.PatchAccountRequestBusinessTypeLlc.ToPointer(),
                 Description: moovgo.String("Local fitness center paying out instructors"),
                 DoingBusinessAs: moovgo.String("Whole Body Fitness"),
                 Email: moovgo.String("amanda@classbooker.dev"),
-                IndustryCodes: &shared.PatchAccountRequestProfileBusinessIndustryCodes{
-                    AdditionalProperties: map[string]interface{}{
-                        "driver": "users",
-                    },
+                IndustryCodes: &shared.PatchAccountRequestIndustryCodes{
                     Mcc: moovgo.String("7997"),
                     Naics: moovgo.String("713940"),
                     Sic: moovgo.String("7991"),
                 },
                 LegalBusinessName: moovgo.String("Whole Body Fitness LLC"),
-                Phone: &shared.PatchAccountRequestProfileBusinessPhone{
-                    AdditionalProperties: map[string]interface{}{
-                        "Sharable": "Division",
-                    },
+                Phone: &shared.PatchAccountRequestSchemasPhone{
                     CountryCode: moovgo.String("1"),
                     Number: moovgo.String("8185551212"),
                 },
-                TaxID: &shared.PatchAccountRequestProfileBusinessTaxID{
-                    AdditionalProperties: map[string]interface{}{
-                        "Northeast": "Wooden",
-                    },
+                TaxID: &shared.PatchAccountRequestTaxID{
                     Ein: &shared.Ein{
-                        AdditionalProperties: map[string]interface{}{
-                            "Internal": "invoice",
-                        },
                         Number: moovgo.String("123-45-6789"),
                     },
                 },
                 Website: moovgo.String("www.wholebodyfitnessgym.com"),
             },
-            Individual: &shared.PatchAccountRequestProfileIndividual{
-                AdditionalProperties: map[string]interface{}{
-                    "visionary": "Buckinghamshire",
-                },
-                Address: &shared.PatchAccountRequestProfileIndividualAddress{
-                    AdditionalProperties: map[string]interface{}{
-                        "frictionless": "haptic",
-                    },
+            Individual: &shared.PatchAccountRequestIndividual{
+                Address: &shared.PatchAccountRequestSchemasProfileAddress{
                     AddressLine1: moovgo.String("123 Main Street"),
                     AddressLine2: moovgo.String("Apt 302"),
                     City: moovgo.String("Boulder"),
@@ -648,77 +558,48 @@ func main() {
                     PostalCode: moovgo.String("80301"),
                     StateOrProvince: moovgo.String("CO"),
                 },
-                BirthDate: &shared.PatchAccountRequestProfileIndividualBirthDate{
-                    AdditionalProperties: map[string]interface{}{
-                        "modulo": "Kia",
-                    },
+                BirthDate: &shared.PatchAccountRequestBirthDate{
                     Day: 9,
                     Month: 11,
                     Year: 1989,
                 },
                 Email: moovgo.String("amanda@classbooker.dev"),
-                GovernmentID: &shared.PatchAccountRequestProfileIndividualGovernmentID{
-                    AdditionalProperties: map[string]interface{}{
-                        "Turkish": "Avon",
-                    },
-                    Itin: &shared.PatchAccountRequestProfileIndividualGovernmentIDItin{
-                        AdditionalProperties: map[string]interface{}{
-                            "Ranch": "hack",
-                        },
+                GovernmentID: &shared.PatchAccountRequestGovernmentID{
+                    Itin: &shared.PatchAccountRequestItin{
                         Full: moovgo.String("123-45-6789"),
                         LastFour: moovgo.String("6789"),
                     },
-                    Ssn: &shared.PatchAccountRequestProfileIndividualGovernmentIDSsn{
-                        AdditionalProperties: map[string]interface{}{
-                            "Rubber": "absolve",
-                        },
+                    Ssn: &shared.PatchAccountRequestSsn{
                         Full: moovgo.String("123-45-6789"),
                         LastFour: moovgo.String("6789"),
                     },
                 },
-                Name: &shared.PatchAccountRequestProfileIndividualName{
-                    AdditionalProperties: map[string]interface{}{
-                        "West": "North",
-                    },
+                Name: &shared.PatchAccountRequestName{
                     FirstName: moovgo.String("Amanda"),
                     LastName: moovgo.String("Yang"),
                     MiddleName: moovgo.String("Amanda"),
                     Suffix: moovgo.String("Jr"),
                 },
-                Phone: &shared.PatchAccountRequestProfileIndividualPhone{
-                    AdditionalProperties: map[string]interface{}{
-                        "quisquam": "Pickup",
-                    },
+                Phone: &shared.PatchAccountRequestSchemasProfilePhone{
                     CountryCode: moovgo.String("1"),
                     Number: moovgo.String("8185551212"),
                 },
             },
         },
         Settings: &shared.PatchAccountRequestSettings{
-            AdditionalProperties: map[string]interface{}{
-                "Ergonomic": "Money",
-            },
-            AchPayment: &shared.PatchAccountRequestSettingsAchPayment{
-                AdditionalProperties: map[string]interface{}{
-                    "male": "Account",
-                },
+            AchPayment: &shared.PatchAccountRequestAchPayment{
                 CompanyName: moovgo.String("Whole Body Fitness"),
             },
-            CardPayment: &shared.PatchAccountRequestSettingsCardPayment{
-                AdditionalProperties: map[string]interface{}{
-                    "Latvian": "ew",
-                },
+            CardPayment: &shared.PatchAccountRequestCardPayment{
                 StatementDescriptor: moovgo.String("Whole Body Fitness"),
             },
         },
         TermsOfService: &shared.PatchAccountRequestTermsOfService{
-            AdditionalProperties: map[string]interface{}{
-                "global": "squat",
-            },
             Token: moovgo.String("kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"),
         },
     }
-    var accountID string = "9aedfb53-dab3-4841-b551-ac2341550f69"
+
+    var accountID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
 
     ctx := context.Background()
     res, err := s.Accounts.Update(ctx, patchAccountRequest, accountID)
@@ -734,14 +615,16 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `patchAccountRequest`                                                    | [shared.PatchAccountRequest](../../models/shared/patchaccountrequest.md) | :heavy_check_mark:                                                       | N/A                                                                      |
-| `accountID`                                                              | *string*                                                                 | :heavy_check_mark:                                                       | ID of the account                                                        |
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `ctx`                                                                           | [context.Context](https://pkg.go.dev/context#Context)                           | :heavy_check_mark:                                                              | The context to use for the request.                                             |
+| `patchAccountRequest`                                                           | [shared.PatchAccountRequest](../../../pkg/models/shared/patchaccountrequest.md) | :heavy_check_mark:                                                              | N/A                                                                             |
+| `accountID`                                                                     | *string*                                                                        | :heavy_check_mark:                                                              | ID of the account                                                               |
 
 
 ### Response
 
-**[*operations.PatchAccountResponse](../../models/operations/patchaccountresponse.md), error**
-
+**[*operations.PatchAccountResponse](../../pkg/models/operations/patchaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

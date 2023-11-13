@@ -41,16 +41,16 @@ func CreateRefundPostResponseGetRefund(getRefund GetRefund) RefundPostResponse {
 
 func (u *RefundPostResponse) UnmarshalJSON(data []byte) error {
 
-	createdRefund := new(CreatedRefund)
+	createdRefund := CreatedRefund{}
 	if err := utils.UnmarshalJSON(data, &createdRefund, "", true, true); err == nil {
-		u.CreatedRefund = createdRefund
+		u.CreatedRefund = &createdRefund
 		u.Type = RefundPostResponseTypeCreatedRefund
 		return nil
 	}
 
-	getRefund := new(GetRefund)
+	getRefund := GetRefund{}
 	if err := utils.UnmarshalJSON(data, &getRefund, "", true, true); err == nil {
-		u.GetRefund = getRefund
+		u.GetRefund = &getRefund
 		u.Type = RefundPostResponseTypeGetRefund
 		return nil
 	}

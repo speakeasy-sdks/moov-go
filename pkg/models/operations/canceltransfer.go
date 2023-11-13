@@ -41,8 +41,6 @@ type CancelTransferResponse struct {
 	ContentType string
 	// Successfully initiated a reversal
 	CreatedReversal *shared.CreatedReversal
-	// Reversal request failed, an error message will be available in the response body.
-	Error *shared.Error
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -61,13 +59,6 @@ func (o *CancelTransferResponse) GetCreatedReversal() *shared.CreatedReversal {
 		return nil
 	}
 	return o.CreatedReversal
-}
-
-func (o *CancelTransferResponse) GetError() *shared.Error {
-	if o == nil {
-		return nil
-	}
-	return o.Error
 }
 
 func (o *CancelTransferResponse) GetStatusCode() int {

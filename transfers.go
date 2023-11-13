@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// transfers - A [transfer](https://docs.moov.io/guides/money-movement/) is the movement of money between Moov accounts, from source to destination. Provided you have linked a bank account which has been verified, you can initiate a transfer to another Moov account. All you need to do is note a [paymentMethod](#tag/Payment-methods), the $ amount of the transfer, and a brief description. With Moov, you can also implement transfer groups, allowing you to associate multiple transfers together and run them sequentially. To learn more, read our guide on [transfer groups](https://docs.moov.io/guides/money-movement/transfer-groups/#transfer-statuses).
-type transfers struct {
+// Transfers - A [transfer](https://docs.moov.io/guides/money-movement/) is the movement of money between Moov accounts, from source to destination. Provided you have linked a bank account which has been verified, you can initiate a transfer to another Moov account. All you need to do is note a [paymentMethod](#tag/Payment-methods), the $ amount of the transfer, and a brief description. With Moov, you can also implement transfer groups, allowing you to associate multiple transfers together and run them sequentially. To learn more, read our guide on [transfer groups](https://docs.moov.io/guides/money-movement/transfer-groups/#transfer-statuses).
+type Transfers struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newTransfers(sdkConfig sdkConfiguration) *transfers {
-	return &transfers{
+func newTransfers(sdkConfig sdkConfiguration) *Transfers {
+	return &Transfers{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Cancel or refund a card transfer
 // Reverses a card transfer by initiating a cancellation or refund depending on the transaction status
-func (s *transfers) Cancel(ctx context.Context, xIdempotencyKey string, transferID string, createReversal *shared.CreateReversal) (*operations.CancelTransferResponse, error) {
+func (s *Transfers) Cancel(ctx context.Context, xIdempotencyKey string, transferID string, createReversal *shared.CreateReversal) (*operations.CancelTransferResponse, error) {
 	request := operations.CancelTransferRequest{
 		XIdempotencyKey: xIdempotencyKey,
 		TransferID:      transferID,
@@ -85,8 +85,6 @@ func (s *transfers) Cancel(ctx context.Context, xIdempotencyKey string, transfer
 	case httpRes.StatusCode == 200:
 		fallthrough
 	case httpRes.StatusCode == 202:
-		fallthrough
-	case httpRes.StatusCode == 409:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out shared.CreatedReversal
@@ -101,12 +99,22 @@ func (s *transfers) Cancel(ctx context.Context, xIdempotencyKey string, transfer
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.Error = &out
+			return nil, &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 409:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out sdkerrors.CreatedReversal
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -114,6 +122,10 @@ func (s *transfers) Cancel(ctx context.Context, xIdempotencyKey string, transfer
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -122,7 +134,7 @@ func (s *transfers) Cancel(ctx context.Context, xIdempotencyKey string, transfer
 
 // Create a transfer
 // Move money by providing the source, destination, and amount in the request body. <br><br> To create a transfer, you must specify the `/accounts/{yourAccountID}/transfers.write` scope. <br> You can find your account id on the [Business details](https://dashboard.moov.io/settings/business) page.
-func (s *transfers) Create(ctx context.Context, createTransfer shared.CreateTransfer, xIdempotencyKey string, xWaitFor *shared.WaitFor) (*operations.CreateTransferResponse, error) {
+func (s *Transfers) Create(ctx context.Context, createTransfer shared.CreateTransfer, xIdempotencyKey string, xWaitFor *shared.WaitFor) (*operations.CreateTransferResponse, error) {
 	request := operations.CreateTransferRequest{
 		CreateTransfer:  createTransfer,
 		XIdempotencyKey: xIdempotencyKey,
@@ -201,8 +213,6 @@ func (s *transfers) Create(ctx context.Context, createTransfer shared.CreateTran
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 202:
-		fallthrough
-	case httpRes.StatusCode == 409:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out shared.GetTransferFull
@@ -220,6 +230,21 @@ func (s *transfers) Create(ctx context.Context, createTransfer shared.CreateTran
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 409:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out sdkerrors.GetTransferFull
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+			return nil, &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	default:
 	}
 
@@ -228,7 +253,7 @@ func (s *transfers) Create(ctx context.Context, createTransfer shared.CreateTran
 
 // GenerateOptions - Generate transfer options
 // Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you supply in the request. <br><br> To get transfer options, you must specify the `/accounts/{yourAccountID}/transfers.read` scope. The accountID you include should be associated with the facilitator account. <br> You can find your accountID on the [Business details](https://dashboard.moov.io/settings/business) page.
-func (s *transfers) GenerateOptions(ctx context.Context, request shared.CreateTransferOptions) (*operations.CreateTransferOptionsResponse, error) {
+func (s *Transfers) GenerateOptions(ctx context.Context, request shared.CreateTransferOptions) (*operations.CreateTransferOptionsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/transfer-options"
 
@@ -288,6 +313,10 @@ func (s *transfers) GenerateOptions(ctx context.Context, request shared.CreateTr
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -296,7 +325,7 @@ func (s *transfers) GenerateOptions(ctx context.Context, request shared.CreateTr
 
 // Get a transfer
 // Retrieve full transfer details such as the amount, source, and destination. Payment rail-specific details are included in the source and destination. <br><br> To get a transfer, you must specify the `/accounts/{yourAccountID}/transfers.read` scope. The accountID included must be your facilitator accountID. <br> You can find your accountID on the [Business details](https://dashboard.moov.io/settings/business) page.
-func (s *transfers) Get(ctx context.Context, transferID string, accountID *string) (*operations.GetTransferResponse, error) {
+func (s *Transfers) Get(ctx context.Context, transferID string, accountID *string) (*operations.GetTransferResponse, error) {
 	request := operations.GetTransferRequest{
 		TransferID: transferID,
 		AccountID:  accountID,
@@ -358,6 +387,10 @@ func (s *transfers) Get(ctx context.Context, transferID string, accountID *strin
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -366,7 +399,7 @@ func (s *transfers) Get(ctx context.Context, transferID string, accountID *strin
 
 // GetRefund - Get refund details
 // Get details of a refund for a card transfer
-func (s *transfers) GetRefund(ctx context.Context, refundID string, transferID string) (*operations.GetRefundResponse, error) {
+func (s *Transfers) GetRefund(ctx context.Context, refundID string, transferID string) (*operations.GetRefundResponse, error) {
 	request := operations.GetRefundRequest{
 		RefundID:   refundID,
 		TransferID: transferID,
@@ -424,6 +457,10 @@ func (s *transfers) GetRefund(ctx context.Context, refundID string, transferID s
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -432,7 +469,7 @@ func (s *transfers) GetRefund(ctx context.Context, refundID string, transferID s
 
 // ListRefunds - Get a list of refunds for a card transfer
 // Get a list of refunds for a card transfer
-func (s *transfers) ListRefunds(ctx context.Context, transferID string) (*operations.ListRefundsResponse, error) {
+func (s *Transfers) ListRefunds(ctx context.Context, transferID string) (*operations.ListRefundsResponse, error) {
 	request := operations.ListRefundsRequest{
 		TransferID: transferID,
 	}
@@ -489,6 +526,10 @@ func (s *transfers) ListRefunds(ctx context.Context, transferID string) (*operat
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -497,7 +538,7 @@ func (s *transfers) ListRefunds(ctx context.Context, transferID string) (*operat
 
 // Refund a transfer
 // <strong>Use the <a href="index.html#tag/Transfers/operation/reverseTransfer">Cancel or refund a card transfer</a> endpoint for more robust cancel and refund options.</strong> <br><br> Initiate a refund for a card transfer <br><br> To initiate a refund, you will need to specify the `/accounts/{accountID}/transfers.write` scope.
-func (s *transfers) Refund(ctx context.Context, xIdempotencyKey string, transferID string, createRefund *shared.CreateRefund, xWaitFor *shared.WaitFor) (*operations.RefundTransferResponse, error) {
+func (s *Transfers) Refund(ctx context.Context, xIdempotencyKey string, transferID string, createRefund *shared.CreateRefund, xWaitFor *shared.WaitFor) (*operations.RefundTransferResponse, error) {
 	request := operations.RefundTransferRequest{
 		XIdempotencyKey: xIdempotencyKey,
 		TransferID:      transferID,
@@ -565,8 +606,6 @@ func (s *transfers) Refund(ctx context.Context, xIdempotencyKey string, transfer
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 202:
-		fallthrough
-	case httpRes.StatusCode == 409:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
 			var out shared.GetRefund
@@ -584,6 +623,21 @@ func (s *transfers) Refund(ctx context.Context, xIdempotencyKey string, transfer
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 409:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out sdkerrors.GetRefund1
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+			return nil, &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	default:
 	}
 
@@ -592,7 +646,7 @@ func (s *transfers) Refund(ctx context.Context, xIdempotencyKey string, transfer
 
 // Update - Patch transfer metadata
 // Update the metadata contained on a transfer <br><br> To patch a transfer, you must specify the `/accounts/{yourAccountID}/transfers.write` scope. The accountID included must be your facilitator accountID. <br> You can find your account ID on the [Business details](https://dashboard.moov.io/settings/business) page.
-func (s *transfers) Update(ctx context.Context, patchTransfer shared.PatchTransfer, transferID string, accountID *string) (*operations.PatchTransferResponse, error) {
+func (s *Transfers) Update(ctx context.Context, patchTransfer shared.PatchTransfer, transferID string, accountID *string) (*operations.PatchTransferResponse, error) {
 	request := operations.PatchTransferRequest{
 		PatchTransfer: patchTransfer,
 		TransferID:    transferID,
@@ -665,6 +719,10 @@ func (s *transfers) Update(ctx context.Context, patchTransfer shared.PatchTransf
 		}
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 

@@ -36,13 +36,13 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAddress(ctx, operations.GetAddressRequest{
-        Search: "Home Rock Southeast",
+        Search: "string",
     })
     if err != nil {
         log.Fatal(err)
     }
 
-    if res.EnrichmentAddresses != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -50,16 +50,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [operations.GetAddressRequest](../../models/operations/getaddressrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [operations.GetAddressRequest](../../pkg/models/operations/getaddressrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[*operations.GetAddressResponse](../../models/operations/getaddressresponse.md), error**
-
+**[*operations.GetAddressResponse](../../pkg/models/operations/getaddressresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetAvatar
 
@@ -85,7 +87,9 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
-    var uniqueID string = "silver"
+
+
+    var uniqueID string = "string"
 
     ctx := context.Background()
     res, err := s.Enrichment.GetAvatar(ctx, uniqueID)
@@ -93,7 +97,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.GetAvatar200ImageWildcardBinaryString != nil {
+    if res.Stream != nil {
         // handle response
     }
 }
@@ -109,8 +113,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetAvatarResponse](../../models/operations/getavatarresponse.md), error**
-
+**[*operations.GetAvatarResponse](../../pkg/models/operations/getavatarresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetIndustries
 
@@ -158,8 +164,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetIndustriesResponse](../../models/operations/getindustriesresponse.md), error**
-
+**[*operations.GetIndustriesResponse](../../pkg/models/operations/getindustriesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetProfile
 
@@ -185,7 +193,9 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
-    var email string = "Southwest"
+
+
+    var email string = "string"
 
     ctx := context.Background()
     res, err := s.Enrichment.GetProfile(ctx, email)
@@ -209,5 +219,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetEnrichmentProfileResponse](../../models/operations/getenrichmentprofileresponse.md), error**
-
+**[*operations.GetEnrichmentProfileResponse](../../pkg/models/operations/getenrichmentprofileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

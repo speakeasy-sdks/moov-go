@@ -70,12 +70,12 @@ func (o *ListDisputesRequest) GetStatus() *shared.DisputeStatus {
 type ListDisputesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
-	// List of dispute details
-	Disputes []shared.Dispute
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// List of dispute details
+	Classes []shared.Dispute
 }
 
 func (o *ListDisputesResponse) GetContentType() string {
@@ -83,13 +83,6 @@ func (o *ListDisputesResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *ListDisputesResponse) GetDisputes() []shared.Dispute {
-	if o == nil {
-		return nil
-	}
-	return o.Disputes
 }
 
 func (o *ListDisputesResponse) GetStatusCode() int {
@@ -104,4 +97,11 @@ func (o *ListDisputesResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *ListDisputesResponse) GetClasses() []shared.Dispute {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

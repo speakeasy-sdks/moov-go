@@ -34,7 +34,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
+
     var capabilityID shared.CapabilityID = shared.CapabilityIDCardIssuing
 
     ctx := context.Background()
@@ -51,17 +54,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `ctx`                                                      | [context.Context](https://pkg.go.dev/context#Context)      | :heavy_check_mark:                                         | The context to use for the request.                        |
-| `accountID`                                                | *string*                                                   | :heavy_check_mark:                                         | ID of the account                                          |
-| `capabilityID`                                             | [shared.CapabilityID](../../models/shared/capabilityid.md) | :heavy_check_mark:                                         | The requested capability identifier                        |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
+| `accountID`                                                       | *string*                                                          | :heavy_check_mark:                                                | ID of the account                                                 |
+| `capabilityID`                                                    | [shared.CapabilityID](../../../pkg/models/shared/capabilityid.md) | :heavy_check_mark:                                                | The requested capability identifier                               |
 
 
 ### Response
 
-**[*operations.DeleteCapabilityResponse](../../models/operations/deletecapabilityresponse.md), error**
-
+**[*operations.DeleteCapabilityResponse](../../pkg/models/operations/deletecapabilityresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -85,7 +90,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
     var capabilityID shared.CapabilityID = shared.CapabilityIDSendFunds
 
     ctx := context.Background()
@@ -102,17 +110,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                  | Type                                                       | Required                                                   | Description                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `ctx`                                                      | [context.Context](https://pkg.go.dev/context#Context)      | :heavy_check_mark:                                         | The context to use for the request.                        |
-| `accountID`                                                | *string*                                                   | :heavy_check_mark:                                         | ID of the account                                          |
-| `capabilityID`                                             | [shared.CapabilityID](../../models/shared/capabilityid.md) | :heavy_check_mark:                                         | The requested capability identifier                        |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
+| `accountID`                                                       | *string*                                                          | :heavy_check_mark:                                                | ID of the account                                                 |
+| `capabilityID`                                                    | [shared.CapabilityID](../../../pkg/models/shared/capabilityid.md) | :heavy_check_mark:                                                | The requested capability identifier                               |
 
 
 ### Response
 
-**[*operations.GetCapabilityResponse](../../models/operations/getcapabilityresponse.md), error**
-
+**[*operations.GetCapabilityResponse](../../pkg/models/operations/getcapabilityresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -136,6 +146,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "c184a429-302e-4aca-80db-f1718b882a50"
 
     ctx := context.Background()
@@ -144,7 +156,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Capabilities != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -160,8 +172,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListCapabilitiesResponse](../../models/operations/listcapabilitiesresponse.md), error**
-
+**[*operations.ListCapabilitiesResponse](../../pkg/models/operations/listcapabilitiesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Request
 
@@ -185,15 +199,15 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     addCapabilityRequest := shared.AddCapabilityRequest{
-        AdditionalProperties: map[string]interface{}{
-            "Movies": "Johns",
-        },
         Capabilities: []shared.CapabilityID{
             shared.CapabilityIDTransfers,
         },
     }
-    var accountID string = "356d1f09-dae6-4235-a496-ce7636725e5c"
+
+    var accountID string = "12e6e103-56d1-4f09-9ae6-2352496ce763"
 
     ctx := context.Background()
     res, err := s.Capabilities.Request(ctx, addCapabilityRequest, accountID)
@@ -201,7 +215,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Capabilities != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -209,14 +223,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `addCapabilityRequest`                                                     | [shared.AddCapabilityRequest](../../models/shared/addcapabilityrequest.md) | :heavy_check_mark:                                                         | N/A                                                                        |
-| `accountID`                                                                | *string*                                                                   | :heavy_check_mark:                                                         | ID of the account                                                          |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
+| `addCapabilityRequest`                                                            | [shared.AddCapabilityRequest](../../../pkg/models/shared/addcapabilityrequest.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+| `accountID`                                                                       | *string*                                                                          | :heavy_check_mark:                                                                | ID of the account                                                                 |
 
 
 ### Response
 
-**[*operations.PostCapabilityResponse](../../models/operations/postcapabilityresponse.md), error**
-
+**[*operations.PostCapabilityResponse](../../pkg/models/operations/postcapabilityresponse.md), error**
+| Error Object                     | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| sdkerrors.CapabilityRequestError | 409                              | application/json                 |
+| sdkerrors.SDKError               | 400-600                          | */*                              |

@@ -49,8 +49,6 @@ type PostLinkCardResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// The supplied card data appeared invalid or was declined by the issuer
-	PostLinkCard422ApplicationJSONObject map[string]interface{}
 }
 
 func (o *PostLinkCardResponse) GetCard() *shared.Card {
@@ -79,11 +77,4 @@ func (o *PostLinkCardResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *PostLinkCardResponse) GetPostLinkCard422ApplicationJSONObject() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.PostLinkCard422ApplicationJSONObject
 }

@@ -27,7 +27,7 @@ type ListWalletsForAccountResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Wallets associated with the given account
-	Wallets []shared.Wallet
+	Classes []shared.Wallet
 }
 
 func (o *ListWalletsForAccountResponse) GetContentType() string {
@@ -51,9 +51,9 @@ func (o *ListWalletsForAccountResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *ListWalletsForAccountResponse) GetWallets() []shared.Wallet {
+func (o *ListWalletsForAccountResponse) GetClasses() []shared.Wallet {
 	if o == nil {
 		return nil
 	}
-	return o.Wallets
+	return o.Classes
 }

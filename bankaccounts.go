@@ -14,24 +14,24 @@ import (
 	"net/http"
 )
 
-// bankAccounts - To transfer money with Moov, you’ll need to link a bank account to your Moov account, then verify that account. You can link a bank account to a Moov account by providing the bank account number, routing number, and Moov account ID.
+// BankAccounts - To transfer money with Moov, you’ll need to link a bank account to your Moov account, then verify that account. You can link a bank account to a Moov account by providing the bank account number, routing number, and Moov account ID.
 //
 // We require micro-deposit verification to reduce the risk of fraud or unauthorized activity. You can verify a bank account by initiating [micro-deposits](https://docs.moov.io/guides/sources/bank-accounts/#micro-deposit-verification), sending two small credit transfers to the bank account you want to confirm. Note that there is no way to initiate a micro-deposit from your bank of choice.
 //
 // Alternatively, you can link and verify a bank account in one step through an instant account verification token from a third party provider like [Plaid](https://docs.moov.io/guides/sources/bank-accounts/plaid) or [MX](https://docs.moov.io/guides/sources/bank-accounts/mx/). Bank accounts can have the following statuses: `new`, `pending`, `verified`, `verificationFailed`, `errored`. Learn more by reading our guide on [bank accounts](https://docs.moov.io/guides/sources/bank-accounts/).
-type bankAccounts struct {
+type BankAccounts struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newBankAccounts(sdkConfig sdkConfiguration) *bankAccounts {
-	return &bankAccounts{
+func newBankAccounts(sdkConfig sdkConfiguration) *BankAccounts {
+	return &BankAccounts{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // InitiateMicroDeposits - Initiate micro-deposits
 // Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of unauthorized activity. Use this method to initiate the micro-deposit verification, sending two small credit transfers to the bank account you want to confirm. If you request micro-deposits before 4:15PM ET, they will appear that same day. If you request micro-deposits any time after 4:15PM ET, they will appear the next banking day. When the two credits are initiated, Moov simultaneously initiates a debit to recoup the micro-deposits.<br><br> `sandbox` - Micro-deposits initiated for a `sandbox` bank account will always be `$0.00` / `$0.00` and instantly verifiable once initiated. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-func (s *bankAccounts) InitiateMicroDeposits(ctx context.Context, accountID string, bankAccountID string) (*operations.PostInitiateMicroDepositsResponse, error) {
+func (s *BankAccounts) InitiateMicroDeposits(ctx context.Context, accountID string, bankAccountID string) (*operations.PostInitiateMicroDepositsResponse, error) {
 	request := operations.PostInitiateMicroDepositsRequest{
 		AccountID:     accountID,
 		BankAccountID: bankAccountID,
@@ -75,13 +75,17 @@ func (s *bankAccounts) InitiateMicroDeposits(ctx context.Context, accountID stri
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
-	case httpRes.StatusCode == 204:
-		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 422:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 204:
 		fallthrough
 	default:
 	}
@@ -91,7 +95,7 @@ func (s *bankAccounts) InitiateMicroDeposits(ctx context.Context, accountID stri
 
 // CompleteMicroDeposits - Complete micro-deposits
 // Complete the micro-deposit validation process by passing the amounts of the two transfers within three tries. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-func (s *bankAccounts) CompleteMicroDeposits(ctx context.Context, completeMicroDepositsRequest shared.CompleteMicroDepositsRequest, accountID string, bankAccountID string) (*operations.PutCompleteMicroDepositsResponse, error) {
+func (s *BankAccounts) CompleteMicroDeposits(ctx context.Context, completeMicroDepositsRequest shared.CompleteMicroDepositsRequest, accountID string, bankAccountID string) (*operations.PutCompleteMicroDepositsResponse, error) {
 	request := operations.PutCompleteMicroDepositsRequest{
 		CompleteMicroDepositsRequest: completeMicroDepositsRequest,
 		AccountID:                    accountID,
@@ -164,6 +168,10 @@ func (s *bankAccounts) CompleteMicroDeposits(ctx context.Context, completeMicroD
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -172,7 +180,7 @@ func (s *bankAccounts) CompleteMicroDeposits(ctx context.Context, completeMicroD
 
 // Delete bank account
 // Discontinue using a specified bank account linked to a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-func (s *bankAccounts) Delete(ctx context.Context, accountID string, bankAccountID string) (*operations.DeleteBankAccountResponse, error) {
+func (s *BankAccounts) Delete(ctx context.Context, accountID string, bankAccountID string) (*operations.DeleteBankAccountResponse, error) {
 	request := operations.DeleteBankAccountRequest{
 		AccountID:     accountID,
 		BankAccountID: bankAccountID,
@@ -216,11 +224,15 @@ func (s *bankAccounts) Delete(ctx context.Context, accountID string, bankAccount
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
-	case httpRes.StatusCode == 204:
-		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 204:
 		fallthrough
 	default:
 	}
@@ -230,7 +242,7 @@ func (s *bankAccounts) Delete(ctx context.Context, accountID string, bankAccount
 
 // Get bank account
 // Retrieve bank account details (i.e. routing number or account type) associated with a specific Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-func (s *bankAccounts) Get(ctx context.Context, accountID string, bankAccountID string) (*operations.GetBankAccountResponse, error) {
+func (s *BankAccounts) Get(ctx context.Context, accountID string, bankAccountID string) (*operations.GetBankAccountResponse, error) {
 	request := operations.GetBankAccountRequest{
 		AccountID:     accountID,
 		BankAccountID: bankAccountID,
@@ -290,6 +302,10 @@ func (s *bankAccounts) Get(ctx context.Context, accountID string, bankAccountID 
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -298,7 +314,7 @@ func (s *bankAccounts) Get(ctx context.Context, accountID string, bankAccountID 
 
 // Link - Bank account
 // Link a bank account to an existing Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
-func (s *bankAccounts) Link(ctx context.Context, bankAccountPayload shared.BankAccountPayload, accountID string) (*operations.LinkBankAccountResponse, error) {
+func (s *BankAccounts) Link(ctx context.Context, bankAccountPayload shared.BankAccountPayload, accountID string) (*operations.LinkBankAccountResponse, error) {
 	request := operations.LinkBankAccountRequest{
 		BankAccountPayload: bankAccountPayload,
 		AccountID:          accountID,
@@ -372,6 +388,10 @@ func (s *bankAccounts) Link(ctx context.Context, bankAccountPayload shared.BankA
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -380,7 +400,7 @@ func (s *bankAccounts) Link(ctx context.Context, bankAccountPayload shared.BankA
 
 // List bank accounts
 // List all the bank accounts associated with a particular Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
-func (s *bankAccounts) List(ctx context.Context, accountID string) (*operations.ListBankAccountsResponse, error) {
+func (s *BankAccounts) List(ctx context.Context, accountID string) (*operations.ListBankAccountsResponse, error) {
 	request := operations.ListBankAccountsRequest{
 		AccountID: accountID,
 	}
@@ -439,6 +459,10 @@ func (s *bankAccounts) List(ctx context.Context, accountID string) (*operations.
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 

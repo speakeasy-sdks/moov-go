@@ -14,22 +14,22 @@ import (
 	"net/http"
 )
 
-// paymentMethods - [Payment methods](https://docs.moov.io/guides/money-movement/payment-methods/) represent all of the ways an account can move funds to another Moov account. Payment methods are generated programmatically when a card or bank account is added or the status is updated e.g., `ach-debit-fund` will be added as a payment method once the bank account is verified.
+// PaymentMethods - [Payment methods](https://docs.moov.io/guides/money-movement/payment-methods/) represent all of the ways an account can move funds to another Moov account. Payment methods are generated programmatically when a card or bank account is added or the status is updated e.g., `ach-debit-fund` will be added as a payment method once the bank account is verified.
 //
 // <em>RTP® is not yet generally available on Moov. Contact us for more information.</em>
-type paymentMethods struct {
+type PaymentMethods struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newPaymentMethods(sdkConfig sdkConfiguration) *paymentMethods {
-	return &paymentMethods{
+func newPaymentMethods(sdkConfig sdkConfiguration) *PaymentMethods {
+	return &PaymentMethods{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Get payment method
 // Get the specified payment method associated with a Moov account. <br><br> To get a payment method, you must specify the `/accounts/{accountID}/payment-methods.read` scope.
-func (s *paymentMethods) Get(ctx context.Context, accountID string, paymentMethodID string) (*operations.GetPaymentMethodResponse, error) {
+func (s *PaymentMethods) Get(ctx context.Context, accountID string, paymentMethodID string) (*operations.GetPaymentMethodResponse, error) {
 	request := operations.GetPaymentMethodRequest{
 		AccountID:       accountID,
 		PaymentMethodID: paymentMethodID,
@@ -89,6 +89,10 @@ func (s *paymentMethods) Get(ctx context.Context, accountID string, paymentMetho
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -97,7 +101,7 @@ func (s *paymentMethods) Get(ctx context.Context, accountID string, paymentMetho
 
 // List payment methods
 // Retrieve a list of payment methods associated with a Moov account. <br><br> To list payment methods, you must specify the `/accounts/{accountID}/payment-methods.read` scope.
-func (s *paymentMethods) List(ctx context.Context, accountID string, sourceID *string) (*operations.ListPaymentMethodsResponse, error) {
+func (s *PaymentMethods) List(ctx context.Context, accountID string, sourceID *string) (*operations.ListPaymentMethodsResponse, error) {
 	request := operations.ListPaymentMethodsRequest{
 		AccountID: accountID,
 		SourceID:  sourceID,
@@ -161,6 +165,10 @@ func (s *paymentMethods) List(ctx context.Context, accountID string, sourceID *s
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 

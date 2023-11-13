@@ -5,7 +5,6 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
 type ClientCredentialsGrantToAccessTokenErrorResponseError string
@@ -49,26 +48,7 @@ func (e *ClientCredentialsGrantToAccessTokenErrorResponseError) UnmarshalJSON(da
 
 // ClientCredentialsGrantToAccessTokenErrorResponse - Error happened when trying to obtain an access token
 type ClientCredentialsGrantToAccessTokenErrorResponse struct {
-	AdditionalProperties map[string]interface{}                                 `additionalProperties:"true" json:"-"`
-	Error                *ClientCredentialsGrantToAccessTokenErrorResponseError `json:"error,omitempty"`
-}
-
-func (c ClientCredentialsGrantToAccessTokenErrorResponse) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *ClientCredentialsGrantToAccessTokenErrorResponse) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *ClientCredentialsGrantToAccessTokenErrorResponse) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Error *ClientCredentialsGrantToAccessTokenErrorResponseError `json:"error,omitempty"`
 }
 
 func (o *ClientCredentialsGrantToAccessTokenErrorResponse) GetError() *ClientCredentialsGrantToAccessTokenErrorResponseError {

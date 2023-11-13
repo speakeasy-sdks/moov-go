@@ -2,116 +2,116 @@
 
 package shared
 
-type LinkApplePayTokenPaymentDataHeader struct {
+type Header struct {
 	EphemeralPublicKey string `json:"ephemeralPublicKey"`
 	PublicKeyHash      string `json:"publicKeyHash"`
 	TransactionID      string `json:"transactionId"`
 }
 
-func (o *LinkApplePayTokenPaymentDataHeader) GetEphemeralPublicKey() string {
+func (o *Header) GetEphemeralPublicKey() string {
 	if o == nil {
 		return ""
 	}
 	return o.EphemeralPublicKey
 }
 
-func (o *LinkApplePayTokenPaymentDataHeader) GetPublicKeyHash() string {
+func (o *Header) GetPublicKeyHash() string {
 	if o == nil {
 		return ""
 	}
 	return o.PublicKeyHash
 }
 
-func (o *LinkApplePayTokenPaymentDataHeader) GetTransactionID() string {
+func (o *Header) GetTransactionID() string {
 	if o == nil {
 		return ""
 	}
 	return o.TransactionID
 }
 
-type LinkApplePayTokenPaymentData struct {
-	Data      string                             `json:"data"`
-	Header    LinkApplePayTokenPaymentDataHeader `json:"header"`
-	Signature string                             `json:"signature"`
-	Version   string                             `json:"version"`
+type PaymentData struct {
+	Data      string `json:"data"`
+	Header    Header `json:"header"`
+	Signature string `json:"signature"`
+	Version   string `json:"version"`
 }
 
-func (o *LinkApplePayTokenPaymentData) GetData() string {
+func (o *PaymentData) GetData() string {
 	if o == nil {
 		return ""
 	}
 	return o.Data
 }
 
-func (o *LinkApplePayTokenPaymentData) GetHeader() LinkApplePayTokenPaymentDataHeader {
+func (o *PaymentData) GetHeader() Header {
 	if o == nil {
-		return LinkApplePayTokenPaymentDataHeader{}
+		return Header{}
 	}
 	return o.Header
 }
 
-func (o *LinkApplePayTokenPaymentData) GetSignature() string {
+func (o *PaymentData) GetSignature() string {
 	if o == nil {
 		return ""
 	}
 	return o.Signature
 }
 
-func (o *LinkApplePayTokenPaymentData) GetVersion() string {
+func (o *PaymentData) GetVersion() string {
 	if o == nil {
 		return ""
 	}
 	return o.Version
 }
 
-type LinkApplePayTokenPaymentMethod struct {
+type LinkApplePayPaymentMethod struct {
 	DisplayName string `json:"displayName"`
 	Network     string `json:"network"`
 	Type        string `json:"type"`
 }
 
-func (o *LinkApplePayTokenPaymentMethod) GetDisplayName() string {
+func (o *LinkApplePayPaymentMethod) GetDisplayName() string {
 	if o == nil {
 		return ""
 	}
 	return o.DisplayName
 }
 
-func (o *LinkApplePayTokenPaymentMethod) GetNetwork() string {
+func (o *LinkApplePayPaymentMethod) GetNetwork() string {
 	if o == nil {
 		return ""
 	}
 	return o.Network
 }
 
-func (o *LinkApplePayTokenPaymentMethod) GetType() string {
+func (o *LinkApplePayPaymentMethod) GetType() string {
 	if o == nil {
 		return ""
 	}
 	return o.Type
 }
 
-type LinkApplePayToken struct {
-	PaymentData           LinkApplePayTokenPaymentData   `json:"paymentData"`
-	PaymentMethod         LinkApplePayTokenPaymentMethod `json:"paymentMethod"`
-	TransactionIdentifier string                         `json:"transactionIdentifier"`
+type Token struct {
+	PaymentData           PaymentData               `json:"paymentData"`
+	PaymentMethod         LinkApplePayPaymentMethod `json:"paymentMethod"`
+	TransactionIdentifier string                    `json:"transactionIdentifier"`
 }
 
-func (o *LinkApplePayToken) GetPaymentData() LinkApplePayTokenPaymentData {
+func (o *Token) GetPaymentData() PaymentData {
 	if o == nil {
-		return LinkApplePayTokenPaymentData{}
+		return PaymentData{}
 	}
 	return o.PaymentData
 }
 
-func (o *LinkApplePayToken) GetPaymentMethod() LinkApplePayTokenPaymentMethod {
+func (o *Token) GetPaymentMethod() LinkApplePayPaymentMethod {
 	if o == nil {
-		return LinkApplePayTokenPaymentMethod{}
+		return LinkApplePayPaymentMethod{}
 	}
 	return o.PaymentMethod
 }
 
-func (o *LinkApplePayToken) GetTransactionIdentifier() string {
+func (o *Token) GetTransactionIdentifier() string {
 	if o == nil {
 		return ""
 	}
@@ -119,12 +119,12 @@ func (o *LinkApplePayToken) GetTransactionIdentifier() string {
 }
 
 type LinkApplePay struct {
-	Token LinkApplePayToken `json:"token"`
+	Token Token `json:"token"`
 }
 
-func (o *LinkApplePay) GetToken() LinkApplePayToken {
+func (o *LinkApplePay) GetToken() Token {
 	if o == nil {
-		return LinkApplePayToken{}
+		return Token{}
 	}
 	return o.Token
 }

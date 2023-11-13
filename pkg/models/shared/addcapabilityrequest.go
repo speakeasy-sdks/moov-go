@@ -2,32 +2,9 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // AddCapabilityRequest - Request to add a capability to an account.
 type AddCapabilityRequest struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Capabilities         []CapabilityID         `json:"capabilities"`
-}
-
-func (a AddCapabilityRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *AddCapabilityRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *AddCapabilityRequest) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Capabilities []CapabilityID `json:"capabilities"`
 }
 
 func (o *AddCapabilityRequest) GetCapabilities() []CapabilityID {

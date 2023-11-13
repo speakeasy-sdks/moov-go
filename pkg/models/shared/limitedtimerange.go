@@ -9,12 +9,11 @@ import (
 
 // LimitedTimeRange - Return `count` number of results within time range between two timestamps and then the interval duration for each result in the specific `tz` timezone
 type LimitedTimeRange struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Count                *int64                 `json:"count,omitempty"`
-	Every                *string                `json:"every,omitempty"`
-	From                 *time.Time             `json:"from,omitempty"`
-	To                   *time.Time             `json:"to,omitempty"`
-	Tz                   *string                `json:"tz,omitempty"`
+	Count *int64     `json:"count,omitempty"`
+	Every *string    `json:"every,omitempty"`
+	From  *time.Time `json:"from,omitempty"`
+	To    *time.Time `json:"to,omitempty"`
+	Tz    *string    `json:"tz,omitempty"`
 }
 
 func (l LimitedTimeRange) MarshalJSON() ([]byte, error) {
@@ -26,13 +25,6 @@ func (l *LimitedTimeRange) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *LimitedTimeRange) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *LimitedTimeRange) GetCount() *int64 {

@@ -8,90 +8,52 @@ import (
 	"time"
 )
 
-// TransferPostResponseSynchronousTransferResponseDisputedAmount - A representation of money containing an integer value and it's currency.
-type TransferPostResponseSynchronousTransferResponseDisputedAmount struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+// DisputedAmount - A representation of money containing an integer value and it's currency.
+type DisputedAmount struct {
 	// A 3-letter ISO 4217 currency code
 	Currency string `json:"currency"`
 	// Quantity in the smallest unit of the specified currency. In USD this is cents, so $12.04 is 1204 and $0.99 would be 99.
 	Value int64 `json:"value"`
 }
 
-func (t TransferPostResponseSynchronousTransferResponseDisputedAmount) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
-}
-
-func (t *TransferPostResponseSynchronousTransferResponseDisputedAmount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *TransferPostResponseSynchronousTransferResponseDisputedAmount) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *TransferPostResponseSynchronousTransferResponseDisputedAmount) GetCurrency() string {
+func (o *DisputedAmount) GetCurrency() string {
 	if o == nil {
 		return ""
 	}
 	return o.Currency
 }
 
-func (o *TransferPostResponseSynchronousTransferResponseDisputedAmount) GetValue() int64 {
+func (o *DisputedAmount) GetValue() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.Value
 }
 
-// TransferPostResponseSynchronousTransferResponseRefundedAmount - A representation of money containing an integer value and it's currency.
-type TransferPostResponseSynchronousTransferResponseRefundedAmount struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+// RefundedAmount - A representation of money containing an integer value and it's currency.
+type RefundedAmount struct {
 	// A 3-letter ISO 4217 currency code
 	Currency string `json:"currency"`
 	// Quantity in the smallest unit of the specified currency. In USD this is cents, so $12.04 is 1204 and $0.99 would be 99.
 	Value int64 `json:"value"`
 }
 
-func (t TransferPostResponseSynchronousTransferResponseRefundedAmount) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
-}
-
-func (t *TransferPostResponseSynchronousTransferResponseRefundedAmount) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *TransferPostResponseSynchronousTransferResponseRefundedAmount) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *TransferPostResponseSynchronousTransferResponseRefundedAmount) GetCurrency() string {
+func (o *RefundedAmount) GetCurrency() string {
 	if o == nil {
 		return ""
 	}
 	return o.Currency
 }
 
-func (o *TransferPostResponseSynchronousTransferResponseRefundedAmount) GetValue() int64 {
+func (o *RefundedAmount) GetValue() int64 {
 	if o == nil {
 		return 0
 	}
 	return o.Value
 }
 
-// TransferPostResponseSynchronousTransferResponse - Transfer details
-type TransferPostResponseSynchronousTransferResponse struct {
+// SynchronousTransferResponse - Transfer details
+type SynchronousTransferResponse struct {
 	// A representation of money containing an integer value and it's currency.
 	Amount    *Amount    `json:"amount,omitempty"`
 	CreatedOn *time.Time `json:"createdOn,omitempty"`
@@ -99,7 +61,7 @@ type TransferPostResponseSynchronousTransferResponse struct {
 	Description *string                           `json:"description,omitempty"`
 	Destination *GetTransferFullSourceDestination `json:"destination,omitempty"`
 	// The total disputed amount for a card transfer
-	DisputedAmount *TransferPostResponseSynchronousTransferResponseDisputedAmount `json:"disputedAmount,omitempty"`
+	DisputedAmount *DisputedAmount `json:"disputedAmount,omitempty"`
 	// A list of disputes for a card transfer
 	Disputes []GetDispute `json:"disputes,omitempty"`
 	// Fee you charged your customer for the transfer
@@ -112,7 +74,7 @@ type TransferPostResponseSynchronousTransferResponse struct {
 	// Fee charged to your platform account for card transfers
 	MoovFee *int64 `json:"moovFee,omitempty"`
 	// The total refunded amount for a card transfer
-	RefundedAmount *TransferPostResponseSynchronousTransferResponseRefundedAmount `json:"refundedAmount,omitempty"`
+	RefundedAmount *RefundedAmount `json:"refundedAmount,omitempty"`
 	// A list of refunds for a card transfer
 	Refunds []GetRefund            `json:"refunds,omitempty"`
 	Source  *GetTransferFullSource `json:"source,omitempty"`
@@ -122,123 +84,123 @@ type TransferPostResponseSynchronousTransferResponse struct {
 	TransferID *string `json:"transferID,omitempty"`
 }
 
-func (t TransferPostResponseSynchronousTransferResponse) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
+func (s SynchronousTransferResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
 }
 
-func (t *TransferPostResponseSynchronousTransferResponse) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+func (s *SynchronousTransferResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, true); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetAmount() *Amount {
+func (o *SynchronousTransferResponse) GetAmount() *Amount {
 	if o == nil {
 		return nil
 	}
 	return o.Amount
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetCreatedOn() *time.Time {
+func (o *SynchronousTransferResponse) GetCreatedOn() *time.Time {
 	if o == nil {
 		return nil
 	}
 	return o.CreatedOn
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetDescription() *string {
+func (o *SynchronousTransferResponse) GetDescription() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Description
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetDestination() *GetTransferFullSourceDestination {
+func (o *SynchronousTransferResponse) GetDestination() *GetTransferFullSourceDestination {
 	if o == nil {
 		return nil
 	}
 	return o.Destination
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetDisputedAmount() *TransferPostResponseSynchronousTransferResponseDisputedAmount {
+func (o *SynchronousTransferResponse) GetDisputedAmount() *DisputedAmount {
 	if o == nil {
 		return nil
 	}
 	return o.DisputedAmount
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetDisputes() []GetDispute {
+func (o *SynchronousTransferResponse) GetDisputes() []GetDispute {
 	if o == nil {
 		return nil
 	}
 	return o.Disputes
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetFacilitatorFee() *GetFacilitatorFee {
+func (o *SynchronousTransferResponse) GetFacilitatorFee() *GetFacilitatorFee {
 	if o == nil {
 		return nil
 	}
 	return o.FacilitatorFee
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetFailureReason() *FailureReason {
+func (o *SynchronousTransferResponse) GetFailureReason() *FailureReason {
 	if o == nil {
 		return nil
 	}
 	return o.FailureReason
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetGroupID() *string {
+func (o *SynchronousTransferResponse) GetGroupID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.GroupID
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetMetadata() map[string]string {
+func (o *SynchronousTransferResponse) GetMetadata() map[string]string {
 	if o == nil {
 		return nil
 	}
 	return o.Metadata
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetMoovFee() *int64 {
+func (o *SynchronousTransferResponse) GetMoovFee() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.MoovFee
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetRefundedAmount() *TransferPostResponseSynchronousTransferResponseRefundedAmount {
+func (o *SynchronousTransferResponse) GetRefundedAmount() *RefundedAmount {
 	if o == nil {
 		return nil
 	}
 	return o.RefundedAmount
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetRefunds() []GetRefund {
+func (o *SynchronousTransferResponse) GetRefunds() []GetRefund {
 	if o == nil {
 		return nil
 	}
 	return o.Refunds
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetSource() *GetTransferFullSource {
+func (o *SynchronousTransferResponse) GetSource() *GetTransferFullSource {
 	if o == nil {
 		return nil
 	}
 	return o.Source
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetStatus() *TransferStatus {
+func (o *SynchronousTransferResponse) GetStatus() *TransferStatus {
 	if o == nil {
 		return nil
 	}
 	return o.Status
 }
 
-func (o *TransferPostResponseSynchronousTransferResponse) GetTransferID() *string {
+func (o *SynchronousTransferResponse) GetTransferID() *string {
 	if o == nil {
 		return nil
 	}
@@ -248,13 +210,13 @@ func (o *TransferPostResponseSynchronousTransferResponse) GetTransferID() *strin
 type TransferPostResponseType string
 
 const (
-	TransferPostResponseTypeCreatedTransfer                                 TransferPostResponseType = "CreatedTransfer"
-	TransferPostResponseTypeTransferPostResponseSynchronousTransferResponse TransferPostResponseType = "TransferPostResponse_Synchronous transfer response"
+	TransferPostResponseTypeCreatedTransfer             TransferPostResponseType = "CreatedTransfer"
+	TransferPostResponseTypeSynchronousTransferResponse TransferPostResponseType = "Synchronous transfer response"
 )
 
 type TransferPostResponse struct {
-	CreatedTransfer                                 *CreatedTransfer
-	TransferPostResponseSynchronousTransferResponse *TransferPostResponseSynchronousTransferResponse
+	CreatedTransfer             *CreatedTransfer
+	SynchronousTransferResponse *SynchronousTransferResponse
 
 	Type TransferPostResponseType
 }
@@ -268,28 +230,28 @@ func CreateTransferPostResponseCreatedTransfer(createdTransfer CreatedTransfer) 
 	}
 }
 
-func CreateTransferPostResponseTransferPostResponseSynchronousTransferResponse(transferPostResponseSynchronousTransferResponse TransferPostResponseSynchronousTransferResponse) TransferPostResponse {
-	typ := TransferPostResponseTypeTransferPostResponseSynchronousTransferResponse
+func CreateTransferPostResponseSynchronousTransferResponse(synchronousTransferResponse SynchronousTransferResponse) TransferPostResponse {
+	typ := TransferPostResponseTypeSynchronousTransferResponse
 
 	return TransferPostResponse{
-		TransferPostResponseSynchronousTransferResponse: &transferPostResponseSynchronousTransferResponse,
-		Type: typ,
+		SynchronousTransferResponse: &synchronousTransferResponse,
+		Type:                        typ,
 	}
 }
 
 func (u *TransferPostResponse) UnmarshalJSON(data []byte) error {
 
-	createdTransfer := new(CreatedTransfer)
+	createdTransfer := CreatedTransfer{}
 	if err := utils.UnmarshalJSON(data, &createdTransfer, "", true, true); err == nil {
-		u.CreatedTransfer = createdTransfer
+		u.CreatedTransfer = &createdTransfer
 		u.Type = TransferPostResponseTypeCreatedTransfer
 		return nil
 	}
 
-	transferPostResponseSynchronousTransferResponse := new(TransferPostResponseSynchronousTransferResponse)
-	if err := utils.UnmarshalJSON(data, &transferPostResponseSynchronousTransferResponse, "", true, true); err == nil {
-		u.TransferPostResponseSynchronousTransferResponse = transferPostResponseSynchronousTransferResponse
-		u.Type = TransferPostResponseTypeTransferPostResponseSynchronousTransferResponse
+	synchronousTransferResponse := SynchronousTransferResponse{}
+	if err := utils.UnmarshalJSON(data, &synchronousTransferResponse, "", true, true); err == nil {
+		u.SynchronousTransferResponse = &synchronousTransferResponse
+		u.Type = TransferPostResponseTypeSynchronousTransferResponse
 		return nil
 	}
 
@@ -301,8 +263,8 @@ func (u TransferPostResponse) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.CreatedTransfer, "", true)
 	}
 
-	if u.TransferPostResponseSynchronousTransferResponse != nil {
-		return utils.MarshalJSON(u.TransferPostResponseSynchronousTransferResponse, "", true)
+	if u.SynchronousTransferResponse != nil {
+		return utils.MarshalJSON(u.SynchronousTransferResponse, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")

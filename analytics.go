@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
@@ -14,19 +15,19 @@ import (
 	"strings"
 )
 
-// analytics - You can retrieve helpful at-a-glance information about your account by getting metrics on categories such as new accounts, transfer counts, and transfer volume over different time periods. To use this endpoint, you must specify the `/analytics.read` scope.
-type analytics struct {
+// Analytics - You can retrieve helpful at-a-glance information about your account by getting metrics on categories such as new accounts, transfer counts, and transfer volume over different time periods. To use this endpoint, you must specify the `/analytics.read` scope.
+type Analytics struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newAnalytics(sdkConfig sdkConfiguration) *analytics {
-	return &analytics{
+func newAnalytics(sdkConfig sdkConfiguration) *Analytics {
+	return &Analytics{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // CountAccountsCreated - Count the number of profiles created by an individual or business
-func (s *analytics) CountAccountsCreated(ctx context.Context, request shared.TimeRange) (*operations.PostAnalyticsAccountsCreatedResponse, error) {
+func (s *Analytics) CountAccountsCreated(ctx context.Context, request shared.TimeRange) (*operations.PostAnalyticsAccountsCreatedResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/analytics/accounts/profiles-created"
 
@@ -73,17 +74,21 @@ func (s *analytics) CountAccountsCreated(ctx context.Context, request shared.Tim
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
-		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // CountTransferStatuses - Count the transfer statuses
-func (s *analytics) CountTransferStatuses(ctx context.Context, request shared.TimeRange) (*operations.PostAnalyticsTransferStatusesResponse, error) {
+func (s *Analytics) CountTransferStatuses(ctx context.Context, request shared.TimeRange) (*operations.PostAnalyticsTransferStatusesResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/analytics/transfers/statuses"
 
@@ -130,17 +135,21 @@ func (s *analytics) CountTransferStatuses(ctx context.Context, request shared.Ti
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
-		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // LargestTransfer - Return the largest number of transfers
-func (s *analytics) LargestTransfer(ctx context.Context, request shared.LimitedTimeRange) (*operations.PostAnalyticsTransferLargestResponse, error) {
+func (s *Analytics) LargestTransfer(ctx context.Context, request shared.LimitedTimeRange) (*operations.PostAnalyticsTransferLargestResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/analytics/transfers/largest"
 
@@ -187,17 +196,21 @@ func (s *analytics) LargestTransfer(ctx context.Context, request shared.LimitedT
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
-		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // SmallestTransfer - Return the smallest number of transfers
-func (s *analytics) SmallestTransfer(ctx context.Context, request shared.LimitedTimeRange) (*operations.PostAnalyticsTransferSmallestResponse, error) {
+func (s *Analytics) SmallestTransfer(ctx context.Context, request shared.LimitedTimeRange) (*operations.PostAnalyticsTransferSmallestResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/analytics/transfers/smallest"
 
@@ -244,17 +257,21 @@ func (s *analytics) SmallestTransfer(ctx context.Context, request shared.Limited
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
-		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
 }
 
 // SumTransfers - Sum all transfers across intervals
-func (s *analytics) SumTransfers(ctx context.Context, request shared.TimeRange) (*operations.PostAnalyticsTransferSumResponse, error) {
+func (s *Analytics) SumTransfers(ctx context.Context, request shared.TimeRange) (*operations.PostAnalyticsTransferSumResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/analytics/transfers/sum"
 
@@ -301,10 +318,14 @@ func (s *analytics) SumTransfers(ctx context.Context, request shared.TimeRange) 
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
-		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

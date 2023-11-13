@@ -33,7 +33,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
     var fileID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -59,8 +62,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetFileDetailsResponse](../../models/operations/getfiledetailsresponse.md), error**
-
+**[*operations.GetFileDetailsResponse](../../pkg/models/operations/getfiledetailsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -84,6 +89,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "c184a429-302e-4aca-80db-f1718b882a50"
 
     ctx := context.Background()
@@ -108,8 +115,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListFilesResponse](../../models/operations/listfilesresponse.md), error**
-
+**[*operations.ListFilesResponse](../../pkg/models/operations/listfilesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Upload
 
@@ -133,17 +142,17 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     fileUploadRequest := shared.FileUploadRequest{
-        AdditionalProperties: map[string]interface{}{
-            "Market": "hard",
-        },
         File: shared.FileUploadRequestFile{
-            Content: []byte("G@^n=VA69B"),
-            File: "New West",
+            Content: []byte("0x87cbca97eC"),
+            FileName: "ullam.wav",
         },
-        FilePurpose: shared.FilePurposeIdentityVerification,
+        FilePurpose: shared.FilePurposeBusinessVerification,
     }
-    var accountID string = "ea72dbc9-489a-4ba3-b260-10e1cd685ff1"
+
+    var accountID string = "57295170-ea72-4dbc-9489-aba3b26010e1"
 
     ctx := context.Background()
     res, err := s.Files.Upload(ctx, fileUploadRequest, accountID)
@@ -159,14 +168,16 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `ctx`                                                                | [context.Context](https://pkg.go.dev/context#Context)                | :heavy_check_mark:                                                   | The context to use for the request.                                  |
-| `fileUploadRequest`                                                  | [shared.FileUploadRequest](../../models/shared/fileuploadrequest.md) | :heavy_check_mark:                                                   | N/A                                                                  |
-| `accountID`                                                          | *string*                                                             | :heavy_check_mark:                                                   | ID of the account                                                    |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `ctx`                                                                       | [context.Context](https://pkg.go.dev/context#Context)                       | :heavy_check_mark:                                                          | The context to use for the request.                                         |
+| `fileUploadRequest`                                                         | [shared.FileUploadRequest](../../../pkg/models/shared/fileuploadrequest.md) | :heavy_check_mark:                                                          | N/A                                                                         |
+| `accountID`                                                                 | *string*                                                                    | :heavy_check_mark:                                                          | ID of the account                                                           |
 
 
 ### Response
 
-**[*operations.UploadFileResponse](../../models/operations/uploadfileresponse.md), error**
-
+**[*operations.UploadFileResponse](../../pkg/models/operations/uploadfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

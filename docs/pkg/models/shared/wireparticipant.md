@@ -1,0 +1,17 @@
+# WireParticipant
+
+Financial institution information regarding a wire participant
+
+
+## Fields
+
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `BookEntrySecuritiesTransferStatus`                                | **string*                                                          | :heavy_minus_sign:                                                 | N/A                                                                | Y                                                                  |
+| `CustomerName`                                                     | **string*                                                          | :heavy_minus_sign:                                                 | N/A                                                                | Main Street Bank                                                   |
+| `Date`                                                             | **string*                                                          | :heavy_minus_sign:                                                 | N/A                                                                | 20000222                                                           |
+| `FundsSettlementOnlyStatus`                                        | **string*                                                          | :heavy_minus_sign:                                                 | N/A                                                                |                                                                    |
+| `FundsTransferStatus`                                              | **string*                                                          | :heavy_minus_sign:                                                 | N/A                                                                | Y                                                                  |
+| `Location`                                                         | [*shared.WireLocation](../../../pkg/models/shared/wirelocation.md) | :heavy_minus_sign:                                                 | N/A                                                                |                                                                    |
+| `RoutingNumber`                                                    | **string*                                                          | :heavy_minus_sign:                                                 | N/A                                                                | 123456789                                                          |
+| `TelegraphicName`                                                  | **string*                                                          | :heavy_minus_sign:                                                 | N/A                                                                | MN STR BNK                                                         |

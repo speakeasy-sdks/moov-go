@@ -8,8 +8,6 @@ import (
 )
 
 type PostOAuth2TokenResponse struct {
-	// Failure create token
-	AccessTokenErrorResponse *shared.AccessTokenErrorResponse
 	// Successfully exchanged the code to create a token
 	AccessTokenResponse *shared.AccessTokenResponse
 	// HTTP response content type for this operation
@@ -18,13 +16,6 @@ type PostOAuth2TokenResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-}
-
-func (o *PostOAuth2TokenResponse) GetAccessTokenErrorResponse() *shared.AccessTokenErrorResponse {
-	if o == nil {
-		return nil
-	}
-	return o.AccessTokenErrorResponse
 }
 
 func (o *PostOAuth2TokenResponse) GetAccessTokenResponse() *shared.AccessTokenResponse {

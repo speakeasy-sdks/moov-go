@@ -2,13 +2,9 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 type FileUploadRequestFile struct {
-	Content []byte `multipartForm:"content"`
-	File    string `multipartForm:"name=file"`
+	Content  []byte `multipartForm:"content"`
+	FileName string `multipartForm:"name=file"`
 }
 
 func (o *FileUploadRequestFile) GetContent() []byte {
@@ -18,38 +14,19 @@ func (o *FileUploadRequestFile) GetContent() []byte {
 	return o.Content
 }
 
-func (o *FileUploadRequestFile) GetFile() string {
+func (o *FileUploadRequestFile) GetFileName() string {
 	if o == nil {
 		return ""
 	}
-	return o.File
+	return o.FileName
 }
 
 // FileUploadRequest - Request to attach a file to an account.
 type FileUploadRequest struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The file to be added. Valid types are [csv, png, jpeg, pdf].
 	File FileUploadRequestFile `multipartForm:"file"`
 	// The file purpose
 	FilePurpose FilePurpose `multipartForm:"name=filePurpose"`
-}
-
-func (f FileUploadRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(f, "", false)
-}
-
-func (f *FileUploadRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &f, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *FileUploadRequest) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *FileUploadRequest) GetFile() FileUploadRequestFile {

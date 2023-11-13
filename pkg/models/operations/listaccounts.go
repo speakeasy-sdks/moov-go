@@ -111,21 +111,14 @@ func (o *ListAccountsRequest) GetVerificationStatus() *shared.AccountVerificatio
 }
 
 type ListAccountsResponse struct {
-	// All connected accounts matching the filter parameters
-	Accounts []shared.Account
 	// HTTP response content type for this operation
 	ContentType string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-}
-
-func (o *ListAccountsResponse) GetAccounts() []shared.Account {
-	if o == nil {
-		return nil
-	}
-	return o.Accounts
+	// All connected accounts matching the filter parameters
+	Classes []shared.Account
 }
 
 func (o *ListAccountsResponse) GetContentType() string {
@@ -147,4 +140,11 @@ func (o *ListAccountsResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *ListAccountsResponse) GetClasses() []shared.Account {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

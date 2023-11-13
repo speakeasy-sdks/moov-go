@@ -9,7 +9,6 @@ import (
 
 // CardAccountUpdater - The results of the most recent card update request
 type CardAccountUpdater struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The results of the card update request
 	UpdateType *CardUpdateReason `json:"updateType,omitempty"`
 	UpdatedOn  *time.Time        `json:"updatedOn,omitempty"`
@@ -24,13 +23,6 @@ func (c *CardAccountUpdater) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *CardAccountUpdater) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CardAccountUpdater) GetUpdateType() *CardUpdateReason {

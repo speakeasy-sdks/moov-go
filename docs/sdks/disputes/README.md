@@ -32,6 +32,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var disputeID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -56,8 +58,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetDisputeResponse](../../models/operations/getdisputeresponse.md), error**
-
+**[*operations.GetDisputeResponse](../../pkg/models/operations/getdisputeresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -91,7 +95,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Disputes != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -99,13 +103,15 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.ListDisputesRequest](../../models/operations/listdisputesrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.ListDisputesRequest](../../pkg/models/operations/listdisputesrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 
 
 ### Response
 
-**[*operations.ListDisputesResponse](../../models/operations/listdisputesresponse.md), error**
-
+**[*operations.ListDisputesResponse](../../pkg/models/operations/listdisputesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

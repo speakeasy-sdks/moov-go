@@ -14,13 +14,13 @@ import (
 	"net/http"
 )
 
-// cards - You can link credit or debit cards to Moov accounts. You can use a card as a source for making transfers, which charges the card. To link a card to a Moov account and avoid some of the burden of PCI compliance, use the [card link Moov Drop](https://docs.moov.io/moovjs/drops/card-link). You cannot add a card via the Dashboard. If you're linking a card via API, you must provide Moov with a copy of your PCI attestation of compliance. When testing cards, use the designated [card numbers for test mode](https://docs.moov.io/guides/set-up-your-account/test-mode/#cards). You must contact Moov before going live in production with cards. Read our guide on [cards](https://docs.moov.io/guides/sources/cards/) for more information.
-type cards struct {
+// Cards - You can link credit or debit cards to Moov accounts. You can use a card as a source for making transfers, which charges the card. To link a card to a Moov account and avoid some of the burden of PCI compliance, use the [card link Moov Drop](https://docs.moov.io/moovjs/drops/card-link). You cannot add a card via the Dashboard. If you're linking a card via API, you must provide Moov with a copy of your PCI attestation of compliance. When testing cards, use the designated [card numbers for test mode](https://docs.moov.io/guides/set-up-your-account/test-mode/#cards). You must contact Moov before going live in production with cards. Read our guide on [cards](https://docs.moov.io/guides/sources/cards/) for more information.
+type Cards struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newCards(sdkConfig sdkConfiguration) *cards {
-	return &cards{
+func newCards(sdkConfig sdkConfiguration) *Cards {
+	return &Cards{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -29,7 +29,7 @@ func newCards(sdkConfig sdkConfiguration) *cards {
 // Connect an Apple Pay token to the specified account.
 // The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.write` scope.
-func (s *cards) LinkApplePayToken(ctx context.Context, linkApplePay shared.LinkApplePay, accountID string) (*operations.PostLinkApplePayTokenResponse, error) {
+func (s *Cards) LinkApplePayToken(ctx context.Context, linkApplePay shared.LinkApplePay, accountID string) (*operations.PostLinkApplePayTokenResponse, error) {
 	request := operations.PostLinkApplePayTokenRequest{
 		LinkApplePay: linkApplePay,
 		AccountID:    accountID,
@@ -99,6 +99,10 @@ func (s *cards) LinkApplePayToken(ctx context.Context, linkApplePay shared.LinkA
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -108,7 +112,7 @@ func (s *cards) LinkApplePayToken(ctx context.Context, linkApplePay shared.LinkA
 // LinkCard - Link card
 // Link a card to an existing Moov account. Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.write` scope.
-func (s *cards) LinkCard(ctx context.Context, cardRequest shared.CardRequest, accountID string, xWaitFor *shared.SchemasWaitFor, opts ...operations.Option) (*operations.PostLinkCardResponse, error) {
+func (s *Cards) LinkCard(ctx context.Context, cardRequest shared.CardRequest, accountID string, xWaitFor *shared.SchemasWaitFor, opts ...operations.Option) (*operations.PostLinkCardResponse, error) {
 	request := operations.PostLinkCardRequest{
 		CardRequest: cardRequest,
 		AccountID:   accountID,
@@ -191,24 +195,18 @@ func (s *cards) LinkCard(ctx context.Context, cardRequest shared.CardRequest, ac
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
-	case httpRes.StatusCode == 422:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out map[string]interface{}
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.PostLinkCard422ApplicationJSONObject = out
-		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
-		}
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 409:
 		fallthrough
+	case httpRes.StatusCode == 422:
+		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -217,7 +215,7 @@ func (s *cards) LinkCard(ctx context.Context, cardRequest shared.CardRequest, ac
 
 // ListCards - List cards
 // List all the cards associated with a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.read` scope.
-func (s *cards) ListCards(ctx context.Context, accountID string) (*operations.GetListCardsResponse, error) {
+func (s *Cards) ListCards(ctx context.Context, accountID string) (*operations.GetListCardsResponse, error) {
 	request := operations.GetListCardsRequest{
 		AccountID: accountID,
 	}
@@ -276,6 +274,10 @@ func (s *cards) ListCards(ctx context.Context, accountID string) (*operations.Ge
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -286,7 +288,7 @@ func (s *cards) ListCards(ctx context.Context, accountID string) (*operations.Ge
 // Create a session with Apple Pay to facilitate a payment.
 // A successful response from this endpoint should be passed through to Apple Pay unchanged.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-func (s *cards) CreateApplePaySession(ctx context.Context, createApplePaySession shared.CreateApplePaySession, accountID string) (*operations.PostApplePaySessionResponse, error) {
+func (s *Cards) CreateApplePaySession(ctx context.Context, createApplePaySession shared.CreateApplePaySession, accountID string) (*operations.PostApplePaySessionResponse, error) {
 	request := operations.PostApplePaySessionRequest{
 		CreateApplePaySession: createApplePaySession,
 		AccountID:             accountID,
@@ -356,6 +358,10 @@ func (s *cards) CreateApplePaySession(ctx context.Context, createApplePaySession
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -364,7 +370,7 @@ func (s *cards) CreateApplePaySession(ctx context.Context, createApplePaySession
 
 // Delete - Disable card
 // Disables a card associated with a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.write` scope.
-func (s *cards) Delete(ctx context.Context, accountID string, cardID string) (*operations.DeleteCardResponse, error) {
+func (s *Cards) Delete(ctx context.Context, accountID string, cardID string) (*operations.DeleteCardResponse, error) {
 	request := operations.DeleteCardRequest{
 		AccountID: accountID,
 		CardID:    cardID,
@@ -408,11 +414,15 @@ func (s *cards) Delete(ctx context.Context, accountID string, cardID string) (*o
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
-	case httpRes.StatusCode == 204:
-		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 204:
 		fallthrough
 	default:
 	}
@@ -422,7 +432,7 @@ func (s *cards) Delete(ctx context.Context, accountID string, cardID string) (*o
 
 // Get card
 // Fetch a specific card associated with a Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.read` scope.
-func (s *cards) Get(ctx context.Context, accountID string, cardID string) (*operations.GetCardResponse, error) {
+func (s *Cards) Get(ctx context.Context, accountID string, cardID string) (*operations.GetCardResponse, error) {
 	request := operations.GetCardRequest{
 		AccountID: accountID,
 		CardID:    cardID,
@@ -482,6 +492,10 @@ func (s *cards) Get(ctx context.Context, accountID string, cardID string) (*oper
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -491,7 +505,7 @@ func (s *cards) Get(ctx context.Context, accountID string, cardID string) (*oper
 // ListApplePayDomains - Get Apple Pay domains
 // Get domains registered with Apple Pay.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/apple-pay.read` scope.
-func (s *cards) ListApplePayDomains(ctx context.Context, accountID string) (*operations.GetApplePayMerchantDomainsResponse, error) {
+func (s *Cards) ListApplePayDomains(ctx context.Context, accountID string) (*operations.GetApplePayMerchantDomainsResponse, error) {
 	request := operations.GetApplePayMerchantDomainsRequest{
 		AccountID: accountID,
 	}
@@ -550,6 +564,10 @@ func (s *cards) ListApplePayDomains(ctx context.Context, accountID string) (*ope
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -560,7 +578,7 @@ func (s *cards) ListApplePayDomains(ctx context.Context, accountID string) (*ope
 // Add domains to be registered with Apple Pay.
 // <br><br> Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/money-movement/cards/apple-pay/#step-1-register-your-domains) with Apple.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-func (s *cards) RegisterApplePayDomain(ctx context.Context, registerApplePayMerchantDomains shared.RegisterApplePayMerchantDomains, accountID string) (*operations.PostApplePayMerchantDomainsResponse, error) {
+func (s *Cards) RegisterApplePayDomain(ctx context.Context, registerApplePayMerchantDomains shared.RegisterApplePayMerchantDomains, accountID string) (*operations.PostApplePayMerchantDomainsResponse, error) {
 	request := operations.PostApplePayMerchantDomainsRequest{
 		RegisterApplePayMerchantDomains: registerApplePayMerchantDomains,
 		AccountID:                       accountID,
@@ -634,6 +652,10 @@ func (s *cards) RegisterApplePayDomain(ctx context.Context, registerApplePayMerc
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -646,7 +668,7 @@ func (s *cards) RegisterApplePayDomain(ctx context.Context, registerApplePayMerc
 // address will update the information stored on file for the card but will not be verified.
 // Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/cards.write` scope.
-func (s *cards) Update(ctx context.Context, cardUpdateRequest shared.CardUpdateRequest, accountID string, cardID string) (*operations.UpdateCardResponse, error) {
+func (s *Cards) Update(ctx context.Context, cardUpdateRequest shared.CardUpdateRequest, accountID string, cardID string) (*operations.UpdateCardResponse, error) {
 	request := operations.UpdateCardRequest{
 		CardUpdateRequest: cardUpdateRequest,
 		AccountID:         accountID,
@@ -713,24 +735,18 @@ func (s *cards) Update(ctx context.Context, cardUpdateRequest shared.CardUpdateR
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
-	case httpRes.StatusCode == 422:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out map[string]interface{}
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.UpdateCard422ApplicationJSONObject = out
-		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
-		}
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 409:
 		fallthrough
+	case httpRes.StatusCode == 422:
+		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -741,7 +757,7 @@ func (s *cards) Update(ctx context.Context, cardUpdateRequest shared.CardUpdateR
 // Add or remove domains to be registered with Apple Pay.
 // <br><br> Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/money-movement/cards/apple-pay/#step-1-register-your-domains) with Apple.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/apple-pay.write` scope.
-func (s *cards) UpdateApplePayDomains(ctx context.Context, updateApplePayMerchantDomains shared.UpdateApplePayMerchantDomains, accountID string) (*operations.UpdateApplePayMerchantDomainsResponse, error) {
+func (s *Cards) UpdateApplePayDomains(ctx context.Context, updateApplePayMerchantDomains shared.UpdateApplePayMerchantDomains, accountID string) (*operations.UpdateApplePayMerchantDomainsResponse, error) {
 	request := operations.UpdateApplePayMerchantDomainsRequest{
 		UpdateApplePayMerchantDomains: updateApplePayMerchantDomains,
 		AccountID:                     accountID,
@@ -795,8 +811,6 @@ func (s *cards) UpdateApplePayDomains(ctx context.Context, updateApplePayMerchan
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
-	case httpRes.StatusCode == 204:
-		fallthrough
 	case httpRes.StatusCode == 400:
 		fallthrough
 	case httpRes.StatusCode == 404:
@@ -804,6 +818,12 @@ func (s *cards) UpdateApplePayDomains(ctx context.Context, updateApplePayMerchan
 	case httpRes.StatusCode == 417:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 204:
 		fallthrough
 	default:
 	}

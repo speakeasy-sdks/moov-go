@@ -63,30 +63,30 @@ func CreateBankAccountPayloadMx(mx Mx) BankAccountPayload {
 
 func (u *BankAccountPayload) UnmarshalJSON(data []byte) error {
 
-	bankAccount := new(BankAccount)
+	bankAccount := BankAccount{}
 	if err := utils.UnmarshalJSON(data, &bankAccount, "", true, true); err == nil {
-		u.BankAccount = bankAccount
+		u.BankAccount = &bankAccount
 		u.Type = BankAccountPayloadTypeBankAccount
 		return nil
 	}
 
-	plaid := new(Plaid)
+	plaid := Plaid{}
 	if err := utils.UnmarshalJSON(data, &plaid, "", true, true); err == nil {
-		u.Plaid = plaid
+		u.Plaid = &plaid
 		u.Type = BankAccountPayloadTypePlaid
 		return nil
 	}
 
-	plaidLink := new(PlaidLink)
+	plaidLink := PlaidLink{}
 	if err := utils.UnmarshalJSON(data, &plaidLink, "", true, true); err == nil {
-		u.PlaidLink = plaidLink
+		u.PlaidLink = &plaidLink
 		u.Type = BankAccountPayloadTypePlaidLink
 		return nil
 	}
 
-	mx := new(Mx)
+	mx := Mx{}
 	if err := utils.UnmarshalJSON(data, &mx, "", true, true); err == nil {
-		u.Mx = mx
+		u.Mx = &mx
 		u.Type = BankAccountPayloadTypeMx
 		return nil
 	}

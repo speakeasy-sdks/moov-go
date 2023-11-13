@@ -9,11 +9,10 @@ import (
 
 // TimeRange - Specify a time range between two timestamps and then the interval duration for each result in the specific `tz` timezone
 type TimeRange struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Every                *time.Time             `json:"every,omitempty"`
-	From                 *time.Time             `json:"from,omitempty"`
-	To                   *time.Time             `json:"to,omitempty"`
-	Tz                   *time.Time             `json:"tz,omitempty"`
+	Every *time.Time `json:"every,omitempty"`
+	From  *time.Time `json:"from,omitempty"`
+	To    *time.Time `json:"to,omitempty"`
+	Tz    *time.Time `json:"tz,omitempty"`
 }
 
 func (t TimeRange) MarshalJSON() ([]byte, error) {
@@ -25,13 +24,6 @@ func (t *TimeRange) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *TimeRange) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *TimeRange) GetEvery() *time.Time {

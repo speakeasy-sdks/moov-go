@@ -14,20 +14,20 @@ import (
 	"net/http"
 )
 
-// transactions - A transaction is a record of a card's activity on a particular Moov account.
-type transactions struct {
+// Transactions - A transaction is a record of a card's activity on a particular Moov account.
+type Transactions struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newTransactions(sdkConfig sdkConfiguration) *transactions {
-	return &transactions{
+func newTransactions(sdkConfig sdkConfiguration) *Transactions {
+	return &Transactions{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // List - Get account transactions
 // List issued card transactions associated with a Moov account
-func (s *transactions) List(ctx context.Context, accountID string, count *int64, skip *int64, status *shared.IssuedCardTransactionStatus) (*operations.ListAccountIssuedCardTransactionsResponse, error) {
+func (s *Transactions) List(ctx context.Context, accountID string, count *int64, skip *int64, status *shared.IssuedCardTransactionStatus) (*operations.ListAccountIssuedCardTransactionsResponse, error) {
 	request := operations.ListAccountIssuedCardTransactionsRequest{
 		AccountID: accountID,
 		Count:     count,
@@ -93,6 +93,10 @@ func (s *transactions) List(ctx context.Context, accountID string, count *int64,
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 

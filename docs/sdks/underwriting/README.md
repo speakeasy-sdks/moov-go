@@ -33,6 +33,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
     ctx := context.Background()
@@ -57,8 +59,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetUnderwritingResponse](../../models/operations/getunderwritingresponse.md), error**
-
+**[*operations.GetUnderwritingResponse](../../pkg/models/operations/getunderwritingresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Update
 
@@ -82,15 +86,15 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     underwritingRequest := shared.UnderwritingRequest{
-        AdditionalProperties: map[string]interface{}{
-            "Van": "East",
-        },
         AverageMonthlyTransactionVolume: moovgo.Int64(250000),
         AverageTransactionSize: moovgo.Int64(10000),
         MaxTransactionSize: moovgo.Int64(50000),
     }
-    var accountID string = "bf4aa77f-204e-4775-8c35-2acfe54077ca"
+
+    var accountID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
 
     ctx := context.Background()
     res, err := s.Underwriting.Update(ctx, underwritingRequest, accountID)
@@ -106,14 +110,16 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `underwritingRequest`                                                    | [shared.UnderwritingRequest](../../models/shared/underwritingrequest.md) | :heavy_check_mark:                                                       | N/A                                                                      |
-| `accountID`                                                              | *string*                                                                 | :heavy_check_mark:                                                       | ID of the account                                                        |
+| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `ctx`                                                                           | [context.Context](https://pkg.go.dev/context#Context)                           | :heavy_check_mark:                                                              | The context to use for the request.                                             |
+| `underwritingRequest`                                                           | [shared.UnderwritingRequest](../../../pkg/models/shared/underwritingrequest.md) | :heavy_check_mark:                                                              | N/A                                                                             |
+| `accountID`                                                                     | *string*                                                                        | :heavy_check_mark:                                                              | ID of the account                                                               |
 
 
 ### Response
 
-**[*operations.UpdateUnderwritingResponse](../../models/operations/updateunderwritingresponse.md), error**
-
+**[*operations.UpdateUnderwritingResponse](../../pkg/models/operations/updateunderwritingresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

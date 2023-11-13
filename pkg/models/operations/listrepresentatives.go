@@ -22,12 +22,12 @@ func (o *ListRepresentativesRequest) GetAccountID() string {
 type ListRepresentativesResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
-	// Successfully retrieved representatives
-	Representatives []shared.Representative
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// Successfully retrieved representatives
+	Classes []shared.Representative
 }
 
 func (o *ListRepresentativesResponse) GetContentType() string {
@@ -35,13 +35,6 @@ func (o *ListRepresentativesResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *ListRepresentativesResponse) GetRepresentatives() []shared.Representative {
-	if o == nil {
-		return nil
-	}
-	return o.Representatives
 }
 
 func (o *ListRepresentativesResponse) GetStatusCode() int {
@@ -56,4 +49,11 @@ func (o *ListRepresentativesResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *ListRepresentativesResponse) GetClasses() []shared.Representative {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

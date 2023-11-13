@@ -37,11 +37,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Analytics.CountAccountsCreated(ctx, shared.TimeRange{
-        AdditionalProperties: map[string]interface{}{
-            "Buckinghamshire": "Pasadena",
-        },
-    })
+    res, err := s.Analytics.CountAccountsCreated(ctx, shared.TimeRange{})
     if err != nil {
         log.Fatal(err)
     }
@@ -54,16 +50,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                             | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
-| `request`                                             | [shared.TimeRange](../../models/shared/timerange.md)  | :heavy_check_mark:                                    | The request object to use for the request.            |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `request`                                                | [shared.TimeRange](../../pkg/models/shared/timerange.md) | :heavy_check_mark:                                       | The request object to use for the request.               |
 
 
 ### Response
 
-**[*operations.PostAnalyticsAccountsCreatedResponse](../../models/operations/postanalyticsaccountscreatedresponse.md), error**
-
+**[*operations.PostAnalyticsAccountsCreatedResponse](../../pkg/models/operations/postanalyticsaccountscreatedresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CountTransferStatuses
 
@@ -89,11 +87,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Analytics.CountTransferStatuses(ctx, shared.TimeRange{
-        AdditionalProperties: map[string]interface{}{
-            "Health": "elf",
-        },
-    })
+    res, err := s.Analytics.CountTransferStatuses(ctx, shared.TimeRange{})
     if err != nil {
         log.Fatal(err)
     }
@@ -106,16 +100,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                             | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
-| `request`                                             | [shared.TimeRange](../../models/shared/timerange.md)  | :heavy_check_mark:                                    | The request object to use for the request.            |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `request`                                                | [shared.TimeRange](../../pkg/models/shared/timerange.md) | :heavy_check_mark:                                       | The request object to use for the request.               |
 
 
 ### Response
 
-**[*operations.PostAnalyticsTransferStatusesResponse](../../models/operations/postanalyticstransferstatusesresponse.md), error**
-
+**[*operations.PostAnalyticsTransferStatusesResponse](../../pkg/models/operations/postanalyticstransferstatusesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## LargestTransfer
 
@@ -141,11 +137,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Analytics.LargestTransfer(ctx, shared.LimitedTimeRange{
-        AdditionalProperties: map[string]interface{}{
-            "Corporate": "Account",
-        },
-    })
+    res, err := s.Analytics.LargestTransfer(ctx, shared.LimitedTimeRange{})
     if err != nil {
         log.Fatal(err)
     }
@@ -158,16 +150,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `ctx`                                                              | [context.Context](https://pkg.go.dev/context#Context)              | :heavy_check_mark:                                                 | The context to use for the request.                                |
-| `request`                                                          | [shared.LimitedTimeRange](../../models/shared/limitedtimerange.md) | :heavy_check_mark:                                                 | The request object to use for the request.                         |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |
+| `request`                                                              | [shared.LimitedTimeRange](../../pkg/models/shared/limitedtimerange.md) | :heavy_check_mark:                                                     | The request object to use for the request.                             |
 
 
 ### Response
 
-**[*operations.PostAnalyticsTransferLargestResponse](../../models/operations/postanalyticstransferlargestresponse.md), error**
-
+**[*operations.PostAnalyticsTransferLargestResponse](../../pkg/models/operations/postanalyticstransferlargestresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## SmallestTransfer
 
@@ -193,11 +187,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Analytics.SmallestTransfer(ctx, shared.LimitedTimeRange{
-        AdditionalProperties: map[string]interface{}{
-            "North": "vastly",
-        },
-    })
+    res, err := s.Analytics.SmallestTransfer(ctx, shared.LimitedTimeRange{})
     if err != nil {
         log.Fatal(err)
     }
@@ -210,16 +200,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `ctx`                                                              | [context.Context](https://pkg.go.dev/context#Context)              | :heavy_check_mark:                                                 | The context to use for the request.                                |
-| `request`                                                          | [shared.LimitedTimeRange](../../models/shared/limitedtimerange.md) | :heavy_check_mark:                                                 | The request object to use for the request.                         |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |
+| `request`                                                              | [shared.LimitedTimeRange](../../pkg/models/shared/limitedtimerange.md) | :heavy_check_mark:                                                     | The request object to use for the request.                             |
 
 
 ### Response
 
-**[*operations.PostAnalyticsTransferSmallestResponse](../../models/operations/postanalyticstransfersmallestresponse.md), error**
-
+**[*operations.PostAnalyticsTransferSmallestResponse](../../pkg/models/operations/postanalyticstransfersmallestresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## SumTransfers
 
@@ -245,11 +237,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Analytics.SumTransfers(ctx, shared.TimeRange{
-        AdditionalProperties: map[string]interface{}{
-            "even": "maximize",
-        },
-    })
+    res, err := s.Analytics.SumTransfers(ctx, shared.TimeRange{})
     if err != nil {
         log.Fatal(err)
     }
@@ -262,13 +250,15 @@ func main() {
 
 ### Parameters
 
-| Parameter                                             | Type                                                  | Required                                              | Description                                           |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
-| `request`                                             | [shared.TimeRange](../../models/shared/timerange.md)  | :heavy_check_mark:                                    | The request object to use for the request.            |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `request`                                                | [shared.TimeRange](../../pkg/models/shared/timerange.md) | :heavy_check_mark:                                       | The request object to use for the request.               |
 
 
 ### Response
 
-**[*operations.PostAnalyticsTransferSumResponse](../../models/operations/postanalyticstransfersumresponse.md), error**
-
+**[*operations.PostAnalyticsTransferSumResponse](../../pkg/models/operations/postanalyticstransfersumresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

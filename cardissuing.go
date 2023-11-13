@@ -14,15 +14,15 @@ import (
 	"net/http"
 )
 
-// cardIssuing - A Moov wallet can serve as a funding source for issuing virtual cards. Note that we currently only issue Discover cards. Virtual cards can then be used to spend funds from the wallet.
+// CardIssuing - A Moov wallet can serve as a funding source for issuing virtual cards. Note that we currently only issue Discover cards. Virtual cards can then be used to spend funds from the wallet.
 //
 // <em> The `card-issuing` and `wallet` capabilities are required to be enabled before any card issuing functionality is available. Moov is in a private beta with select customers for card issuing.</em>
-type cardIssuing struct {
+type CardIssuing struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newCardIssuing(sdkConfig sdkConfiguration) *cardIssuing {
-	return &cardIssuing{
+func newCardIssuing(sdkConfig sdkConfiguration) *CardIssuing {
+	return &CardIssuing{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -30,7 +30,7 @@ func newCardIssuing(sdkConfig sdkConfiguration) *cardIssuing {
 // RequestCard - Request card
 // Request a virtual card be created
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.write` scope.
-func (s *cardIssuing) RequestCard(ctx context.Context, requestCard shared.RequestCard, accountID string) (*operations.PostRequestCardResponse, error) {
+func (s *CardIssuing) RequestCard(ctx context.Context, requestCard shared.RequestCard, accountID string) (*operations.PostRequestCardResponse, error) {
 	request := operations.PostRequestCardRequest{
 		RequestCard: requestCard,
 		AccountID:   accountID,
@@ -100,6 +100,10 @@ func (s *cardIssuing) RequestCard(ctx context.Context, requestCard shared.Reques
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -109,7 +113,7 @@ func (s *cardIssuing) RequestCard(ctx context.Context, requestCard shared.Reques
 // GetCard - Get issued card
 // Retrieve a single issued card associated with a Moov account
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-func (s *cardIssuing) GetCard(ctx context.Context, accountID string, issuedCardID string) (*operations.GetIssuedCardResponse, error) {
+func (s *CardIssuing) GetCard(ctx context.Context, accountID string, issuedCardID string) (*operations.GetIssuedCardResponse, error) {
 	request := operations.GetIssuedCardRequest{
 		AccountID:    accountID,
 		IssuedCardID: issuedCardID,
@@ -169,6 +173,10 @@ func (s *cardIssuing) GetCard(ctx context.Context, accountID string, issuedCardI
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -178,7 +186,7 @@ func (s *cardIssuing) GetCard(ctx context.Context, accountID string, issuedCardI
 // GetCardFullDetails - Get full card details
 // Get issued card with PAN, CVV, and expiration. Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
-func (s *cardIssuing) GetCardFullDetails(ctx context.Context, accountID string, issuedCardID string) (*operations.GetFullIssuedCardResponse, error) {
+func (s *CardIssuing) GetCardFullDetails(ctx context.Context, accountID string, issuedCardID string) (*operations.GetFullIssuedCardResponse, error) {
 	request := operations.GetFullIssuedCardRequest{
 		AccountID:    accountID,
 		IssuedCardID: issuedCardID,
@@ -238,6 +246,10 @@ func (s *cardIssuing) GetCardFullDetails(ctx context.Context, accountID string, 
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -248,7 +260,7 @@ func (s *cardIssuing) GetCardFullDetails(ctx context.Context, accountID string, 
 // List Moov issued cards existing for the account.
 // <br><br> All supported query parameters are optional.
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.read` scope.
-func (s *cardIssuing) ListCards(ctx context.Context, accountID string, count *int64, skip *int64, states *shared.IssuedCardState) (*operations.ListIssuedCardsResponse, error) {
+func (s *CardIssuing) ListCards(ctx context.Context, accountID string, count *int64, skip *int64, states *shared.IssuedCardState) (*operations.ListIssuedCardsResponse, error) {
 	request := operations.ListIssuedCardsRequest{
 		AccountID: accountID,
 		Count:     count,
@@ -314,6 +326,10 @@ func (s *cardIssuing) ListCards(ctx context.Context, accountID string, count *in
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -323,7 +339,7 @@ func (s *cardIssuing) ListCards(ctx context.Context, accountID string, count *in
 // UpdateCard - Update issued card
 // Update a Moov issued card
 // <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/issued-cards.write` scope.
-func (s *cardIssuing) UpdateCard(ctx context.Context, updateIssuedCard shared.UpdateIssuedCard, accountID string, issuedCardID string) (*operations.UpdateIssuedCardResponse, error) {
+func (s *CardIssuing) UpdateCard(ctx context.Context, updateIssuedCard shared.UpdateIssuedCard, accountID string, issuedCardID string) (*operations.UpdateIssuedCardResponse, error) {
 	request := operations.UpdateIssuedCardRequest{
 		UpdateIssuedCard: updateIssuedCard,
 		AccountID:        accountID,
@@ -378,11 +394,15 @@ func (s *cardIssuing) UpdateCard(ctx context.Context, updateIssuedCard shared.Up
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
-	case httpRes.StatusCode == 200:
-		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 429:
+		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 200:
 		fallthrough
 	default:
 	}

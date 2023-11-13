@@ -1,0 +1,10 @@
+# PostLinkCardRequest
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `CardRequest`                                                                                        | [shared.CardRequest](../../../pkg/models/shared/cardrequest.md)                                      | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `AccountID`                                                                                          | *string*                                                                                             | :heavy_check_mark:                                                                                   | ID of the account                                                                                    |
+| `XWaitFor`                                                                                           | [*shared.SchemasWaitFor](../../../pkg/models/shared/schemaswaitfor.md)                               | :heavy_minus_sign:                                                                                   | Optional header that indicates whether to return a synchronous response or an asynchronous response. |

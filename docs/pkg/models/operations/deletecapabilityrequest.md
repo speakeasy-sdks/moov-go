@@ -1,0 +1,9 @@
+# DeleteCapabilityRequest
+
+
+## Fields
+
+| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `AccountID`                                                       | *string*                                                          | :heavy_check_mark:                                                | ID of the account                                                 |
+| `CapabilityID`                                                    | [shared.CapabilityID](../../../pkg/models/shared/capabilityid.md) | :heavy_check_mark:                                                | The requested capability identifier                               |

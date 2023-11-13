@@ -1,0 +1,12 @@
+# CardVerifications
+
+The results of submitting cardholder data to a card network for verification
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  | Example                                                                                      |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `AddressLine1`                                                                               | [*sdkerrors.CardVerificationResult](../../../pkg/models/sdkerrors/cardverificationresult.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          | match                                                                                        |
+| `Cvv`                                                                                        | [*sdkerrors.CardVerificationResult](../../../pkg/models/sdkerrors/cardverificationresult.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          | match                                                                                        |
+| `PostalCode`                                                                                 | [*sdkerrors.CardVerificationResult](../../../pkg/models/sdkerrors/cardverificationresult.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          | match                                                                                        |

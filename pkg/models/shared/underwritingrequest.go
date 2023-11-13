@@ -2,34 +2,11 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // UnderwritingRequest - Describes underwriting values (in USD) used for card payment acceptance
 type UnderwritingRequest struct {
-	AdditionalProperties            map[string]interface{} `additionalProperties:"true" json:"-"`
-	AverageMonthlyTransactionVolume *int64                 `json:"averageMonthlyTransactionVolume,omitempty"`
-	AverageTransactionSize          *int64                 `json:"averageTransactionSize,omitempty"`
-	MaxTransactionSize              *int64                 `json:"maxTransactionSize,omitempty"`
-}
-
-func (u UnderwritingRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(u, "", false)
-}
-
-func (u *UnderwritingRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *UnderwritingRequest) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	AverageMonthlyTransactionVolume *int64 `json:"averageMonthlyTransactionVolume,omitempty"`
+	AverageTransactionSize          *int64 `json:"averageTransactionSize,omitempty"`
+	MaxTransactionSize              *int64 `json:"maxTransactionSize,omitempty"`
 }
 
 func (o *UnderwritingRequest) GetAverageMonthlyTransactionVolume() *int64 {

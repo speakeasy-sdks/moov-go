@@ -35,14 +35,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     createRepresentative := shared.CreateRepresentative{
-        AdditionalProperties: map[string]interface{}{
-            "online": "Configuration",
-        },
         Address: &shared.CreateRepresentativeAddress{
-            AdditionalProperties: map[string]interface{}{
-                "Money": "blue",
-            },
             AddressLine1: moovgo.String("123 Main Street"),
             AddressLine2: moovgo.String("Apt 302"),
             City: moovgo.String("Boulder"),
@@ -51,60 +47,40 @@ func main() {
             StateOrProvince: moovgo.String("CO"),
         },
         BirthDate: &shared.CreateRepresentativeBirthDate{
-            AdditionalProperties: map[string]interface{}{
-                "shred": "abnormally",
-            },
             Day: 9,
             Month: 11,
             Year: 1989,
         },
         Email: moovgo.String("amanda@classbooker.dev"),
-        GovernmentID: &shared.CreateRepresentativeGovernmentID{
-            AdditionalProperties: map[string]interface{}{
-                "deposit": "evolve",
-            },
-            Itin: &shared.CreateRepresentativeGovernmentIDItin{
-                AdditionalProperties: map[string]interface{}{
-                    "male": "SUV",
-                },
+        GovernmentID: &shared.GovernmentID{
+            Itin: &shared.Itin{
                 Full: moovgo.String("123-45-6789"),
                 LastFour: moovgo.String("6789"),
             },
-            Ssn: &shared.CreateRepresentativeGovernmentIDSsn{
-                AdditionalProperties: map[string]interface{}{
-                    "quantify": "Polestar",
-                },
+            Ssn: &shared.Ssn{
                 Full: moovgo.String("123-45-6789"),
                 LastFour: moovgo.String("6789"),
             },
         },
         Name: &shared.CreateRepresentativeName{
-            AdditionalProperties: map[string]interface{}{
-                "mobile": "National",
-            },
             FirstName: "Amanda",
             LastName: "Yang",
             MiddleName: moovgo.String("Amanda"),
             Suffix: moovgo.String("Jr"),
         },
         Phone: &shared.CreateRepresentativePhone{
-            AdditionalProperties: map[string]interface{}{
-                "Durham": "after",
-            },
             CountryCode: moovgo.String("1"),
             Number: moovgo.String("8185551212"),
         },
-        Responsibilities: &shared.CreateRepresentativeResponsibilities{
-            AdditionalProperties: map[string]interface{}{
-                "overriding": "Bike",
-            },
+        Responsibilities: &shared.Responsibilities{
             IsController: moovgo.Bool(false),
             IsOwner: moovgo.Bool(true),
             JobTitle: "CEO",
             OwnershipPercentage: 38,
         },
     }
-    var accountID string = "b1d5e261-915a-425d-8d9e-a1320e8504aa"
+
+    var accountID string = "77ad642c-1fc6-4fe0-b241-bcdd89dc7fa5"
 
     ctx := context.Background()
     res, err := s.Representatives.Create(ctx, createRepresentative, accountID)
@@ -120,17 +96,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `createRepresentative`                                                     | [shared.CreateRepresentative](../../models/shared/createrepresentative.md) | :heavy_check_mark:                                                         | N/A                                                                        |
-| `accountID`                                                                | *string*                                                                   | :heavy_check_mark:                                                         | ID of the account                                                          |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
+| `createRepresentative`                                                            | [shared.CreateRepresentative](../../../pkg/models/shared/createrepresentative.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+| `accountID`                                                                       | *string*                                                                          | :heavy_check_mark:                                                                | ID of the account                                                                 |
 
 
 ### Response
 
-**[*operations.CreateRepresentativeResponse](../../models/operations/createrepresentativeresponse.md), error**
-
+**[*operations.CreateRepresentativeResponse](../../pkg/models/operations/createrepresentativeresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Delete
 
@@ -154,7 +132,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
+
     var representativeID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -180,8 +161,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteRepresentativeResponse](../../models/operations/deleterepresentativeresponse.md), error**
-
+**[*operations.DeleteRepresentativeResponse](../../pkg/models/operations/deleterepresentativeresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -205,7 +188,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
     var representativeID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -231,8 +217,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetRepresentativeResponse](../../models/operations/getrepresentativeresponse.md), error**
-
+**[*operations.GetRepresentativeResponse](../../pkg/models/operations/getrepresentativeresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -256,6 +244,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "c184a429-302e-4aca-80db-f1718b882a50"
 
     ctx := context.Background()
@@ -264,7 +254,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Representatives != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -280,8 +270,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListRepresentativesResponse](../../models/operations/listrepresentativesresponse.md), error**
-
+**[*operations.ListRepresentativesResponse](../../pkg/models/operations/listrepresentativesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Update
 
@@ -317,14 +309,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     patchRepresentativeRequest := shared.PatchRepresentativeRequest{
-        AdditionalProperties: map[string]interface{}{
-            "Van": "East",
-        },
         Address: &shared.PatchRepresentativeRequestAddress{
-            AdditionalProperties: map[string]interface{}{
-                "male": "Metal",
-            },
             AddressLine1: moovgo.String("123 Main Street"),
             AddressLine2: moovgo.String("Apt 302"),
             City: moovgo.String("Boulder"),
@@ -333,60 +321,41 @@ func main() {
             StateOrProvince: moovgo.String("CO"),
         },
         BirthDate: &shared.PatchRepresentativeRequestBirthDate{
-            AdditionalProperties: map[string]interface{}{
-                "cheater": "Islands",
-            },
             Day: 9,
             Month: 11,
             Year: 1989,
         },
         Email: moovgo.String("amanda@classbooker.dev"),
         GovernmentID: &shared.PatchRepresentativeRequestGovernmentID{
-            AdditionalProperties: map[string]interface{}{
-                "online": "dynamic",
-            },
-            Itin: &shared.PatchRepresentativeRequestGovernmentIDItin{
-                AdditionalProperties: map[string]interface{}{
-                    "white": "bifurcated",
-                },
+            Itin: &shared.PatchRepresentativeRequestItin{
                 Full: moovgo.String("123-45-6789"),
                 LastFour: moovgo.String("6789"),
             },
-            Ssn: &shared.PatchRepresentativeRequestGovernmentIDSsn{
-                AdditionalProperties: map[string]interface{}{
-                    "Forward": "syndicate",
-                },
+            Ssn: &shared.PatchRepresentativeRequestSsn{
                 Full: moovgo.String("123-45-6789"),
                 LastFour: moovgo.String("6789"),
             },
         },
         Name: &shared.PatchRepresentativeRequestName{
-            AdditionalProperties: map[string]interface{}{
-                "East": "Baht",
-            },
             FirstName: moovgo.String("Amanda"),
             LastName: moovgo.String("Yang"),
             MiddleName: moovgo.String("Amanda"),
             Suffix: moovgo.String("Jr"),
         },
         Phone: &shared.PatchRepresentativeRequestPhone{
-            AdditionalProperties: map[string]interface{}{
-                "Quality": "guestbook",
-            },
             CountryCode: moovgo.String("1"),
             Number: moovgo.String("8185551212"),
         },
         Responsibilities: &shared.PatchRepresentativeRequestResponsibilities{
-            AdditionalProperties: map[string]interface{}{
-                "driver": "users",
-            },
             IsController: moovgo.Bool(false),
             IsOwner: moovgo.Bool(true),
             JobTitle: moovgo.String("CEO"),
             OwnershipPercentage: moovgo.Int64(38),
         },
     }
-    var accountID string = "5ca71871-4355-4ad7-94e1-b584578f9d86"
+
+    var accountID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
+
     var representativeID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -403,15 +372,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |                                                                                        |
-| `patchRepresentativeRequest`                                                           | [shared.PatchRepresentativeRequest](../../models/shared/patchrepresentativerequest.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |                                                                                        |
-| `accountID`                                                                            | *string*                                                                               | :heavy_check_mark:                                                                     | ID of the account                                                                      |                                                                                        |
-| `representativeID`                                                                     | *string*                                                                               | :heavy_check_mark:                                                                     | ID of the representative                                                               | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                   |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                         | [context.Context](https://pkg.go.dev/context#Context)                                         | :heavy_check_mark:                                                                            | The context to use for the request.                                                           |                                                                                               |
+| `patchRepresentativeRequest`                                                                  | [shared.PatchRepresentativeRequest](../../../pkg/models/shared/patchrepresentativerequest.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
+| `accountID`                                                                                   | *string*                                                                                      | :heavy_check_mark:                                                                            | ID of the account                                                                             |                                                                                               |
+| `representativeID`                                                                            | *string*                                                                                      | :heavy_check_mark:                                                                            | ID of the representative                                                                      | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                          |
 
 
 ### Response
 
-**[*operations.PatchRepresentativeResponse](../../models/operations/patchrepresentativeresponse.md), error**
-
+**[*operations.PatchRepresentativeResponse](../../pkg/models/operations/patchrepresentativeresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

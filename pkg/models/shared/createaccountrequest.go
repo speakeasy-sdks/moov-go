@@ -2,112 +2,70 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
-type CreateAccountRequestCustomerSupportAddress struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	AddressLine1         *string                `json:"addressLine1,omitempty"`
-	AddressLine2         *string                `json:"addressLine2,omitempty"`
-	City                 *string                `json:"city,omitempty"`
-	Country              *string                `json:"country,omitempty"`
-	PostalCode           *string                `json:"postalCode,omitempty"`
-	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
+type CreateAccountRequestAddress struct {
+	AddressLine1    *string `json:"addressLine1,omitempty"`
+	AddressLine2    *string `json:"addressLine2,omitempty"`
+	City            *string `json:"city,omitempty"`
+	Country         *string `json:"country,omitempty"`
+	PostalCode      *string `json:"postalCode,omitempty"`
+	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
-func (c CreateAccountRequestCustomerSupportAddress) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateAccountRequestCustomerSupportAddress) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateAccountRequestCustomerSupportAddress) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *CreateAccountRequestCustomerSupportAddress) GetAddressLine1() *string {
+func (o *CreateAccountRequestAddress) GetAddressLine1() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine1
 }
 
-func (o *CreateAccountRequestCustomerSupportAddress) GetAddressLine2() *string {
+func (o *CreateAccountRequestAddress) GetAddressLine2() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AddressLine2
 }
 
-func (o *CreateAccountRequestCustomerSupportAddress) GetCity() *string {
+func (o *CreateAccountRequestAddress) GetCity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.City
 }
 
-func (o *CreateAccountRequestCustomerSupportAddress) GetCountry() *string {
+func (o *CreateAccountRequestAddress) GetCountry() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Country
 }
 
-func (o *CreateAccountRequestCustomerSupportAddress) GetPostalCode() *string {
+func (o *CreateAccountRequestAddress) GetPostalCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PostalCode
 }
 
-func (o *CreateAccountRequestCustomerSupportAddress) GetStateOrProvince() *string {
+func (o *CreateAccountRequestAddress) GetStateOrProvince() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StateOrProvince
 }
 
-type CreateAccountRequestCustomerSupportPhone struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	CountryCode          *string                `json:"countryCode,omitempty"`
-	Number               *string                `json:"number,omitempty"`
+type CreateAccountRequestPhone struct {
+	CountryCode *string `json:"countryCode,omitempty"`
+	Number      *string `json:"number,omitempty"`
 }
 
-func (c CreateAccountRequestCustomerSupportPhone) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateAccountRequestCustomerSupportPhone) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateAccountRequestCustomerSupportPhone) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *CreateAccountRequestCustomerSupportPhone) GetCountryCode() *string {
+func (o *CreateAccountRequestPhone) GetCountryCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CountryCode
 }
 
-func (o *CreateAccountRequestCustomerSupportPhone) GetNumber() *string {
+func (o *CreateAccountRequestPhone) GetNumber() *string {
 	if o == nil {
 		return nil
 	}
@@ -116,33 +74,14 @@ func (o *CreateAccountRequestCustomerSupportPhone) GetNumber() *string {
 
 // CreateAccountRequestCustomerSupport - User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account
 type CreateAccountRequestCustomerSupport struct {
-	AdditionalProperties map[string]interface{}                      `additionalProperties:"true" json:"-"`
-	Address              *CreateAccountRequestCustomerSupportAddress `json:"address,omitempty"`
+	Address *CreateAccountRequestAddress `json:"address,omitempty"`
 	// Email Address
-	Email   *string                                   `json:"email,omitempty"`
-	Phone   *CreateAccountRequestCustomerSupportPhone `json:"phone,omitempty"`
-	Website *string                                   `json:"website,omitempty"`
+	Email   *string                    `json:"email,omitempty"`
+	Phone   *CreateAccountRequestPhone `json:"phone,omitempty"`
+	Website *string                    `json:"website,omitempty"`
 }
 
-func (c CreateAccountRequestCustomerSupport) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateAccountRequestCustomerSupport) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateAccountRequestCustomerSupport) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *CreateAccountRequestCustomerSupport) GetAddress() *CreateAccountRequestCustomerSupportAddress {
+func (o *CreateAccountRequestCustomerSupport) GetAddress() *CreateAccountRequestAddress {
 	if o == nil {
 		return nil
 	}
@@ -156,7 +95,7 @@ func (o *CreateAccountRequestCustomerSupport) GetEmail() *string {
 	return o.Email
 }
 
-func (o *CreateAccountRequestCustomerSupport) GetPhone() *CreateAccountRequestCustomerSupportPhone {
+func (o *CreateAccountRequestCustomerSupport) GetPhone() *CreateAccountRequestPhone {
 	if o == nil {
 		return nil
 	}
@@ -170,64 +109,26 @@ func (o *CreateAccountRequestCustomerSupport) GetWebsite() *string {
 	return o.Website
 }
 
-// CreateAccountRequestSettingsAchPayment - User provided settings to manage ACH payments
-type CreateAccountRequestSettingsAchPayment struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+// CreateAccountRequestAchPayment - User provided settings to manage ACH payments
+type CreateAccountRequestAchPayment struct {
 	// The description that shows up on ACH transactions. This will default to the account's display name on account creation.
 	CompanyName *string `json:"companyName,omitempty"`
 }
 
-func (c CreateAccountRequestSettingsAchPayment) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateAccountRequestSettingsAchPayment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateAccountRequestSettingsAchPayment) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *CreateAccountRequestSettingsAchPayment) GetCompanyName() *string {
+func (o *CreateAccountRequestAchPayment) GetCompanyName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CompanyName
 }
 
-// CreateAccountRequestSettingsCardPayment - User provided settings to manage card payments. This data is only allowed on a business account
-type CreateAccountRequestSettingsCardPayment struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+// CreateAccountRequestCardPayment - User provided settings to manage card payments. This data is only allowed on a business account
+type CreateAccountRequestCardPayment struct {
 	// The description that shows up on credit card transactions. This will default to the accounts display name on account creation.
 	StatementDescriptor *string `json:"statementDescriptor,omitempty"`
 }
 
-func (c CreateAccountRequestSettingsCardPayment) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateAccountRequestSettingsCardPayment) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateAccountRequestSettingsCardPayment) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *CreateAccountRequestSettingsCardPayment) GetStatementDescriptor() *string {
+func (o *CreateAccountRequestCardPayment) GetStatementDescriptor() *string {
 	if o == nil {
 		return nil
 	}
@@ -236,37 +137,18 @@ func (o *CreateAccountRequestSettingsCardPayment) GetStatementDescriptor() *stri
 
 // CreateAccountRequestSettings - User provided settings to manage an account
 type CreateAccountRequestSettings struct {
-	AdditionalProperties map[string]interface{}                   `additionalProperties:"true" json:"-"`
-	AchPayment           *CreateAccountRequestSettingsAchPayment  `json:"achPayment,omitempty"`
-	CardPayment          *CreateAccountRequestSettingsCardPayment `json:"cardPayment,omitempty"`
+	AchPayment  *CreateAccountRequestAchPayment  `json:"achPayment,omitempty"`
+	CardPayment *CreateAccountRequestCardPayment `json:"cardPayment,omitempty"`
 }
 
-func (c CreateAccountRequestSettings) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateAccountRequestSettings) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateAccountRequestSettings) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *CreateAccountRequestSettings) GetAchPayment() *CreateAccountRequestSettingsAchPayment {
+func (o *CreateAccountRequestSettings) GetAchPayment() *CreateAccountRequestAchPayment {
 	if o == nil {
 		return nil
 	}
 	return o.AchPayment
 }
 
-func (o *CreateAccountRequestSettings) GetCardPayment() *CreateAccountRequestSettingsCardPayment {
+func (o *CreateAccountRequestSettings) GetCardPayment() *CreateAccountRequestCardPayment {
 	if o == nil {
 		return nil
 	}
@@ -275,26 +157,7 @@ func (o *CreateAccountRequestSettings) GetCardPayment() *CreateAccountRequestSet
 
 // CreateAccountRequestTermsOfService - An encrypted value used to record acceptance of Moov's Terms of Service
 type CreateAccountRequestTermsOfService struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Token                *string                `json:"token,omitempty"`
-}
-
-func (c CreateAccountRequestTermsOfService) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateAccountRequestTermsOfService) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateAccountRequestTermsOfService) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Token *string `json:"token,omitempty"`
 }
 
 func (o *CreateAccountRequestTermsOfService) GetToken() *string {
@@ -306,7 +169,6 @@ func (o *CreateAccountRequestTermsOfService) GetToken() *string {
 
 // CreateAccountRequest - Describes the fields available when creating a Moov Account
 type CreateAccountRequest struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The type of entity represented by this Account
 	AccountType AccountType `json:"accountType"`
 	// The list of capabilities to request when the account is created.
@@ -324,24 +186,6 @@ type CreateAccountRequest struct {
 	Profile        CreateProfile                       `json:"profile"`
 	Settings       *CreateAccountRequestSettings       `json:"settings,omitempty"`
 	TermsOfService *CreateAccountRequestTermsOfService `json:"termsOfService,omitempty"`
-}
-
-func (c CreateAccountRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateAccountRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateAccountRequest) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreateAccountRequest) GetAccountType() AccountType {

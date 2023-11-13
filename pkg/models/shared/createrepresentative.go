@@ -8,31 +8,12 @@ import (
 
 // CreateRepresentativeAddress - Residential address for an individual. Business addresses not accepted.
 type CreateRepresentativeAddress struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	AddressLine1         *string                `json:"addressLine1,omitempty"`
-	AddressLine2         *string                `json:"addressLine2,omitempty"`
-	City                 *string                `json:"city,omitempty"`
-	Country              *string                `json:"country,omitempty"`
-	PostalCode           *string                `json:"postalCode,omitempty"`
-	StateOrProvince      *string                `json:"stateOrProvince,omitempty"`
-}
-
-func (c CreateRepresentativeAddress) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateRepresentativeAddress) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateRepresentativeAddress) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	AddressLine1    *string `json:"addressLine1,omitempty"`
+	AddressLine2    *string `json:"addressLine2,omitempty"`
+	City            *string `json:"city,omitempty"`
+	Country         *string `json:"country,omitempty"`
+	PostalCode      *string `json:"postalCode,omitempty"`
+	StateOrProvince *string `json:"stateOrProvince,omitempty"`
 }
 
 func (o *CreateRepresentativeAddress) GetAddressLine1() *string {
@@ -79,28 +60,9 @@ func (o *CreateRepresentativeAddress) GetStateOrProvince() *string {
 
 // CreateRepresentativeBirthDate - Birthdate for an individual
 type CreateRepresentativeBirthDate struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Day                  int64                  `json:"day"`
-	Month                int64                  `json:"month"`
-	Year                 int64                  `json:"year"`
-}
-
-func (c CreateRepresentativeBirthDate) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateRepresentativeBirthDate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateRepresentativeBirthDate) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Day   int64 `json:"day"`
+	Month int64 `json:"month"`
+	Year  int64 `json:"year"`
 }
 
 func (o *CreateRepresentativeBirthDate) GetDay() int64 {
@@ -124,114 +86,57 @@ func (o *CreateRepresentativeBirthDate) GetYear() int64 {
 	return o.Year
 }
 
-type CreateRepresentativeGovernmentIDItin struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Full                 *string                `json:"full,omitempty"`
-	LastFour             *string                `json:"lastFour,omitempty"`
+type Itin struct {
+	Full     *string `json:"full,omitempty"`
+	LastFour *string `json:"lastFour,omitempty"`
 }
 
-func (c CreateRepresentativeGovernmentIDItin) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateRepresentativeGovernmentIDItin) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateRepresentativeGovernmentIDItin) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *CreateRepresentativeGovernmentIDItin) GetFull() *string {
+func (o *Itin) GetFull() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Full
 }
 
-func (o *CreateRepresentativeGovernmentIDItin) GetLastFour() *string {
+func (o *Itin) GetLastFour() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastFour
 }
 
-type CreateRepresentativeGovernmentIDSsn struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	Full                 *string                `json:"full,omitempty"`
-	LastFour             *string                `json:"lastFour,omitempty"`
+type Ssn struct {
+	Full     *string `json:"full,omitempty"`
+	LastFour *string `json:"lastFour,omitempty"`
 }
 
-func (c CreateRepresentativeGovernmentIDSsn) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateRepresentativeGovernmentIDSsn) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateRepresentativeGovernmentIDSsn) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *CreateRepresentativeGovernmentIDSsn) GetFull() *string {
+func (o *Ssn) GetFull() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Full
 }
 
-func (o *CreateRepresentativeGovernmentIDSsn) GetLastFour() *string {
+func (o *Ssn) GetLastFour() *string {
 	if o == nil {
 		return nil
 	}
 	return o.LastFour
 }
 
-type CreateRepresentativeGovernmentID struct {
-	AdditionalProperties map[string]interface{}                `additionalProperties:"true" json:"-"`
-	Itin                 *CreateRepresentativeGovernmentIDItin `json:"itin,omitempty"`
-	Ssn                  *CreateRepresentativeGovernmentIDSsn  `json:"ssn,omitempty"`
+type GovernmentID struct {
+	Itin *Itin `json:"itin,omitempty"`
+	Ssn  *Ssn  `json:"ssn,omitempty"`
 }
 
-func (c CreateRepresentativeGovernmentID) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateRepresentativeGovernmentID) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateRepresentativeGovernmentID) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *CreateRepresentativeGovernmentID) GetItin() *CreateRepresentativeGovernmentIDItin {
+func (o *GovernmentID) GetItin() *Itin {
 	if o == nil {
 		return nil
 	}
 	return o.Itin
 }
 
-func (o *CreateRepresentativeGovernmentID) GetSsn() *CreateRepresentativeGovernmentIDSsn {
+func (o *GovernmentID) GetSsn() *Ssn {
 	if o == nil {
 		return nil
 	}
@@ -240,7 +145,6 @@ func (o *CreateRepresentativeGovernmentID) GetSsn() *CreateRepresentativeGovernm
 
 // CreateRepresentativeName - Name for an individual
 type CreateRepresentativeName struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// Name this person was given. This is usually the the same as first name.
 	FirstName string `json:"firstName"`
 	// Family name of this person. This is usually the the same as last name.
@@ -249,24 +153,6 @@ type CreateRepresentativeName struct {
 	MiddleName *string `json:"middleName,omitempty"`
 	// Suffix of a given name
 	Suffix *string `json:"suffix,omitempty"`
-}
-
-func (c CreateRepresentativeName) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateRepresentativeName) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateRepresentativeName) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *CreateRepresentativeName) GetFirstName() string {
@@ -298,27 +184,8 @@ func (o *CreateRepresentativeName) GetSuffix() *string {
 }
 
 type CreateRepresentativePhone struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
-	CountryCode          *string                `json:"countryCode,omitempty"`
-	Number               *string                `json:"number,omitempty"`
-}
-
-func (c CreateRepresentativePhone) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateRepresentativePhone) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateRepresentativePhone) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	CountryCode *string `json:"countryCode,omitempty"`
+	Number      *string `json:"number,omitempty"`
 }
 
 func (o *CreateRepresentativePhone) GetCountryCode() *string {
@@ -335,9 +202,8 @@ func (o *CreateRepresentativePhone) GetNumber() *string {
 	return o.Number
 }
 
-// CreateRepresentativeResponsibilities - Describes the job responsibilities of an individual
-type CreateRepresentativeResponsibilities struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
+// Responsibilities - Describes the job responsibilities of an individual
+type Responsibilities struct {
 	// Indicates whether this individual has significant management responsibilities within the business
 	IsController *bool `default:"false" json:"isController"`
 	// If `true`, this field indicates that this individual has an ownership stake of at least 25% in the business. If the representative does not own at least 25% of the business, this field should be `false`.
@@ -347,46 +213,39 @@ type CreateRepresentativeResponsibilities struct {
 	OwnershipPercentage int64 `json:"ownershipPercentage"`
 }
 
-func (c CreateRepresentativeResponsibilities) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
+func (r Responsibilities) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
 }
 
-func (c *CreateRepresentativeResponsibilities) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+func (r *Responsibilities) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CreateRepresentativeResponsibilities) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
-}
-
-func (o *CreateRepresentativeResponsibilities) GetIsController() *bool {
+func (o *Responsibilities) GetIsController() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.IsController
 }
 
-func (o *CreateRepresentativeResponsibilities) GetIsOwner() *bool {
+func (o *Responsibilities) GetIsOwner() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.IsOwner
 }
 
-func (o *CreateRepresentativeResponsibilities) GetJobTitle() string {
+func (o *Responsibilities) GetJobTitle() string {
 	if o == nil {
 		return ""
 	}
 	return o.JobTitle
 }
 
-func (o *CreateRepresentativeResponsibilities) GetOwnershipPercentage() int64 {
+func (o *Responsibilities) GetOwnershipPercentage() int64 {
 	if o == nil {
 		return 0
 	}
@@ -395,34 +254,15 @@ func (o *CreateRepresentativeResponsibilities) GetOwnershipPercentage() int64 {
 
 // CreateRepresentative - Describes the fields available when creating a representative
 type CreateRepresentative struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// Residential address for an individual. Business addresses not accepted.
 	Address   *CreateRepresentativeAddress   `json:"address,omitempty"`
 	BirthDate *CreateRepresentativeBirthDate `json:"birthDate,omitempty"`
 	// Email Address
-	Email            *string                               `json:"email,omitempty"`
-	GovernmentID     *CreateRepresentativeGovernmentID     `json:"governmentID,omitempty"`
-	Name             *CreateRepresentativeName             `json:"name,omitempty"`
-	Phone            *CreateRepresentativePhone            `json:"phone,omitempty"`
-	Responsibilities *CreateRepresentativeResponsibilities `json:"responsibilities,omitempty"`
-}
-
-func (c CreateRepresentative) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateRepresentative) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateRepresentative) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
+	Email            *string                    `json:"email,omitempty"`
+	GovernmentID     *GovernmentID              `json:"governmentID,omitempty"`
+	Name             *CreateRepresentativeName  `json:"name,omitempty"`
+	Phone            *CreateRepresentativePhone `json:"phone,omitempty"`
+	Responsibilities *Responsibilities          `json:"responsibilities,omitempty"`
 }
 
 func (o *CreateRepresentative) GetAddress() *CreateRepresentativeAddress {
@@ -446,7 +286,7 @@ func (o *CreateRepresentative) GetEmail() *string {
 	return o.Email
 }
 
-func (o *CreateRepresentative) GetGovernmentID() *CreateRepresentativeGovernmentID {
+func (o *CreateRepresentative) GetGovernmentID() *GovernmentID {
 	if o == nil {
 		return nil
 	}
@@ -467,7 +307,7 @@ func (o *CreateRepresentative) GetPhone() *CreateRepresentativePhone {
 	return o.Phone
 }
 
-func (o *CreateRepresentative) GetResponsibilities() *CreateRepresentativeResponsibilities {
+func (o *CreateRepresentative) GetResponsibilities() *Responsibilities {
 	if o == nil {
 		return nil
 	}

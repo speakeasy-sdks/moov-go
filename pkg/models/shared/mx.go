@@ -2,10 +2,6 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
-)
-
 // Mx - Describes the account to link to the Moov account using a MX processor token. <br><br> `sandbox` - When linking a bank account to a `sandbox` account using an MX authorization token a default bank account routing number will be used. The following default data will be used to generate the bank account in this flow:
 // ```
 //
@@ -14,27 +10,8 @@ import (
 //
 // ```
 type Mx struct {
-	AdditionalProperties map[string]interface{} `additionalProperties:"true" json:"-"`
 	// The authorization code of a MX account which allows a processor to retrieve a linked payment account. <br><br> `sandbox` - When linking a bank account to a `sandbox` account using a MX authorization code it will utilize MX's sandbox environment. The MX authorization code provided must be generated from MX's sandbox environment.
 	Mx *MXAuthorizationCode `json:"mx,omitempty"`
-}
-
-func (m Mx) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(m, "", false)
-}
-
-func (m *Mx) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *Mx) GetAdditionalProperties() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.AdditionalProperties
 }
 
 func (o *Mx) GetMx() *MXAuthorizationCode {

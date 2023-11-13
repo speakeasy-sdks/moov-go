@@ -45,8 +45,6 @@ type UpdateCardResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// The supplied card data appeared invalid or was declined by the issuer
-	UpdateCard422ApplicationJSONObject map[string]interface{}
 }
 
 func (o *UpdateCardResponse) GetCard() *shared.Card {
@@ -75,11 +73,4 @@ func (o *UpdateCardResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *UpdateCardResponse) GetUpdateCard422ApplicationJSONObject() map[string]interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.UpdateCard422ApplicationJSONObject
 }

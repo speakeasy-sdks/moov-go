@@ -2,29 +2,29 @@
 
 package shared
 
-// CreateTransferDestination - A payment method ID
-type CreateTransferDestination struct {
+// Destination - A payment method ID
+type Destination struct {
 	AchDetails *CreateACHDetailsBase `json:"achDetails,omitempty"`
 	// UUID v4
 	PaymentMethodID *string `json:"paymentMethodID,omitempty"`
 }
 
-func (o *CreateTransferDestination) GetAchDetails() *CreateACHDetailsBase {
+func (o *Destination) GetAchDetails() *CreateACHDetailsBase {
 	if o == nil {
 		return nil
 	}
 	return o.AchDetails
 }
 
-func (o *CreateTransferDestination) GetPaymentMethodID() *string {
+func (o *Destination) GetPaymentMethodID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentMethodID
 }
 
-// CreateTransferSource - A payment method ID
-type CreateTransferSource struct {
+// Source - A payment method ID
+type Source struct {
 	AchDetails  *CreateAchDetailsSource `json:"achDetails,omitempty"`
 	CardDetails *CreateCardDetails      `json:"cardDetails,omitempty"`
 	// UUID v4
@@ -33,28 +33,28 @@ type CreateTransferSource struct {
 	TransferID *string `json:"transferID,omitempty"`
 }
 
-func (o *CreateTransferSource) GetAchDetails() *CreateAchDetailsSource {
+func (o *Source) GetAchDetails() *CreateAchDetailsSource {
 	if o == nil {
 		return nil
 	}
 	return o.AchDetails
 }
 
-func (o *CreateTransferSource) GetCardDetails() *CreateCardDetails {
+func (o *Source) GetCardDetails() *CreateCardDetails {
 	if o == nil {
 		return nil
 	}
 	return o.CardDetails
 }
 
-func (o *CreateTransferSource) GetPaymentMethodID() *string {
+func (o *Source) GetPaymentMethodID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentMethodID
 }
 
-func (o *CreateTransferSource) GetTransferID() *string {
+func (o *Source) GetTransferID() *string {
 	if o == nil {
 		return nil
 	}
@@ -67,13 +67,13 @@ type CreateTransfer struct {
 	// A description of the transfer
 	Description *string `json:"description,omitempty"`
 	// A payment method ID
-	Destination *CreateTransferDestination `json:"destination,omitempty"`
+	Destination *Destination `json:"destination,omitempty"`
 	// Total or markup fee
 	FacilitatorFee *CreateFacilitatorFee `json:"facilitatorFee,omitempty"`
 	// Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// A payment method ID
-	Source *CreateTransferSource `json:"source,omitempty"`
+	Source *Source `json:"source,omitempty"`
 }
 
 func (o *CreateTransfer) GetAmount() *Amount {
@@ -90,7 +90,7 @@ func (o *CreateTransfer) GetDescription() *string {
 	return o.Description
 }
 
-func (o *CreateTransfer) GetDestination() *CreateTransferDestination {
+func (o *CreateTransfer) GetDestination() *Destination {
 	if o == nil {
 		return nil
 	}
@@ -111,7 +111,7 @@ func (o *CreateTransfer) GetMetadata() map[string]string {
 	return o.Metadata
 }
 
-func (o *CreateTransfer) GetSource() *CreateTransferSource {
+func (o *CreateTransfer) GetSource() *Source {
 	if o == nil {
 		return nil
 	}

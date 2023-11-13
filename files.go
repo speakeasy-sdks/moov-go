@@ -14,20 +14,20 @@ import (
 	"net/http"
 )
 
-// files - Files can be used for a multitude of different use cases including but not limited to, individual identity verification and business underwriting. You may need to provide documentation to enable capabilities or to keep capabilities enabled for an account. The maximum file size is 10MB. Each account is allowed a maximum of 10 files. Acceptable file types include csv, jpg, pdf, and png. To learn about uploading files in the Moov Dashboard, read our [file upload guide](https://docs.moov.io/guides/dashboard/accounts/#file-upload).
-type files struct {
+// Files can be used for a multitude of different use cases including but not limited to, individual identity verification and business underwriting. You may need to provide documentation to enable capabilities or to keep capabilities enabled for an account. The maximum file size is 10MB. Each account is allowed a maximum of 10 files. Acceptable file types include csv, jpg, pdf, and png. To learn about uploading files in the Moov Dashboard, read our [file upload guide](https://docs.moov.io/guides/dashboard/accounts/#file-upload).
+type Files struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newFiles(sdkConfig sdkConfiguration) *files {
-	return &files{
+func newFiles(sdkConfig sdkConfiguration) *Files {
+	return &Files{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Get File Details
 // Retrieve file details associated with a specific Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.read` scope.
-func (s *files) Get(ctx context.Context, accountID string, fileID string) (*operations.GetFileDetailsResponse, error) {
+func (s *Files) Get(ctx context.Context, accountID string, fileID string) (*operations.GetFileDetailsResponse, error) {
 	request := operations.GetFileDetailsRequest{
 		AccountID: accountID,
 		FileID:    fileID,
@@ -87,6 +87,10 @@ func (s *files) Get(ctx context.Context, accountID string, fileID string) (*oper
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -95,7 +99,7 @@ func (s *files) Get(ctx context.Context, accountID string, fileID string) (*oper
 
 // List files
 // List all the files associated with a particular Moov account. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.read` scope.
-func (s *files) List(ctx context.Context, accountID string) (*operations.ListFilesResponse, error) {
+func (s *Files) List(ctx context.Context, accountID string) (*operations.ListFilesResponse, error) {
 	request := operations.ListFilesRequest{
 		AccountID: accountID,
 	}
@@ -154,6 +158,10 @@ func (s *files) List(ctx context.Context, accountID string) (*operations.ListFil
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 
@@ -162,7 +170,7 @@ func (s *files) List(ctx context.Context, accountID string) (*operations.ListFil
 
 // Upload File
 // Upload a file and link it to the provided Moov account. The maximum file size is 10MB. Each account is allowed a maximum of 10 files. Acceptable file types include csv, jpg, pdf, and png. <br><br> To use this endpoint, you need to specify the `/accounts/{accountID}/files.write` scope.
-func (s *files) Upload(ctx context.Context, fileUploadRequest shared.FileUploadRequest, accountID string) (*operations.UploadFileResponse, error) {
+func (s *Files) Upload(ctx context.Context, fileUploadRequest shared.FileUploadRequest, accountID string) (*operations.UploadFileResponse, error) {
 	request := operations.UploadFileRequest{
 		FileUploadRequest: fileUploadRequest,
 		AccountID:         accountID,
@@ -236,6 +244,10 @@ func (s *files) Upload(ctx context.Context, fileUploadRequest shared.FileUploadR
 		fallthrough
 	case httpRes.StatusCode == 429:
 		fallthrough
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 	}
 

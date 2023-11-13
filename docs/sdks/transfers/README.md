@@ -38,8 +38,12 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var xIdempotencyKey string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+
     var transferID string = "03fa7112-315a-4072-a9f2-43f3f1ec962e"
+
     createReversal := &shared.CreateReversal{
         Amount: moovgo.Int64(1000),
     }
@@ -58,18 +62,22 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     | Example                                                         |
-| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| `ctx`                                                           | [context.Context](https://pkg.go.dev/context#Context)           | :heavy_check_mark:                                              | The context to use for the request.                             |                                                                 |
-| `xIdempotencyKey`                                               | *string*                                                        | :heavy_check_mark:                                              | Prevents duplicate reversals from being created                 | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                            |
-| `transferID`                                                    | *string*                                                        | :heavy_check_mark:                                              | ID of the Transfer                                              |                                                                 |
-| `createReversal`                                                | [*shared.CreateReversal](../../models/shared/createreversal.md) | :heavy_minus_sign:                                              | N/A                                                             |                                                                 |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |                                                                        |
+| `xIdempotencyKey`                                                      | *string*                                                               | :heavy_check_mark:                                                     | Prevents duplicate reversals from being created                        | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                   |
+| `transferID`                                                           | *string*                                                               | :heavy_check_mark:                                                     | ID of the Transfer                                                     |                                                                        |
+| `createReversal`                                                       | [*shared.CreateReversal](../../../pkg/models/shared/createreversal.md) | :heavy_minus_sign:                                                     | N/A                                                                    |                                                                        |
 
 
 ### Response
 
-**[*operations.CancelTransferResponse](../../models/operations/canceltransferresponse.md), error**
-
+**[*operations.CancelTransferResponse](../../pkg/models/operations/canceltransferresponse.md), error**
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.Error           | 400                       | application/json          |
+| sdkerrors.CreatedReversal | 409                       | application/json          |
+| sdkerrors.SDKError        | 400-600                   | */*                       |
 
 ## Create
 
@@ -93,16 +101,15 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     createTransfer := shared.CreateTransfer{
         Amount: &shared.Amount{
-            AdditionalProperties: map[string]interface{}{
-                "online": "Configuration",
-            },
             Currency: "USD",
             Value: 1204,
         },
         Description: moovgo.String("Pay Instructor for May 15 Class"),
-        Destination: &shared.CreateTransferDestination{
+        Destination: &shared.Destination{
             AchDetails: &shared.CreateACHDetailsBase{
                 CompanyEntryDescription: moovgo.String("Gym Dues"),
                 OriginatingCompanyName: moovgo.String("Whole Body Fit"),
@@ -111,9 +118,9 @@ func main() {
         },
         FacilitatorFee: &shared.CreateFacilitatorFee{},
         Metadata: map[string]string{
-            "Money": "blue",
+            "key": "string",
         },
-        Source: &shared.CreateTransferSource{
+        Source: &shared.Source{
             AchDetails: &shared.CreateAchDetailsSource{
                 CompanyEntryDescription: moovgo.String("Gym Dues"),
                 DebitHoldPeriod: shared.CreateAchDetailsSourceDebitHoldPeriodTwoDays.ToPointer(),
@@ -126,7 +133,9 @@ func main() {
             TransferID: moovgo.String("ec7e1848-dc80-4ab0-8827-dd7fc0737b43"),
         },
     }
+
     var xIdempotencyKey string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+
     var xWaitFor *shared.WaitFor = shared.WaitForRailResponse
 
     ctx := context.Background()
@@ -146,15 +155,18 @@ func main() {
 | Parameter                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                                                                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                     | The context to use for the request.                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                        |
-| `createTransfer`                                                                                                                                                                                                                                       | [shared.CreateTransfer](../../models/shared/createtransfer.md)                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                        |
+| `createTransfer`                                                                                                                                                                                                                                       | [shared.CreateTransfer](../../../pkg/models/shared/createtransfer.md)                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                        |
 | `xIdempotencyKey`                                                                                                                                                                                                                                      | *string*                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                     | Prevents duplicate transfers from being created. Note that we only accept UUID v4.                                                                                                                                                                     | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                                                                                                                                                                                   |
-| `xWaitFor`                                                                                                                                                                                                                                             | [*shared.WaitFor](../../models/shared/waitfor.md)                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                     | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an asynchronous response indicating the transfer was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                        |
+| `xWaitFor`                                                                                                                                                                                                                                             | [*shared.WaitFor](../../../pkg/models/shared/waitfor.md)                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                     | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an asynchronous response indicating the transfer was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                        |
 
 
 ### Response
 
-**[*operations.CreateTransferResponse](../../models/operations/createtransferresponse.md), error**
-
+**[*operations.CreateTransferResponse](../../pkg/models/operations/createtransferresponse.md), error**
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.GetTransferFull | 409                       | application/json          |
+| sdkerrors.SDKError        | 400-600                   | */*                       |
 
 ## GenerateOptions
 
@@ -182,9 +194,6 @@ func main() {
     ctx := context.Background()
     res, err := s.Transfers.GenerateOptions(ctx, shared.CreateTransferOptions{
         Amount: shared.Amount{
-            AdditionalProperties: map[string]interface{}{
-                "Human": "Incredible",
-            },
             Currency: "USD",
             Value: 1204,
         },
@@ -209,16 +218,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `request`                                                                    | [shared.CreateTransferOptions](../../models/shared/createtransferoptions.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `request`                                                                        | [shared.CreateTransferOptions](../../pkg/models/shared/createtransferoptions.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 
 
 ### Response
 
-**[*operations.CreateTransferOptionsResponse](../../models/operations/createtransferoptionsresponse.md), error**
-
+**[*operations.CreateTransferOptionsResponse](../../pkg/models/operations/createtransferoptionsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -242,7 +253,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var transferID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
     var accountID *string = "58ccc65b-c928-4154-952e-30c048b8c2b5"
 
     ctx := context.Background()
@@ -268,8 +282,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetTransferResponse](../../models/operations/gettransferresponse.md), error**
-
+**[*operations.GetTransferResponse](../../pkg/models/operations/gettransferresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetRefund
 
@@ -293,7 +309,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var refundID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+
     var transferID string = "dcb7cb00-9cc1-4b92-8e6f-29c9d50583d5"
 
     ctx := context.Background()
@@ -319,8 +338,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetRefundResponse](../../models/operations/getrefundresponse.md), error**
-
+**[*operations.GetRefundResponse](../../pkg/models/operations/getrefundresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListRefunds
 
@@ -344,6 +365,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var transferID string = "7fdf7d4f-a689-4415-8f2e-71877eebee60"
 
     ctx := context.Background()
@@ -368,8 +391,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListRefundsResponse](../../models/operations/listrefundsresponse.md), error**
-
+**[*operations.ListRefundsResponse](../../pkg/models/operations/listrefundsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Refund
 
@@ -393,11 +418,16 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var xIdempotencyKey string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+
     var transferID string = "94e35bc6-be02-470f-a21a-a226b055b594"
+
     createRefund := &shared.CreateRefund{
         Amount: moovgo.Int64(1000),
     }
+
     var xWaitFor *shared.WaitFor = shared.WaitForRailResponse
 
     ctx := context.Background()
@@ -419,14 +449,17 @@ func main() {
 | `ctx`                                                                                                                                                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                        | The context to use for the request.                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                           |
 | `xIdempotencyKey`                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                        | Prevents duplicate refunds from being created. Note that we only accept UUID v4.                                                                                                                                                                          | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                                                                                                                                                                                      |
 | `transferID`                                                                                                                                                                                                                                              | *string*                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                        | ID of the Transfer                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                           |
-| `createRefund`                                                                                                                                                                                                                                            | [*shared.CreateRefund](../../models/shared/createrefund.md)                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                        | N/A                                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                           |
-| `xWaitFor`                                                                                                                                                                                                                                                | [*shared.WaitFor](../../models/shared/waitfor.md)                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                        | Optional header that indicates whether to return a synchronous response that includes the full refund and card transaction details or an asynchronous response indicating the refund was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                           |
+| `createRefund`                                                                                                                                                                                                                                            | [*shared.CreateRefund](../../../pkg/models/shared/createrefund.md)                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                        | N/A                                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                           |
+| `xWaitFor`                                                                                                                                                                                                                                                | [*shared.WaitFor](../../../pkg/models/shared/waitfor.md)                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                        | Optional header that indicates whether to return a synchronous response that includes the full refund and card transaction details or an asynchronous response indicating the refund was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                           |
 
 
 ### Response
 
-**[*operations.RefundTransferResponse](../../models/operations/refundtransferresponse.md), error**
-
+**[*operations.RefundTransferResponse](../../pkg/models/operations/refundtransferresponse.md), error**
+| Error Object         | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| sdkerrors.GetRefund1 | 409                  | application/json     |
+| sdkerrors.SDKError   | 400-600              | */*                  |
 
 ## Update
 
@@ -450,13 +483,17 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     patchTransfer := shared.PatchTransfer{
         Metadata: map[string]string{
-            "Van": "East",
+            "key": "string",
         },
     }
-    var transferID string = "bf4aa77f-204e-4775-8c35-2acfe54077ca"
-    var accountID *string = "bf6805c5-ca71-4871-8355-ad7d4e1b5845"
+
+    var transferID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
+
+    var accountID *string = "077cabf6-805c-45ca-b187-14355ad7d4e1"
 
     ctx := context.Background()
     res, err := s.Transfers.Update(ctx, patchTransfer, transferID, accountID)
@@ -472,15 +509,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
-| `patchTransfer`                                              | [shared.PatchTransfer](../../models/shared/patchtransfer.md) | :heavy_check_mark:                                           | N/A                                                          |
-| `transferID`                                                 | *string*                                                     | :heavy_check_mark:                                           | ID of the Transfer                                           |
-| `accountID`                                                  | **string*                                                    | :heavy_minus_sign:                                           | ID of a connected account                                    |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ctx`                                                               | [context.Context](https://pkg.go.dev/context#Context)               | :heavy_check_mark:                                                  | The context to use for the request.                                 |
+| `patchTransfer`                                                     | [shared.PatchTransfer](../../../pkg/models/shared/patchtransfer.md) | :heavy_check_mark:                                                  | N/A                                                                 |
+| `transferID`                                                        | *string*                                                            | :heavy_check_mark:                                                  | ID of the Transfer                                                  |
+| `accountID`                                                         | **string*                                                           | :heavy_minus_sign:                                                  | ID of a connected account                                           |
 
 
 ### Response
 
-**[*operations.PatchTransferResponse](../../models/operations/patchtransferresponse.md), error**
-
+**[*operations.PatchTransferResponse](../../pkg/models/operations/patchtransferresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

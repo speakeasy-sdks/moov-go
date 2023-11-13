@@ -53,58 +53,58 @@ func (o *GetPaymentMethodResponse) GetPaymentMethod() *shared.PaymentMethod {
 	return o.PaymentMethod
 }
 
-func (o *GetPaymentMethodResponse) GetPaymentMethodAchCreditSameDay() *shared.PaymentMethodBankAccount {
+func (o *GetPaymentMethodResponse) GetPaymentMethodAchCreditSameDay() *shared.SchemasPaymentMethodBankAccountBankAccount {
 	if v := o.GetPaymentMethod(); v != nil {
-		return v.PaymentMethodBankAccount
+		return v.SchemasPaymentMethodBankAccountBankAccount
 	}
 	return nil
 }
 
-func (o *GetPaymentMethodResponse) GetPaymentMethodAchCreditStandard() *shared.PaymentMethodBankAccount {
+func (o *GetPaymentMethodResponse) GetPaymentMethodAchCreditStandard() *shared.SchemasPaymentMethodBankAccountBankAccount {
 	if v := o.GetPaymentMethod(); v != nil {
-		return v.PaymentMethodBankAccount
+		return v.SchemasPaymentMethodBankAccountBankAccount
 	}
 	return nil
 }
 
-func (o *GetPaymentMethodResponse) GetPaymentMethodAchDebitCollect() *shared.PaymentMethodBankAccount {
+func (o *GetPaymentMethodResponse) GetPaymentMethodAchDebitCollect() *shared.SchemasPaymentMethodBankAccountBankAccount {
 	if v := o.GetPaymentMethod(); v != nil {
-		return v.PaymentMethodBankAccount
+		return v.SchemasPaymentMethodBankAccountBankAccount
 	}
 	return nil
 }
 
-func (o *GetPaymentMethodResponse) GetPaymentMethodAchDebitFund() *shared.PaymentMethodBankAccount {
+func (o *GetPaymentMethodResponse) GetPaymentMethodAchDebitFund() *shared.SchemasPaymentMethodBankAccountBankAccount {
 	if v := o.GetPaymentMethod(); v != nil {
-		return v.PaymentMethodBankAccount
+		return v.SchemasPaymentMethodBankAccountBankAccount
 	}
 	return nil
 }
 
-func (o *GetPaymentMethodResponse) GetPaymentMethodApplePay() *shared.PaymentMethodApplePay {
+func (o *GetPaymentMethodResponse) GetPaymentMethodApplePay() *shared.ApplePay {
 	if v := o.GetPaymentMethod(); v != nil {
-		return v.PaymentMethodApplePay
+		return v.ApplePay
 	}
 	return nil
 }
 
-func (o *GetPaymentMethodResponse) GetPaymentMethodCardPayment() *shared.PaymentMethodCard {
+func (o *GetPaymentMethodResponse) GetPaymentMethodCardPayment() *shared.SchemasPaymentMethodCardCard {
 	if v := o.GetPaymentMethod(); v != nil {
-		return v.PaymentMethodCard
+		return v.SchemasPaymentMethodCardCard
 	}
 	return nil
 }
 
-func (o *GetPaymentMethodResponse) GetPaymentMethodMoovWallet() *shared.PaymentMethodWallet {
+func (o *GetPaymentMethodResponse) GetPaymentMethodMoovWallet() *shared.SchemasPaymentMethodWalletWallet {
 	if v := o.GetPaymentMethod(); v != nil {
-		return v.PaymentMethodWallet
+		return v.SchemasPaymentMethodWalletWallet
 	}
 	return nil
 }
 
-func (o *GetPaymentMethodResponse) GetPaymentMethodRtpCredit() *shared.PaymentMethodBankAccount {
+func (o *GetPaymentMethodResponse) GetPaymentMethodRtpCredit() *shared.SchemasPaymentMethodBankAccountBankAccount {
 	if v := o.GetPaymentMethod(); v != nil {
-		return v.PaymentMethodBankAccount
+		return v.SchemasPaymentMethodBankAccountBankAccount
 	}
 	return nil
 }

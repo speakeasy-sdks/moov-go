@@ -39,7 +39,10 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
     var walletID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -65,8 +68,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetWalletForAccountResponse](../../models/operations/getwalletforaccountresponse.md), error**
-
+**[*operations.GetWalletForAccountResponse](../../pkg/models/operations/getwalletforaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetTransaction
 
@@ -90,8 +95,12 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "7e52eb20-20b9-4198-9c56-1f8d538908ad"
+
     var transactionID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
+
     var walletID string = "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"
 
     ctx := context.Background()
@@ -118,8 +127,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetWalletTransactionResponse](../../models/operations/getwallettransactionresponse.md), error**
-
+**[*operations.GetWalletTransactionResponse](../../pkg/models/operations/getwallettransactionresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -143,6 +154,8 @@ func main() {
             AccessToken: moovgo.String(""),
         }),
     )
+
+
     var accountID string = "c184a429-302e-4aca-80db-f1718b882a50"
 
     ctx := context.Background()
@@ -151,7 +164,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Wallets != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -167,8 +180,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListWalletsForAccountResponse](../../models/operations/listwalletsforaccountresponse.md), error**
-
+**[*operations.ListWalletsForAccountResponse](../../pkg/models/operations/listwalletsforaccountresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListTransactions
 
@@ -203,7 +218,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.WalletTransactions != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -211,13 +226,15 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
-| `request`                                                                                            | [operations.ListWalletTransactionsRequest](../../models/operations/listwallettransactionsrequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `request`                                                                                                | [operations.ListWalletTransactionsRequest](../../pkg/models/operations/listwallettransactionsrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
 
 
 ### Response
 
-**[*operations.ListWalletTransactionsResponse](../../models/operations/listwallettransactionsresponse.md), error**
-
+**[*operations.ListWalletTransactionsResponse](../../pkg/models/operations/listwallettransactionsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
