@@ -20,11 +20,11 @@ Fetch enriched address suggestions. Requires a partial address.
 package main
 
 import(
-	"context"
-	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
+	"context"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -75,10 +75,10 @@ Get avatar image for an account using a unique ID.
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
@@ -130,10 +130,10 @@ Returns a list of all industry titles and their corresponding MCC/SIC/NAICS code
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
@@ -181,10 +181,10 @@ Fetch enriched profile data. Requires a valid email address. This service is off
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {

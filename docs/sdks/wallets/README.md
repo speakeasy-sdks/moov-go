@@ -27,10 +27,10 @@ Get information on a specific wallet (e.g., the available balance). <br><br> To 
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
@@ -83,10 +83,10 @@ Get details on a specific wallet transaction. <br><br> To access this endpoint, 
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
@@ -142,10 +142,10 @@ List the wallets associated with a Moov account. <br><br> To list wallets, you'l
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
@@ -195,11 +195,11 @@ List all the transactions associated with a particular Moov wallet. <br><br> To 
 package main
 
 import(
-	"context"
-	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
+	"context"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"log"
 )
 
 func main() {

@@ -2,16 +2,18 @@ configVersion: 1.0.0
 management:
   docChecksum: 0311889a7ed4b464557a7a4f2b1e2c2e
   docVersion: 1.0.0
-  speakeasyVersion: 1.116.0
-  generationVersion: 2.185.0
+  speakeasyVersion: 1.120.3
+  generationVersion: 2.192.1
 generation:
   comments: {}
   sdkClassName: Moov
   repoURL: https://github.com/speakeasy-sdks/moov-go.git
+  usageSnippets:
+    optionalPropertyRendering: withExample
 features:
   go:
     constsAndDefaults: 0.1.1
-    core: 3.1.2
+    core: 3.1.5
     deprecations: 2.81.1
     downloadStreams: 0.1.1
     examples: 2.81.3
@@ -23,7 +25,7 @@ features:
     nameOverrides: 2.81.1
     unions: 2.85.0
 go:
-  version: 0.4.1
+  version: 0.4.2
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   imports:

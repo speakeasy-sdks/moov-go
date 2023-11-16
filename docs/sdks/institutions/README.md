@@ -19,11 +19,11 @@ Search for institutions by their routing number or name. <br><br> To use this en
 package main
 
 import(
-	"context"
-	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
+	"context"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"log"
 )
 
 func main() {
