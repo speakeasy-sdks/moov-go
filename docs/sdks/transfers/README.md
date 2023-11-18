@@ -456,10 +456,10 @@ func main() {
 ### Response
 
 **[*operations.RefundTransferResponse](../../pkg/models/operations/refundtransferresponse.md), error**
-| Error Object         | Status Code          | Content Type         |
-| -------------------- | -------------------- | -------------------- |
-| sdkerrors.GetRefund1 | 409                  | application/json     |
-| sdkerrors.SDKError   | 400-600              | */*                  |
+| Error Object        | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| sdkerrors.GetRefund | 409                 | application/json    |
+| sdkerrors.SDKError  | 400-600             | */*                 |
 
 ## Update
 

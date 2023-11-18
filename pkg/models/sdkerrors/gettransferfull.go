@@ -4,6 +4,7 @@ package sdkerrors
 
 import (
 	"encoding/json"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"time"
 )
 
@@ -54,20 +55,20 @@ func (o *RefundedAmount) GetValue() int64 {
 // GetTransferFull - Transfer details
 type GetTransferFull struct {
 	// A representation of money containing an integer value and it's currency.
-	Amount    *Amount    `json:"amount,omitempty"`
-	CreatedOn *time.Time `json:"createdOn,omitempty"`
+	Amount    *shared.Amount `json:"amount,omitempty"`
+	CreatedOn *time.Time     `json:"createdOn,omitempty"`
 	// A description of the transfer
-	Description *string                           `json:"description,omitempty"`
-	Destination *GetTransferFullSourceDestination `json:"destination,omitempty"`
+	Description *string                                  `json:"description,omitempty"`
+	Destination *shared.GetTransferFullSourceDestination `json:"destination,omitempty"`
 	// The total disputed amount for a card transfer
 	DisputedAmount *DisputedAmount `json:"disputedAmount,omitempty"`
 	// A list of disputes for a card transfer
-	Disputes []GetDispute `json:"disputes,omitempty"`
+	Disputes []shared.GetDispute `json:"disputes,omitempty"`
 	// Fee you charged your customer for the transfer
-	FacilitatorFee *GetFacilitatorFee `json:"facilitatorFee,omitempty"`
+	FacilitatorFee *shared.GetFacilitatorFee `json:"facilitatorFee,omitempty"`
 	// Transfer failure reason
-	FailureReason *FailureReason `json:"failureReason,omitempty"`
-	GroupID       *string        `json:"groupID,omitempty"`
+	FailureReason *shared.FailureReason `json:"failureReason,omitempty"`
+	GroupID       *string               `json:"groupID,omitempty"`
 	// Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Fee charged to your platform account for card transfers
@@ -75,10 +76,10 @@ type GetTransferFull struct {
 	// The total refunded amount for a card transfer
 	RefundedAmount *RefundedAmount `json:"refundedAmount,omitempty"`
 	// A list of refunds for a card transfer
-	Refunds []GetRefund            `json:"refunds,omitempty"`
-	Source  *GetTransferFullSource `json:"source,omitempty"`
+	Refunds []GetRefund                   `json:"refunds,omitempty"`
+	Source  *shared.GetTransferFullSource `json:"source,omitempty"`
 	// Current status of a transfer
-	Status *TransferStatus `json:"status,omitempty"`
+	Status *shared.TransferStatus `json:"status,omitempty"`
 	// UUID v4
 	TransferID *string `json:"transferID,omitempty"`
 }

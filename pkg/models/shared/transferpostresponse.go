@@ -4,6 +4,7 @@ package shared
 
 import (
 	"errors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
@@ -76,7 +77,7 @@ type SynchronousTransferResponse struct {
 	// The total refunded amount for a card transfer
 	RefundedAmount *RefundedAmount `json:"refundedAmount,omitempty"`
 	// A list of refunds for a card transfer
-	Refunds []GetRefund            `json:"refunds,omitempty"`
+	Refunds []sdkerrors.GetRefund  `json:"refunds,omitempty"`
 	Source  *GetTransferFullSource `json:"source,omitempty"`
 	// Current status of a transfer
 	Status *TransferStatus `json:"status,omitempty"`
@@ -179,7 +180,7 @@ func (o *SynchronousTransferResponse) GetRefundedAmount() *RefundedAmount {
 	return o.RefundedAmount
 }
 
-func (o *SynchronousTransferResponse) GetRefunds() []GetRefund {
+func (o *SynchronousTransferResponse) GetRefunds() []sdkerrors.GetRefund {
 	if o == nil {
 		return nil
 	}
