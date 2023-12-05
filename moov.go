@@ -199,9 +199,9 @@ func New(opts ...SDKOption) *Moov {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "0.4.3",
-			GenVersion:        "2.194.1",
-			UserAgent:         "speakeasy-sdk/go 0.4.3 2.194.1 1.0.0 github.com/speakeasy-sdks/moov-go",
+			SDKVersion:        "0.4.4",
+			GenVersion:        "2.210.3",
+			UserAgent:         "speakeasy-sdk/go 0.4.4 2.210.3 1.0.0 github.com/speakeasy-sdks/moov-go",
 		},
 	}
 	for _, opt := range opts {

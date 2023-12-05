@@ -268,7 +268,6 @@ pkg/utils/utils.go
 /pkg/models/sdkerrors/error.go
 /pkg/models/sdkerrors/getrefund.go
 /pkg/models/sdkerrors/gettransferfull.go
-USAGE.md
 docs/pkg/models/operations/putaccountcountriesrequest.md
 docs/pkg/models/operations/putaccountcountriesresponse.md
 docs/pkg/models/operations/createaccountresponse.md
@@ -697,5 +696,6 @@ docs/sdks/cardissuing/README.md
 docs/sdks/transactions/README.md
 docs/sdks/accesstoken/README.md
 docs/sdks/transfers/README.md
+USAGE.md
 pkg/models/operations/options.go
 .gitattributes
