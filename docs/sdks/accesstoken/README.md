@@ -23,16 +23,16 @@ Use the client_id and client_secret to generate an access token.
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -80,16 +80,17 @@ Allows clients to notify the authorization server that a previously obtained ref
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 

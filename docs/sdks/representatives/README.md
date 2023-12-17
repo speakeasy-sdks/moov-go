@@ -23,16 +23,16 @@ Moov accounts associated with businesses require information regarding individua
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -96,11 +96,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
-| `createRepresentative`                                                            | [shared.CreateRepresentative](../../../pkg/models/shared/createrepresentative.md) | :heavy_check_mark:                                                                | N/A                                                                               |
-| `accountID`                                                                       | *string*                                                                          | :heavy_check_mark:                                                                | ID of the account                                                                 |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `createRepresentative`                                                         | [shared.CreateRepresentative](../../pkg/models/shared/createrepresentative.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `accountID`                                                                    | *string*                                                                       | :heavy_check_mark:                                                             | ID of the account                                                              |
 
 
 ### Response
@@ -120,16 +120,17 @@ Deletes a business representative associated with a Moov account. <br><br> To us
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -176,16 +177,16 @@ Retrieve a specific representative associated with a given Moov account. <br><br
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -232,16 +233,16 @@ A Moov account may have multiple representatives depending on the associated bus
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -297,16 +298,16 @@ If you need to update information in a locked state, please contact Moov support
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -372,12 +373,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                         | [context.Context](https://pkg.go.dev/context#Context)                                         | :heavy_check_mark:                                                                            | The context to use for the request.                                                           |                                                                                               |
-| `patchRepresentativeRequest`                                                                  | [shared.PatchRepresentativeRequest](../../../pkg/models/shared/patchrepresentativerequest.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
-| `accountID`                                                                                   | *string*                                                                                      | :heavy_check_mark:                                                                            | ID of the account                                                                             |                                                                                               |
-| `representativeID`                                                                            | *string*                                                                                      | :heavy_check_mark:                                                                            | ID of the representative                                                                      | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                          |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |                                                                                            |
+| `patchRepresentativeRequest`                                                               | [shared.PatchRepresentativeRequest](../../pkg/models/shared/patchrepresentativerequest.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |                                                                                            |
+| `accountID`                                                                                | *string*                                                                                   | :heavy_check_mark:                                                                         | ID of the account                                                                          |                                                                                            |
+| `representativeID`                                                                         | *string*                                                                                   | :heavy_check_mark:                                                                         | ID of the representative                                                                   | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                       |
 
 
 ### Response

@@ -5,7 +5,7 @@ package sdkerrors
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/speakeasy-sdks/moov-go/pkg/utils"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"time"
 )
 
@@ -105,98 +105,22 @@ func (e *FailureCode) UnmarshalJSON(data []byte) error {
 // GetRefund - Details of a card refund
 type GetRefund struct {
 	// A representation of money containing an integer value and it's currency.
-	Amount      *Amount            `json:"amount,omitempty"`
-	CardDetails *RefundCardDetails `json:"cardDetails,omitempty"`
-	CreatedOn   *time.Time         `json:"createdOn,omitempty"`
+	Amount      *shared.Amount            `json:"amount,omitempty"`
+	CardDetails *shared.RefundCardDetails `json:"cardDetails,omitempty"`
+	CreatedOn   *time.Time                `json:"createdOn,omitempty"`
 	// This field is deprecated and will be removed in December 2023.
 	//
 	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	FailureCode *FailureCode `json:"failureCode,omitempty"`
 	// UUID v4
-	RefundID  *string       `json:"refundID,omitempty"`
-	Status    *RefundStatus `json:"status,omitempty"`
-	UpdatedOn *time.Time    `json:"updatedOn,omitempty"`
+	RefundID  *string              `json:"refundID,omitempty"`
+	Status    *shared.RefundStatus `json:"status,omitempty"`
+	UpdatedOn *time.Time           `json:"updatedOn,omitempty"`
 }
 
-func (g GetRefund) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(g, "", false)
-}
+var _ error = &GetRefund{}
 
-func (g *GetRefund) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *GetRefund) GetAmount() *Amount {
-	if o == nil {
-		return nil
-	}
-	return o.Amount
-}
-
-func (o *GetRefund) GetCardDetails() *RefundCardDetails {
-	if o == nil {
-		return nil
-	}
-	return o.CardDetails
-}
-
-func (o *GetRefund) GetCreatedOn() *time.Time {
-	if o == nil {
-		return nil
-	}
-	return o.CreatedOn
-}
-
-func (o *GetRefund) GetFailureCode() *FailureCode {
-	if o == nil {
-		return nil
-	}
-	return o.FailureCode
-}
-
-func (o *GetRefund) GetRefundID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.RefundID
-}
-
-func (o *GetRefund) GetStatus() *RefundStatus {
-	if o == nil {
-		return nil
-	}
-	return o.Status
-}
-
-func (o *GetRefund) GetUpdatedOn() *time.Time {
-	if o == nil {
-		return nil
-	}
-	return o.UpdatedOn
-}
-
-// GetRefund1 - Details of a card refund
-type GetRefund1 struct {
-	// A representation of money containing an integer value and it's currency.
-	Amount      *Amount            `json:"amount,omitempty"`
-	CardDetails *RefundCardDetails `json:"cardDetails,omitempty"`
-	CreatedOn   *time.Time         `json:"createdOn,omitempty"`
-	// This field is deprecated and will be removed in December 2023.
-	//
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-	FailureCode *FailureCode `json:"failureCode,omitempty"`
-	// UUID v4
-	RefundID  *string       `json:"refundID,omitempty"`
-	Status    *RefundStatus `json:"status,omitempty"`
-	UpdatedOn *time.Time    `json:"updatedOn,omitempty"`
-}
-
-var _ error = &GetRefund1{}
-
-func (e *GetRefund1) Error() string {
+func (e *GetRefund) Error() string {
 	data, _ := json.Marshal(e)
 	return string(data)
 }
