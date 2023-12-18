@@ -19,16 +19,16 @@ List issued card transactions associated with a Moov account
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -55,13 +55,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `accountID`                                                                                      | *string*                                                                                         | :heavy_check_mark:                                                                               | ID of the account                                                                                |
-| `count`                                                                                          | **int64*                                                                                         | :heavy_minus_sign:                                                                               | Optional parameter to limit the number of results in the query                                   |
-| `skip`                                                                                           | **int64*                                                                                         | :heavy_minus_sign:                                                                               | The number of items to offset before starting to collect the result set                          |
-| `status`                                                                                         | [*shared.IssuedCardTransactionStatus](../../../pkg/models/shared/issuedcardtransactionstatus.md) | :heavy_minus_sign:                                                                               | Optional parameters to filter results IssuedCardTransactions.                                    |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                         | [context.Context](https://pkg.go.dev/context#Context)                                         | :heavy_check_mark:                                                                            | The context to use for the request.                                                           |
+| `accountID`                                                                                   | *string*                                                                                      | :heavy_check_mark:                                                                            | ID of the account                                                                             |
+| `count`                                                                                       | **int64*                                                                                      | :heavy_minus_sign:                                                                            | Optional parameter to limit the number of results in the query                                |
+| `skip`                                                                                        | **int64*                                                                                      | :heavy_minus_sign:                                                                            | The number of items to offset before starting to collect the result set                       |
+| `status`                                                                                      | [*shared.IssuedCardTransactionStatus](../../pkg/models/shared/issuedcardtransactionstatus.md) | :heavy_minus_sign:                                                                            | Optional parameters to filter results IssuedCardTransactions.                                 |
 
 
 ### Response
