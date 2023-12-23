@@ -12,6 +12,6 @@ refundPostResponse := shared.CreateRefundPostResponseCreatedRefund(shared.Create
 ### GetRefund
 
 ```go
-refundPostResponse := shared.CreateRefundPostResponseGetRefund(shared.GetRefund{/* values here */})
+refundPostResponse := shared.CreateRefundPostResponseGetRefund(sdkerrors.GetRefund{/* values here */})
 ```
 
