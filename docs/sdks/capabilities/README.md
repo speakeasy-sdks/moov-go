@@ -22,16 +22,17 @@ Disable a specific capability that an account has requested. <br><br> To use thi
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -54,11 +55,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
-| `accountID`                                                       | *string*                                                          | :heavy_check_mark:                                                | ID of the account                                                 |
-| `capabilityID`                                                    | [shared.CapabilityID](../../../pkg/models/shared/capabilityid.md) | :heavy_check_mark:                                                | The requested capability identifier                               |
+| Parameter                                                      | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `ctx`                                                          | [context.Context](https://pkg.go.dev/context#Context)          | :heavy_check_mark:                                             | The context to use for the request.                            |
+| `accountID`                                                    | *string*                                                       | :heavy_check_mark:                                             | ID of the account                                              |
+| `capabilityID`                                                 | [shared.CapabilityID](../../pkg/models/shared/capabilityid.md) | :heavy_check_mark:                                             | The requested capability identifier                            |
 
 
 ### Response
@@ -66,7 +67,7 @@ func main() {
 **[*operations.DeleteCapabilityResponse](../../pkg/models/operations/deletecapabilityresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Get
 
@@ -78,16 +79,16 @@ Retrieve a specific capability that an account has requested. <br><br> To use th
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -110,11 +111,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
-| `accountID`                                                       | *string*                                                          | :heavy_check_mark:                                                | ID of the account                                                 |
-| `capabilityID`                                                    | [shared.CapabilityID](../../../pkg/models/shared/capabilityid.md) | :heavy_check_mark:                                                | The requested capability identifier                               |
+| Parameter                                                      | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `ctx`                                                          | [context.Context](https://pkg.go.dev/context#Context)          | :heavy_check_mark:                                             | The context to use for the request.                            |
+| `accountID`                                                    | *string*                                                       | :heavy_check_mark:                                             | ID of the account                                              |
+| `capabilityID`                                                 | [shared.CapabilityID](../../pkg/models/shared/capabilityid.md) | :heavy_check_mark:                                             | The requested capability identifier                            |
 
 
 ### Response
@@ -122,7 +123,7 @@ func main() {
 **[*operations.GetCapabilityResponse](../../pkg/models/operations/getcapabilityresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## List
 
@@ -134,16 +135,16 @@ Retrieve all the capabilities an account has requested. <br><br> To use this end
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -175,7 +176,7 @@ func main() {
 **[*operations.ListCapabilitiesResponse](../../pkg/models/operations/listcapabilitiesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Request
 
@@ -187,16 +188,16 @@ Request capabilities for a specific account. <br><br> To use this endpoint, you 
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -223,11 +224,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
-| `addCapabilityRequest`                                                            | [shared.AddCapabilityRequest](../../../pkg/models/shared/addcapabilityrequest.md) | :heavy_check_mark:                                                                | N/A                                                                               |
-| `accountID`                                                                       | *string*                                                                          | :heavy_check_mark:                                                                | ID of the account                                                                 |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `addCapabilityRequest`                                                         | [shared.AddCapabilityRequest](../../pkg/models/shared/addcapabilityrequest.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `accountID`                                                                    | *string*                                                                       | :heavy_check_mark:                                                             | ID of the account                                                              |
 
 
 ### Response
@@ -236,4 +237,4 @@ func main() {
 | Error Object                     | Status Code                      | Content Type                     |
 | -------------------------------- | -------------------------------- | -------------------------------- |
 | sdkerrors.CapabilityRequestError | 409                              | application/json                 |
-| sdkerrors.SDKError               | 400-600                          | */*                              |
+| sdkerrors.SDKError               | 4xx-5xx                          | */*                              |

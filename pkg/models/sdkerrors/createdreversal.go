@@ -5,6 +5,7 @@ package sdkerrors
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"time"
 )
@@ -105,17 +106,17 @@ func (e *SchemasFailureCode) UnmarshalJSON(data []byte) error {
 // SynchronousRefundResponse - Details of a card refund
 type SynchronousRefundResponse struct {
 	// A representation of money containing an integer value and it's currency.
-	Amount      *Amount            `json:"amount,omitempty"`
-	CardDetails *RefundCardDetails `json:"cardDetails,omitempty"`
-	CreatedOn   *time.Time         `json:"createdOn,omitempty"`
+	Amount      *shared.Amount            `json:"amount,omitempty"`
+	CardDetails *shared.RefundCardDetails `json:"cardDetails,omitempty"`
+	CreatedOn   *time.Time                `json:"createdOn,omitempty"`
 	// This field is deprecated and will be removed in December 2023.
 	//
 	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	FailureCode *SchemasFailureCode `json:"failureCode,omitempty"`
 	// UUID v4
-	RefundID  *string       `json:"refundID,omitempty"`
-	Status    *RefundStatus `json:"status,omitempty"`
-	UpdatedOn *time.Time    `json:"updatedOn,omitempty"`
+	RefundID  *string              `json:"refundID,omitempty"`
+	Status    *shared.RefundStatus `json:"status,omitempty"`
+	UpdatedOn *time.Time           `json:"updatedOn,omitempty"`
 }
 
 func (s SynchronousRefundResponse) MarshalJSON() ([]byte, error) {
@@ -129,14 +130,14 @@ func (s *SynchronousRefundResponse) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *SynchronousRefundResponse) GetAmount() *Amount {
+func (o *SynchronousRefundResponse) GetAmount() *shared.Amount {
 	if o == nil {
 		return nil
 	}
 	return o.Amount
 }
 
-func (o *SynchronousRefundResponse) GetCardDetails() *RefundCardDetails {
+func (o *SynchronousRefundResponse) GetCardDetails() *shared.RefundCardDetails {
 	if o == nil {
 		return nil
 	}
@@ -164,7 +165,7 @@ func (o *SynchronousRefundResponse) GetRefundID() *string {
 	return o.RefundID
 }
 
-func (o *SynchronousRefundResponse) GetStatus() *RefundStatus {
+func (o *SynchronousRefundResponse) GetStatus() *shared.RefundStatus {
 	if o == nil {
 		return nil
 	}
@@ -179,8 +180,8 @@ func (o *SynchronousRefundResponse) GetUpdatedOn() *time.Time {
 }
 
 type CreatedReversal struct {
-	Cancellation *CreatedCancellation       `json:"cancellation,omitempty"`
-	Refund       *SynchronousRefundResponse `json:"refund,omitempty"`
+	Cancellation *shared.CreatedCancellation `json:"cancellation,omitempty"`
+	Refund       *SynchronousRefundResponse  `json:"refund,omitempty"`
 }
 
 var _ error = &CreatedReversal{}
