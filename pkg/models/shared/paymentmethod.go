@@ -447,6 +447,7 @@ const (
 	PaymentMethodTypeRtpCredit         PaymentMethodType = "rtp-credit"
 )
 
+// PaymentMethod - A method of moving money
 type PaymentMethod struct {
 	SchemasPaymentMethodWalletWallet           *SchemasPaymentMethodWalletWallet
 	SchemasPaymentMethodBankAccountBankAccount *SchemasPaymentMethodBankAccountBankAccount
@@ -666,6 +667,7 @@ const (
 	DestinationOptionsTypeRtpCredit         DestinationOptionsType = "rtp-credit"
 )
 
+// DestinationOptions - A method of moving money
 type DestinationOptions struct {
 	SchemasPaymentMethodWalletWallet           *SchemasPaymentMethodWalletWallet
 	SchemasPaymentMethodBankAccountBankAccount *SchemasPaymentMethodBankAccountBankAccount
@@ -885,6 +887,7 @@ const (
 	SourceOptionsTypeRtpCredit         SourceOptionsType = "rtp-credit"
 )
 
+// SourceOptions - A method of moving money
 type SourceOptions struct {
 	SchemasPaymentMethodWalletWallet           *SchemasPaymentMethodWalletWallet
 	SchemasPaymentMethodBankAccountBankAccount *SchemasPaymentMethodBankAccountBankAccount
