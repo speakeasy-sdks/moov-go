@@ -13,6 +13,7 @@ const (
 	AccessTokenResponseTypeClientCredentialsGrantToAccessTokenResponse AccessTokenResponseType = "ClientCredentialsGrantToAccessTokenResponse"
 )
 
+// AccessTokenResponse - Possible responses that can be made to the /token endpoints. The type of response returned here will mirror the type of the request
 type AccessTokenResponse struct {
 	ClientCredentialsGrantToAccessTokenResponse *ClientCredentialsGrantToAccessTokenResponse
 
