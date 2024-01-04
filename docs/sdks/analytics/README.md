@@ -23,16 +23,17 @@ Count the number of profiles created by an individual or business
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -61,7 +62,7 @@ func main() {
 **[*operations.PostAnalyticsAccountsCreatedResponse](../../pkg/models/operations/postanalyticsaccountscreatedresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CountTransferStatuses
 
@@ -73,16 +74,17 @@ Count the transfer statuses
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -111,7 +113,7 @@ func main() {
 **[*operations.PostAnalyticsTransferStatusesResponse](../../pkg/models/operations/postanalyticstransferstatusesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## LargestTransfer
 
@@ -123,16 +125,17 @@ Return the largest number of transfers
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -161,7 +164,7 @@ func main() {
 **[*operations.PostAnalyticsTransferLargestResponse](../../pkg/models/operations/postanalyticstransferlargestresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## SmallestTransfer
 
@@ -173,16 +176,17 @@ Return the smallest number of transfers
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -211,7 +215,7 @@ func main() {
 **[*operations.PostAnalyticsTransferSmallestResponse](../../pkg/models/operations/postanalyticstransfersmallestresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## SumTransfers
 
@@ -223,16 +227,17 @@ Sum all transfers across intervals
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -261,4 +266,4 @@ func main() {
 **[*operations.PostAnalyticsTransferSumResponse](../../pkg/models/operations/postanalyticstransfersumresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

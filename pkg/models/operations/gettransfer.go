@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
 	"net/http"
 )
 
@@ -32,7 +32,7 @@ type GetTransferResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Details of a transfer
-	GetTransferFull *shared.GetTransferFull
+	GetTransferFull *sdkerrors.GetTransferFull
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -46,7 +46,7 @@ func (o *GetTransferResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *GetTransferResponse) GetGetTransferFull() *shared.GetTransferFull {
+func (o *GetTransferResponse) GetGetTransferFull() *sdkerrors.GetTransferFull {
 	if o == nil {
 		return nil
 	}
