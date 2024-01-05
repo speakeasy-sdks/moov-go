@@ -7,16 +7,19 @@
   <a href="https://slack.moov.io/"><img src="https://img.shields.io/static/v1?label=Slack&message=Join&color=7289da&style=for-the-badge" /></a>
 </div>
 
-<!-- Start SDK Installation -->
+<!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
 ```bash
 go get github.com/speakeasy-sdks/moov-go
 ```
-<!-- End SDK Installation -->
+<!-- End SDK Installation [installation] -->
 
+<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
-<!-- Start SDK Example Usage -->
+
+### Example
+
 ```go
 package main
 
@@ -30,7 +33,7 @@ import (
 func main() {
 	s := moovgo.New(
 		moovgo.WithSecurity(shared.Security{
-			AccessToken: moovgo.String(""),
+			AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
 		}),
 	)
 
@@ -67,11 +70,10 @@ func main() {
 }
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->
 
-<!-- Start SDK Available Operations -->
+<!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
-
 
 ### [Accounts](docs/sdks/accounts/README.md)
 
@@ -194,55 +196,42 @@ func main() {
 * [ListRefunds](docs/sdks/transfers/README.md#listrefunds) - Get a list of refunds for a card transfer
 * [Refund](docs/sdks/transfers/README.md#refund) - Refund a transfer
 * [Update](docs/sdks/transfers/README.md#update) - Patch transfer metadata
-<!-- End SDK Available Operations -->
+<!-- End Available Resources and Operations [operations] -->
 
 
 
-<!-- Start Dev Containers -->
-
-<!-- End Dev Containers -->
 
 
 
-<!-- Start Pagination -->
-# Pagination
 
-Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
-returned response object will have a `Next` method that can be called to pull down the next group of results. If the
-return value of `Next` is `nil`, then there are no more pages to be fetched.
-
-Here's an example of one such pagination call:
+<!-- Start Special Types [types] -->
+## Special Types
 
 
-<!-- End Pagination -->
+<!-- End Special Types [types] -->
 
 
 
-<!-- Start Go Types -->
-
-<!-- End Go Types -->
-
-
-
-<!-- Start Error Handling -->
-# Error Handling
+<!-- Start Error Handling [errors] -->
+## Error Handling
 
 Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
 
 | Error Object                     | Status Code                      | Content Type                     |
 | -------------------------------- | -------------------------------- | -------------------------------- |
 | sdkerrors.CapabilityRequestError | 409                              | application/json                 |
-| sdkerrors.SDKError               | 400-600                          | */*                              |
+| sdkerrors.SDKError               | 4xx-5xx                          | */*                              |
 
-
-## Example
+### Example
 
 ```go
 package main
 
 import (
 	"context"
+	"errors"
 	moovgo "github.com/speakeasy-sdks/moov-go"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"log"
 )
@@ -250,7 +239,7 @@ import (
 func main() {
 	s := moovgo.New(
 		moovgo.WithSecurity(shared.Security{
-			AccessToken: moovgo.String(""),
+			AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
 		}),
 	)
 
@@ -281,14 +270,14 @@ func main() {
 }
 
 ```
-<!-- End Error Handling -->
+<!-- End Error Handling [errors] -->
 
 
 
-<!-- Start Server Selection -->
-# Server Selection
+<!-- Start Server Selection [server] -->
+## Server Selection
 
-## Select Server by Index
+### Select Server by Index
 
 You can override the default server globally using the `WithServerIndex` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
@@ -296,7 +285,7 @@ You can override the default server globally using the `WithServerIndex` option 
 | - | ------ | --------- |
 | 0 | `https://api.moov.io` | None |
 
-For example:
+#### Example
 
 ```go
 package main
@@ -312,25 +301,13 @@ func main() {
 	s := moovgo.New(
 		moovgo.WithServerIndex(0),
 		moovgo.WithSecurity(shared.Security{
-			AccessToken: moovgo.String(""),
+			AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
 		}),
 	)
 
 	countries := shared.Countries{
 		Countries: []string{
-			"U",
-			"n",
-			"i",
-			"t",
-			"e",
-			"d",
-			" ",
-			"S",
-			"t",
-			"a",
-			"t",
-			"e",
-			"s",
+			"United States",
 		},
 	}
 
@@ -350,10 +327,9 @@ func main() {
 ```
 
 
-## Override Server URL Per-Client
+### Override Server URL Per-Client
 
 The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
-
 ```go
 package main
 
@@ -368,25 +344,13 @@ func main() {
 	s := moovgo.New(
 		moovgo.WithServerURL("https://api.moov.io"),
 		moovgo.WithSecurity(shared.Security{
-			AccessToken: moovgo.String(""),
+			AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
 		}),
 	)
 
 	countries := shared.Countries{
 		Countries: []string{
-			"U",
-			"n",
-			"i",
-			"t",
-			"e",
-			"d",
-			" ",
-			"S",
-			"t",
-			"a",
-			"t",
-			"e",
-			"s",
+			"United States",
 		},
 	}
 
@@ -405,10 +369,9 @@ func main() {
 
 ```
 
-## Override Server URL Per-Operation
+### Override Server URL Per-Operation
 
 The server URL can also be overridden on a per-operation basis, provided a server list was specified for the operation. For example:
-
 ```go
 package main
 
@@ -422,7 +385,7 @@ import (
 func main() {
 	s := moovgo.New(
 		moovgo.WithSecurity(shared.Security{
-			AccessToken: moovgo.String(""),
+			AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
 		}),
 	)
 
@@ -459,12 +422,12 @@ func main() {
 }
 
 ```
-<!-- End Server Selection -->
+<!-- End Server Selection [server] -->
 
 
 
-<!-- Start Custom HTTP Client -->
-# Custom HTTP Client
+<!-- Start Custom HTTP Client [http-client] -->
+## Custom HTTP Client
 
 The Go SDK makes API calls that wrap an internal HTTP client. The requirements for the HTTP client are very simple. It must match this interface:
 
@@ -490,14 +453,14 @@ var (
 ```
 
 This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
-<!-- End Custom HTTP Client -->
+<!-- End Custom HTTP Client [http-client] -->
 
 
 
-<!-- Start Authentication -->
-# Authentication
+<!-- Start Authentication [security] -->
+## Authentication
 
-## Per-Client Security Schemes
+### Per-Client Security Schemes
 
 This SDK supports the following security schemes globally:
 
@@ -508,7 +471,6 @@ This SDK supports the following security schemes globally:
 | `OAuth2Credentials` | http                | HTTP Basic          |
 
 You can set the security parameters through the `WithSecurity` option when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
-
 ```go
 package main
 
@@ -522,25 +484,13 @@ import (
 func main() {
 	s := moovgo.New(
 		moovgo.WithSecurity(shared.Security{
-			AccessToken: moovgo.String(""),
+			AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
 		}),
 	)
 
 	countries := shared.Countries{
 		Countries: []string{
-			"U",
-			"n",
-			"i",
-			"t",
-			"e",
-			"d",
-			" ",
-			"S",
-			"t",
-			"a",
-			"t",
-			"e",
-			"s",
+			"United States",
 		},
 	}
 
@@ -558,7 +508,7 @@ func main() {
 }
 
 ```
-<!-- End Authentication -->
+<!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

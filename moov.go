@@ -171,7 +171,6 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 }
 
 // WithSecurity configures the SDK to use the provided security details
-
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *Moov) {
 		sdk.sdkConfiguration.Security = withSecurity(security)
@@ -200,8 +199,8 @@ func New(opts ...SDKOption) *Moov {
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
 			SDKVersion:        "0.4.1",
-			GenVersion:        "2.185.0",
-			UserAgent:         "speakeasy-sdk/go 0.4.1 2.185.0 1.0.0 github.com/speakeasy-sdks/moov-go",
+			GenVersion:        "2.225.2",
+			UserAgent:         "speakeasy-sdk/go 0.4.1 2.225.2 1.0.0 github.com/speakeasy-sdks/moov-go",
 		},
 	}
 	for _, opt := range opts {
