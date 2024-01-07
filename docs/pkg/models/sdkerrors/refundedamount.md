@@ -1,6 +1,6 @@
 # RefundedAmount
 
-A representation of money containing an integer value and it's currency.
+The total refunded amount for a card transfer
 
 
 ## Fields
