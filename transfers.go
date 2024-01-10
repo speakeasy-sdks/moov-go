@@ -87,7 +87,7 @@ func (s *Transfers) Cancel(ctx context.Context, xIdempotencyKey string, transfer
 	case httpRes.StatusCode == 202:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.CreatedReversal
+			var out sdkerrors.CreatedReversal
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -215,7 +215,7 @@ func (s *Transfers) Create(ctx context.Context, createTransfer shared.CreateTran
 	case httpRes.StatusCode == 202:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.GetTransferFull
+			var out sdkerrors.GetTransferFull
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -376,7 +376,7 @@ func (s *Transfers) Get(ctx context.Context, transferID string, accountID *strin
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.GetTransferFull
+			var out sdkerrors.GetTransferFull
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -446,7 +446,7 @@ func (s *Transfers) GetRefund(ctx context.Context, refundID string, transferID s
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.GetRefund
+			var out sdkerrors.GetRefund
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -515,7 +515,7 @@ func (s *Transfers) ListRefunds(ctx context.Context, transferID string) (*operat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out []shared.GetRefund
+			var out []sdkerrors.GetRefund
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -608,7 +608,7 @@ func (s *Transfers) Refund(ctx context.Context, xIdempotencyKey string, transfer
 	case httpRes.StatusCode == 202:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.GetRefund
+			var out sdkerrors.GetRefund
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -630,7 +630,7 @@ func (s *Transfers) Refund(ctx context.Context, xIdempotencyKey string, transfer
 	case httpRes.StatusCode == 409:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out sdkerrors.GetRefund1
+			var out sdkerrors.GetRefund
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -708,7 +708,7 @@ func (s *Transfers) Update(ctx context.Context, patchTransfer shared.PatchTransf
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.GetTransferFull
+			var out sdkerrors.GetTransferFull
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
