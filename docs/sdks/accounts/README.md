@@ -30,35 +30,23 @@ Assign the countries of operation for an account. This endpoint will always over
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
 
     countries := shared.Countries{
         Countries: []string{
-            "U",
-            "n",
-            "i",
-            "t",
-            "e",
-            "d",
-            " ",
-            "S",
-            "t",
-            "a",
-            "t",
-            "e",
-            "s",
+            "United States",
         },
     }
 
@@ -78,11 +66,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `ctx`                                                       | [context.Context](https://pkg.go.dev/context#Context)       | :heavy_check_mark:                                          | The context to use for the request.                         |
-| `countries`                                                 | [shared.Countries](../../../pkg/models/shared/countries.md) | :heavy_check_mark:                                          | N/A                                                         |
-| `accountID`                                                 | *string*                                                    | :heavy_check_mark:                                          | ID of the account                                           |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `countries`                                              | [shared.Countries](../../pkg/models/shared/countries.md) | :heavy_check_mark:                                       | N/A                                                      |
+| `accountID`                                              | *string*                                                 | :heavy_check_mark:                                       | ID of the account                                        |
 
 
 ### Response
@@ -90,7 +78,7 @@ func main() {
 **[*operations.PutAccountCountriesResponse](../../pkg/models/operations/putaccountcountriesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Create
 
@@ -102,16 +90,16 @@ You can create accounts for your users by passing the required information to Mo
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -245,7 +233,7 @@ func main() {
 **[*operations.CreateAccountResponse](../../pkg/models/operations/createaccountresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Get
 
@@ -257,16 +245,16 @@ Retrieves details for the account with the specified ID. <br><br> To get an acco
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -298,7 +286,7 @@ func main() {
 **[*operations.GetAccountResponse](../../pkg/models/operations/getaccountresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetTosToken
 
@@ -310,16 +298,16 @@ Generates a non-expiring token that can then be used to accept Moov's terms of s
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -347,7 +335,7 @@ func main() {
 **[*operations.GetTermsOfServiceTokenResponse](../../pkg/models/operations/gettermsofservicetokenresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## List
 
@@ -365,17 +353,17 @@ Searching by name and email will overlap and return results based on relevance.
 package main
 
 import(
-	"context"
-	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
+	"context"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
+	"log"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -407,7 +395,7 @@ func main() {
 **[*operations.ListAccountsResponse](../../pkg/models/operations/listaccountsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListCountries
 
@@ -419,16 +407,16 @@ Retrieve the specified countries of operation for an account. <br><br> To get th
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -460,7 +448,7 @@ func main() {
 **[*operations.GetAccountCountriesResponse](../../pkg/models/operations/getaccountcountriesresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Update
 
@@ -483,16 +471,16 @@ If you need to update information in a locked state, please contact Moov support
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -615,11 +603,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `ctx`                                                                           | [context.Context](https://pkg.go.dev/context#Context)                           | :heavy_check_mark:                                                              | The context to use for the request.                                             |
-| `patchAccountRequest`                                                           | [shared.PatchAccountRequest](../../../pkg/models/shared/patchaccountrequest.md) | :heavy_check_mark:                                                              | N/A                                                                             |
-| `accountID`                                                                     | *string*                                                                        | :heavy_check_mark:                                                              | ID of the account                                                               |
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
+| `patchAccountRequest`                                                        | [shared.PatchAccountRequest](../../pkg/models/shared/patchaccountrequest.md) | :heavy_check_mark:                                                           | N/A                                                                          |
+| `accountID`                                                                  | *string*                                                                     | :heavy_check_mark:                                                           | ID of the account                                                            |
 
 
 ### Response
@@ -627,4 +615,4 @@ func main() {
 **[*operations.PatchAccountResponse](../../pkg/models/operations/patchaccountresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
