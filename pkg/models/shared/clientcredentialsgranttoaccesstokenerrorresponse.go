@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-type ClientCredentialsGrantToAccessTokenErrorResponseError string
+type Error string
 
 const (
-	ClientCredentialsGrantToAccessTokenErrorResponseErrorInvalidRequest       ClientCredentialsGrantToAccessTokenErrorResponseError = "invalid_request"
-	ClientCredentialsGrantToAccessTokenErrorResponseErrorInvalidClient        ClientCredentialsGrantToAccessTokenErrorResponseError = "invalid_client"
-	ClientCredentialsGrantToAccessTokenErrorResponseErrorInvalidGrant         ClientCredentialsGrantToAccessTokenErrorResponseError = "invalid_grant"
-	ClientCredentialsGrantToAccessTokenErrorResponseErrorUnauthorizedClient   ClientCredentialsGrantToAccessTokenErrorResponseError = "unauthorized_client"
-	ClientCredentialsGrantToAccessTokenErrorResponseErrorUnsupportedGrantType ClientCredentialsGrantToAccessTokenErrorResponseError = "unsupported_grant_type"
-	ClientCredentialsGrantToAccessTokenErrorResponseErrorInvalidScope         ClientCredentialsGrantToAccessTokenErrorResponseError = "invalid_scope"
+	ErrorInvalidRequest       Error = "invalid_request"
+	ErrorInvalidClient        Error = "invalid_client"
+	ErrorInvalidGrant         Error = "invalid_grant"
+	ErrorUnauthorizedClient   Error = "unauthorized_client"
+	ErrorUnsupportedGrantType Error = "unsupported_grant_type"
+	ErrorInvalidScope         Error = "invalid_scope"
 )
 
-func (e ClientCredentialsGrantToAccessTokenErrorResponseError) ToPointer() *ClientCredentialsGrantToAccessTokenErrorResponseError {
+func (e Error) ToPointer() *Error {
 	return &e
 }
 
-func (e *ClientCredentialsGrantToAccessTokenErrorResponseError) UnmarshalJSON(data []byte) error {
+func (e *Error) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -39,19 +39,19 @@ func (e *ClientCredentialsGrantToAccessTokenErrorResponseError) UnmarshalJSON(da
 	case "unsupported_grant_type":
 		fallthrough
 	case "invalid_scope":
-		*e = ClientCredentialsGrantToAccessTokenErrorResponseError(v)
+		*e = Error(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ClientCredentialsGrantToAccessTokenErrorResponseError: %v", v)
+		return fmt.Errorf("invalid value for Error: %v", v)
 	}
 }
 
 // ClientCredentialsGrantToAccessTokenErrorResponse - Error happened when trying to obtain an access token
 type ClientCredentialsGrantToAccessTokenErrorResponse struct {
-	Error *ClientCredentialsGrantToAccessTokenErrorResponseError `json:"error,omitempty"`
+	Error *Error `json:"error,omitempty"`
 }
 
-func (o *ClientCredentialsGrantToAccessTokenErrorResponse) GetError() *ClientCredentialsGrantToAccessTokenErrorResponseError {
+func (o *ClientCredentialsGrantToAccessTokenErrorResponse) GetError() *Error {
 	if o == nil {
 		return nil
 	}
