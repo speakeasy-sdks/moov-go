@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"net/http"
 )
@@ -49,7 +50,7 @@ type RefundTransferResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// A refund was successfully created but an error occurred while waiting for a synchronous response.
-	GetRefund *shared.GetRefund
+	GetRefund *sdkerrors.GetRefund
 	// Successfully initiated a card refund
 	RefundPostResponse *shared.RefundPostResponse
 	// HTTP response status code for this operation
@@ -65,7 +66,7 @@ func (o *RefundTransferResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *RefundTransferResponse) GetGetRefund() *shared.GetRefund {
+func (o *RefundTransferResponse) GetGetRefund() *sdkerrors.GetRefund {
 	if o == nil {
 		return nil
 	}

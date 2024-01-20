@@ -1,6 +1,6 @@
 # DisputedAmount
 
-A representation of money containing an integer value and it's currency.
+The total disputed amount for a card transfer
 
 
 ## Fields
