@@ -31,16 +31,16 @@ The `token` data is defined by Apple Pay and should be passed through from Apple
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -82,11 +82,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
-| `linkApplePay`                                                    | [shared.LinkApplePay](../../../pkg/models/shared/linkapplepay.md) | :heavy_check_mark:                                                | N/A                                                               |
-| `accountID`                                                       | *string*                                                          | :heavy_check_mark:                                                | ID of the account                                                 |
+| Parameter                                                      | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `ctx`                                                          | [context.Context](https://pkg.go.dev/context#Context)          | :heavy_check_mark:                                             | The context to use for the request.                            |
+| `linkApplePay`                                                 | [shared.LinkApplePay](../../pkg/models/shared/linkapplepay.md) | :heavy_check_mark:                                             | N/A                                                            |
+| `accountID`                                                    | *string*                                                       | :heavy_check_mark:                                             | ID of the account                                              |
 
 
 ### Response
@@ -94,7 +94,7 @@ func main() {
 **[*operations.PostLinkApplePayTokenResponse](../../pkg/models/operations/postlinkapplepaytokenresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## LinkCard
 
@@ -108,16 +108,16 @@ Link a card to an existing Moov account. Only use this endpoint if you have prov
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -160,9 +160,9 @@ func main() {
 | Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
 | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
-| `cardRequest`                                                                                        | [shared.CardRequest](../../../pkg/models/shared/cardrequest.md)                                      | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `cardRequest`                                                                                        | [shared.CardRequest](../../pkg/models/shared/cardrequest.md)                                         | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `accountID`                                                                                          | *string*                                                                                             | :heavy_check_mark:                                                                                   | ID of the account                                                                                    |
-| `xWaitFor`                                                                                           | [*shared.SchemasWaitFor](../../../pkg/models/shared/schemaswaitfor.md)                               | :heavy_minus_sign:                                                                                   | Optional header that indicates whether to return a synchronous response or an asynchronous response. |
+| `xWaitFor`                                                                                           | [*shared.SchemasWaitFor](../../pkg/models/shared/schemaswaitfor.md)                                  | :heavy_minus_sign:                                                                                   | Optional header that indicates whether to return a synchronous response or an asynchronous response. |
 | `opts`                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                         | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
 
 
@@ -171,7 +171,7 @@ func main() {
 **[*operations.PostLinkCardResponse](../../pkg/models/operations/postlinkcardresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListCards
 
@@ -183,16 +183,16 @@ List all the cards associated with a Moov account. <br><br> To use this endpoint
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -224,7 +224,7 @@ func main() {
 **[*operations.GetListCardsResponse](../../pkg/models/operations/getlistcardsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateApplePaySession
 
@@ -239,16 +239,16 @@ A successful response from this endpoint should be passed through to Apple Pay u
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -274,11 +274,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `ctx`                                                                               | [context.Context](https://pkg.go.dev/context#Context)                               | :heavy_check_mark:                                                                  | The context to use for the request.                                                 |
-| `createApplePaySession`                                                             | [shared.CreateApplePaySession](../../../pkg/models/shared/createapplepaysession.md) | :heavy_check_mark:                                                                  | N/A                                                                                 |
-| `accountID`                                                                         | *string*                                                                            | :heavy_check_mark:                                                                  | ID of the account                                                                   |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `createApplePaySession`                                                          | [shared.CreateApplePaySession](../../pkg/models/shared/createapplepaysession.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `accountID`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | ID of the account                                                                |
 
 
 ### Response
@@ -286,7 +286,7 @@ func main() {
 **[*operations.PostApplePaySessionResponse](../../pkg/models/operations/postapplepaysessionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Delete
 
@@ -298,16 +298,17 @@ Disables a card associated with a Moov account. <br><br> To use this endpoint, y
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -342,7 +343,7 @@ func main() {
 **[*operations.DeleteCardResponse](../../pkg/models/operations/deletecardresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Get
 
@@ -354,16 +355,16 @@ Fetch a specific card associated with a Moov account. <br><br> To use this endpo
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -398,7 +399,7 @@ func main() {
 **[*operations.GetCardResponse](../../pkg/models/operations/getcardresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListApplePayDomains
 
@@ -412,16 +413,16 @@ Get domains registered with Apple Pay.
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -453,7 +454,7 @@ func main() {
 **[*operations.GetApplePayMerchantDomainsResponse](../../pkg/models/operations/getapplepaymerchantdomainsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## RegisterApplePayDomain
 
@@ -468,16 +469,16 @@ Add domains to be registered with Apple Pay.
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -505,11 +506,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                   | [context.Context](https://pkg.go.dev/context#Context)                                                   | :heavy_check_mark:                                                                                      | The context to use for the request.                                                                     |
-| `registerApplePayMerchantDomains`                                                                       | [shared.RegisterApplePayMerchantDomains](../../../pkg/models/shared/registerapplepaymerchantdomains.md) | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
-| `accountID`                                                                                             | *string*                                                                                                | :heavy_check_mark:                                                                                      | ID of the account                                                                                       |
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
+| `registerApplePayMerchantDomains`                                                                    | [shared.RegisterApplePayMerchantDomains](../../pkg/models/shared/registerapplepaymerchantdomains.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `accountID`                                                                                          | *string*                                                                                             | :heavy_check_mark:                                                                                   | ID of the account                                                                                    |
 
 
 ### Response
@@ -517,7 +518,7 @@ func main() {
 **[*operations.PostApplePayMerchantDomainsResponse](../../pkg/models/operations/postapplepaymerchantdomainsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Update
 
@@ -534,16 +535,16 @@ Only use this endpoint if you have provided Moov with a copy of your PCI attesta
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -582,12 +583,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `ctx`                                                                       | [context.Context](https://pkg.go.dev/context#Context)                       | :heavy_check_mark:                                                          | The context to use for the request.                                         |                                                                             |
-| `cardUpdateRequest`                                                         | [shared.CardUpdateRequest](../../../pkg/models/shared/cardupdaterequest.md) | :heavy_check_mark:                                                          | N/A                                                                         |                                                                             |
-| `accountID`                                                                 | *string*                                                                    | :heavy_check_mark:                                                          | ID of the account                                                           |                                                                             |
-| `cardID`                                                                    | *string*                                                                    | :heavy_check_mark:                                                          | ID of the card                                                              | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                        |
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              | Example                                                                  |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |                                                                          |
+| `cardUpdateRequest`                                                      | [shared.CardUpdateRequest](../../pkg/models/shared/cardupdaterequest.md) | :heavy_check_mark:                                                       | N/A                                                                      |                                                                          |
+| `accountID`                                                              | *string*                                                                 | :heavy_check_mark:                                                       | ID of the account                                                        |                                                                          |
+| `cardID`                                                                 | *string*                                                                 | :heavy_check_mark:                                                       | ID of the card                                                           | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                     |
 
 
 ### Response
@@ -595,7 +596,7 @@ func main() {
 **[*operations.UpdateCardResponse](../../pkg/models/operations/updatecardresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateApplePayDomains
 
@@ -610,16 +611,17 @@ Add or remove domains to be registered with Apple Pay.
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -649,11 +651,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                               | [context.Context](https://pkg.go.dev/context#Context)                                               | :heavy_check_mark:                                                                                  | The context to use for the request.                                                                 |
-| `updateApplePayMerchantDomains`                                                                     | [shared.UpdateApplePayMerchantDomains](../../../pkg/models/shared/updateapplepaymerchantdomains.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
-| `accountID`                                                                                         | *string*                                                                                            | :heavy_check_mark:                                                                                  | ID of the account                                                                                   |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `updateApplePayMerchantDomains`                                                                  | [shared.UpdateApplePayMerchantDomains](../../pkg/models/shared/updateapplepaymerchantdomains.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `accountID`                                                                                      | *string*                                                                                         | :heavy_check_mark:                                                                               | ID of the account                                                                                |
 
 
 ### Response
@@ -661,4 +663,4 @@ func main() {
 **[*operations.UpdateApplePayMerchantDomainsResponse](../../pkg/models/operations/updateapplepaymerchantdomainsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
