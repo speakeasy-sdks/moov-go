@@ -447,6 +447,7 @@ const (
 	PaymentMethodTypeRtpCredit         PaymentMethodType = "rtp-credit"
 )
 
+// PaymentMethod - A method of moving money
 type PaymentMethod struct {
 	SchemasPaymentMethodWalletWallet           *SchemasPaymentMethodWalletWallet
 	SchemasPaymentMethodBankAccountBankAccount *SchemasPaymentMethodBankAccountBankAccount
@@ -458,6 +459,7 @@ type PaymentMethod struct {
 
 func CreatePaymentMethodAchCreditSameDay(achCreditSameDay SchemasPaymentMethodBankAccountBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchCreditSameDay
+
 	typStr := PaymentMethodsType(typ)
 	achCreditSameDay.PaymentMethodType = &typStr
 
@@ -469,6 +471,7 @@ func CreatePaymentMethodAchCreditSameDay(achCreditSameDay SchemasPaymentMethodBa
 
 func CreatePaymentMethodAchCreditStandard(achCreditStandard SchemasPaymentMethodBankAccountBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchCreditStandard
+
 	typStr := PaymentMethodsType(typ)
 	achCreditStandard.PaymentMethodType = &typStr
 
@@ -480,6 +483,7 @@ func CreatePaymentMethodAchCreditStandard(achCreditStandard SchemasPaymentMethod
 
 func CreatePaymentMethodAchDebitCollect(achDebitCollect SchemasPaymentMethodBankAccountBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchDebitCollect
+
 	typStr := PaymentMethodsType(typ)
 	achDebitCollect.PaymentMethodType = &typStr
 
@@ -491,6 +495,7 @@ func CreatePaymentMethodAchDebitCollect(achDebitCollect SchemasPaymentMethodBank
 
 func CreatePaymentMethodAchDebitFund(achDebitFund SchemasPaymentMethodBankAccountBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeAchDebitFund
+
 	typStr := PaymentMethodsType(typ)
 	achDebitFund.PaymentMethodType = &typStr
 
@@ -502,6 +507,7 @@ func CreatePaymentMethodAchDebitFund(achDebitFund SchemasPaymentMethodBankAccoun
 
 func CreatePaymentMethodApplePay(applePay ApplePay) PaymentMethod {
 	typ := PaymentMethodTypeApplePay
+
 	typStr := PaymentMethodsType(typ)
 	applePay.PaymentMethodType = &typStr
 
@@ -513,6 +519,7 @@ func CreatePaymentMethodApplePay(applePay ApplePay) PaymentMethod {
 
 func CreatePaymentMethodCardPayment(cardPayment SchemasPaymentMethodCardCard) PaymentMethod {
 	typ := PaymentMethodTypeCardPayment
+
 	typStr := PaymentMethodsType(typ)
 	cardPayment.PaymentMethodType = &typStr
 
@@ -524,6 +531,7 @@ func CreatePaymentMethodCardPayment(cardPayment SchemasPaymentMethodCardCard) Pa
 
 func CreatePaymentMethodMoovWallet(moovWallet SchemasPaymentMethodWalletWallet) PaymentMethod {
 	typ := PaymentMethodTypeMoovWallet
+
 	typStr := PaymentMethodsType(typ)
 	moovWallet.PaymentMethodType = &typStr
 
@@ -535,6 +543,7 @@ func CreatePaymentMethodMoovWallet(moovWallet SchemasPaymentMethodWalletWallet) 
 
 func CreatePaymentMethodRtpCredit(rtpCredit SchemasPaymentMethodBankAccountBankAccount) PaymentMethod {
 	typ := PaymentMethodTypeRtpCredit
+
 	typStr := PaymentMethodsType(typ)
 	rtpCredit.PaymentMethodType = &typStr
 
@@ -666,6 +675,7 @@ const (
 	DestinationOptionsTypeRtpCredit         DestinationOptionsType = "rtp-credit"
 )
 
+// DestinationOptions - A method of moving money
 type DestinationOptions struct {
 	SchemasPaymentMethodWalletWallet           *SchemasPaymentMethodWalletWallet
 	SchemasPaymentMethodBankAccountBankAccount *SchemasPaymentMethodBankAccountBankAccount
@@ -677,6 +687,7 @@ type DestinationOptions struct {
 
 func CreateDestinationOptionsAchCreditSameDay(achCreditSameDay SchemasPaymentMethodBankAccountBankAccount) DestinationOptions {
 	typ := DestinationOptionsTypeAchCreditSameDay
+
 	typStr := PaymentMethodsType(typ)
 	achCreditSameDay.PaymentMethodType = &typStr
 
@@ -688,6 +699,7 @@ func CreateDestinationOptionsAchCreditSameDay(achCreditSameDay SchemasPaymentMet
 
 func CreateDestinationOptionsAchCreditStandard(achCreditStandard SchemasPaymentMethodBankAccountBankAccount) DestinationOptions {
 	typ := DestinationOptionsTypeAchCreditStandard
+
 	typStr := PaymentMethodsType(typ)
 	achCreditStandard.PaymentMethodType = &typStr
 
@@ -699,6 +711,7 @@ func CreateDestinationOptionsAchCreditStandard(achCreditStandard SchemasPaymentM
 
 func CreateDestinationOptionsAchDebitCollect(achDebitCollect SchemasPaymentMethodBankAccountBankAccount) DestinationOptions {
 	typ := DestinationOptionsTypeAchDebitCollect
+
 	typStr := PaymentMethodsType(typ)
 	achDebitCollect.PaymentMethodType = &typStr
 
@@ -710,6 +723,7 @@ func CreateDestinationOptionsAchDebitCollect(achDebitCollect SchemasPaymentMetho
 
 func CreateDestinationOptionsAchDebitFund(achDebitFund SchemasPaymentMethodBankAccountBankAccount) DestinationOptions {
 	typ := DestinationOptionsTypeAchDebitFund
+
 	typStr := PaymentMethodsType(typ)
 	achDebitFund.PaymentMethodType = &typStr
 
@@ -721,6 +735,7 @@ func CreateDestinationOptionsAchDebitFund(achDebitFund SchemasPaymentMethodBankA
 
 func CreateDestinationOptionsApplePay(applePay ApplePay) DestinationOptions {
 	typ := DestinationOptionsTypeApplePay
+
 	typStr := PaymentMethodsType(typ)
 	applePay.PaymentMethodType = &typStr
 
@@ -732,6 +747,7 @@ func CreateDestinationOptionsApplePay(applePay ApplePay) DestinationOptions {
 
 func CreateDestinationOptionsCardPayment(cardPayment SchemasPaymentMethodCardCard) DestinationOptions {
 	typ := DestinationOptionsTypeCardPayment
+
 	typStr := PaymentMethodsType(typ)
 	cardPayment.PaymentMethodType = &typStr
 
@@ -743,6 +759,7 @@ func CreateDestinationOptionsCardPayment(cardPayment SchemasPaymentMethodCardCar
 
 func CreateDestinationOptionsMoovWallet(moovWallet SchemasPaymentMethodWalletWallet) DestinationOptions {
 	typ := DestinationOptionsTypeMoovWallet
+
 	typStr := PaymentMethodsType(typ)
 	moovWallet.PaymentMethodType = &typStr
 
@@ -754,6 +771,7 @@ func CreateDestinationOptionsMoovWallet(moovWallet SchemasPaymentMethodWalletWal
 
 func CreateDestinationOptionsRtpCredit(rtpCredit SchemasPaymentMethodBankAccountBankAccount) DestinationOptions {
 	typ := DestinationOptionsTypeRtpCredit
+
 	typStr := PaymentMethodsType(typ)
 	rtpCredit.PaymentMethodType = &typStr
 
@@ -885,6 +903,7 @@ const (
 	SourceOptionsTypeRtpCredit         SourceOptionsType = "rtp-credit"
 )
 
+// SourceOptions - A method of moving money
 type SourceOptions struct {
 	SchemasPaymentMethodWalletWallet           *SchemasPaymentMethodWalletWallet
 	SchemasPaymentMethodBankAccountBankAccount *SchemasPaymentMethodBankAccountBankAccount
@@ -896,6 +915,7 @@ type SourceOptions struct {
 
 func CreateSourceOptionsAchCreditSameDay(achCreditSameDay SchemasPaymentMethodBankAccountBankAccount) SourceOptions {
 	typ := SourceOptionsTypeAchCreditSameDay
+
 	typStr := PaymentMethodsType(typ)
 	achCreditSameDay.PaymentMethodType = &typStr
 
@@ -907,6 +927,7 @@ func CreateSourceOptionsAchCreditSameDay(achCreditSameDay SchemasPaymentMethodBa
 
 func CreateSourceOptionsAchCreditStandard(achCreditStandard SchemasPaymentMethodBankAccountBankAccount) SourceOptions {
 	typ := SourceOptionsTypeAchCreditStandard
+
 	typStr := PaymentMethodsType(typ)
 	achCreditStandard.PaymentMethodType = &typStr
 
@@ -918,6 +939,7 @@ func CreateSourceOptionsAchCreditStandard(achCreditStandard SchemasPaymentMethod
 
 func CreateSourceOptionsAchDebitCollect(achDebitCollect SchemasPaymentMethodBankAccountBankAccount) SourceOptions {
 	typ := SourceOptionsTypeAchDebitCollect
+
 	typStr := PaymentMethodsType(typ)
 	achDebitCollect.PaymentMethodType = &typStr
 
@@ -929,6 +951,7 @@ func CreateSourceOptionsAchDebitCollect(achDebitCollect SchemasPaymentMethodBank
 
 func CreateSourceOptionsAchDebitFund(achDebitFund SchemasPaymentMethodBankAccountBankAccount) SourceOptions {
 	typ := SourceOptionsTypeAchDebitFund
+
 	typStr := PaymentMethodsType(typ)
 	achDebitFund.PaymentMethodType = &typStr
 
@@ -940,6 +963,7 @@ func CreateSourceOptionsAchDebitFund(achDebitFund SchemasPaymentMethodBankAccoun
 
 func CreateSourceOptionsApplePay(applePay ApplePay) SourceOptions {
 	typ := SourceOptionsTypeApplePay
+
 	typStr := PaymentMethodsType(typ)
 	applePay.PaymentMethodType = &typStr
 
@@ -951,6 +975,7 @@ func CreateSourceOptionsApplePay(applePay ApplePay) SourceOptions {
 
 func CreateSourceOptionsCardPayment(cardPayment SchemasPaymentMethodCardCard) SourceOptions {
 	typ := SourceOptionsTypeCardPayment
+
 	typStr := PaymentMethodsType(typ)
 	cardPayment.PaymentMethodType = &typStr
 
@@ -962,6 +987,7 @@ func CreateSourceOptionsCardPayment(cardPayment SchemasPaymentMethodCardCard) So
 
 func CreateSourceOptionsMoovWallet(moovWallet SchemasPaymentMethodWalletWallet) SourceOptions {
 	typ := SourceOptionsTypeMoovWallet
+
 	typStr := PaymentMethodsType(typ)
 	moovWallet.PaymentMethodType = &typStr
 
@@ -973,6 +999,7 @@ func CreateSourceOptionsMoovWallet(moovWallet SchemasPaymentMethodWalletWallet) 
 
 func CreateSourceOptionsRtpCredit(rtpCredit SchemasPaymentMethodBankAccountBankAccount) SourceOptions {
 	typ := SourceOptionsTypeRtpCredit
+
 	typStr := PaymentMethodsType(typ)
 	rtpCredit.PaymentMethodType = &typStr
 

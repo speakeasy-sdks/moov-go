@@ -28,16 +28,16 @@ Request a virtual card be created
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -77,11 +77,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                       | Type                                                            | Required                                                        | Description                                                     |
-| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
-| `ctx`                                                           | [context.Context](https://pkg.go.dev/context#Context)           | :heavy_check_mark:                                              | The context to use for the request.                             |
-| `requestCard`                                                   | [shared.RequestCard](../../../pkg/models/shared/requestcard.md) | :heavy_check_mark:                                              | N/A                                                             |
-| `accountID`                                                     | *string*                                                        | :heavy_check_mark:                                              | ID of the account                                               |
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
+| `requestCard`                                                | [shared.RequestCard](../../pkg/models/shared/requestcard.md) | :heavy_check_mark:                                           | N/A                                                          |
+| `accountID`                                                  | *string*                                                     | :heavy_check_mark:                                           | ID of the account                                            |
 
 
 ### Response
@@ -89,7 +89,7 @@ func main() {
 **[*operations.PostRequestCardResponse](../../pkg/models/operations/postrequestcardresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetCard
 
@@ -103,16 +103,16 @@ Retrieve a single issued card associated with a Moov account
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -147,7 +147,7 @@ func main() {
 **[*operations.GetIssuedCardResponse](../../pkg/models/operations/getissuedcardresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetCardFullDetails
 
@@ -161,16 +161,16 @@ Get issued card with PAN, CVV, and expiration. Only use this endpoint if you hav
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -205,7 +205,7 @@ func main() {
 **[*operations.GetFullIssuedCardResponse](../../pkg/models/operations/getfullissuedcardresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListCards
 
@@ -220,16 +220,16 @@ List Moov issued cards existing for the account.
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -262,7 +262,7 @@ func main() {
 | `accountID`                                                                      | *string*                                                                         | :heavy_check_mark:                                                               | ID of the account                                                                |
 | `count`                                                                          | **int64*                                                                         | :heavy_minus_sign:                                                               | Optional parameter to limit the number of results in the query                   |
 | `skip`                                                                           | **int64*                                                                         | :heavy_minus_sign:                                                               | The number of items to offset before starting to collect the result set          |
-| `states`                                                                         | [*shared.IssuedCardState](../../../pkg/models/shared/issuedcardstate.md)         | :heavy_minus_sign:                                                               | Optional, comma-separated states to filter the Moov list issued cards response.<br/> |
+| `states`                                                                         | [*shared.IssuedCardState](../../pkg/models/shared/issuedcardstate.md)            | :heavy_minus_sign:                                                               | Optional, comma-separated states to filter the Moov list issued cards response.<br/> |
 
 
 ### Response
@@ -270,7 +270,7 @@ func main() {
 **[*operations.ListIssuedCardsResponse](../../pkg/models/operations/listissuedcardsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateCard
 
@@ -284,16 +284,17 @@ Update a Moov issued card
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -335,12 +336,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `ctx`                                                                     | [context.Context](https://pkg.go.dev/context#Context)                     | :heavy_check_mark:                                                        | The context to use for the request.                                       |                                                                           |
-| `updateIssuedCard`                                                        | [shared.UpdateIssuedCard](../../../pkg/models/shared/updateissuedcard.md) | :heavy_check_mark:                                                        | N/A                                                                       |                                                                           |
-| `accountID`                                                               | *string*                                                                  | :heavy_check_mark:                                                        | ID of the account                                                         |                                                                           |
-| `issuedCardID`                                                            | *string*                                                                  | :heavy_check_mark:                                                        | ID of the issued card                                                     | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                      |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            | Example                                                                |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `ctx`                                                                  | [context.Context](https://pkg.go.dev/context#Context)                  | :heavy_check_mark:                                                     | The context to use for the request.                                    |                                                                        |
+| `updateIssuedCard`                                                     | [shared.UpdateIssuedCard](../../pkg/models/shared/updateissuedcard.md) | :heavy_check_mark:                                                     | N/A                                                                    |                                                                        |
+| `accountID`                                                            | *string*                                                               | :heavy_check_mark:                                                     | ID of the account                                                      |                                                                        |
+| `issuedCardID`                                                         | *string*                                                               | :heavy_check_mark:                                                     | ID of the issued card                                                  | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                   |
 
 
 ### Response
@@ -348,4 +349,4 @@ func main() {
 **[*operations.UpdateIssuedCardResponse](../../pkg/models/operations/updateissuedcardresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
