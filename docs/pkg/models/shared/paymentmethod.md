@@ -1,5 +1,7 @@
 # PaymentMethod
 
+A method of moving money
+
 
 ## Supported Types
 
