@@ -4,6 +4,7 @@ package shared
 
 import (
 	"errors"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 )
 
@@ -16,7 +17,7 @@ const (
 
 type RefundPostResponse struct {
 	CreatedRefund *CreatedRefund
-	GetRefund     *GetRefund
+	GetRefund     *sdkerrors.GetRefund
 
 	Type RefundPostResponseType
 }
@@ -30,7 +31,7 @@ func CreateRefundPostResponseCreatedRefund(createdRefund CreatedRefund) RefundPo
 	}
 }
 
-func CreateRefundPostResponseGetRefund(getRefund GetRefund) RefundPostResponse {
+func CreateRefundPostResponseGetRefund(getRefund sdkerrors.GetRefund) RefundPostResponse {
 	typ := RefundPostResponseTypeGetRefund
 
 	return RefundPostResponse{
@@ -48,7 +49,7 @@ func (u *RefundPostResponse) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	getRefund := GetRefund{}
+	getRefund := sdkerrors.GetRefund{}
 	if err := utils.UnmarshalJSON(data, &getRefund, "", true, true); err == nil {
 		u.GetRefund = &getRefund
 		u.Type = RefundPostResponseTypeGetRefund
