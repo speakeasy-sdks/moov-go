@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
 	"net/http"
 )
 
@@ -23,7 +23,7 @@ type ListRefundsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// List of refunds
-	GetRefunds []shared.GetRefund
+	GetRefunds []sdkerrors.GetRefund
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -37,7 +37,7 @@ func (o *ListRefundsResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *ListRefundsResponse) GetGetRefunds() []shared.GetRefund {
+func (o *ListRefundsResponse) GetGetRefunds() []sdkerrors.GetRefund {
 	if o == nil {
 		return nil
 	}
