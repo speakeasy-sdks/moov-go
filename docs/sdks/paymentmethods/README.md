@@ -23,16 +23,16 @@ Get the specified payment method associated with a Moov account. <br><br> To get
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
@@ -67,7 +67,7 @@ func main() {
 **[*operations.GetPaymentMethodResponse](../../pkg/models/operations/getpaymentmethodresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## List
 
@@ -79,23 +79,23 @@ Retrieve a list of payment methods associated with a Moov account. <br><br> To l
 package main
 
 import(
+	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
+	moovgo "github.com/speakeasy-sdks/moov-go"
 	"context"
 	"log"
-	moovgo "github.com/speakeasy-sdks/moov-go"
-	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 )
 
 func main() {
     s := moovgo.New(
         moovgo.WithSecurity(shared.Security{
-            AccessToken: moovgo.String(""),
+            AccessToken: moovgo.String("Bearer <YOUR_ACCESS_TOKEN_HERE>"),
         }),
     )
 
 
     var accountID string = "c184a429-302e-4aca-80db-f1718b882a50"
 
-    var sourceID *string = "80555741-9e79-40e2-b205-5dd402eb66ec"
+    var sourceID *string = moovgo.String("80555741-9e79-40e2-b205-5dd402eb66ec")
 
     ctx := context.Background()
     res, err := s.PaymentMethods.List(ctx, accountID, sourceID)
@@ -123,4 +123,4 @@ func main() {
 **[*operations.ListPaymentMethodsResponse](../../pkg/models/operations/listpaymentmethodsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

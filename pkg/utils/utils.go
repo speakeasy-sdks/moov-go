@@ -8,6 +8,7 @@ import (
 	"math/big"
 	"reflect"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 
@@ -63,6 +64,29 @@ func Contains(slice []string, item string) bool {
 	return false
 }
 
+func MatchStatusCodes(expectedCodes []string, statusCode int) bool {
+	for _, codeStr := range expectedCodes {
+		code, err := strconv.Atoi(codeStr)
+		if err == nil {
+			if code == statusCode {
+				return true
+			}
+			continue
+		}
+
+		codeRange, err := strconv.Atoi(string(codeStr[0]))
+		if err != nil {
+			continue
+		}
+
+		if statusCode >= (codeRange*100) && statusCode < ((codeRange+1)*100) {
+			return true
+		}
+	}
+
+	return false
+}
+
 func parseStructTag(tagKey string, field reflect.StructField) map[string]string {
 	tag := field.Tag.Get(tagKey)
 	if tag == "" {
@@ -81,7 +105,6 @@ func parseStructTag(tagKey string, field reflect.StructField) map[string]string 
 			parts = append(parts, "true")
 		case 2:
 			// key=value option
-			break
 		default:
 			// invalid option
 			continue
