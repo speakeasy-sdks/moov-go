@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"net/http"
 )
@@ -40,7 +41,7 @@ type CancelTransferResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Successfully initiated a reversal
-	CreatedReversal *shared.CreatedReversal
+	CreatedReversal *sdkerrors.CreatedReversal
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -54,7 +55,7 @@ func (o *CancelTransferResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *CancelTransferResponse) GetCreatedReversal() *shared.CreatedReversal {
+func (o *CancelTransferResponse) GetCreatedReversal() *sdkerrors.CreatedReversal {
 	if o == nil {
 		return nil
 	}

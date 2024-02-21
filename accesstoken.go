@@ -6,13 +6,14 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/moov-go/internal/hooks"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/moov-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/moov-go/pkg/utils"
 	"io"
 	"net/http"
-	"strings"
+	"net/url"
 )
 
 // AccessToken - When making requests to Moov from a browser, you can use OAuth with JSON Web Tokens (JWT).
@@ -31,36 +32,55 @@ func newAccessToken(sdkConfig sdkConfiguration) *AccessToken {
 // Create access token
 // Use the client_id and client_secret to generate an access token.
 func (s *AccessToken) Create(ctx context.Context, request shared.ClientCredentialsGrantToAccessTokenRequest) (*operations.PostOAuth2TokenResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "postOAuth2Token"}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/oauth2/token"
+	opURL, err := url.JoinPath(baseURL, "/oauth2/token")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-	if bodyReader == nil {
-		return nil, fmt.Errorf("request body is required")
+		return nil, err
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
-
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	if err != nil {
+		return nil, err
+	}
 
 	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
-	}
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
 
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"400", "429", "4XX", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
+	}
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.PostOAuth2TokenResponse{
@@ -75,6 +95,7 @@ func (s *AccessToken) Create(ctx context.Context, request shared.ClientCredentia
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -114,36 +135,55 @@ func (s *AccessToken) Create(ctx context.Context, request shared.ClientCredentia
 // Revoke access token
 // Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed
 func (s *AccessToken) Revoke(ctx context.Context, request shared.RevokeTokenRequest) (*operations.RevokeOAuth2TokenResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "revokeOAuth2Token"}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/oauth2/revoke"
+	opURL, err := url.JoinPath(baseURL, "/oauth2/revoke")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "form", `request:"mediaType=application/x-www-form-urlencoded"`)
 	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-	if bodyReader == nil {
-		return nil, fmt.Errorf("request body is required")
+		return nil, err
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "*/*")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
-
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	if err != nil {
+		return nil, err
+	}
 
 	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
-	}
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
 
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"400", "429", "4XX", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
+	}
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.RevokeOAuth2TokenResponse{
@@ -158,6 +198,7 @@ func (s *AccessToken) Revoke(ctx context.Context, request shared.RevokeTokenRequ
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 400:
 		fallthrough
