@@ -1,0 +1,10 @@
+workflowVersion: 1.0.0
+sources:
+    my-source:
+        inputs:
+            - location: |
+                - ./openapi/moov.yaml
+targets:
+    go-target:
+        target: go
+        source: my-source
